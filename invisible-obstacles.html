@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Invisible Obstacles Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=Plus+Jakarta+Sans:wght@400;500;600&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+<script>(function(){var m;try{m=localStorage.getItem("io-mode")}catch(e){}if(!m){var t=document.documentElement.getAttribute("data-theme");m=t||(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}document.documentElement.setAttribute("data-mode",m);document.documentElement.classList.add("js")})();</script>
+<style>
+/* Tokens
+   Spacing: 16px grid. 8px is the half step for tight pairs, 4px only for hairline nudges.
+   Colour 60-30-10: 60 neutral ground (--bg), 30 ink and surfaces (--text, --surface, --mat, --line), 10 one accent (--accent). */
+:root {
+  --s-1: 4px; --s0: 8px; --s1: 16px; --s2: 32px; --s3: 48px; --s4: 64px; --s5: 96px; --s6: 128px;
+  --r-s: 8px; --r-m: 16px; --r-l: 24px;
+  --bg: #FAFAF9; --surface: #FFFFFF; --mat: #F1F1EF; --text: #111111; --soft: #3D3D3D; --muted: #6B6B6B; --line: #E4E4E1;
+  --accent: #1A3DFF; --accent-ink: #FFFFFF; --accent-soft: rgba(26,61,255,.08);
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --display: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  color-scheme: light;
+}
+:root[data-mode="dark"] {
+  --bg: #141414; --surface: #1C1C1C; --mat: #222222; --text: #F2F2F0; --soft: #CACAC7; --muted: #9A9A97; --line: #2D2D2D;
+  --accent: #8FA2FF; --accent-ink: #111111; --accent-soft: rgba(143,162,255,.12);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { font-size: 100%; scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--soft); font-family: var(--sans); font-size: 16px; line-height: 24px; font-weight: 400; transition: background-color .3s, color .3s; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+h1, h2, h3, h4 { font-family: var(--display); color: var(--text); margin: 0; font-weight: 500; text-wrap: balance; }
+p { margin: 0; }
+a { color: var(--text); text-underline-offset: 4px; text-decoration-thickness: 1px; text-decoration-color: color-mix(in srgb, var(--accent) 60%, transparent); transition: color .2s, text-decoration-color .2s; }
+a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+img, video { max-width: 100%; display: block; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: var(--r-s); }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: var(--s1); top: -80px; z-index: 30; background: var(--text); color: var(--bg); padding: var(--s0) var(--s1); border-radius: var(--r-s); }
+.skip:focus { top: var(--s1); }
+.todo { display: inline-block; border: 1px dashed var(--muted); color: var(--muted); border-radius: var(--r-s); padding: 0 var(--s0); font-size: 14px; }
+
+/* Layout: one 672px reading column (42 x 16), 1088px media column (68 x 16) */
+.col { max-width: calc(672px + 2 * var(--s2)); margin: 0 auto; padding: 0 var(--s2); }
+.wide { max-width: calc(1088px + 2 * var(--s2)); margin-left: auto; margin-right: auto; padding: 0 var(--s2); }
+@media (max-width: 560px) { .col, .wide { padding: 0 var(--s1); } }
+
+/* Nav */
+.nav { position: sticky; top: 0; z-index: 20; display: flex; justify-content: space-between; align-items: center; height: 64px; padding: 0 var(--s2); border-bottom: 1px solid transparent; transition: border-color .2s; background: color-mix(in srgb, var(--bg) 84%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.nav.scrolled { border-bottom-color: var(--line); }
+.mark { width: 32px; height: 32px; border-radius: 50%; background: var(--text); color: var(--bg); display: grid; place-items: center; font-family: var(--display); font-weight: 600; font-size: 12px; letter-spacing: .02em; text-decoration: none; }
+.mark:hover { color: var(--bg); background: var(--accent); }
+.nav-r { display: flex; align-items: center; gap: var(--s0); }
+.pill { font-size: 14px; line-height: 16px; color: var(--muted); text-decoration: none; padding: var(--s0) var(--s1); border-radius: 999px; border: 1px solid transparent; white-space: nowrap; }
+.pill:hover { color: var(--text); }
+.pill[aria-current] { color: var(--text); background: var(--surface); border-color: var(--line); }
+.mode { width: 32px; height: 32px; border-radius: 50%; border: 0; background: none; color: var(--muted); cursor: pointer; display: grid; place-items: center; padding: 0; }
+.mode:hover { color: var(--text); }
+.mode svg { width: 16px; height: 16px; }
+.mode .moon { display: none; } :root[data-mode="dark"] .mode .sun { display: none; } :root[data-mode="dark"] .mode .moon { display: block; }
+@media (max-width: 480px) { .nav { padding: 0 var(--s1); gap: var(--s1); } .nav-r { gap: 0; } .pill { padding: var(--s0) 10px; } }
+
+.logo { flex: none; display: inline-flex; align-items: center; gap: 12px; height: 32px; color: var(--text); text-decoration: none; border-radius: var(--r-s); }
+.logo .lm { width: 24px; height: 24px; flex: none; display: block; }
+.logo .lw { font-family: "Montserrat", var(--display); font-weight: 600; font-size: 16px; line-height: 24px; letter-spacing: -.01em; white-space: nowrap; }
+.logo:hover { color: var(--text); opacity: .72; }
+
+/* Hero: two clean devices on a 16px rhythm, one accent ring */
+.hero { padding-top: var(--s2); overflow-x: clip; }
+.stage { position: relative; max-width: 1024px; margin: 0 auto; padding: 0 var(--s4) var(--s3) calc(var(--s4) + 96px); }
+@media (max-width: 900px) { .stage { padding-bottom: var(--s3); } }
+.laptop, .phone { margin: 0; }
+/* Laptop: thin black bezel, aluminium rim, camera notch, browser window, wedge base */
+.laptop { position: relative; container-type: inline-size; }
+.lid { position: relative; background: #0B0B0C; border-radius: 2.2cqw 2.2cqw .6cqw .6cqw; padding: 1.5cqw 1.5cqw 2cqw; box-shadow: 0 0 0 1px #A9AAAD, inset 0 0 0 1px #2A2A2C, 0 4cqw 8cqw -5cqw rgba(0,0,0,.45); }
+.lid::before { content: ""; position: absolute; z-index: 3; top: 1.5cqw; left: 50%; width: 8cqw; height: 1.6cqw; transform: translateX(-50%); background: #0B0B0C; border-radius: 0 0 .8cqw .8cqw; }
+.lid::after { content: ""; position: absolute; z-index: 4; top: 1.85cqw; left: 50%; width: .6cqw; height: .6cqw; transform: translateX(-50%); border-radius: 50%; background: #1E2433; box-shadow: inset 0 0 0 .12cqw #2F3850; }
+.scr { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border-radius: .6cqw; background: #fff; display: flex; flex-direction: column; }
+.chrome { flex: none; height: 5.3%; display: flex; align-items: center; gap: .8cqw; padding: 0 1.4cqw; background: #F2F2F4; border-bottom: 1px solid #E1E1E4; }
+.chrome i { width: .9cqw; height: .9cqw; border-radius: 50%; background: #D9D9DC; }
+.chrome i:nth-child(1) { background: #FF5F57; } .chrome i:nth-child(2) { background: #FEBC2E; } .chrome i:nth-child(3) { background: #28C840; }
+.chrome b { margin-left: 2.4cqw; width: 30%; height: 2.2cqw; border-radius: .6cqw; background: #fff; box-shadow: inset 0 0 0 1px #E1E1E4; font: 500 1cqw/2.2cqw var(--sans); color: #6B6B6B; text-align: left; padding-left: 1.2cqw; letter-spacing: .01em; }
+.vp { position: relative; flex: 1; overflow: hidden; }
+.vp img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.base { position: relative; height: 1.8cqw; margin: 0 -7%; background: linear-gradient(180deg, #F1F1F2 0%, #D3D4D6 45%, #A6A7AA 100%); border-radius: .3cqw .3cqw 4cqw 4cqw / .3cqw .3cqw 1.6cqw 1.6cqw; }
+.base::before { content: ""; position: absolute; top: 0; left: 50%; width: 14%; height: 45%; transform: translateX(-50%); background: linear-gradient(180deg, #BDBEC1, #D9DADC); border-radius: 0 0 1cqw 1cqw; }
+.base::after { content: ""; position: absolute; left: 6%; right: 6%; bottom: -1.6cqw; height: 1.6cqw; background: radial-gradient(50% 50% at 50% 0, rgba(0,0,0,.22), transparent 70%); }
+:root[data-mode="dark"] .lid { box-shadow: 0 0 0 1px #5A5B5E, inset 0 0 0 1px #2A2A2C, 0 4cqw 8cqw -5cqw rgba(0,0,0,.7); }
+:root[data-mode="dark"] .base { background: linear-gradient(180deg, #6A6B6E 0%, #4A4B4E 45%, #2E2F31 100%); }
+:root[data-mode="dark"] .base::before { background: linear-gradient(180deg, #3A3B3D, #55565A); }
+.ring { position: absolute; border-radius: 6px; box-shadow: 0 0 0 2px var(--accent); }
+:root[data-mode="dark"] .ring { box-shadow: 0 0 0 2px #1A3DFF; }
+/* Phone: titanium rim, black bezel, dynamic island, status bar, side buttons */
+.phone { position: absolute; left: var(--s2); bottom: var(--s3); width: 18%; container-type: inline-size; }
+.ph { position: relative; background: #111113; border-radius: 15cqw; padding: 3.4cqw; box-shadow: inset 0 0 0 .9cqw #3B3B3E, inset 0 0 0 1.4cqw #111113, 0 0 0 1px #77777C, 0 10cqw 20cqw -10cqw rgba(0,0,0,.55); }
+.ph::before { content: ""; position: absolute; z-index: 3; top: 6.2cqw; left: 50%; width: 30cqw; height: 8.6cqw; transform: translateX(-50%); background: #000; border-radius: 99px; }
+.phone .p-scr { position: relative; aspect-ratio: 390 / 844; overflow: hidden; border-radius: 11.5cqw; background: #ECECEE; display: flex; flex-direction: column; }
+.sbar { flex: none; height: 6.4%; display: flex; align-items: center; justify-content: space-between; padding: 1.5cqw 8cqw 0 10cqw; font: 600 4.2cqw/1 var(--sans); color: #111; background: #ECECEE; }
+.sbar .icons { display: flex; align-items: center; gap: 1.6cqw; }
+.sbar .bars { display: flex; align-items: flex-end; gap: .6cqw; height: 3cqw; }
+.sbar .bars i { width: .9cqw; background: #111; border-radius: .3cqw; }
+.sbar .bars i:nth-child(1) { height: 35%; } .sbar .bars i:nth-child(2) { height: 55%; } .sbar .bars i:nth-child(3) { height: 78%; } .sbar .bars i:nth-child(4) { height: 100%; }
+.sbar .batt { position: relative; width: 6.6cqw; height: 3.2cqw; border-radius: 1cqw; box-shadow: inset 0 0 0 .35cqw rgba(17,17,17,.4); padding: .6cqw; }
+.sbar .batt::before { content: ""; display: block; height: 100%; width: 80%; border-radius: .5cqw; background: #111; }
+.sbar .batt::after { content: ""; position: absolute; right: -1.1cqw; top: 1.05cqw; width: .7cqw; height: 1.1cqw; border-radius: 0 .4cqw .4cqw 0; background: rgba(17,17,17,.4); }
+.p-scr .pv { flex: 1; overflow: hidden; }
+.phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.ph .sb { position: absolute; width: 1.4cqw; border-radius: .6cqw; background: #2C2C2F; }
+.ph .sb.l1 { left: -1.2cqw; top: 22%; height: 7%; } .ph .sb.l2 { left: -1.2cqw; top: 31%; height: 11%; } .ph .sb.l3 { left: -1.2cqw; top: 44%; height: 11%; } .ph .sb.r1 { right: -1.2cqw; top: 31%; height: 16%; }
+.bubble { position: absolute; right: var(--s5); bottom: 0; width: 320px; background: var(--surface); color: var(--text); border: 1px solid var(--line); border-radius: var(--r-m); padding: var(--s1); display: grid; gap: var(--s0); box-shadow: 0 16px 32px -24px rgba(0,0,0,.35); }
+.bubble .lab, .bubble-m .lab { display: flex; align-items: center; gap: var(--s0); font-size: 12px; line-height: 16px; font-weight: 600; color: var(--accent); }
+.bubble .lab::before, .bubble-m .lab::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+.say { font-size: 14px; line-height: 24px; }
+.bubble-m { display: none; }
+.laptop { animation: lift .9s cubic-bezier(.2,.8,.2,1) both; }
+.phone { animation: rise .9s .25s cubic-bezier(.2,.8,.2,1) both; }
+.bubble { animation: rise .5s .9s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes lift { from { opacity: 0; transform: translateY(32px); } to { opacity: 1; transform: none; } }
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@media (max-width: 900px) { .bubble { display: none; } .bubble-m { display: grid; gap: var(--s0); max-width: 672px; margin: var(--s2) auto 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-m); padding: var(--s1); font-size: 16px; line-height: 24px; color: var(--text); } }
+@media (max-width: 640px) { .stage { padding: 0 var(--s1) var(--s1); } .phone { display: none; } .lid { padding: 8px 8px 16px; } .bubble-m { margin: var(--s2) var(--s1) 0; } }
+
+.title { text-align: center; padding-top: var(--s4); }
+.title h1 { font-size: clamp(40px, 5vw, 64px); line-height: 1.125; font-weight: 500; letter-spacing: -.02em; }
+.title p { margin: var(--s1) auto 0; max-width: 560px; font-size: 16px; line-height: 24px; color: var(--muted); }
+.cta { margin-top: var(--s2); display: flex; justify-content: center; align-items: center; gap: var(--s2); flex-wrap: wrap; }
+.pill-link { font-size: 14px; line-height: 16px; color: var(--text); }
+.meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2); margin: var(--s3) auto 0; padding: var(--s2) 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: left; }
+.meta dt { color: var(--muted); font-size: 14px; line-height: 24px; margin-bottom: var(--s0); }
+.meta dd { margin: 0; color: var(--text); font-size: 16px; line-height: 24px; }
+@media (max-width: 640px) { .meta { grid-template-columns: 1fr; gap: var(--s1); } }
+
+/* Story sections: 96px between sections, 32px inside */
+.sec { padding-top: var(--s5); }
+.sec + .sec { margin-top: var(--s5); border-top: 1px solid var(--line); }
+.sec h2 { font-size: clamp(28px, 3vw, 32px); line-height: 40px; letter-spacing: -.015em; margin-bottom: var(--s1); }
+.sec h3 { font-size: 20px; line-height: 32px; margin: var(--s2) 0 var(--s0); }
+.sec h3.h4, .foot h3.h4 { font-size: 16px; line-height: 24px; margin: 0; }
+.col > p + p { margin-top: var(--s1); }
+.col p { font-size: 16px; line-height: 24px; }
+figure { margin: var(--s3) auto; }
+figcaption { color: var(--muted); }
+.cap { text-align: center; font-style: italic; font-size: 14px; line-height: 24px; color: var(--muted); margin-top: var(--s1); }
+@media (max-width: 560px) { .sec { padding-top: var(--s4); } .sec + .sec { margin-top: var(--s4); } }
+
+.nums { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2); margin: var(--s2) 0 0; }
+.nums b { display: block; font-family: var(--display); font-weight: 500; font-size: 40px; line-height: 48px; color: var(--accent); letter-spacing: -.03em; }
+.nums span { display: block; font-size: 14px; line-height: 24px; color: var(--muted); margin-top: var(--s0); }
+.nums a { color: var(--muted); font-size: 12px; line-height: 24px; }
+@media (max-width: 640px) { .nums { grid-template-columns: 1fr; gap: var(--s2); } }
+
+.quiet-list { margin: var(--s1) 0 0; padding-left: 20px; display: grid; gap: var(--s0); }
+.people { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s1); margin-top: var(--s2); }
+.people div { border: 1px solid var(--line); border-radius: var(--r-m); padding: var(--s1); background: var(--surface); }
+.people b { display: block; font-family: var(--display); font-weight: 500; color: var(--text); font-size: 24px; line-height: 32px; }
+.people span { display: block; font-size: 14px; line-height: 24px; color: var(--muted); }
+@media (max-width: 640px) { .people { grid-template-columns: 1fr 1fr; } }
+
+.finding { margin-top: var(--s2); padding-top: var(--s2); border-top: 1px solid var(--line); }
+.finding .k { font-size: 14px; line-height: 24px; color: var(--accent); font-weight: 500; margin-bottom: var(--s0); }
+.finding h3 { margin-top: 0; }
+blockquote { margin: var(--s1) 0 0; padding-left: var(--s1); border-left: 2px solid var(--line); }
+
+.table { overflow-x: auto; border-top: 1px solid var(--line); }
+table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 16px; line-height: 24px; }
+th, td { text-align: left; padding: var(--s1) var(--s1) var(--s1) 0; vertical-align: top; border-bottom: 1px solid var(--line); }
+th { color: var(--muted); font-weight: 500; font-size: 14px; }
+td:first-child { color: var(--text); width: 30%; }
+td:nth-child(2) { width: 38%; }
+td.basis { color: var(--muted); font-size: 14px; line-height: 24px; width: 32%; }
+td.basis b { display: block; color: var(--accent); font-weight: 500; font-size: 12px; line-height: 16px; letter-spacing: .01em; margin-bottom: var(--s-1); }
+.table.bleed { width: min(1088px, 100vw - 64px); margin-left: 50%; transform: translateX(-50%); }
+@media (max-width: 640px) {
+  .table.bleed { width: auto; margin-left: 0; transform: none; }
+  table { min-width: 0; }
+  thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  table, tbody, tr, td { display: block; width: auto !important; }
+  tr { padding: var(--s1) 0; border-bottom: 1px solid var(--line); }
+  td { border: 0; padding: 0; }
+  td + td { margin-top: var(--s0); }
+  td:first-child { font-weight: 500; }
+  td:nth-child(2)::before { content: "Why"; display: block; color: var(--muted); font-size: 12px; line-height: 16px; margin-bottom: var(--s-1); }
+}
+td:first-child { width: 30%; }
+
+
+/* Media follows the page theme: light screenshots in light mode, dark in dark */
+:root:not([data-mode="dark"]) .tm-d, :root[data-mode="dark"] .tm-l { display: none !important; }
+:root[data-mode="dark"] .fr-in, :root[data-mode="dark"] .ba .frame img, :root[data-mode="dark"] .clip video { background: #0F1012; }
+:root[data-mode="dark"] .scr { background: #0F1012; }
+:root[data-mode="dark"] .chrome { background: #212226; border-bottom-color: #2E3035; }
+:root[data-mode="dark"] .chrome b { background: #0F1012; color: #9A9DA6; box-shadow: inset 0 0 0 1px #2E3035; }
+:root[data-mode="dark"] .phone .p-scr, :root[data-mode="dark"] .sbar { background: #0F1012; color: #F2F2F4; }
+:root[data-mode="dark"] .sbar .bars i, :root[data-mode="dark"] .sbar .batt::before { background: #F2F2F4; }
+:root[data-mode="dark"] .sbar .batt { box-shadow: inset 0 0 0 .35cqw rgba(242,242,244,.45); }
+:root[data-mode="dark"] .sbar .batt::after { background: rgba(242,242,244,.45); }
+
+
+
+/* Responsive + touch-target fixes */
+.site-foot { margin-top: var(--s5); }
+.sf-in { max-width: calc(1088px + 2 * var(--s2)); margin: 0 auto; padding: 0 var(--s2); }
+.sf-row { display: flex; justify-content: space-between; align-items: center; gap: var(--s1) var(--s2); flex-wrap: wrap; padding: var(--s2) 0 var(--s3); border-top: 1px solid var(--line); }
+.sf-c { font-size: 14px; line-height: 24px; color: var(--muted); }
+.sf-links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--s0) var(--s2); }
+.sf-links a { display: inline-block; padding: 4px 0; font-size: 14px; line-height: 24px; color: var(--muted); text-decoration: none; }
+.sf-links a:hover { color: var(--accent); }
+@media (max-width: 560px) { .sf-in { padding: 0 var(--s1); } .sf-row { flex-direction: column-reverse; align-items: flex-start; } .sf-links { gap: var(--s0) var(--s1); } }
+@media (max-width: 380px) { .nav { padding: 0 12px; gap: 8px; } .pill { padding: 8px 8px; font-size: 13px; } .logo { min-width: 24px; } .logo .lm { width: 22px; height: 22px; } .mode { width: 28px; } }
+
+.pill-link { display: inline-block; padding: 8px 0; }
+.nums a { display: inline-block; padding: 4px 0; }
+
+
+/* Mobile menu */
+.menu-btn { display: none; }
+@media (max-width: 640px) {
+  .nav { padding: 0 var(--s1); gap: var(--s1); }
+  .logo .lw { position: static !important; width: auto !important; height: auto !important; overflow: visible !important; clip: auto !important; }
+  .nav-r { gap: var(--s0); }
+  .menu-btn { display: grid; place-items: center; width: 40px; height: 40px; margin-right: -8px; border: 0; border-radius: 50%; background: none; color: var(--text); cursor: pointer; }
+  .menu-btn .bars { position: relative; width: 18px; height: 10px; }
+  .menu-btn .bars i { position: absolute; left: 0; right: 0; height: 1.5px; border-radius: 2px; background: currentColor; transition: transform .25s, top .25s; }
+  .menu-btn .bars i:first-child { top: 0; } .menu-btn .bars i:last-child { top: 8.5px; }
+  .menu-btn[aria-expanded="true"] .bars i:first-child { top: 4.25px; transform: rotate(45deg); }
+  .menu-btn[aria-expanded="true"] .bars i:last-child { top: 4.25px; transform: rotate(-45deg); }
+  .menu { position: fixed; z-index: 25; top: 64px; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; padding: var(--s1) var(--s1) var(--s3); background: var(--bg); border-top: 1px solid var(--line); overflow-y: auto; visibility: hidden; opacity: 0; transform: translateY(-8px); transition: opacity .2s, transform .25s cubic-bezier(.2,.8,.2,1), visibility 0s .25s; }
+  .menu.open { visibility: visible; opacity: 1; transform: none; transition: opacity .2s, transform .25s cubic-bezier(.2,.8,.2,1); }
+  .menu .pill { display: flex; align-items: center; justify-content: space-between; height: 64px; padding: 0 var(--s0) !important; border: 0 !important; border-bottom: 1px solid var(--line) !important; border-radius: 0; background: none !important; font-family: var(--display); font-size: 24px !important; line-height: 32px; font-weight: 500; color: var(--text); }
+  .menu .pill[aria-current] { color: var(--accent); }
+  .menu .pill[aria-current]::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  body.menu-open { overflow: hidden; }
+  body.menu-open .nav { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--bg); border-bottom-color: transparent; }
+}
+
+/* Site footer (shared by every page) */
+
+/* Section navigation */
+:root { --navh: 64px; --toch: 0px; }
+.toc { position: sticky; top: var(--navh); z-index: 19; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); margin-top: var(--s4); }
+.toc ol { list-style: none; margin: 0 auto; padding: var(--s0) var(--s2); max-width: calc(1088px + 2 * var(--s2)); display: flex; gap: var(--s-1); overflow-x: auto; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 var(--s2), #000 calc(100% - var(--s2)), transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 var(--s2), #000 calc(100% - var(--s2)), transparent 100%); }
+.toc ol::-webkit-scrollbar { display: none; }
+.toc a { display: block; white-space: nowrap; font-size: 14px; line-height: 16px; color: var(--muted); text-decoration: none; padding: var(--s0) var(--s1); border-radius: 999px; transition: color .2s, background-color .2s; }
+.toc a:hover { color: var(--text); }
+.toc a[aria-current] { color: var(--accent); background: var(--accent-soft); }
+.sec { scroll-margin-top: calc(var(--navh) + var(--toch) + var(--s1)); }
+@media (max-width: 560px) { .toc ol { padding: var(--s0) var(--s1); } }
+@media (min-width: 1472px) {
+  .toc { position: fixed; top: 50%; left: max(var(--s2), calc(50vw - 576px - 208px)); transform: translateY(-50%); margin: 0; background: none; backdrop-filter: none; -webkit-backdrop-filter: none; border: 0; opacity: 0; visibility: hidden; transition: opacity .4s, visibility .4s; }
+  .toc.show { opacity: 1; visibility: visible; }
+  .toc ol { flex-direction: column; gap: 0; padding: 0; -webkit-mask-image: none; mask-image: none; overflow: visible; }
+  .toc a { position: relative; padding: var(--s0) 0 var(--s0) var(--s2); border-radius: 0; }
+  .toc a::before { content: ""; position: absolute; left: 0; top: 50%; width: var(--s0); height: 1px; background: var(--line); transition: width .25s, background-color .25s; }
+  .toc a[aria-current] { background: none; }
+  .toc a[aria-current]::before { width: var(--s1); height: 2px; margin-top: -1px; background: var(--accent); }
+}
+/* Section reveal */
+.js .sec { opacity: 0; transform: translateY(var(--s2)); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
+.js .sec.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .js .sec { opacity: 1; transform: none; } }
+@media print { .toc { display: none; } .js .sec { opacity: 1; transform: none; } }
+
+/* Media frames: one mat, one hairline, one radius pair (16 outside, 8 inside) */
+.frame { background: var(--mat); border-radius: var(--r-m); padding: var(--s1); }
+.fr-in { position: relative; border-radius: var(--r-s); overflow: hidden; background: #fff; box-shadow: 0 0 0 1px var(--line); }
+.fr-in img { width: 100%; height: 100%; }
+.box { position: absolute; border-radius: 6px; opacity: 0; pointer-events: none; box-shadow: 0 0 0 2px var(--accent), 0 0 0 9999px rgba(15,16,18,.32); background: transparent; transition: opacity .25s ease; }
+.box.on { opacity: 1; }
+:root[data-mode="dark"] .box { box-shadow: 0 0 0 2px var(--accent), 0 0 0 9999px rgba(0,0,0,.5); }
+.pinwrap { position: relative; padding-right: var(--s2); }
+.pins { position: absolute; top: 0; right: 0; bottom: 0; width: var(--s2); }
+.pin { position: absolute; left: 50%; width: 24px; height: 24px; margin-left: -8px; border-radius: 50%; background: var(--surface); color: var(--text); box-shadow: inset 0 0 0 1px var(--line); display: grid; place-items: center; font-size: 12px; line-height: 16px; font-weight: 600; font-style: normal; pointer-events: none; transition: background-color .2s, color .2s; }
+.pin.on { background: var(--accent); color: var(--accent-ink); box-shadow: none; }
+.shot { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--s3); align-items: start; margin: var(--s4) auto; }
+.shot:first-child { margin-top: var(--s3); }
+@media (max-width: 900px) { .shot { grid-template-columns: 1fr; gap: var(--s2); margin: var(--s3) auto; } }
+@media (max-width: 560px) { .frame { padding: var(--s0); border-radius: 12px; } .fr-in { border-radius: 6px; } .pinwrap { padding-right: 24px; } .pins { width: 24px; } .pin { width: 16px; height: 16px; margin-left: -4px; font-size: 10px; } }
+.shot figcaption > p { color: var(--text); font-size: 16px; line-height: 24px; font-weight: 500; margin-bottom: var(--s1); }
+.marks { list-style: none; margin: 0; padding: 0; display: grid; }
+.marks li { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: var(--s1); padding: var(--s1) 0; border-top: 1px solid var(--line); cursor: default; }
+.marks li:hover span, .marks li.on span { color: var(--text); }
+.marks .num { width: 24px; height: 24px; border-radius: 50%; background: var(--surface); color: var(--text); box-shadow: inset 0 0 0 1px var(--line); display: grid; place-items: center; font-size: 12px; line-height: 16px; font-weight: 600; transition: background-color .2s, color .2s; }
+.marks li:hover .num, .marks li.on .num { background: var(--accent); color: var(--accent-ink); box-shadow: none; }
+.marks span { font-size: 16px; line-height: 24px; color: var(--soft); }
+.marks small { display: block; color: var(--muted); font-size: 14px; line-height: 24px; }
+
+.ba { display: grid; gap: var(--s2); }
+.ba-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); }
+.ba figure { margin: 0; }
+.ba .frame img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: left top; border-radius: var(--r-s); background: #fff; box-shadow: 0 0 0 1px var(--line); }
+.ba figcaption { font-size: 14px; line-height: 24px; margin-top: var(--s1); }
+.ba figcaption b { color: var(--text); font-weight: 600; margin-right: var(--s0); }
+@media (max-width: 700px) { .ba-row { grid-template-columns: 1fr; gap: var(--s1); } }
+
+.opts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s1); }
+.opt { min-width: 0; border: 1px solid var(--line); border-radius: var(--r-m); padding: var(--s1); background: var(--surface); display: grid; grid-template-rows: auto 144px auto; gap: var(--s1); align-content: start; }
+.opt.pick { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.opt h3 { font-size: 16px; line-height: 24px; display: flex; flex-direction: column-reverse; gap: var(--s-1); }
+.opt h3 small { font-family: var(--sans); font-size: 12px; line-height: 16px; color: var(--muted); font-weight: 500; }
+.opt.pick h3 small { color: var(--accent); }
+.sketch { background: var(--mat); border-radius: var(--r-s); padding: var(--s1); display: grid; align-content: center; gap: var(--s0); font-size: 12px; line-height: 16px; overflow: hidden; color: var(--soft); }
+.sk-f { border: 1px solid #CFCFCC; border-radius: 6px; background: #fff; padding: var(--s0); color: #6B6B6B; }
+.sk-cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; background: #fff; border: 1px solid #CFCFCC; border-radius: 6px; padding: var(--s-1); font-size: 10px; line-height: 16px; text-align: center; color: #6B6B6B; }
+.sk-cal b { background: #111; color: #fff; border-radius: 4px; }
+.sk-row { display: flex; gap: var(--s0); }
+.sk-row div { flex: 1 1 0; min-width: 0; display: grid; gap: var(--s-1); font-size: 11px; }
+.sk-row div:last-child { flex-grow: 1.4; }
+.sk-row .sk-f { text-align: center; color: #111; padding: var(--s0) 2px; }
+.opt ul { margin: 0; padding-left: var(--s1); display: grid; gap: var(--s0); font-size: 14px; line-height: 24px; }
+@media (max-width: 1000px) { .opts { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .opts { grid-template-columns: 1fr; } }
+
+.clips { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3) var(--s2); }
+.clip { margin: 0; }
+.clip video { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: top; border-radius: var(--r-s); background: #fff; box-shadow: 0 0 0 1px var(--line); }
+.clip figcaption { margin-top: var(--s1); display: grid; gap: var(--s0); }
+.clip h3 { font-size: 16px; line-height: 24px; }
+.clip p { font-size: 14px; line-height: 24px; }
+.hears { font-style: italic; color: var(--soft) !important; }
+.hears span { display: block; font-style: normal; font-size: 12px; line-height: 16px; color: var(--accent); font-weight: 500; margin-bottom: var(--s-1); }
+.clip-bar { display: flex; justify-content: space-between; align-items: center; gap: var(--s1); flex-wrap: wrap; margin-bottom: var(--s2); color: var(--muted); font-size: 14px; line-height: 24px; }
+.mt { font: inherit; font-size: 14px; line-height: 16px; background: var(--surface); color: var(--text); border: 1px solid var(--line); border-radius: 999px; padding: var(--s0) var(--s1); cursor: pointer; }
+.mt:hover { border-color: var(--accent); color: var(--accent); }
+@media (max-width: 760px) { .clips { grid-template-columns: 1fr; gap: var(--s2); } }
+
+.foot { margin-top: var(--s6); }
+.next { display: flex; justify-content: space-between; align-items: center; gap: var(--s1); flex-wrap: wrap; border: 1px solid var(--line); border-radius: var(--r-l); padding: var(--s2); background: var(--surface); }
+.next h3 { font-size: 24px; line-height: 32px; }
+.next p { color: var(--muted); font-size: 16px; line-height: 24px; margin-top: var(--s0); }
+.btn { display: inline-flex; gap: var(--s0); align-items: center; justify-content: center; height: 40px; background: var(--accent); color: var(--accent-ink); text-decoration: none; padding: 0 24px; border-radius: 999px; font-weight: 500; font-size: 14px; line-height: 16px; letter-spacing: .005em; transition: filter .2s; }
+.btn:hover { color: var(--accent-ink); filter: brightness(1.08); }
+.refs { margin-top: var(--s3); font-size: 14px; line-height: 24px; color: var(--muted); }
+.refs h3 { font-family: var(--sans); font-size: 14px; line-height: 24px; color: var(--text); font-weight: 500; margin-bottom: var(--s0); }
+.refs ul { margin: 0; padding-left: var(--s1); display: grid; gap: var(--s0); }
+.refs a { color: var(--muted); }
+.credit { margin-top: var(--s2); padding-top: var(--s2); border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: var(--s1); flex-wrap: wrap; font-size: 14px; line-height: 24px; color: var(--muted); }
+/* nav layout v2: mark only, centred capsule */
+.logo .lw { position: absolute !important; width: 1px !important; height: 1px !important; overflow: hidden !important; clip: rect(0 0 0 0) !important; white-space: nowrap; padding: 0; border: 0; }
+.logo { gap: 0; width: 40px; height: 40px; justify-content: center; border-radius: 50%; margin-left: -8px; }
+.logo .lm { width: 24px; height: 24px; }
+@media (min-width: 641px) {
+  .nav { display: grid; grid-template-columns: 1fr auto 1fr; height: 72px; padding: 0 var(--s2); }
+  .nav-r { display: contents; }
+  .nav > .logo { grid-column: 1; justify-self: start; }
+  .menu { grid-column: 2; display: flex; gap: 2px; padding: 4px; border: 1px solid var(--line); border-radius: 999px; background: color-mix(in srgb, var(--surface) 70%, transparent); }
+  .menu .pill { padding: 8px 16px; font-size: 14px; line-height: 16px; border: 0; transition: color .2s, background-color .2s; }
+  .menu .pill[aria-current] { background: var(--text); color: var(--bg); border: 0; }
+  .menu .pill:not([aria-current]):hover { background: var(--mat); color: var(--text); }
+  .nav-r > .mode { grid-column: 3; justify-self: end; width: 40px; height: 40px; border: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 70%, transparent); }
+  .nav-r > .mode:hover { border-color: var(--muted); }
+  .nav.scrolled { border-bottom-color: transparent; }
+}
+@media (min-width: 641px) and (max-width: 720px) { .nav { padding: 0 var(--s1); } .menu .pill { padding: 8px 12px; } }
+/* sharp corners: 4–5px everywhere */
+:root { --r-s: 4px; --r-m: 5px; --r-l: 5px; }
+.btn, .pill, .menu, .mt, .sevp, .tags li, .toc a, .mode, .menu-btn, .logo, .nav-r > .mode { border-radius: 4px !important; }
+.box, .ring, .fr-in, .sk-cal, .sk-f { border-radius: 4px; }
+.meter i, .meter i::after { border-radius: 2px; }
+.frame { border-radius: 5px !important; }
+@media (min-width: 641px) { .menu { padding: 3px; } .menu .pill { border-radius: 3px !important; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the case study</a>
+<nav class="nav" aria-label="Site">
+  <a class="logo" href="index.html"><svg class="lm" viewBox="0 0 96 96" aria-hidden="true" focusable="false"><g fill="currentColor"><rect x="0" y="0" width="12" height="96"/><polygon points="18,90 18,73 78,13 78,30"/><rect x="84" y="0" width="12" height="96"/><rect x="50" y="58" width="28" height="12"/></g></svg><span class="lw">Vedant Atram</span></a>
+  <div class="nav-r">
+    <div class="menu" id="menu">
+      <a class="pill" href="index.html#work">Work</a>
+      <a class="pill" href="thinking.html">Thinking</a>
+      <a class="pill" href="about.html">About</a>
+      <a class="pill" href="Vedant-Atram-Resume.pdf" target="_blank" rel="noopener">Resume<span class="vh"> (PDF, opens in a new tab)</span></a>
+    </div>
+    <button type="button" class="mode" id="mode" aria-label="Switch to dark mode"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span class="vh">Menu</span><span class="bars" aria-hidden="true"><i></i><i></i></span></button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="stage">
+    <figure class="laptop"><div class="lid"><div class="scr">
+      <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><b>Practice job application</b></div>
+      <div class="vp"><img class="tm-l" src="assets/hero-desk.webp" width="1280" height="736" alt="The redesigned practice job application on a laptop: step 1 of 8, Personal contact information, with keyboard focus on the Year field of today’s date."><img class="tm-d" loading="lazy" src="assets/hero-desk-d.webp" width="1280" height="736" alt="The redesigned practice job application on a laptop: step 1 of 8, Personal contact information, with keyboard focus on the Year field of today’s date.">
+      <span class="ring" style="left:31.31%;top:70.39%;width:9.25%;height:7.32%" aria-hidden="true"></span></div>
+    </div></div><div class="base" aria-hidden="true"></div></figure>
+    <figure class="phone"><div class="ph"><span class="sb l1" aria-hidden="true"></span><span class="sb l2" aria-hidden="true"></span><span class="sb l3" aria-hidden="true"></span><span class="sb r1" aria-hidden="true"></span><div class="p-scr"><div class="sbar" aria-hidden="true"><span>9:41</span><span class="icons"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="batt"></span></span></div><div class="pv"><img class="tm-l" src="assets/hero-phone.webp" width="390" height="790" alt="The same step on a phone, the device one participant used with VoiceOver."><img class="tm-d" loading="lazy" src="assets/hero-phone-d.webp" width="390" height="790" alt="The same step on a phone, the device one participant used with VoiceOver."></div></div></div></figure>
+  </div>
+  <div class="col title">
+    <h1>Invisible Obstacles</h1>
+    <p>Why blind screen-reader users get stuck in online job applications, and how I redesigned one to work with a screen reader from start to finish.</p>
+    <div class="cta"><a class="btn" href="prototypes/invisible-obstacles/">Try the prototype <span aria-hidden="true">→</span></a><a class="pill-link" href="#overview">Read the case study</a></div>
+    <dl class="meta">
+      <div><dt>My role</dt><dd>UX Researcher &amp; Designer</dd></div>
+      <div><dt>Timeline</dt><dd>Research Oct–Nov 2025, HCI 511 at DePaul. Redesign 2026.</dd></div>
+      <div><dt>Outcome</dt><dd>3 findings · coded 8-step prototype · 0 automated WCAG 2.1 AA violations</dd></div>
+    </dl>
+  </div>
+</header>
+
+<nav class="toc" id="toc" aria-label="Sections"><ol><li><a href="#overview">Overview</a></li><li><a href="#research">Research</a></li><li><a href="#findings">Findings</a></li><li><a href="#before-after">Before &amp; after</a></li><li><a href="#date-field">Date field</a></li><li><a href="#redesign">Redesign</a></li><li><a href="#decisions">Decisions</a></li><li><a href="#motion">Motion</a></li><li><a href="#validation">Validation</a></li><li><a href="#limitations">Limitations</a></li></ol></nav>
+
+<main id="main" tabindex="-1">
+
+<section class="sec col" id="overview" aria-labelledby="h-over">
+  <h2 id="h-over">Overview</h2>
+  <p>Online forms are one of the most common places the web breaks for people who use screen readers. On a job application the cost is high: a field you can’t complete can end the application before anyone reads it.</p>
+  <div class="nums">
+    <div><b>5×</b><span>longer for blind users on the same web task when a site is poorly accessible: 424 seconds against 82.</span><a href="https://doi.org/10.1093/iwc/iwad004">Griffith et al., 2022</a></div>
+    <div><b>51%</b><span>of the top million home pages have form fields a screen reader can’t name.</span><a href="https://webaim.org/projects/million/">WebAIM, 2026</a></div>
+    <div><b>706k</b><span>people in the US are blind, among 7.15 million with vision loss glasses can’t correct.</span><a href="https://www.cdc.gov/visionhealth/vehss/estimates/vision-loss-prevalence.html">CDC, 2024</a></div>
+  </div>
+</section>
+
+<section class="sec col" id="research" aria-labelledby="h-start">
+  <h2 id="h-start">Where it started</h2>
+  <p>Our team asked a simple question: what problems do blind and low-vision users face when they fill in digital forms with a screen reader? To find out, we watched four blind adults complete <a href="https://www.careeronestop.org/Toolkit/Jobs/practice-job-application-form.aspx">CareerOneStop’s Practice Job Application</a>, a 7-page form from the US Department of Labor, on their own devices.</p>
+  <p>Each session had a short interview, the observed task over Zoom with screen sharing, and a reflection. We coded the transcripts line by line into themes, and used task analysis and the AEIOU framework on our observation notes.</p>
+  <div class="people" role="list" aria-label="Participants">
+    <div role="listitem"><b>71</b><span>P1 · JAWS · laptop</span></div>
+    <div role="listitem"><b>65</b><span>P2 · JAWS · laptop</span></div>
+    <div role="listitem"><b>54</b><span>P3 · JAWS · laptop</span></div>
+    <div role="listitem"><b>52</b><span>P4 · VoiceOver · phone</span></div>
+  </div>
+  <p class="cap">Four experienced screen-reader users in Chicago, aged 52 to 71.</p>
+</section>
+
+<section class="sec col" id="findings" aria-labelledby="h-find">
+  <h2 id="h-find">What got in the way</h2>
+  <p>Every participant was an experienced screen-reader user, and every breakdown we saw came from how the form was built. Three themes explained them.</p>
+  <div class="finding"><p class="k">Finding 1 · Knowing where you are</p><h3>Unpredictable navigation left people lost.</h3><p>Focus jumped between sections. The F and H keys skipped information or landed on unlabelled controls, and some keys advanced the page without warning, so people had to stop, re-scan and rebuild their picture of the form.</p></div>
+  <div class="finding"><p class="k">Finding 2 · Controls that just work</p><h3>The date field stopped everyone.</h3><p>No one could tell the required format, operate the date control reliably from the keyboard, or make sense of what the screen reader said about it. People skipped the field or tried workaround after workaround.</p></div>
+  <div class="finding"><p class="k">Finding 3 · Clear feedback</p><h3>No feedback meant doing the form’s job for it.</h3><p>The form never said when a required field was missed or an entry was wrong. Participants re-checked every answer by hand and tracked their own progress in their heads.</p></div>
+</section>
+
+<section class="sec" id="before-after" aria-labelledby="h-ba">
+  <div class="col"><h2 id="h-ba">Before and after</h2><p>The redesign keeps all seven of the original’s sections and asks the same questions, so each pair below compares the same content.</p></div>
+  <div class="wide ba" style="margin-top:var(--s2)">
+    <div class="ba-row"><figure><div class="frame"><img src="assets/o1.webp" width="560" height="420" alt="Original form: a Date field labelled mm/dd/yyyy using the browser’s built-in date input." loading="lazy"></div><figcaption><b>Before</b>The browser’s built-in date input, with the format only in the label.</figcaption></figure><figure><div class="frame"><img class="tm-l" src="assets/s1.webp" width="880" height="655" alt="Redesign: today’s date as Month, Day and Year text fields with the example 3 15 2027." loading="lazy"><img class="tm-d" src="assets/s1-d.webp" width="880" height="655" alt="Redesign: today’s date as Month, Day and Year text fields with the example 3 15 2027." loading="lazy"></div><figcaption><b>After</b>Three labelled text fields, with the format read out as an example.</figcaption></figure></div>
+    <div class="ba-row"><figure><div class="frame"><img src="assets/o2.webp" width="728" height="546" alt="Original form: an If no, when would you be able to start date field that is always shown." loading="lazy"></div><figcaption><b>Before</b>“If no, when…?” is always on the page, whatever you answered.</figcaption></figure><figure><div class="frame"><img class="tm-l" src="assets/b2.webp" width="880" height="660" alt="Redesign: When could you start appears only after choosing No." loading="lazy"><img class="tm-d" src="assets/b2-d.webp" width="880" height="660" alt="Redesign: When could you start appears only after choosing No." loading="lazy"></div><figcaption><b>After</b>The follow-up appears only after “No”, directly below it.</figcaption></figure></div>
+    <div class="ba-row"><figure><div class="frame"><img src="assets/o4.webp" width="720" height="540" alt="Original form: employment start and end dates as browser month pickers." loading="lazy"></div><figcaption><b>Before</b>Start and end dates use the browser’s month picker.</figcaption></figure><figure><div class="frame"><img class="tm-l" src="assets/b4.webp" width="880" height="660" alt="Redesign: Month and Year text fields, with an error message next to the end date." loading="lazy"><img class="tm-d" src="assets/b4-d.webp" width="880" height="660" alt="Redesign: Month and Year text fields, with an error message next to the end date." loading="lazy"></div><figcaption><b>After</b>Month and Year fields, and errors that name the exact part to fix.</figcaption></figure></div>
+  </div>
+  <p class="cap col" style="margin-top:var(--s2)">Original screenshots captured from the live CareerOneStop form in November 2026; it may have changed since our 2025 sessions.</p>
+</section>
+
+<section class="sec" id="date-field" aria-labelledby="h-date">
+  <div class="col"><h2 id="h-date">Designing the date field</h2><p>The date field was the most severe barrier. The original uses the browser’s own date input, so “use native controls” wasn’t enough on its own. I compared four ways to ask for a date.</p></div>
+  <div class="wide opts" style="margin-top:var(--s2)">
+    <article class="opt"><h3 class="h4">Built-in date input <small>The original</small></h3><div class="sketch" aria-hidden="true">Date (mm/dd/yyyy)<div class="sk-f">mm/dd/yyyy &#9638;</div></div><ul><li>Native to the browser</li><li>In our sessions, no one could tell the format or get a keyboard response</li></ul></article>
+    <article class="opt"><h3 class="h4">Custom picker <small>Rejected</small></h3><div class="sketch" aria-hidden="true"><div class="sk-f">Select a date ▾</div><div class="sk-cal"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><b>15</b></div></div><ul><li>Full control over the look</li><li>A complex widget, the kind the paper warns against</li></ul></article>
+    <article class="opt"><h3 class="h4">One masked field <small>Rejected</small></h3><div class="sketch" aria-hidden="true"><div class="sk-f">MM / DD / YYYY</div><div class="sk-f" style="color:#111">03 / 1_ / ____</div></div><ul><li>Compact</li><li>Auto-inserted slashes change the text as you type, which can be announced unpredictably</li></ul></article>
+    <article class="opt pick"><h3 class="h4">Three text fields <small>Chosen</small></h3><div class="sketch" aria-hidden="true">For example, 3 15 2027<div class="sk-row"><div>Month<span class="sk-f">3</span></div><div>Day<span class="sk-f">15</span></div><div>Year<span class="sk-f">2027</span></div></div></div><ul><li>Plain inputs every screen reader handles</li><li>Each part labelled; errors point to the exact part</li><li>Three tab stops instead of one</li></ul></article>
+  </div>
+  <p class="cap col">Month comes first because all participants were in Chicago. The same pattern replaces the original’s month pickers in employment history.</p>
+</section>
+
+<section class="sec" id="redesign" aria-labelledby="h-red">
+  <div class="col"><h2 id="h-red">The redesign, step by step</h2><p>Each part of the redesign responds to one of the three findings. The numbered notes come from tags in the prototype’s code; hover or focus a note to highlight it on the screen.</p></div>
+  <div>
+  <figure class="shot wide">
+  <div class="frame"><div class="pinwrap"><div class="fr-in" style="aspect-ratio:1844/1174"><img class="tm-l" src="assets/s1.webp" width="922" height="587" alt="Step 1 of 8: a progress bar, the heading Personal contact information, today’s date as three text fields, and name fields including an optional middle initial." loading="lazy"><img class="tm-d" src="assets/s1-d.webp" width="922" height="587" alt="Step 1 of 8: a progress bar, the heading Personal contact information, today’s date as three text fields, and name fields including an optional middle initial." loading="lazy"><span class="box" data-k="s1-1" style="left:2.39%;top:4.43%;width:95.23%;height:9.20%"></span><span class="box" data-k="s1-2" style="left:2.39%;top:17.04%;width:95.23%;height:14.31%"></span><span class="box" data-k="s1-3" style="left:2.39%;top:51.28%;width:95.23%;height:25.89%"></span><span class="box" data-k="s1-4" style="left:38.47%;top:80.58%;width:23.06%;height:15.67%"></span></div><div class="pins" aria-hidden="true"><b class="pin" data-k="s1-1" style="top:4.43%">1</b><b class="pin" data-k="s1-2" style="top:17.04%">2</b><b class="pin" data-k="s1-3" style="top:51.28%">3</b><b class="pin" data-k="s1-4" style="top:80.58%">4</b></div></div></div>
+  <figcaption><p>Start oriented. The progress bar, page title and heading all say where you are, and every field says what it wants.</p><ol class="marks"><li data-k="s1-1" tabindex="0"><b class="num" aria-hidden="true">1</b><span>Progress you can hear: &quot;Contact, current step&quot;<small>Knowing where you are</small></span></li><li data-k="s1-2" tabindex="0"><b class="num" aria-hidden="true">2</b><span>A real heading for every section<small>Knowing where you are</small></span></li><li data-k="s1-3" tabindex="0"><b class="num" aria-hidden="true">3</b><span>Today’s date as Month, Day, Year text fields<small>Controls that just work</small></span></li><li data-k="s1-4" tabindex="0"><b class="num" aria-hidden="true">4</b><span>&quot;(optional)&quot; in words, not an asterisk<small>Clear feedback</small></span></li></ol></figcaption>
+</figure>
+  <figure class="shot wide">
+  <div class="frame"><div class="pinwrap"><div class="fr-in" style="aspect-ratio:1844/1416"><img class="tm-l" src="assets/s2.webp" width="922" height="708" alt="Step 2: Could you start immediately, answered No, with a When could you start question revealed below it." loading="lazy"><img class="tm-d" src="assets/s2-d.webp" width="922" height="708" alt="Step 2: Could you start immediately, answered No, with a When could you start question revealed below it." loading="lazy"><span class="box" data-k="s2-1" style="left:2.39%;top:39.27%;width:95.23%;height:12.99%"></span><span class="box" data-k="s2-2" style="left:2.39%;top:55.08%;width:95.23%;height:21.47%"></span><span class="box" data-k="s2-3" style="left:4.34%;top:59.60%;width:93.28%;height:5.08%"></span><span class="box" data-k="s2-4" style="left:2.39%;top:79.38%;width:95.23%;height:17.51%"></span></div><div class="pins" aria-hidden="true"><b class="pin" data-k="s2-1" style="top:39.27%">1</b><b class="pin" data-k="s2-2" style="top:55.08%">2</b><b class="pin" data-k="s2-3" style="top:63.22%">3</b><b class="pin" data-k="s2-4" style="top:79.38%">4</b></div></div></div>
+  <figcaption><p>Only the questions that apply. Follow-ups appear after the answer that needs them, in reading order.</p><ol class="marks"><li data-k="s2-1" tabindex="0"><b class="num" aria-hidden="true">1</b><span>Real radio buttons in a named group<small>Controls that just work</small></span></li><li data-k="s2-2" tabindex="0"><b class="num" aria-hidden="true">2</b><span>Follow-up appears only after &quot;No&quot;<small>Clear feedback</small></span></li><li data-k="s2-3" tabindex="0"><b class="num" aria-hidden="true">3</b><span>Format example read after the label<small>Clear feedback</small></span></li><li data-k="s2-4" tabindex="0"><b class="num" aria-hidden="true">4</b><span>Optional questions say so<small>Clear feedback</small></span></li></ol></figcaption>
+</figure>
+  <figure class="shot wide">
+  <div class="frame"><div class="pinwrap"><div class="fr-in" style="aspect-ratio:1811/430"><img class="tm-l" src="assets/s4a.webp" width="905" height="215" alt="An error summary reading: There is a problem, end date for employer 2 must have a month from 1 to 12." loading="lazy"><img class="tm-d" src="assets/s4a-d.webp" width="905" height="215" alt="An error summary reading: There is a problem, end date for employer 2 must have a month from 1 to 12." loading="lazy"><span class="box" data-k="s4a-1" style="left:1.54%;top:42.79%;width:96.91%;height:48.84%"></span></div><div class="pins" aria-hidden="true"><b class="pin" data-k="s4a-1" style="top:42.79%">1</b></div></div></div>
+  <figcaption><p>Errors you can find. Focus moves to a summary of everything wrong, and each item links to its field.</p><ol class="marks"><li data-k="s4a-1" tabindex="0"><b class="num" aria-hidden="true">1</b><span>Error summary takes focus and links to each field<small>Clear feedback</small></span></li></ol></figcaption>
+</figure>
+  <figure class="shot wide">
+  <div class="frame"><div class="pinwrap"><div class="fr-in" style="aspect-ratio:1844/1900"><img class="tm-l" src="assets/s4b.webp" width="922" height="950" alt="Employer 2, with the end-date month field marked invalid and an error message above it." loading="lazy"><img class="tm-d" src="assets/s4b-d.webp" width="922" height="950" alt="Employer 2, with the end-date month field marked invalid and an error message above it." loading="lazy"><span class="box" data-k="s4b-1" style="left:5.97%;top:4.74%;width:13.79%;height:3.76%"></span><span class="box" data-k="s4b-2" style="left:5.97%;top:60.90%;width:88.07%;height:19.37%"></span><span class="box" data-k="s4b-3" style="left:5.97%;top:67.64%;width:88.07%;height:3.79%"></span></div><div class="pins" aria-hidden="true"><b class="pin" data-k="s4b-1" style="top:4.74%">1</b><b class="pin" data-k="s4b-2" style="top:60.90%">2</b><b class="pin" data-k="s4b-3" style="top:67.64%">3</b></div></div></div>
+  <figcaption><p>And the fix, in place. The same message sits next to the field, marked invalid for the screen reader.</p><ol class="marks"><li data-k="s4b-1" tabindex="0"><b class="num" aria-hidden="true">1</b><span>&quot;Employer 2&quot; heading: focus lands here when added<small>Knowing where you are</small></span></li><li data-k="s4b-2" tabindex="0"><b class="num" aria-hidden="true">2</b><span>Plain Month and Year fields instead of a month picker<small>Controls that just work</small></span></li><li data-k="s4b-3" tabindex="0"><b class="num" aria-hidden="true">3</b><span>The same message, next to the field<small>Clear feedback</small></span></li></ol></figcaption>
+</figure>
+  <figure class="shot wide">
+  <div class="frame"><div class="pinwrap"><div class="fr-in" style="aspect-ratio:1844/1444"><img class="tm-l" src="assets/s8.webp" width="922" height="722" alt="The review step, with answers grouped under Personal contact information and a Change link." loading="lazy"><img class="tm-d" src="assets/s8-d.webp" width="922" height="722" alt="The review step, with answers grouped under Personal contact information and a Change link." loading="lazy"><span class="box" data-k="s8-1" style="left:2.39%;top:41.69%;width:95.23%;height:55.26%"></span><span class="box" data-k="s8-2" style="left:2.39%;top:3.60%;width:95.23%;height:7.48%"></span></div><div class="pins" aria-hidden="true"><b class="pin" data-k="s8-1" style="top:41.69%">1</b><b class="pin" data-k="s8-2" style="top:3.60%">2</b></div></div></div>
+  <figcaption><p>One place to check. People re-checked everything by hand, and the original has no review, so I added one.</p><ol class="marks"><li data-k="s8-1" tabindex="0"><b class="num" aria-hidden="true">1</b><span>Answers grouped by section, one Change link each<small>Clear feedback</small></span></li><li data-k="s8-2" tabindex="0"><b class="num" aria-hidden="true">2</b><span>Completed sections announced as &quot;completed&quot;<small>Knowing where you are</small></span></li></ol></figcaption>
+</figure>
+  <figure class="shot wide">
+  <div class="frame"><div class="pinwrap"><div class="fr-in" style="aspect-ratio:1844/802"><img class="tm-l" src="assets/s9.webp" width="922" height="401" alt="The completion screen: a tick, the heading Application complete, and what happens next." loading="lazy"><img class="tm-d" src="assets/s9-d.webp" width="922" height="401" alt="The completion screen: a tick, the heading Application complete, and what happens next." loading="lazy"><span class="box" data-k="s9-1" style="left:2.39%;top:26.43%;width:73.60%;height:26.93%"></span><span class="box" data-k="s9-2" style="left:2.39%;top:66.33%;width:90.37%;height:27.18%"></span></div><div class="pins" aria-hidden="true"><b class="pin" data-k="s9-1" style="top:26.43%">1</b><b class="pin" data-k="s9-2" style="top:66.33%">2</b></div></div></div>
+  <figcaption><p>A clear ending. The result is the first thing a screen reader hears.</p><ol class="marks"><li data-k="s9-1" tabindex="0"><b class="num" aria-hidden="true">1</b><span>Result in the first heading; focus moves here<small>Knowing where you are</small></span></li><li data-k="s9-2" tabindex="0"><b class="num" aria-hidden="true">2</b><span>What to do next, in plain steps<small>Clear feedback</small></span></li></ol></figcaption>
+</figure>
+  </div>
+</section>
+
+<section class="sec col" id="decisions" aria-labelledby="h-dec">
+  <h2 id="h-dec">Design decisions</h2>
+  <p>Every decision starts from something we saw or heard in the four sessions. Where the sessions didn’t settle a question, I used published research or accessibility standards. Anything that is my own call is labelled that way.</p>
+  <div class="table bleed" style="margin-top:var(--s2)"><table>
+    <thead><tr><th scope="col">Decision</th><th scope="col">Why</th><th scope="col">Basis</th></tr></thead>
+    <tbody>
+      <tr><td>Month, Day and Year as three plain text boxes</td><td>None of the four participants could fill in the browser’s built-in date box or work out what format it wanted.</td><td class="basis"><b>Observed</b>All 4 participants: none could enter a date in the built-in box or tell what format it wanted</td></tr>
+      <tr><td>Standard radio buttons, checkboxes and dropdowns</td><td>These worked with every participant’s screen reader. The built-in date box was the one control that failed.</td><td class="basis"><b>Observed</b>Participants got through these controls without help; the date box was the only one that failed</td></tr>
+      <tr><td>A heading for every step and section; every field has a name</td><td>Participants moved by jumping from heading to heading and field to field. Missing headings and unnamed fields made them skip content or land on a box with no name.</td><td class="basis"><b>Observed + WCAG</b>Participants jumped by heading (H key) and by field (F key). WCAG 1.3.1 Info and Relationships, 2.4.6 Headings and Labels</td></tr>
+      <tr><td>No pop-ups, auto-advance or surprise redirects</td><td>Our study’s recommendations name these as a cause of the screen reader’s position jumping without warning.</td><td class="basis"><b>Our recommendation + WCAG</b>Written by our team after the sessions. WCAG 3.2.2 On Input: no change of page or focus without warning</td></tr>
+      <tr><td>A list of errors at the top that takes focus, plus a message next to each field</td><td>The original never said what was wrong. A published study with blind users found that an error list like this reduces input mistakes.</td><td class="basis"><b>Research + WCAG</b>Buzzi et al., 2016: an error summary cut input mistakes for blind users. WCAG 3.3.1 Error Identification</td></tr>
+      <tr><td>Follow-up questions appear only when they apply</td><td>The original shows every “If yes…” question to everyone, so screen-reader users hear questions that don’t apply to them.</td><td class="basis"><b>My call</b>Participants had to listen to “If yes…” questions that didn’t apply to them</td></tr>
+      <tr><td>Focus moves to the new step’s heading; the step number is in the page title</td><td>Participants kept track of their progress in their heads. This tells them where they’ve landed and how far along they are.</td><td class="basis"><b>My call + WCAG</b>Participants tracked their step in their heads. WCAG 2.4.2 Page Titled, 2.4.3 Focus Order</td></tr>
+      <tr><td>A review page with a Change link for each section</td><td>Participants went back and re-checked every answer by hand. The original has no review page.</td><td class="basis"><b>Observed + WCAG</b>Participants re-read every answer by hand. WCAG 3.3.4 Error Prevention: let people review before submitting</td></tr>
+      <tr><td>“(optional)” written in words, never an asterisk</td><td>Screen readers read words exactly. An asterisk may be skipped or read out as “star”.</td><td class="basis"><b>WCAG</b>3.3.2 Labels or Instructions. An asterisk may be skipped or read as “star”</td></tr>
+      <tr><td>When an employer is added, focus moves to it and it’s announced</td><td>The page never changes without the screen reader saying so.</td><td class="basis"><b>WCAG</b>4.1.3 Status Messages, 2.4.3 Focus Order</td></tr>
+      <tr><td>Animation only shows what changed; it never moves focus</td><td>Turns off when the device is set to reduce motion, so it never gets in the way.</td><td class="basis"><b>WCAG</b>2.3.3 Animation from Interactions; follows the device’s reduce-motion setting</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="sec" id="motion" aria-labelledby="h-motion">
+  <div class="col"><h2 id="h-motion">Motion</h2><p>Animation marks changes a sighted or low-vision user could otherwise miss. A screen-reader user gets the same information from focus or a spoken announcement. No animation moves focus, none repeats, and all of them turn off when reduced motion is on.</p></div>
+  <div class="wide" style="margin-top:var(--s2)">
+    <div class="clip-bar"><span>Recorded from the prototype</span><button type="button" class="mt" id="mt">Pause clips</button></div>
+    <div class="clips">
+      <figure class="clip">
+  <div class="frame"><video class="tm-l" src="vid/errors.mp4" poster="vid/errors-poster.jpg" muted loop playsinline preload="metadata" aria-label="Errors, at the top and at each field: screen recording of the prototype"></video><video class="tm-d" src="vid/errors-d.mp4" poster="vid/errors-d-poster.jpg" muted loop playsinline preload="metadata" aria-label="Errors, at the top and at each field: screen recording of the prototype"></video></div>
+  <figcaption><h3 class="h4">Errors, at the top and at each field</h3><p>A summary drops in, then the same message appears beside every field it belongs to.</p><p class="hears"><span>Screen reader</span>“There are 9 problems. Enter today’s date, link…”</p></figcaption>
+</figure>
+      <figure class="clip">
+  <div class="frame"><video class="tm-l" src="vid/reveal.mp4" poster="vid/reveal-poster.jpg" muted loop playsinline preload="metadata" aria-label="A follow-up appears: screen recording of the prototype"></video><video class="tm-d" src="vid/reveal-d.mp4" poster="vid/reveal-d-poster.jpg" muted loop playsinline preload="metadata" aria-label="A follow-up appears: screen recording of the prototype"></video></div>
+  <figcaption><h3 class="h4">A follow-up appears</h3><p>Choosing No unfolds the question that depends on it, directly below.</p><p class="hears"><span>Screen reader</span>“No, radio button, checked, 2 of 2.” The new question is next in reading order.</p></figcaption>
+</figure>
+      <figure class="clip">
+  <div class="frame"><video class="tm-l" src="vid/addjob.mp4" poster="vid/addjob-poster.jpg" muted loop playsinline preload="metadata" aria-label="An employer is added: screen recording of the prototype"></video><video class="tm-d" src="vid/addjob-d.mp4" poster="vid/addjob-d-poster.jpg" muted loop playsinline preload="metadata" aria-label="An employer is added: screen recording of the prototype"></video></div>
+  <figcaption><h3 class="h4">An employer is added</h3><p>The new entry rises in with a brief ring around it.</p><p class="hears"><span>Screen reader</span>“Employer 2, heading level 3.” Then: “Employer 2 added.”</p></figcaption>
+</figure>
+      <figure class="clip">
+  <div class="frame"><video class="tm-l" src="vid/step.mp4" poster="vid/step-poster.jpg" muted loop playsinline preload="metadata" aria-label="Moving to the next step: screen recording of the prototype"></video><video class="tm-d" src="vid/step-d.mp4" poster="vid/step-d-poster.jpg" muted loop playsinline preload="metadata" aria-label="Moving to the next step: screen recording of the prototype"></video></div>
+  <figcaption><h3 class="h4">Moving to the next step</h3><p>New content rises in and the current step in the progress bar moves forward.</p><p class="hears"><span>Screen reader</span>“Step 2 of 8: Eligibility, position and salary, heading level 1.”</p></figcaption>
+</figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec col" id="validation" aria-labelledby="h-valid">
+  <h2 id="h-valid">Validation</h2>
+  <p>An automated scan with axe-core against WCAG 2.1 A and AA found no violations on any of the 8 steps, including every error state. A scripted run of a complete application exercised every validation rule, the follow-up questions, adding and removing employers, and the review.</p>
+  <p>Automated checks only cover what code can detect. The next step is to test the redesign with VoiceOver and NVDA, then with blind screen-reader users on the same task as the original study, measuring independent completion, time on task and confidence.</p>
+</section>
+
+<section class="sec col" id="limitations" aria-labelledby="h-learn">
+  <h2 id="h-learn">Limitations</h2>
+  <ul class="quiet-list"><li>Four participants, all in Chicago and all experienced screen-reader users, so the findings may not hold for newer users.</li><li>One type of form, observed remotely over Zoom.</li><li>The redesign has passed automated checks but hasn’t yet been tested with blind users.</li></ul>
+</section>
+
+</main>
+
+<aside class="col foot" aria-label="Try the prototype">
+  <div class="next"><div><h3>Try the prototype</h3><p>All 8 steps, built in code. Works with a keyboard and screen reader.</p></div><a class="btn" href="prototypes/invisible-obstacles/">Open the prototype <span aria-hidden="true">→</span></a></div>
+</aside>
+<footer class="site-foot" aria-label="Site footer">
+  <div class="sf-in">
+    <div class="sf-row">
+      <span class="sf-c">© 2026 Vedant Atram</span>
+      <ul class="sf-links">
+        <li><a href="mailto:vedantatram157@gmail.com">Email</a></li>
+        <li><a href="https://www.linkedin.com/in/vedantatram/">LinkedIn</a></li>
+        <li><a href="https://medium.com/@Atrams">Medium</a></li>
+        <li><a href="https://www.behance.net/vedantatram">Behance</a></li>
+        <li><a href="Vedant-Atram-Resume.pdf" target="_blank" rel="noopener">Resume<span class="vh"> (PDF, opens in a new tab)</span></a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement, btn = document.getElementById("mode");
+  function label() { btn.setAttribute("aria-label", root.getAttribute("data-mode") === "dark" ? "Switch to light mode" : "Switch to dark mode"); }
+  label();
+  btn.addEventListener("click", function () {
+    var m = root.getAttribute("data-mode") === "dark" ? "light" : "dark";
+    root.setAttribute("data-mode", m); label();
+    try { localStorage.setItem("io-mode", m); } catch (e) {}
+  });
+  var nav = document.querySelector(".nav"); function onScroll() { nav.classList.toggle("scrolled", window.scrollY > 8); } window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var toc = document.getElementById("toc"), tlinks = Array.prototype.slice.call(toc.querySelectorAll("a")), secs = tlinks.map(function (a) { return document.getElementById(a.getAttribute("href").slice(1)); }), hero = document.getElementById("top"), wideQ = matchMedia("(min-width: 1460px)");
+  function measure() { root.style.setProperty("--navh", nav.offsetHeight + "px"); root.style.setProperty("--toch", wideQ.matches ? "0px" : toc.offsetHeight + "px"); }
+  measure(); window.addEventListener("resize", measure);
+  function setCur(id) { tlinks.forEach(function (a) { var on = a.getAttribute("href") === "#" + id; if (on) { a.setAttribute("aria-current", "location"); if (!wideQ.matches) { var ol = toc.firstElementChild; ol.scrollTo({ left: a.offsetLeft - (ol.clientWidth - a.offsetWidth) / 2, behavior: reduce ? "auto" : "smooth" }); } } else a.removeAttribute("aria-current"); }); }
+  function spy() { var y = window.innerHeight * .35, cur = null; secs.forEach(function (s) { if (s.getBoundingClientRect().top <= y) cur = s; }); var hb = hero.getBoundingClientRect().bottom; toc.classList.toggle("show", hb < window.innerHeight * .4); if (cur) { if (cur.id !== spy.last) { spy.last = cur.id; setCur(cur.id); } } else if (spy.last) { spy.last = null; tlinks.forEach(function (a) { a.removeAttribute("aria-current"); }); } }
+  var tick = false; window.addEventListener("scroll", function () { if (!tick) { tick = true; requestAnimationFrame(function () { tick = false; spy(); }); } }, { passive: true }); spy();
+  tlinks.forEach(function (a) { a.addEventListener("click", function () { var s = document.getElementById(a.getAttribute("href").slice(1)); s.classList.add("in"); var h = s.querySelector("h2"); if (h) { h.setAttribute("tabindex", "-1"); setTimeout(function () { h.focus({ preventScroll: true }); }, reduce ? 0 : 450); } }); });
+  var all = Array.prototype.slice.call(document.querySelectorAll(".sec"));
+  if ("IntersectionObserver" in window && !reduce) { var ro = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); ro.unobserve(e.target); } }); }, { rootMargin: "0px 0px -8% 0px", threshold: .02 }); all.forEach(function (s) { ro.observe(s); }); } else all.forEach(function (s) { s.classList.add("in"); });
+  if (location.hash) { var t = document.querySelector(location.hash); if (t) t.classList.add("in"); }
+  var _r = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.querySelectorAll(".marks li").forEach(function (li) {
+    var box = document.querySelector('.box[data-k="' + li.getAttribute("data-k") + '"]');
+    var pin = document.querySelector('.pin[data-k="' + li.getAttribute("data-k") + '"]');
+    function on() { box && box.classList.add("on"); pin && pin.classList.add("on"); li.classList.add("on"); }
+    function off() { box && box.classList.remove("on"); pin && pin.classList.remove("on"); li.classList.remove("on"); }
+    li.addEventListener("mouseenter", on); li.addEventListener("mouseleave", off); li.addEventListener("focus", on); li.addEventListener("blur", off);
+  });
+  var vids = Array.prototype.slice.call(document.querySelectorAll(".clip video")), mt = document.getElementById("mt"), playing = !reduce;
+  function sync() { mt.textContent = playing ? "Pause clips" : "Play clips"; vids.forEach(function (v) { if (playing && v.dataset.vis === "1") { var p = v.play(); if (p && p.catch) p.catch(function () {}); } else v.pause(); }); }
+  if ("IntersectionObserver" in window) { var io = new IntersectionObserver(function (es) { es.forEach(function (e) { e.target.dataset.vis = e.isIntersecting ? "1" : "0"; }); sync(); }, { threshold: .4 }); vids.forEach(function (v) { io.observe(v); }); } else vids.forEach(function (v) { v.dataset.vis = "1"; });
+  mt.addEventListener("click", function () { playing = !playing; sync(); });
+  sync();
+})();
+</script>
+<script>
+(function () {
+  var b = document.getElementById("menu-btn"), m = document.getElementById("menu"), mq = window.matchMedia("(max-width: 640px)");
+  if (!b || !m) return;
+  function set(open, focusBtn) {
+    b.setAttribute("aria-expanded", open ? "true" : "false");
+    m.classList.toggle("open", open); document.body.classList.toggle("menu-open", open);
+    if (open) { var f = m.querySelector("a"); if (f) setTimeout(function () { f.focus(); }, 60); }
+    else if (focusBtn) b.focus();
+  }
+  b.addEventListener("click", function () { set(b.getAttribute("aria-expanded") !== "true"); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && m.classList.contains("open")) set(false, true); });
+  m.addEventListener("click", function (e) { if (e.target.closest("a")) set(false); });
+  function sync() { if (!mq.matches) set(false); m.toggleAttribute("inert", mq.matches && !m.classList.contains("open")); }
+  b.addEventListener("click", sync); mq.addEventListener ? mq.addEventListener("change", sync) : mq.addListener(sync); sync();
+})();
+</script>
+</body>
+</html>

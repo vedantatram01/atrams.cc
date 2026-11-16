@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CeraVe redesign concept</title>
+<meta name="description" content="Unofficial redesign concept of CeraVe.com by Vedant Atram, based on a usability study. Not affiliated with CeraVe.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #12233A; --soft: #44546A; --muted: #526075; --line: #E2E7EE; --field: #B9C3D0;
+  --bg: #FFFFFF; --tint: #F4F7FA; --navy: #0B3B6E; --navy-ink: #FFFFFF; --sky: #E8F1FB; --ok: #1D6B45; --ok-bg: #E8F5EE; --warn: #8A4B00; --warn-bg: #FFF4E5;
+  --focus: #1F6FEB; --r: 12px; --font: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: var(--font); color: var(--ink); background: var(--bg); font-size: 16px; line-height: 24px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
+a { color: var(--navy); text-underline-offset: 3px; }
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 6px; }
+h1, h2, h3 { margin: 0; letter-spacing: -.01em; }
+p { margin: 0; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: 16px; top: -64px; z-index: 50; background: var(--navy); color: #fff; padding: 8px 16px; border-radius: 8px; }
+.skip:focus { top: 8px; }
+.wrap { max-width: 1184px; margin: 0 auto; padding: 0 24px; }
+@media (max-width: 600px) { .wrap { padding: 0 16px; } }
+
+/* Concept banner */
+.concept { background: var(--ink); color: #E9EEF5; font-size: 13px; line-height: 20px; }
+.concept .wrap { display: flex; justify-content: center; gap: 8px; padding-top: 8px; padding-bottom: 8px; text-align: center; flex-wrap: wrap; }
+.concept a { color: #fff; }
+
+/* Header */
+header.site { border-bottom: 1px solid var(--line); background: #fff; position: relative; z-index: 20; }
+.hbar { display: flex; align-items: center; gap: 24px; height: 72px; }
+.brand { display: flex; align-items: baseline; gap: 8px; text-decoration: none; color: var(--navy); font-weight: 600; font-size: 22px; letter-spacing: -.02em; }
+.brand small { font-size: 11px; font-weight: 500; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+.mainnav { display: flex; align-items: center; gap: 4px; flex: 1; }
+.mainnav > button, .mainnav > a { border: 0; background: none; padding: 8px 12px; border-radius: 8px; font-weight: 500; color: var(--ink); text-decoration: none; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.mainnav > button:hover, .mainnav > a:hover { background: var(--tint); }
+.mainnav svg { width: 12px; height: 12px; transition: transform .2s; }
+.mainnav [aria-expanded="true"] svg { transform: rotate(180deg); }
+.hright { display: flex; align-items: center; gap: 8px; }
+.search { display: flex; align-items: center; gap: 8px; border: 1px solid var(--field); border-radius: 999px; padding: 0 12px; height: 40px; width: 220px; }
+.search input { border: 0; outline: 0; background: none; width: 100%; }
+.search:focus-within { outline: 3px solid var(--focus); outline-offset: 2px; }
+.stores { display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); text-decoration: none; color: var(--ink); font-weight: 500; white-space: nowrap; }
+.mega { position: absolute; left: 0; right: 0; top: 100%; background: #fff; border-bottom: 1px solid var(--line); box-shadow: 0 24px 40px -24px rgba(18,35,58,.25); }
+.mega .wrap { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 1.2fr); gap: 32px; padding-top: 24px; padding-bottom: 32px; }
+.mega h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; margin-bottom: 8px; }
+.mega ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.mega a { display: block; padding: 6px 0; text-decoration: none; color: var(--ink); }
+.mega a:hover { color: var(--navy); text-decoration: underline; }
+.mega .promo { background: var(--sky); border-radius: var(--r); padding: 20px; display: grid; gap: 8px; align-content: start; }
+.mega .promo b { font-size: 18px; }
+.mega .promo p { color: var(--soft); font-size: 14px; }
+.menu-t { display: none; }
+@media (max-width: 960px) {
+  .search { display: none; }
+  .mega .wrap { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 720px) {
+  .hbar { gap: 12px; }
+  .mainnav { display: none; } .mainnav.open { display: flex; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; background: #fff; border-bottom: 1px solid var(--line); padding: 8px 16px 16px; }
+  .mainnav.open > button, .mainnav.open > a { justify-content: space-between; padding: 12px 8px; font-size: 18px; }
+  .menu-t { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 999px; background: #fff; cursor: pointer; margin-left: auto; }
+  .stores span { display: none; } .stores { width: 44px; padding: 0; justify-content: center; }
+  .mega { position: static; box-shadow: none; border: 0; }
+  .mega .wrap { grid-template-columns: 1fr; gap: 16px; padding: 8px 0 16px; }
+}
+
+/* Generic */
+main { min-height: 60vh; }
+main:focus, main h1:focus { outline: none; }
+.crumbs { font-size: 14px; color: var(--muted); padding: 16px 0; }
+.crumbs ol { list-style: none; margin: 0; padding: 0; display: flex; gap: 8px; flex-wrap: wrap; }
+.crumbs li + li::before { content: "/"; margin-right: 8px; color: var(--field); }
+.crumbs a { color: var(--muted); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 24px; border-radius: 999px; border: 1px solid transparent; font-weight: 600; text-decoration: none; cursor: pointer; transition: background-color .2s, border-color .2s; }
+.btn-p { background: var(--navy); color: var(--navy-ink); }
+.btn-p:hover { background: #082E57; }
+.btn-s { background: #fff; color: var(--ink); border-color: var(--field); }
+.btn-s:hover { border-color: var(--ink); }
+.btn-sm { min-height: 40px; padding: 0 16px; font-size: 14px; }
+.tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; line-height: 16px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: var(--tint); color: var(--soft); }
+.tag.ok { background: var(--ok-bg); color: var(--ok); }
+.tag.warn { background: var(--warn-bg); color: var(--warn); }
+h1.pt { font-size: clamp(28px, 4vw, 40px); line-height: 1.15; font-weight: 600; }
+.lede { color: var(--soft); font-size: 18px; line-height: 28px; max-width: 60ch; margin-top: 8px; }
+
+/* Bottle art */
+.art { display: grid; place-items: center; background: var(--tint); border-radius: var(--r); aspect-ratio: 1; overflow: hidden; }
+.art svg { width: 56%; height: auto; }
+
+/* Home */
+.hero { padding: 48px 0 32px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; align-items: center; }
+.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: end; }
+.trio .art { aspect-ratio: 3/4; }
+.trio .art:nth-child(2) { aspect-ratio: 3/5; }
+.trio .art svg { width: 78%; }
+.tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding-bottom: 64px; }
+.tile { border: 1px solid var(--line); border-radius: var(--r); padding: 24px; display: grid; gap: 8px; align-content: start; text-decoration: none; color: var(--ink); transition: border-color .2s; }
+.tile:hover { border-color: var(--navy); }
+.tile b { font-size: 18px; }
+.tile p { color: var(--soft); font-size: 15px; }
+.tile .go { color: var(--navy); font-weight: 600; margin-top: 8px; }
+@media (max-width: 800px) { .hero { grid-template-columns: 1fr; } .tiles { grid-template-columns: 1fr; } }
+
+/* Listing */
+.lhead { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; padding-bottom: 24px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 24px; padding-bottom: 120px; }
+.card { position: relative; display: flex; flex-direction: column; gap: 12px; }
+.card .cmp { margin-top: auto; align-self: flex-start; }
+.card .price { margin-top: -4px; }
+.card h2 { font-size: 17px; line-height: 24px; font-weight: 600; }
+.card h2 a { color: var(--ink); text-decoration: none; }
+.card h2 a::after { content: ""; position: absolute; inset: 0 0 64px 0; }
+.card .meta { font-size: 14px; color: var(--muted); }
+.card .price { font-weight: 600; }
+.cmp { position: relative; z-index: 1; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 14px; border: 1px solid var(--field); border-radius: 999px; cursor: pointer; font-weight: 500; font-size: 15px; justify-self: start; }
+.cmp input { width: 18px; height: 18px; accent-color: var(--navy); margin: 0; }
+.cmp:has(input:checked) { border-color: var(--navy); background: var(--sky); color: var(--navy); }
+.tray { position: fixed; z-index: 30; left: 50%; bottom: 24px; transform: translate(-50%, 140%); background: var(--ink); color: #fff; border-radius: 999px; padding: 8px 8px 8px 24px; display: flex; align-items: center; gap: 16px; box-shadow: 0 16px 40px -12px rgba(18,35,58,.5); transition: transform .3s cubic-bezier(.2,.8,.2,1); max-width: calc(100% - 32px); }
+.tray.show { transform: translate(-50%, 0); }
+.tray .btn { background: #fff; color: var(--ink); min-height: 44px; }
+.tray .btn[aria-disabled="true"] { opacity: .55; cursor: not-allowed; }
+.tray .clear { background: none; border: 0; color: #C9D3E0; text-decoration: underline; cursor: pointer; padding: 8px; }
+
+/* Product */
+.pd { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; padding-bottom: 48px; }
+.pd .art { aspect-ratio: 1; }
+.pd-info { display: grid; gap: 16px; align-content: start; }
+.rating { font-size: 14px; color: var(--muted); }
+.fromprice { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.fromprice b { font-size: 28px; line-height: 36px; }
+.fromprice span { color: var(--soft); }
+fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+legend { font-weight: 600; margin-bottom: 8px; padding: 0; }
+.sizes { display: flex; flex-wrap: wrap; gap: 8px; }
+.size { position: relative; }
+.size input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.size span { display: grid; gap: 0; min-width: 88px; padding: 8px 14px; border: 1px solid var(--field); border-radius: 10px; text-align: center; }
+.size small { font-size: 13px; color: var(--muted); }
+.size input:checked + span { border-color: var(--navy); box-shadow: 0 0 0 1px var(--navy); background: var(--sky); }
+.size input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+.acts { display: flex; flex-wrap: wrap; gap: 12px; }
+.note { display: flex; gap: 8px; font-size: 14px; color: var(--soft); background: var(--tint); border-radius: 10px; padding: 12px 14px; }
+.note svg { flex: none; width: 18px; height: 18px; margin-top: 3px; color: var(--navy); }
+.bestfor { display: flex; flex-wrap: wrap; gap: 8px; }
+.subnav { position: sticky; top: 0; z-index: 15; background: var(--navy); color: #fff; }
+.subnav .wrap { display: flex; align-items: center; gap: 8px; height: 56px; overflow-x: auto; }
+.subnav b { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: #BFD3EA; margin-right: 8px; white-space: nowrap; }
+.subnav a { color: #fff; text-decoration: none; padding: 8px 12px; border-radius: 999px; white-space: nowrap; font-weight: 500; }
+.subnav a:hover { background: rgba(255,255,255,.12); }
+.psec { padding: 48px 0; border-top: 1px solid var(--line); scroll-margin-top: 72px; }
+.psec h2 { font-size: 24px; line-height: 32px; font-weight: 600; margin-bottom: 16px; }
+.ings { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.ing { background: var(--tint); border-radius: var(--r); padding: 20px; }
+.ing b { display: block; margin-bottom: 4px; }
+.ing p { color: var(--soft); font-size: 15px; }
+.steps { margin: 0; padding-left: 20px; display: grid; gap: 8px; color: var(--soft); max-width: 60ch; }
+@media (max-width: 800px) { .pd { grid-template-columns: 1fr; gap: 24px; } .ings { grid-template-columns: 1fr; } .pd .art { aspect-ratio: 4/3; } }
+
+/* Retailer sheet */
+dialog { border: 0; padding: 0; border-radius: 20px; width: min(560px, calc(100% - 32px)); max-height: calc(100% - 32px); color: var(--ink); box-shadow: 0 32px 64px -24px rgba(18,35,58,.5); }
+dialog::backdrop { background: rgba(18,35,58,.45); }
+.dh { display: flex; justify-content: space-between; align-items: start; gap: 16px; padding: 24px 24px 16px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: #fff; }
+.dh h2 { font-size: 20px; line-height: 28px; font-weight: 600; }
+.dh p { color: var(--soft); font-size: 14px; margin-top: 4px; }
+.x { flex: none; width: 44px; height: 44px; border-radius: 999px; border: 1px solid var(--line); background: #fff; cursor: pointer; display: grid; place-items: center; }
+.db { padding: 16px 24px 24px; display: grid; gap: 12px; }
+.sortnote { font-size: 13px; color: var(--muted); }
+.rets { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.ret { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; align-items: center; border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+.ret .rn { font-weight: 600; }
+.ret .rp { font-weight: 600; font-size: 18px; text-align: right; }
+.ret .rm { display: flex; flex-wrap: wrap; gap: 6px; grid-column: 1; }
+.ret .rb { grid-column: 2; grid-row: 2; }
+.ret.out { background: var(--tint); }
+.ret.out .rp { color: var(--muted); font-weight: 500; font-size: 15px; }
+.ret.best { border-color: var(--ok); }
+
+/* Finder */
+.finder { max-width: 720px; margin: 0 auto; padding: 32px 0 80px; display: grid; gap: 24px; }
+.fprog { display: grid; gap: 8px; }
+.fprog .bar { height: 6px; border-radius: 999px; background: var(--tint); overflow: hidden; }
+.fprog .bar i { display: block; height: 100%; background: var(--navy); border-radius: 999px; transition: width .3s; }
+.fprog p { font-size: 14px; color: var(--muted); }
+.opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.opt { position: relative; }
+.opt input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.opt span { display: grid; gap: 2px; min-height: 64px; align-content: center; padding: 12px 16px 12px 48px; border: 1px solid var(--field); border-radius: 14px; position: relative; }
+.opt span::before { content: ""; position: absolute; left: 16px; top: 50%; width: 20px; height: 20px; margin-top: -10px; border: 1.5px solid var(--field); border-radius: 6px; background: #fff; }
+.opt.radio span::before { border-radius: 50%; }
+.opt small { color: var(--muted); font-size: 13px; line-height: 18px; }
+.opt input:checked + span { border-color: var(--navy); box-shadow: 0 0 0 1px var(--navy); background: var(--sky); }
+.opt input:checked + span::before { background: var(--navy) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat; border-color: var(--navy); }
+.opt.radio input:checked + span::before { background: #fff; box-shadow: inset 0 0 0 5px var(--navy); }
+.opt input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+.opt input:disabled + span { opacity: .45; cursor: not-allowed; }
+.fnav { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.ferr { color: #B42318; font-weight: 600; display: none; }
+.ferr.on { display: block; }
+.intro-points { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.intro-points li { display: flex; gap: 12px; align-items: start; }
+.intro-points svg { flex: none; width: 24px; height: 24px; color: var(--navy); }
+@media (max-width: 600px) { .opts { grid-template-columns: 1fr; } }
+
+/* Results */
+.res { padding-bottom: 80px; display: grid; gap: 24px; }
+.answers { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 14px; color: var(--soft); }
+.routine { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+.rstep { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 24px; border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
+.rstep .art { aspect-ratio: 1; }
+.rstep .stepn { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.rstep h3 { font-size: 20px; line-height: 28px; font-weight: 600; margin-top: 2px; }
+.why { margin: 12px 0 0; padding: 14px 16px; background: var(--ok-bg); border-radius: 12px; }
+.why b { color: var(--ok); font-size: 14px; }
+.why ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 4px; font-size: 15px; color: var(--ink); }
+.rrow { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin-top: 16px; }
+.swap { display: flex; align-items: center; gap: 8px; }
+.swap label { font-size: 14px; color: var(--soft); }
+.swap select { min-height: 40px; border: 1px solid var(--field); border-radius: 10px; padding: 0 36px 0 12px; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 6l4 4 4-4' fill='none' stroke='%2312233A' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") right 10px center/14px no-repeat; appearance: none; }
+@media (max-width: 640px) { .rstep { grid-template-columns: 1fr; } .rstep .art { aspect-ratio: 16/9; } }
+
+/* Compare */
+.cmpbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; padding: 8px 0 24px; }
+.cmpbar .l { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.switch { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 500; min-height: 44px; }
+.switch input { appearance: none; width: 44px; height: 26px; border-radius: 999px; background: var(--field); position: relative; cursor: pointer; margin: 0; transition: background-color .2s; }
+.switch input::after { content: ""; position: absolute; left: 3px; top: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: transform .2s; }
+.switch input:checked { background: var(--navy); }
+.switch input:checked::after { transform: translateX(18px); }
+.tblwrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 16px; margin-bottom: 80px; }
+table.ct { border-collapse: collapse; width: 100%; min-width: 640px; }
+.ct th, .ct td { text-align: left; vertical-align: top; padding: 16px; border-bottom: 1px solid var(--line); }
+.ct thead th { background: #fff; position: sticky; top: 0; }
+.ct tbody th { width: 180px; font-size: 14px; color: var(--muted); font-weight: 600; background: var(--tint); }
+.ct tr:last-child th, .ct tr:last-child td { border-bottom: 0; }
+.ct .ph { display: grid; gap: 10px; }
+.ct .ph .art { width: 96px; aspect-ratio: 1; }
+.ct .ph a { font-weight: 600; color: var(--ink); text-decoration: none; }
+.ct .ph a:hover { text-decoration: underline; }
+.ct .rm { justify-self: start; background: none; border: 0; padding: 4px 0; color: var(--soft); text-decoration: underline; cursor: pointer; font-size: 14px; }
+.ct td.diff { background: #FFFBEB; }
+.ct ul { margin: 0; padding-left: 18px; }
+.add { display: grid; gap: 8px; }
+.add select { min-height: 44px; border: 1px solid var(--field); border-radius: 10px; padding: 0 12px; background: #fff; max-width: 220px; }
+.empty { border: 1px dashed var(--field); border-radius: 16px; padding: 32px; text-align: center; color: var(--soft); margin-bottom: 80px; display: grid; gap: 16px; justify-items: center; }
+
+/* Stores */
+.stores-p { max-width: 640px; padding: 16px 0 80px; display: grid; gap: 16px; }
+.zip { display: flex; gap: 12px; flex-wrap: wrap; align-items: end; }
+.zip label { display: grid; gap: 6px; font-weight: 600; }
+.zip input { min-height: 48px; border: 1px solid var(--field); border-radius: 10px; padding: 0 14px; width: 160px; }
+
+footer.site { border-top: 1px solid var(--line); background: var(--tint); color: var(--soft); font-size: 14px; }
+footer.site .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 24px; padding-bottom: 24px; }
+.enter { animation: rise .3s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* ===== CeraVe visual language (matches cerave.com; solutions unchanged) ===== */
+:root { --ink: #1B2A3A; --soft: #3F4B57; --muted: #56616C; --line: #DCDFE3; --field: #9AA3AD; --tint: #F2F2F2; --navy: #113450; --blue: #1179B6; --blue-d: #0D6399; --sky: #EAF3F9; --r: 0; --font: "Barlow", "DIN Next", "Helvetica Neue", Arial, sans-serif; }
+body { letter-spacing: .01em; color: var(--ink); }
+a { color: var(--blue); }
+:focus-visible { border-radius: 0; outline-color: var(--blue); }
+h1.pt { font-weight: 600; color: var(--navy); letter-spacing: 0; }
+.lede { color: var(--soft); }
+.concept { background: var(--navy); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
+.concept b { font-weight: 700; }
+/* header: utility row + uppercase nav row */
+header.site { border-bottom: 1px solid var(--line); }
+.hbar { height: auto; display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 32px; padding-top: 16px; }
+.brand { grid-row: 1; color: var(--navy); font-size: 30px; font-weight: 600; letter-spacing: -.01em; align-self: center; align-items: center; }
+.brand small { font-size: 10px; font-weight: 700; letter-spacing: .12em; color: #fff; background: var(--blue); padding: 2px 6px; }
+.util { grid-row: 1; grid-column: 2; display: flex; justify-content: flex-end; align-items: center; gap: 24px; font-size: 12px; }
+.util a { color: var(--soft); text-decoration: none; letter-spacing: .04em; }
+.util a:hover { color: var(--blue); text-decoration: underline; }
+.search { border-radius: 0; border: 0; background: var(--tint); padding: 0 0 0 12px; height: 32px; width: 240px; gap: 0; }
+.search input { font-size: 14px; }
+.search .sbtn { flex: none; width: 32px; height: 32px; display: grid; place-items: center; background: var(--blue); color: #fff; }
+.navrow { grid-row: 2; grid-column: 1 / -1; display: flex; align-items: stretch; justify-content: space-between; gap: 16px; margin-top: 4px; }
+.mainnav { gap: 8px; }
+.mainnav > button, .mainnav > a { border-radius: 0; text-transform: uppercase; letter-spacing: .05em; font-weight: 700; font-size: 15px; color: var(--navy); padding: 12px 12px 16px; border-bottom: 4px solid transparent; }
+.mainnav > button:hover, .mainnav > a:hover { background: none; color: var(--blue); }
+.mainnav [aria-expanded="true"] { border-bottom-color: var(--blue); }
+.hright { align-self: center; padding-bottom: 8px; }
+.stores { border-radius: 0; border: 1px solid var(--blue); color: var(--blue); text-transform: uppercase; letter-spacing: .08em; font-weight: 700; font-size: 14px; padding: 0 20px; height: 40px; }
+.stores:hover { background: var(--blue); color: #fff; }
+.mega { box-shadow: 0 16px 24px -16px rgba(17,52,80,.3); border-top: 1px solid var(--line); }
+.mega .wrap { gap: 0; padding-top: 24px; padding-bottom: 24px; }
+.mega .wrap > div { padding: 0 24px; border-left: 1px solid var(--line); }
+.mega .wrap > div:first-child { border-left: 0; padding-left: 0; }
+.mega h2 { font-size: 14px; font-weight: 700; letter-spacing: .08em; color: var(--soft); margin-bottom: 12px; }
+.mega a { font-size: 15px; color: var(--soft); padding: 4px 0; }
+.mega a:hover { color: var(--blue); }
+.mega .promo { border-radius: 0; background: var(--blue); color: #fff; margin-left: 24px; padding: 24px; }
+.mega .promo b { color: #fff; }
+.mega .promo p { color: #fff; }
+.mega .promo .tag { background: #fff; color: var(--navy); justify-self: start; }
+.mega .promo:hover { color: #fff; text-decoration: none; background: var(--blue-d); }
+.crumbs { font-size: 12px; letter-spacing: .02em; }
+.crumbs a { color: var(--soft); text-decoration: none; }
+.crumbs a:hover { text-decoration: underline; }
+.crumbs li + li::before { color: var(--soft); }
+/* buttons: square, uppercase, tracked */
+.btn { white-space: nowrap; border-radius: 0; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; font-size: 14px; min-height: 44px; padding: 0 28px; }
+.btn-p { background: var(--blue); color: #fff; }
+.btn-p:hover { background: var(--blue-d); }
+.btn-s { background: #fff; color: var(--blue); border-color: var(--blue); }
+.btn-s:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+.btn-n { background: var(--navy); color: #fff; }
+.btn-sm { min-height: 40px; font-size: 13px; padding: 0 20px; }
+.tag { border-radius: 0; font-weight: 500; background: var(--tint); color: var(--ink); font-size: 13px; letter-spacing: .02em; }
+.tag.ok { background: #E6F2EA; color: #1D5E3A; }
+.tag.warn { background: #FFF1DE; color: #7A4300; }
+.stars { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 13px; }
+.stars svg { height: 16px; width: auto; color: #0772BA; }
+.art { border-radius: 0; background: #fff; }
+/* home */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0; padding: 0; margin: 32px 0 48px; align-items: stretch; background: var(--blue); }
+.hero .trio { background: #E4EEF5; padding: 40px 32px 0; clip-path: polygon(0 0, 100% 0, 78% 100%, 0 100%); margin-right: -20%; position: relative; z-index: 1; }
+.hero .trio .art { background: transparent; }
+.hero .copy { order: 2; padding: 56px 40px 56px 20%; color: #fff; display: grid; align-content: center; gap: 12px; }
+.hero .copy h1.pt { color: #fff; font-size: clamp(28px, 3.4vw, 40px); }
+.hero .copy .lede { color: #fff; font-size: 16px; line-height: 24px; }
+.hero .btn-w { background: #fff; color: var(--blue); }
+.hero .btn-w:hover { background: var(--navy); color: #fff; }
+.hero .btn-o { background: transparent; color: #fff; border-color: #fff; }
+.hero .btn-o:hover { background: #fff; color: var(--blue); }
+.sechead { text-align: center; font-size: 28px; line-height: 36px; font-weight: 600; color: var(--navy); margin-bottom: 24px; }
+.tile { border-radius: 0; border: 0; background: var(--tint); padding: 32px; }
+.tile b { color: var(--navy); font-size: 20px; }
+.tile .go { color: var(--blue-d); text-transform: uppercase; letter-spacing: .08em; font-size: 14px; font-weight: 700; }
+.tile:hover { background: #E8EBEE; }
+@media (max-width: 800px) { .hero { grid-template-columns: 1fr; } .hero .trio { clip-path: none; margin-right: 0; } .hero .copy { padding: 32px 24px; } }
+/* listing */
+.lhead { justify-content: center; text-align: center; padding: 8px 0 32px; }
+.lhead .lede { margin: 12px auto 0; font-size: 18px; font-weight: 300; }
+.grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 24px; border-top: 16px solid var(--tint); padding-top: 32px; }
+.card { align-items: center; text-align: center; gap: 8px; }
+.card .chip { text-transform: capitalize; align-self: stretch; background: var(--tint); font-size: 13px; padding: 2px 8px; margin-top: 8px; }
+.card h2 { font-size: 15px; font-weight: 700; color: var(--navy); }
+.card h2 a { color: var(--navy); }
+.card .meta { font-size: 13px; }
+.card .price { font-weight: 700; color: var(--navy); }
+.card .cmp { align-self: center; margin-top: auto; }
+.cmp { border-radius: 0; border-color: var(--blue); color: var(--blue); text-transform: uppercase; letter-spacing: .08em; font-weight: 700; font-size: 13px; min-height: 40px; padding: 0 20px; }
+.cmp input { accent-color: var(--blue); }
+.cmp:has(input:checked) { background: var(--blue); color: #fff; border-color: var(--blue); }
+.cmp:has(input:checked) input { accent-color: #fff; }
+.tray { border-radius: 0; background: var(--navy); padding: 8px 8px 8px 24px; }
+.tray .btn { background: #fff; color: var(--navy); }
+.tray .clear { color: #D5E2EC; }
+/* product */
+.pd-info { gap: 16px; }
+.pd-info h1.pt { color: var(--blue); font-weight: 500; font-size: clamp(28px, 3vw, 36px); }
+.madefor { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.madefor b { color: var(--blue); font-weight: 500; }
+.fromprice b { font-size: 22px; line-height: 32px; color: var(--navy); font-weight: 700; }
+legend { font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: .06em; font-size: 14px; }
+.size span { border-radius: 0; border-color: var(--line); }
+.size input:checked + span { border-color: var(--blue); box-shadow: 0 0 0 1px var(--blue); background: #fff; }
+.acts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+.pd-info .acts .btn { white-space: normal; text-align: center; padding: 8px 16px; }
+.note { border-radius: 0; background: var(--tint); font-size: 15px; color: var(--ink); padding: 16px; }
+.note svg { color: var(--blue); }
+.subnav b { color: #A9C4DA; }
+.subnav a { border-radius: 0; text-transform: uppercase; letter-spacing: .06em; font-size: 14px; font-weight: 600; }
+.psec h2 { color: var(--navy); font-weight: 600; }
+.ing { border-radius: 0; }
+.ing b { color: var(--blue-d); }
+@media (max-width: 500px) { .acts { grid-template-columns: 1fr; } .btn { white-space: normal; text-align: center; padding: 8px 16px; } }
+/* retailer dialog (their modal: product left, retailers right) */
+dialog { border-radius: 0; width: min(640px, calc(100% - 32px)); }
+.dh { border-bottom: 1px solid var(--line); }
+.dh h2 { color: var(--navy); }
+.x { border-radius: 0; border: 0; }
+.ret { border-radius: 0; border: 0; border-bottom: 1px solid var(--line); padding: 16px 4px; }
+.ret.best { border: 1px solid var(--blue); padding: 16px; background: var(--sky); }
+.ret.out { background: #fff; }
+.ret .rn { font-size: 18px; color: var(--navy); font-weight: 700; }
+.ret .rp { color: var(--navy); }
+.ret .rb.btn { background: #111; color: #fff; border-color: #111; }
+.ret .rb.btn:hover { background: var(--navy); border-color: var(--navy); }
+/* finder (their quiz: grey tiles, navy when picked, centred) */
+.finder { text-align: center; justify-items: center; max-width: 760px; }
+.finder > * { width: 100%; }
+.finder .intro-points { text-align: left; max-width: 520px; margin: 0 auto; }
+.finder .intro-points svg { color: var(--blue); }
+.finder .note { text-align: left; max-width: 520px; margin: 0 auto; }
+.fprog { justify-items: center; }
+.dots { display: flex; align-items: center; }
+.dots i { width: 10px; height: 10px; border-radius: 50%; background: #B4BBC2; }
+.dots i.on { background: #4F7499; }
+.dots i.cur { width: 14px; height: 14px; }
+.dots i + i { margin-left: 22px; position: relative; }
+.dots i + i::before { content: ""; position: absolute; right: 100%; top: 50%; width: 22px; height: 2px; margin-top: -1px; background: #B4BBC2; }
+.fprog p { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
+.finder fieldset legend { width: 100%; text-transform: none; letter-spacing: 0; }
+.finder fieldset legend h1.pt { color: var(--navy); font-weight: 500; }
+.opts { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.opt span { border: 0; border-radius: 0; background: var(--tint); min-height: 104px; padding: 16px; text-align: center; justify-items: center; }
+.opt span b { font-weight: 500; font-size: 17px; color: var(--ink); }
+.opt span::before { display: none; }
+.opt input:checked + span { background: #213A52; box-shadow: none; }
+.opt input:checked + span b, .opt input:checked + span small { color: #fff; }
+.opt input:checked + span::after { content: ""; position: absolute; left: 8px; top: 8px; width: 18px; height: 18px; border-radius: 50%; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5 5.5-6' fill='none' stroke='%23213A52' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat; }
+.opt span:hover { background: #E6E8EB; }
+.opt input:disabled + span { opacity: .6; }
+@media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .grid { grid-template-columns: 1fr; } }
+.opt input:checked + span:hover { background: #213A52; }
+.fnav .btn-p { background: #4F7499; }
+.fnav .btn-p:hover { background: var(--navy); }
+.fnav .btn-p::after { content: "›"; font-size: 18px; margin-left: 2px; }
+.fnav .btn-s::before { content: "‹"; font-size: 18px; margin-right: 2px; }
+@media (max-width: 720px) { .opts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 420px) { .opts { grid-template-columns: 1fr; } .opt span { min-height: 72px; } }
+/* results (their routine page: centred, step headings ruled both sides) */
+.res > div:nth-child(2) { text-align: center; }
+.res > div:nth-child(2) .lede { margin: 8px auto 0; }
+.answers { justify-content: center; }
+.routine { gap: 40px; }
+.rstep { border: 0; border-radius: 0; padding: 0; grid-template-columns: 200px minmax(0, 1fr); row-gap: 16px; }
+.rstep > .stepn { grid-column: 1 / -1; display: flex; align-items: center; gap: 24px; justify-content: center; font-size: 24px; line-height: 32px; font-weight: 700; color: var(--navy); letter-spacing: .04em; }
+.rstep > .stepn::before, .rstep > .stepn::after { content: ""; flex: 1; height: 1px; background: var(--navy); }
+.rstep h3 { color: var(--navy); font-weight: 700; }
+.why { border-radius: 0; background: var(--sky); border-left: 4px solid var(--blue); }
+.why b { color: var(--navy); text-transform: uppercase; letter-spacing: .06em; font-size: 13px; }
+.swap select, .add select { border-radius: 0; }
+@media (max-width: 640px) { .rstep > .stepn { font-size: 18px; gap: 12px; } }
+/* compare */
+.switch input:checked { background: var(--blue); }
+.tblwrap { border-radius: 0; }
+.ct tbody th { color: var(--navy); text-transform: uppercase; letter-spacing: .05em; font-size: 13px; }
+.ct .ph a { color: var(--navy); }
+.ct td.diff { background: #EEF5FA; }
+.empty { border-radius: 0; background: var(--tint); border: 0; }
+.zip input { border-radius: 0; }
+footer.site { background: var(--navy); color: #D5E2EC; border-top: 0; }
+@media (max-width: 960px) { .util a { display: none; } }
+@media (max-width: 720px) {
+  .hbar { grid-template-columns: 1fr auto; padding-bottom: 12px; }
+  .brand { font-size: 26px; }
+  .util { display: none; }
+  .navrow { grid-row: 1; grid-column: 2; margin: 0; }
+  .hright { padding: 0; }
+  .stores { width: 44px; padding: 0; justify-content: center; }
+  .menu-t { border-radius: 0; }
+  .mainnav.open > button, .mainnav.open > a { border-bottom: 1px solid var(--line); }
+  .mega .wrap > div { border-left: 0; padding: 0; }
+  .mega .promo { margin-left: 0; }
+}
+/* ===== realism layer ===== */
+.art svg { width: auto; height: 86%; max-width: 92%; }
+.card .art { aspect-ratio: 1; background: #fff; align-self: stretch; }
+.tray:not(.show) { visibility: hidden; }
+.card .art svg { height: 88%; }
+.card { position: relative; }
+.badge { position: absolute; top: 8px; left: 0; z-index: 1; background: var(--navy); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; }
+.badge.static { position: static; justify-self: start; }
+.kick { font-size: 14px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #fff; }
+.hero .trio { align-items: end; }
+.hero .trio { padding: 24px 24px 0 !important; gap: 0; }
+.hero .trio .art { aspect-ratio: 5/8; }
+.hero .trio .art svg { height: 92%; max-width: 100%; }
+.hsec { padding-bottom: 64px; }
+.cats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.cats a { display: grid; gap: 8px; justify-items: center; text-align: center; text-decoration: none; background: var(--tint); padding: 24px 16px; }
+.cats a:hover { background: #E8EBEE; }
+.cats .art { background: transparent; width: 70%; aspect-ratio: 1; }
+.cats span { font-size: 20px; font-weight: 600; color: var(--navy); }
+.cats b { font-size: 14px; letter-spacing: .08em; text-transform: uppercase; color: var(--blue-d); }
+.grid.g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 0; padding: 0; margin: 0; list-style: none; }
+.band { background: var(--navy); color: #fff; padding: 56px 0; margin-bottom: 0; }
+.band h2 { font-size: 28px; line-height: 36px; font-weight: 600; text-align: center; }
+.band > .wrap > p { text-align: center; max-width: 560px; margin: 8px auto 32px; color: #E3ECF3; }
+.band ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.band li { display: grid; justify-items: center; text-align: center; gap: 8px; }
+.band .ic { width: 48px; height: 48px; color: #8FC3E6; }
+.band b { font-size: 18px; }
+.band li > span:last-child { color: #E3ECF3; }
+/* listing with filters */
+.lbody { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 32px; align-items: start; }
+.filters { border-top: 16px solid var(--tint); padding-top: 16px; }
+.filters summary { font-size: 14px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--navy); cursor: pointer; padding: 8px 0; list-style: none; }
+.filters summary::-webkit-details-marker { display: none; }
+.fgrp { border: 0; margin: 0; padding: 16px 0; border-bottom: 1px solid var(--line); display: grid; gap: 4px; }
+.fgrp legend { float: left; width: 100%; margin-bottom: 8px; font-size: 13px; }
+.fopt { display: flex; align-items: center; gap: 10px; min-height: 32px; font-size: 15px; cursor: pointer; }
+.fopt input { width: 18px; height: 18px; accent-color: var(--blue); margin: 0; }
+.linkbtn { background: none; border: 0; padding: 8px 0; color: var(--blue-d); text-decoration: underline; font: inherit; font-size: 14px; cursor: pointer; min-height: 32px; }
+.lbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; border-top: 16px solid var(--tint); padding: 16px 0; }
+.lbar p { margin: 0; color: var(--soft); font-size: 15px; }
+.sort { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--soft); }
+.sort select { height: 40px; border: 1px solid var(--field); border-radius: 0; padding: 0 32px 0 12px; font: inherit; color: var(--ink); background: #fff; }
+.lbody .grid { border-top: 0; padding: 8px 0 120px; list-style: none; margin: 0; }
+.lbody .grid .card[hidden] { display: none; }
+/* product gallery */
+.gal { display: grid; gap: 12px; align-content: start; }
+.gal #gmain { aspect-ratio: 1; background: #fff; border: 1px solid var(--line); }
+.gal #gmain svg { height: 90%; }
+.thumbs { display: grid; grid-template-columns: repeat(3, 88px); gap: 12px; }
+.thumbs button { width: 88px; height: 88px; padding: 4px; background: #fff; border: 1px solid var(--line); cursor: pointer; display: grid; place-items: center; }
+.thumbs button svg { height: 100%; width: auto; }
+.thumbs button[aria-pressed="true"] { border: 2px solid var(--blue); }
+.thumbs button:hover { border-color: var(--blue); }
+.acc { margin-top: 16px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.acc summary { cursor: pointer; padding: 16px 0; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: .06em; font-size: 14px; }
+.acc p { margin: 0 0 16px; color: var(--soft); }
+/* footer */
+footer.site { padding: 0; font-size: 15px; }
+.fcols { display: grid !important; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; padding-top: 48px !important; padding-bottom: 40px !important; justify-content: stretch !important; }
+.fcols h2 { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #fff; margin: 0 0 12px; }
+.fcols nav { display: grid; gap: 4px; align-content: start; }
+.fcols a { color: #D5E2EC; text-decoration: none; padding: 4px 0; }
+.fcols a:hover { color: #fff; text-decoration: underline; }
+.fcols p { margin: 0; color: #D5E2EC; max-width: 280px; }
+.fbrand { font-size: 26px; font-weight: 600; color: #fff !important; margin-bottom: 8px !important; }
+.fbot { border-top: 1px solid #2A4B66; font-size: 13px; }
+.fbot .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 16px; padding-bottom: 16px; color: #B9CCDB; }
+@media (max-width: 1000px) { .grid.g4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .fcols { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 800px) {
+  .lbody { grid-template-columns: 1fr; gap: 0; }
+  .filters { border-top: 0; padding-top: 0; border-bottom: 1px solid var(--line); }
+  .filters summary { min-height: 44px; display: flex; align-items: center; }
+  .filters summary::after { content: "+"; margin-left: auto; font-size: 20px; }
+  .filters[open] summary::after { content: "−"; }
+  .cats { grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .cats span { font-size: 16px; }
+  .band ul { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) { .grid.g4 { grid-template-columns: 1fr 1fr; gap: 24px 12px; } .cats { grid-template-columns: 1fr; } .fcols { grid-template-columns: 1fr; } .thumbs { grid-template-columns: repeat(3, 72px); } .thumbs button { width: 72px; height: 72px; } }
+/* ===== production layer: cerave.com structure ===== */
+:root { --navy: #0E3353; --body: "Open Sans", Arial, sans-serif; }
+body { font-family: var(--body); font-size: 15px; line-height: 24px; letter-spacing: 0; }
+h1, h2, h3, legend, .btn, .cmp, .mainnav, .stores, .brand, .badge, .kick, .tag, .sechead, .fbrand, .crumbs, .stepn, .ct th, .rn, .price, .fromprice, .stars { font-family: var(--font); }
+.btn, .cmp, .stores, .mainnav > button, .mainnav > a { font-size: 14px; }
+.scene { display: block; width: 100%; height: 100%; }
+/* hero carousel */
+.carousel { position: relative; overflow: hidden; background: #DCEBF6; }
+.ctrack { display: flex; transition: transform .6s cubic-bezier(.4, 0, .2, 1); }
+.slide { flex: 0 0 100%; position: relative; height: 560px; }
+.slide .scene { position: absolute; inset: 0; }
+.scopy { position: relative; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 12px; }
+.scopy > * { max-width: 460px; }
+.kick { color: var(--blue-d); font-size: 14px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin: 0; }
+.stitle { font-size: clamp(32px, 4vw, 52px); line-height: 1.05; font-weight: 700; text-transform: uppercase; color: var(--navy); margin: 0; letter-spacing: .01em; }
+.sdesc { font-size: 17px; line-height: 26px; color: var(--soft); margin: 0 0 12px; }
+.on-dark .kick { color: #8FC3E6; }
+.on-dark .stitle { color: #fff; }
+.on-dark .sdesc { color: #DCE8F2; }
+.btn-w { background: #fff; color: var(--navy); border-color: #fff; }
+.btn-w:hover { background: transparent; color: #fff; }
+.cnav { position: absolute; top: 50%; margin-top: -24px; width: 48px; height: 48px; display: grid; place-items: center; background: rgba(255, 255, 255, .92); border: 0; color: var(--navy); cursor: pointer; box-shadow: 0 2px 8px rgba(14, 51, 83, .18); }
+.cnav svg { width: 22px; height: 22px; }
+.cnav:hover { background: #fff; }
+.cnav.prev { left: 16px; } .cnav.next { right: 16px; }
+.cdots { position: absolute; left: 0; right: 0; bottom: 20px; display: flex; justify-content: center; gap: 4px; }
+.cdots button { width: 24px; height: 24px; border: 0; background: none; cursor: pointer; display: grid; place-items: center; padding: 0; }
+.cdots button::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 1px rgba(14, 51, 83, .5); }
+.cdots button[aria-current]::before { background: var(--navy); width: 12px; height: 12px; }
+/* sections */
+.hsec { padding-top: 64px; padding-bottom: 0; }
+.shead { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+.shead .sechead { text-align: left; }
+.sechead { font-size: 32px; line-height: 40px; font-weight: 400; color: var(--navy); margin: 0 0 32px; }
+.more { font-family: var(--font); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: 14px; color: var(--blue-d); text-decoration: none; }
+.more:hover { text-decoration: underline; }
+.cats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+.cats a { background: none; padding: 0; gap: 16px; }
+.cats a:hover { background: none; }
+.cats a:hover .cimg .scene { transform: scale(1.04); }
+.cimg { display: block; width: 100%; aspect-ratio: 3 / 4; overflow: hidden; }
+.cimg .scene { transition: transform .4s ease; }
+.clab { font-family: var(--font); font-size: 16px !important; font-weight: 700 !important; letter-spacing: .08em; text-transform: uppercase; color: var(--navy); }
+.fbanner { position: relative; height: 440px; margin-top: 72px; overflow: hidden; }
+.fbanner .scene { position: absolute; inset: 0; }
+.fbanner .wrap { position: relative; height: 100%; display: flex; align-items: center; }
+.fbcopy { background: var(--navy); color: #fff; padding: 40px; max-width: 440px; display: grid; gap: 12px; justify-items: start; }
+.fbcopy h2 { font-size: 30px; line-height: 36px; font-weight: 700; margin: 0; }
+.fbcopy p { margin: 0 0 8px; color: #DCE8F2; }
+.tips { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.tips a { display: grid; gap: 8px; text-decoration: none; color: inherit; }
+.timg { display: block; aspect-ratio: 16 / 10; overflow: hidden; margin-bottom: 8px; }
+.timg .scene { transition: transform .4s ease; }
+.tips a:hover .timg .scene { transform: scale(1.04); }
+.tips a:hover .ttl { text-decoration: underline; }
+.tkick { font-family: var(--font); font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--blue-d); }
+.ttl { font-family: var(--font); font-size: 21px; line-height: 28px; font-weight: 600; color: var(--navy); }
+.tds { color: var(--soft); font-size: 15px; }
+.band { margin-top: 72px; }
+/* category banner */
+.cbanner { position: relative; height: 340px; overflow: hidden; }
+.cbanner .scene { position: absolute; inset: 0; }
+.cbanner .wrap { position: relative; height: 100%; display: flex; align-items: center; }
+.cbcopy { max-width: 460px; display: grid; gap: 8px; }
+.cbcopy h1.pt { font-size: clamp(32px, 4vw, 48px); line-height: 1.1; font-weight: 400; color: var(--navy); }
+.cbcopy p { margin: 0; font-size: 17px; color: var(--soft); }
+.lhint { margin: 0 0 16px; color: var(--soft); }
+.crumbs { padding-top: 16px; }
+/* cards */
+.card .art { background: #F6F8FA; }
+.card .art svg { height: 84%; }
+.card h2 { font-size: 16px; line-height: 22px; }
+@media (max-width: 900px) { .cats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .tips { grid-template-columns: 1fr; } .tips a { grid-template-columns: 200px 1fr; column-gap: 16px; } .timg { grid-row: 1 / 5; margin: 0; } }
+@media (max-width: 800px) {
+  .slide { height: auto; display: flex; flex-direction: column; }
+  .slide .scene { position: static; height: 300px; }
+  .slide .scene, .fbanner .scene { width: 100%; }
+  .scopy { padding-top: 24px; padding-bottom: 48px; background: #fff; }
+  .slide .scene { height: 260px; }
+  .on-dark .scopy { background: var(--navy); }
+  .cnav { top: 150px; width: 40px; height: 40px; margin-top: -20px; }
+  .cnav.prev { left: 8px; } .cnav.next { right: 8px; }
+  .cdots { bottom: 12px; }
+  .fbanner { height: auto; }
+  .fbanner .scene { position: static; height: 240px; }
+  .fbanner .wrap { padding: 0; }
+  .fbcopy { max-width: none; width: 100%; }
+  .cbanner { height: 220px; }
+  .cbcopy { background: rgba(255, 255, 255, .88); padding: 16px; }
+}
+@media (max-width: 560px) { .tips a { grid-template-columns: 1fr; } .timg { grid-row: auto; } .sechead { font-size: 26px; line-height: 32px; } .cats { gap: 12px; } .clab { font-size: 14px !important; } }
+
+/* ===== photography ===== */
+img.scene { display: block; width: 100%; height: 100%; object-fit: cover; }
+.art img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.card .art, .gal #gmain, .rstep .art, .ct .art, .thumbs button { background: #fff; }
+.card .art img { width: 92%; height: 92%; margin: 4%; }
+.thumbs { grid-template-columns: repeat(2, 88px); }
+.thumbs button img { width: 100%; height: 100%; object-fit: cover; }
+.pcard { position: absolute; right: 3%; top: 24%; width: 240px; background: #fff; padding: 16px; display: grid; gap: 8px; box-shadow: 0 16px 40px rgba(0, 0, 0, .35); font-size: 14px; }
+.pcard b { font-family: var(--font); font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--navy); }
+.pcard span { display: flex; justify-content: space-between; background: #F4F5F6; padding: 8px 12px; font-weight: 600; color: var(--ink); }
+.pcard span.best { background: #EAF3F9; box-shadow: inset 0 0 0 2px var(--blue); }
+.pcard i { font-style: normal; font-family: var(--font); font-weight: 700; color: var(--navy); }
+@media (max-width: 1180px) { .pcard { display: none; } }
+@media (max-width: 800px) { .slide img.scene { height: 260px; object-position: 82% center !important; } .fbanner img.scene { height: 240px; } }
+
+.tray .btn { white-space: nowrap; }
+@media (max-width: 560px) {
+  .tray { left: 0 !important; right: 0 !important; bottom: 0 !important; transform: none; width: auto !important; max-width: none !important; padding: 8px 8px 8px 16px; gap: 12px; }
+  .tray:not(.show) { transform: translateY(110%); }
+  .tray.show { transform: none; }
+  .tray .btn { padding: 0 16px; }
+  .tray p, .tray span { white-space: nowrap; font-size: 14px; }
+}
+
+/* ===== polish pass: spacing & alignment ===== */
+[hidden] { display: none !important; }
+main > .enter > .wrap:last-child, main > .enter > section:last-child:not(.band) { padding-bottom: 64px; }
+main .band:last-child { margin-bottom: 0; }
+.filters, .lbar { border-top: 0; }
+.filters { padding-top: 0; }
+.lbar { padding: 0 0 16px; margin-bottom: 8px; border-bottom: 1px solid var(--line); }
+.lbody { padding-top: 8px; }
+.lbody .grid { padding-bottom: 0; }
+.fgrp:first-of-type { padding-top: 8px; }
+.empty { margin: 32px 0 0; padding: 32px; }
+body.has-tray main { padding-bottom: 96px; }
+/* product page sections align with the info column grid */
+.psec { max-width: none; }
+.ings { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+/* footer: two link columns per row on phones */
+@media (max-width: 520px) {
+  .fcols { grid-template-columns: 1fr 1fr; gap: 32px 16px; }
+  .fcols > div:first-child { grid-column: 1 / -1; }
+  .fcols nav:last-child { grid-column: 1 / -1; }
+}
+/* listing: two-up grid on phones */
+@media (max-width: 520px) {
+  .lbody .grid { grid-template-columns: 1fr 1fr; gap: 24px 12px; }
+  .card h2 { font-size: 14px; line-height: 20px; }
+  .card .chip { font-size: 12px; line-height: 16px; padding: 4px 6px; }
+  .card .meta { font-size: 12px; }
+  .card .cmp { padding: 0 12px; }
+  .stars { gap: 4px; } .stars svg { height: 13px; }
+  .lbar { gap: 8px; }
+  .sort select { padding-right: 24px; }
+}
+/* routine results on phones: small image left of title, content full width */
+@media (max-width: 640px) {
+  .rstep { grid-template-columns: 88px minmax(0, 1fr); column-gap: 16px; row-gap: 12px; }
+  .rstep > .art { aspect-ratio: 1 !important; grid-row: 2; }
+  .rstep > div:not(.art) { display: contents; }
+  .rstep > div:not(.art) > h3 { grid-column: 2; grid-row: 2; align-self: center; margin: 0; }
+  .rstep > div:not(.art) > *:not(h3) { grid-column: 1 / -1; }
+  .rstep > div:not(.art) > p { margin: 0; }
+  .rstep .swap { display: grid; gap: 4px; }
+  .rstep .swap select { width: 100%; }
+  .rstep .rrow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 8px; align-items: center; }
+  .rstep .rrow > span:first-child, .rstep .rrow .swap { grid-column: 1 / -1; }
+  .rstep .rrow .btn { width: 100%; padding: 0 8px; }
+  .rstep .rrow .btn:only-of-type { grid-column: 1 / -1; }
+}
+/* retailer dialog rows on phones */
+@media (max-width: 520px) {
+  .ret { grid-template-columns: minmax(0, 1fr) auto; row-gap: 8px; }
+  .ret .rn { grid-column: 1; grid-row: 1; }
+  .ret .rp { grid-column: 2; grid-row: 1; }
+  .ret .rm { grid-column: 1 / -1; grid-row: 2; }
+  .ret .rb { grid-column: 1 / -1; grid-row: 3; width: 100%; justify-content: center; }
+  .ret.best { padding: 16px 12px; }
+}
+/* compare table on phones: narrower label column */
+@media (max-width: 640px) { .ct tbody th { width: 112px; min-width: 112px; padding-left: 12px; padding-right: 8px; font-size: 12px; } .ct td { min-width: 160px; } }
+
+/* stores page */
+.stores-p { max-width: none; display: grid; gap: 16px; justify-items: start; padding-bottom: 48px; border-bottom: 1px solid var(--line); }
+.stores-p .lede { max-width: 640px; margin: 0; }
+.zip { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; }
+.zip label { display: grid; gap: 8px; font-weight: 600; font-size: 14px; }
+.zip input { height: 44px; width: 200px; border: 1px solid var(--field); padding: 0 12px; font: inherit; }
+#zipr { width: 100%; display: grid; gap: 12px; }
+#zipr:empty { display: none; }
+.scards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.scards li { border: 1px solid var(--line); padding: 16px; display: grid; gap: 4px; justify-items: start; }
+.scards b { font-family: var(--font); font-size: 18px; color: var(--navy); }
+.scards .sd, .scards .sh { color: var(--soft); font-size: 14px; }
+.scards .tag { margin-top: 8px; }
+.sprods { padding-top: 48px; }
+.sprods .sechead { margin-bottom: 8px; text-align: left; }
+.sprods > .lede { margin: 0 0 32px; }
+.sgrp + .sgrp { margin-top: 40px; }
+.sgh { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 16px; }
+.sgh h3 { margin: 0; font-size: 20px; line-height: 28px; color: var(--navy); font-weight: 600; }
+.srow { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.srow a { display: grid; gap: 4px; justify-items: start; text-decoration: none; color: inherit; }
+.srow .art { display: block; width: 100%; aspect-ratio: 1; background: #fff; border: 1px solid var(--line); margin-bottom: 8px; }
+.srow a:hover .sn { text-decoration: underline; }
+.srow .sn { font-family: var(--font); font-weight: 700; font-size: 15px; line-height: 20px; color: var(--navy); }
+.srow .sp { font-size: 14px; color: var(--soft); }
+.srow .tag { font-size: 12px; }
+.card h2 a { display: inline-block; padding: 2px 0; }
+@media (max-width: 1000px) { .srow { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 720px) { .scards { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .srow { grid-template-columns: 1fr 1fr; gap: 16px 12px; } .zip input { width: 100%; } .zip label { flex: 1; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site">
+  <div class="wrap hbar">
+    <a class="brand" href="#/" aria-label="CeraVe, home">CeraVe</a>
+    <div class="util"><label class="search"><span class="vh">Search products</span><input id="q" type="search" placeholder="Search"><span class="sbtn" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span></label></div>
+    <div class="navrow">
+    <nav class="mainnav" id="mainnav" aria-label="Main">
+      <button type="button" id="megabtn" aria-expanded="false" aria-controls="mega">Skincare <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <a href="#/finder" data-finding="2" data-rec="7">Find my routine</a>
+      <a href="#/compare" data-finding="3" data-rec="10">Compare products</a>
+    </nav>
+    <div class="hright">
+      
+      <a class="stores" href="#/stores" data-finding="1" data-rec="4" aria-label="Find nearby stores"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 15s5-4.6 5-8.5A5 5 0 0 0 3 6.5C3 10.4 8 15 8 15z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="6.5" r="1.8" fill="currentColor"/></svg><span>Find nearby stores</span></a>
+      <button class="menu-t" type="button" id="menut" aria-expanded="false" aria-controls="mainnav"><span class="vh">Menu</span><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+    </div>
+    </div>
+  </div>
+  <div class="mega" id="mega" hidden>
+    <div class="wrap">
+      <div><h2>By product</h2><ul><li><a href="#/c/cleansers">Facial cleansers</a></li><li><a href="#/c/moisturizers">Facial moisturizers</a></li><li><a href="#/c/eye">Eye creams</a></li></ul></div>
+      <div data-finding="2" data-rec="7"><h2>By concern</h2><ul><li><a href="#/finder?c=dryness">Dryness</a></li><li><a href="#/finder?c=breakouts">Breakouts</a></li><li><a href="#/finder?c=eyes">Dark circles and puffiness</a></li><li><a href="#/finder?c=oil">Oiliness</a></li><li><a href="#/finder">Not sure? Find my routine</a></li></ul></div>
+      <div><h2>Tools</h2><ul><li><a href="#/compare">Compare products</a></li><li><a href="#/stores">Find nearby stores</a></li></ul></div>
+      <a class="promo" href="#/finder" data-finding="2" data-rec="6"><b>Find my routine</b><p>Answer 4 quick questions about your skin. You get a routine, why each product fits, and options to swap.</p><span class="tag">About 1 minute</span></a>
+    </div>
+  </div>
+</header>
+<main id="main" tabindex="-1"></main>
+<div class="tray" id="tray" role="region" aria-label="Compare tray" data-finding="3" data-rec="11"><span id="trayt" aria-live="polite"></span><button class="clear" type="button" id="trayclear">Clear</button><a class="btn btn-sm" id="traygo" href="#/compare">Compare</a></div>
+<dialog id="buy" aria-labelledby="buyh"></dialog>
+<footer class="site"><div class="wrap fcols">
+  <div><p class="fbrand">CeraVe</p><p>Skincare developed with dermatologists, with three essential ceramides in every formula.</p></div>
+  <nav aria-label="Skincare"><h2>Skincare</h2><a href="#/c/cleansers">Facial cleansers</a><a href="#/c/moisturizers">Facial moisturizers</a><a href="#/c/eye">Eye creams</a></nav>
+  <nav aria-label="Help me choose"><h2>Help me choose</h2><a href="#/finder">Find my routine</a><a href="#/compare">Compare products</a><a href="#/stores">Find nearby stores</a></nav>
+  <nav aria-label="Popular"><h2>Popular</h2><a href="#/p/daily-lotion">Daily Moisturizing Lotion</a><a href="#/p/hydrating-cleanser">Hydrating Facial Cleanser</a><a href="#/p/moisturizing-cream">Moisturizing Cream</a></nav>
+</div><div class="fbot"><div class="wrap"><span>© 2026 Vedant Atram</span><span>Portfolio prototype by Vedant Atram. Not affiliated with CeraVe. Prices are sample data.</span></div></div></footer>
+
+<script>
+(function () {
+"use strict";
+var R = { target: "Target", walmart: "Walmart", cvs: "CVS", amazon: "Amazon", ulta: "Ulta Beauty", walgreens: "Walgreens" };
+var DOM = { target: "target.com", walmart: "walmart.com", cvs: "cvs.com", amazon: "amazon.com", ulta: "ulta.com", walgreens: "walgreens.com" };
+/* Sample data for the prototype. Prices are illustrative. */
+var P = {
+  "hydrating-cleanser": { name: "Hydrating Facial Cleanser", cat: "cleansers", color: "#1179B6", shape: "pump", type: "Normal to dry", texture: "Creamy lotion, non-foaming", ings: ["Ceramides", "Hyaluronic acid"], does: "Cleans without stripping moisture and helps restore the skin barrier.", use: "Massage onto damp skin, then rinse. Morning and night.", sizes: { "8 oz": 13.99, "12 oz": 16.99, "16 oz": 18.99 }, concerns: ["dryness"], skin: ["normal", "dry", "sensitive"], step: "cleanse" },
+  "foaming-cleanser": { name: "Foaming Facial Cleanser", cat: "cleansers", color: "#1179B6", shape: "pump", type: "Normal to oily", texture: "Gel that foams", ings: ["Ceramides", "Niacinamide", "Hyaluronic acid"], does: "Removes excess oil and dirt without disrupting the skin barrier.", use: "Lather onto damp skin, then rinse. Morning and night.", sizes: { "8 oz": 13.99, "12 oz": 16.99, "16 oz": 18.99 }, concerns: ["oil", "breakouts"], skin: ["normal", "oily", "combination"], step: "cleanse" },
+  "acne-cleanser": { name: "Acne Control Cleanser", cat: "cleansers", color: "#00A3AD", shape: "pump", type: "Oily, acne-prone", texture: "Gel cleanser", ings: ["2% salicylic acid", "Ceramides", "Niacinamide"], does: "Clears breakouts and helps prevent new ones.", use: "Use once a day to start, then up to twice a day.", sizes: { "8 oz": 14.99 }, concerns: ["breakouts"], skin: ["oily", "combination"], step: "cleanse" },
+  "daily-lotion": { name: "Daily Moisturizing Lotion", cat: "moisturizers", color: "#1179B6", shape: "pump", type: "Normal to dry", texture: "Lightweight lotion", ings: ["Ceramides", "Hyaluronic acid"], does: "Hydrates for 24 hours and helps restore the skin barrier.", use: "Apply to face and body as often as needed.", sizes: { "3 oz": 7.99, "12 oz": 15.99, "19 oz": 19.99 }, concerns: ["dryness"], skin: ["normal", "dry", "sensitive", "combination"], step: "moisturize" },
+  "moisturizing-cream": { name: "Moisturizing Cream", cat: "moisturizers", color: "#1179B6", shape: "jar", type: "Dry to very dry", texture: "Rich cream", ings: ["Ceramides", "Hyaluronic acid", "Petrolatum"], does: "Deep, long-lasting moisture for very dry skin.", use: "Apply liberally as often as needed.", sizes: { "8 oz": 12.99, "16 oz": 18.99 }, concerns: ["dryness"], skin: ["dry", "sensitive"], step: "moisturize" },
+  "pm-lotion": { name: "PM Facial Moisturizing Lotion", cat: "moisturizers", color: "#1B4F8C", shape: "flip", type: "All skin types", texture: "Light, oil-free lotion", ings: ["Niacinamide", "Ceramides", "Hyaluronic acid"], does: "Overnight hydration that is light enough for oily skin.", use: "Apply at night after cleansing.", sizes: { "3 oz": 15.99 }, concerns: ["oil", "breakouts", "dryness"], skin: ["normal", "oily", "combination", "dry", "sensitive"], step: "moisturize" },
+  "am-spf": { name: "AM Facial Moisturizing Lotion SPF 30", cat: "moisturizers", color: "#E07B39", shape: "flip", type: "All skin types", texture: "Light lotion with sunscreen", ings: ["Broad spectrum SPF 30", "Ceramides", "Niacinamide"], does: "Daytime moisture with sun protection.", use: "Apply in the morning, 15 minutes before sun.", sizes: { "3 oz": 16.99 }, concerns: ["sun"], skin: ["normal", "oily", "combination", "dry", "sensitive"], step: "protect" },
+  "eye-repair": { name: "Eye Repair Cream", cat: "eye", color: "#1179B6", shape: "tube", type: "All skin types", texture: "Light cream", ings: ["Ceramides", "Hyaluronic acid", "Niacinamide"], does: "Targets the look of dark circles and puffiness under the eyes.", use: "Pat gently under the eyes, morning and night.", sizes: { "0.5 oz": 14.99 }, concerns: ["eyes"], skin: ["normal", "oily", "combination", "dry", "sensitive"], step: "treat" },
+  "sa-cleanser": { name: "SA Smoothing Cleanser", cat: "cleansers", color: "#5B8DB8", shape: "pump", type: "Rough, bumpy", texture: "Gel cleanser", ings: ["Salicylic acid", "Ceramides", "Hyaluronic acid"], does: "Gently exfoliates and smooths rough, bumpy skin.", use: "Massage onto damp skin, then rinse. Once or twice a day.", sizes: { "8 oz": 13.99, "16 oz": 18.99 }, concerns: ["aging", "breakouts"], skin: ["normal", "combination", "oily"], step: "cleanse" },
+  "night-cream": { name: "Skin Renewing Night Cream", cat: "moisturizers", color: "#2E4A7D", shape: "jar", type: "All skin types", texture: "Rich cream", ings: ["Retinol", "Ceramides", "Niacinamide"], does: "Overnight moisture that helps smooth the look of fine lines.", use: "Apply at night after cleansing.", sizes: { "1.7 oz": 21.99 }, concerns: ["aging", "dryness"], skin: ["normal", "dry", "combination"], step: "moisturize" }
+};
+var BADGE = { "daily-lotion": "Best seller", "hydrating-cleanser": "Best seller", "night-cream": "New", "moisturizing-cream": "Derm favorite" };
+var RATE = { "hydrating-cleanser": "4.7", "foaming-cleanser": "4.6", "acne-cleanser": "4.4", "daily-lotion": "4.7", "moisturizing-cream": "4.8", "pm-lotion": "4.6", "am-spf": "4.3", "eye-repair": "4.4", "sa-cleanser": "4.5", "night-cream": "4.5" };
+var CAT = { cleansers: "Facial cleansers", moisturizers: "Facial moisturizers", eye: "Eye creams" };
+/* Per-retailer price offsets and stock, so the sheet shows a real comparison */
+var OFF = { target: 0, walmart: -0.5, cvs: 1, amazon: -0.3, ulta: 0.5, walgreens: 1.2 };
+var COUPON = { target: "Save $2 with Target Circle", cvs: "Buy 1, get 1 50% off" };
+function stock(id, size, r) { var h = (id + size + r).split("").reduce(function (a, c) { return (a * 31 + c.charCodeAt(0)) % 997; }, 7); return h % 7 !== 0; }
+function priceAt(id, size, r) { return Math.max(1, P[id].sizes[size] + OFF[r]); }
+function minPrice(id) { var m = Infinity; Object.keys(P[id].sizes).forEach(function (s) { Object.keys(R).forEach(function (r) { if (stock(id, s, r)) m = Math.min(m, priceAt(id, s, r)); }); }); return m; }
+function $(s, el) { return (el || document).querySelector(s); }
+function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+function stars(r) { return '<span class="stars"><svg viewBox="0 0 88 16" aria-hidden="true"><g fill="currentColor"><path d="M8 0l2.4 5.2 5.6.6-4.2 3.8 1.2 5.6L8 12.4 3 15.2l1.2-5.6L0 5.8l5.6-.6z"/></g><g fill="currentColor"><path d="M26 0l2.4 5.2 5.6.6-4.2 3.8 1.2 5.6L26 12.4 21 15.2l1.2-5.6L18 5.8l5.6-.6zM44 0l2.4 5.2 5.6.6-4.2 3.8 1.2 5.6L44 12.4 39 15.2l1.2-5.6L36 5.8l5.6-.6zM62 0l2.4 5.2 5.6.6-4.2 3.8 1.2 5.6L62 12.4 57 15.2l1.2-5.6L54 5.8l5.6-.6z"/></g><path d="M80 0l2.4 5.2 5.6.6-4.2 3.8 1.2 5.6L80 12.4 75 15.2l1.2-5.6L72 5.8l5.6-.6z" fill="#B4BBC2"/></svg><span>' + r + '<span class="vh"> out of 5, sample rating</span></span></span>'; }
+function money(n) { return "$" + n.toFixed(2); }
+
+var PHOTO = { "hydrating-cleanser": "pump-blue", "foaming-cleanser": "pump-blue", "acne-cleanser": "pump-teal", "sa-cleanser": "pump-steel", "daily-lotion": "pump-blue", "moisturizing-cream": "jar-blue", "night-cream": "jar-navy", "pm-lotion": "flip-navy", "am-spf": "flip-orange", "eye-repair": "tube-blue" };
+function photo(id) { return '<img src="img/p-' + PHOTO[id] + '.webp" alt="" loading="lazy" decoding="async">'; }
+function art(id, big) { return '<div class="art">' + photo(id) + '</div>'; }
+
+/* ---------- Compare selection (persists across views) ---------- */
+var sel = [];
+try { sel = JSON.parse(sessionStorage.getItem("cv-cmp") || "[]"); } catch (e) {}
+function saveSel() { try { sessionStorage.setItem("cv-cmp", JSON.stringify(sel)); } catch (e) {} tray(); }
+function tray() {
+  var t = $("#tray"), go = $("#traygo"), n = sel.length, onCompare = location.hash.indexOf("#/compare") === 0;
+  t.classList.toggle("show", n > 0 && !onCompare);
+  document.body.classList.toggle("has-tray", n > 0 && !onCompare);
+  t.setAttribute("aria-hidden", n > 0 && !onCompare ? "false" : "true");
+  $("#trayt").textContent = n === 1 ? "1 product selected. Pick 1 more to compare." : n + " products selected";
+  go.href = "#/compare?ids=" + sel.join(",");
+  go.textContent = "Compare " + n;
+  if (n < 2) { go.setAttribute("aria-disabled", "true"); go.tabIndex = -1; } else { go.removeAttribute("aria-disabled"); go.tabIndex = 0; }
+  if (!t.classList.contains("show")) { go.tabIndex = -1; $("#trayclear").tabIndex = -1; } else { $("#trayclear").tabIndex = 0; }
+}
+$("#trayclear").addEventListener("click", function () { sel = []; saveSel(); document.querySelectorAll(".cmp input").forEach(function (i) { i.checked = false; }); });
+$("#traygo").addEventListener("click", function (e) { if (this.getAttribute("aria-disabled") === "true") e.preventDefault(); });
+
+/* ---------- Views ---------- */
+function crumbs(items) { return '<nav class="crumbs" aria-label="Breadcrumb"><ol>' + items.map(function (it, i) { return '<li>' + (i < items.length - 1 ? '<a href="' + it[1] + '">' + esc(it[0]) + '</a>' : '<span aria-current="page">' + esc(it[0]) + '</span>') + '</li>'; }).join("") + '</ol></nav>'; }
+
+function skinT(p) { return p.type + (/skin/i.test(p.type) ? "" : " skin"); }
+function card(id) {
+  var p = P[id], on = sel.indexOf(id) > -1;
+  return '<li class="card" data-id="' + id + '" data-skin="' + p.skin.join(" ") + '" data-con="' + p.concerns.join(" ") + '" data-price="' + minPrice(id) + '" data-rate="' + (RATE[id] || "4.5") + '">' +
+    (BADGE[id] ? '<span class="badge">' + BADGE[id] + '</span>' : '') + art(id) + '<p class="chip">For ' + esc(p.type) + ' skin</p><h2><a href="#/p/' + id + '">' + esc(p.name) + '</a></h2><p class="meta">' + esc(p.texture) + '</p>' + stars(RATE[id] || "4.5") + '<p class="price">From ' + money(minPrice(id)) + '</p>' +
+    '<label class="cmp" data-finding="3" data-rec="10"><input type="checkbox" data-cmp="' + id + '"' + (on ? " checked" : "") + '> Compare</label></li>';
+}
+/* ---------- Photography (banners) ---------- */
+var BAN = { routine: "routine", prices: "prices", compare: "compare", finder: "finder", cleansers: "cleansers", moisturizers: "moisturizers", eye: "finder", stores: "routine" };
+function scene(kind, crop, pos) { return '<img class="scene" src="img/b-' + BAN[kind] + '.webp" alt="" decoding="async"' + (crop ? ' loading="lazy"' : '') + ' style="object-position:' + (pos || (crop ? "78% 60%" : "right center")) + '">'; }
+
+var SLIDES = [
+  { k: "routine", kick: "New · Skincare Solution Finder", t: "Find your routine in 4 questions", d: "Pick up to two concerns. Get a routine with a reason for every product.", cta: ["Find my routine", "#/finder"] },
+  { k: "prices", kick: "Shop with confidence", t: "See prices before you leave", d: "Compare retailer prices and stock for every size, right on the product page.", cta: ["See how it works", "#/p/daily-lotion"], light: 1 },
+  { k: "compare", kick: "Compare products", t: "Compare up to 3, side by side", d: "Tick Compare on any product. We highlight what's different.", cta: ["Compare cleansers", "#/c/cleansers"] }
+];
+function vHome() {
+  document.title = "CeraVe · Skincare developed with dermatologists";
+  var best = ["daily-lotion", "hydrating-cleanser", "moisturizing-cream", "pm-lotion"];
+  var hero = '<section class="carousel" aria-roledescription="carousel" aria-label="Featured"><div class="ctrack" id="ctrack">' +
+    SLIDES.map(function (s, i) { return '<div class="slide' + (s.light ? " on-dark" : "") + '" role="group" aria-roledescription="slide" aria-label="' + (i + 1) + ' of ' + SLIDES.length + '"' + (i ? " inert" : "") + '>' + scene(s.k) + (s.k === "prices" ? '<div class="pcard" aria-hidden="true"><b>Lowest price</b><span class="best">Target<i>$14.99</i></span><span>Walmart<i>$15.47</i></span><span>CVS<i>$16.99</i></span></div>' : '') +
+      '<div class="wrap scopy"><p class="kick">' + s.kick + '</p><h2 class="stitle">' + s.t + '</h2><p class="sdesc">' + s.d + '</p><a class="btn ' + (s.light ? "btn-w" : "btn-p") + '" href="' + s.cta[1] + '"' + (i === 0 ? ' data-finding="2" data-rec="6"' : '') + '>' + s.cta[0] + '</a></div></div>'; }).join("") +
+    '</div><button type="button" class="cnav prev" id="cprev" aria-label="Previous slide"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2"/></svg></button><button type="button" class="cnav next" id="cnext" aria-label="Next slide"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>' +
+    '<div class="cdots">' + SLIDES.map(function (s, i) { return '<button type="button" data-slide="' + i + '" aria-label="Show slide ' + (i + 1) + '"' + (i ? "" : ' aria-current="true"') + '></button>'; }).join("") + '</div></section>';
+  var cats = '<section class="hsec wrap" aria-labelledby="h-cat"><h2 class="sechead" id="h-cat">Shop by category</h2><ul class="cats" role="list">' +
+    [["cleansers", "#/c/cleansers", "Facial cleansers"], ["moisturizers", "#/c/moisturizers", "Facial moisturizers"], ["eye", "#/c/eye", "Eye creams"], ["compare", "#/compare", "Compare products"]].map(function (c) { return '<li><a href="' + c[1] + '"><span class="cimg">' + scene(c[0], 1, "80% 60%") + '</span><span class="clab">' + c[2] + '</span></a></li>'; }).join("") + '</ul></section>';
+  var bestS = '<section class="hsec wrap" aria-labelledby="h-best"><div class="shead"><h2 class="sechead" id="h-best">Best sellers</h2><a class="more" href="#/c/moisturizers">Shop all <span aria-hidden="true">›</span></a></div><ul class="grid g4" role="list">' + best.map(card).join("") + '</ul></section>';
+  var finder = '<section class="fbanner" aria-labelledby="h-fb">' + scene("finder") + '<div class="wrap"><div class="fbcopy"><h2 id="h-fb">Skincare Solution Finder</h2><p>Not sure where to start? Answer 4 quick questions and get a routine built around your skin, with a reason for every product.</p><a class="btn btn-w" href="#/finder">Find my routine</a></div></div></section>';
+  var tips = '<section class="hsec wrap" aria-labelledby="h-tips"><h2 class="sechead" id="h-tips">Skincare tips &amp; advice</h2><ul class="tips" role="list">' +
+    [["moisturizers", "Routines", "How to build a routine for dry skin", "Start with the finder and pick “Dryness”. We'll match a cleanser and moisturizer.", "#/finder?c=dryness"],
+     ["compare", "Products", "Gel, cream or lotion? How the textures compare", "See our three best-selling cleansers side by side, with the differences highlighted.", "#/compare?ids=hydrating-cleanser,foaming-cleanser,acne-cleanser"],
+     ["prices", "Shopping", "Where to buy CeraVe at the best price", "Every product page now lists retailer prices and stock before you leave the site.", "#/p/hydrating-cleanser"]].map(function (t) { return '<li><a href="' + t[4] + '"><span class="timg">' + scene(t[0], 1, "82% 55%") + '</span><span class="tkick">' + t[1] + '</span><span class="ttl">' + t[2] + '</span><span class="tds">' + t[3] + '</span></a></li>'; }).join("") + '</ul></section>';
+  var band = '<section class="band" aria-labelledby="h-band"><div class="wrap"><h2 id="h-band">Developed with dermatologists</h2><p>Every formula contains three essential ceramides to help restore and maintain the skin\'s natural barrier.</p><ul role="list">' +
+    [["Ceramides", "Help restore the protective skin barrier."], ["Hyaluronic acid", "Draws in moisture and holds it in the skin."], ["Niacinamide", "Calms the skin and helps balance oil."]].map(function (x, i) { return '<li><span class="ic" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.5"/>' + ['<circle cx="14" cy="16" r="4" fill="currentColor"/><circle cx="26" cy="16" r="4" fill="currentColor"/><circle cx="20" cy="26" r="4" fill="currentColor"/>', '<path d="M20 9c5 7 8 11 8 15a8 8 0 0 1-16 0c0-4 3-8 8-15z" fill="currentColor"/>', '<path d="M12 26l8-14 8 14z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>'][i] + '</svg></span><b>' + x[0] + '</b><span>' + x[1] + '</span></li>'; }).join("") + '</ul></div></section>';
+  return '<h1 class="vh">CeraVe skincare</h1>' + hero + cats + bestS + finder + tips + band;
+}
+var CIDX = 0;
+function goSlide(i) {
+  var t = $("#ctrack"); if (!t) return;
+  CIDX = (i + SLIDES.length) % SLIDES.length;
+  t.style.transform = "translateX(" + (-100 * CIDX) + "%)";
+  [].forEach.call(t.children, function (s, k) { if (k === CIDX) s.removeAttribute("inert"); else s.setAttribute("inert", ""); });
+  document.querySelectorAll(".cdots button").forEach(function (b, k) { if (k === CIDX) b.setAttribute("aria-current", "true"); else b.removeAttribute("aria-current"); });
+}
+document.addEventListener("click", function (e) {
+  if (e.target.closest("#cprev")) goSlide(CIDX - 1);
+  else if (e.target.closest("#cnext")) goSlide(CIDX + 1);
+  else { var d = e.target.closest("[data-slide]"); if (d) goSlide(+d.dataset.slide); }
+});
+function catBanner(cat, title, sub) { return '<section class="cbanner">' + scene(cat, null, "right 60%") + '<div class="wrap"><div class="cbcopy"><h1 class="pt">' + title + '</h1><p>' + sub + '</p></div></div></section>'; }
+var SK = [["normal", "Normal"], ["dry", "Dry"], ["oily", "Oily"], ["combination", "Combination"], ["sensitive", "Sensitive"]];
+function vList(cat) {
+  var ids = Object.keys(P).filter(function (k) { return P[k].cat === cat; });
+  document.title = CAT[cat] + " · CeraVe";
+  var cons = Q[0].o.filter(function (o) { return ids.some(function (id) { return P[id].concerns.indexOf(o[0]) > -1; }); });
+  var skins = SK.filter(function (o) { return ids.some(function (id) { return P[id].skin.indexOf(o[0]) > -1; }); });
+  function grp(t, key, opts) { return '<fieldset class="fgrp"><legend>' + t + '</legend>' + opts.map(function (o) { return '<label class="fopt"><input type="checkbox" data-filter="' + key + '" value="' + o[0] + '"> ' + o[1] + '</label>'; }).join("") + '</fieldset>'; }
+  var SUB = { cleansers: "Gentle cleansers that clean without disrupting the skin barrier.", moisturizers: "Lotions and creams with three essential ceramides for lasting hydration.", eye: "Eye creams that brighten and hydrate the delicate skin around the eyes." };
+  return catBanner(cat, CAT[cat], SUB[cat]) + '<div class="wrap">' + crumbs([["Home", "#/"], ["Skincare", "#/"], [CAT[cat]]]) +
+    '<p class="lhint">Tick <b>Compare</b> on any two or three products to see them side by side.</p>' +
+    '<div class="lbody"><details class="filters"' + (WIDE ? " open" : "") + '><summary>Filter</summary>' + grp("Skin type", "skin", skins) + grp("Skin concern", "con", cons) + '<button type="button" class="linkbtn" id="fclear">Clear filters</button></details>' +
+    '<div><div class="lbar"><p id="lcount" aria-live="polite">' + ids.length + ' products</p><label class="sort">Sort by <select id="sort"><option value="feat">Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="rate">Top rated</option></select></label></div>' +
+    '<ul class="grid" id="lgrid" role="list">' + ids.map(card).join("") + '</ul><p class="empty" id="lnone" hidden>No products match these filters. <button type="button" class="linkbtn" id="fclear2">Clear filters</button></p></div></div></div>';
+}
+function applyList() {
+  var g = $("#lgrid"); if (!g) return;
+  var f = { skin: [], con: [] };
+  document.querySelectorAll("[data-filter]:checked").forEach(function (i) { f[i.dataset.filter].push(i.value); });
+  var items = [].slice.call(g.children), n = 0;
+  items.forEach(function (li) {
+    var ok = (!f.skin.length || f.skin.some(function (v) { return li.dataset.skin.split(" ").indexOf(v) > -1; })) && (!f.con.length || f.con.some(function (v) { return li.dataset.con.split(" ").indexOf(v) > -1; }));
+    li.hidden = !ok; if (ok) n++;
+  });
+  var m = $("#sort").value, key = { low: function (a, b) { return a.dataset.price - b.dataset.price; }, high: function (a, b) { return b.dataset.price - a.dataset.price; }, rate: function (a, b) { return b.dataset.rate - a.dataset.rate; } }[m];
+  var order = Object.keys(P);
+  items.sort(key || function (a, b) { return order.indexOf(a.dataset.id) - order.indexOf(b.dataset.id); }).forEach(function (li) { g.appendChild(li); });
+  $("#lcount").textContent = n + (n === 1 ? " product" : " products");
+  $("#lnone").hidden = n > 0;
+}
+document.addEventListener("change", function (e) { if (e.target.matches("[data-filter], #sort")) applyList(); });
+var WIDE = innerWidth > 800; addEventListener("resize", function () { var w = innerWidth > 800; if (w !== WIDE) { WIDE = w; document.querySelectorAll(".filters").forEach(function (d) { d.open = w; }); } });
+document.addEventListener("click", function (e) {
+  if (e.target.id === "fclear" || e.target.id === "fclear2") { document.querySelectorAll("[data-filter]").forEach(function (i) { i.checked = false; }); applyList(); }
+  var t = e.target.closest("[data-view]"); if (t) { $("#gmain").innerHTML = gview(t.dataset.pid, t.dataset.view); document.querySelectorAll("[data-view]").forEach(function (b) { b.setAttribute("aria-pressed", String(b === t)); }); }
+});
+function gview(id, v) { return v === "life" ? '<img src="img/b-' + BAN[P[id].cat] + '.webp" alt="" style="object-fit:cover;object-position:78% 60%;width:100%;height:100%">' : photo(id); }
+function gallery(id) {
+  return '<div class="gal"><div class="art" id="gmain" role="img" aria-label="' + esc(P[id].name) + '">' + gview(id, "front") + '</div><div class="thumbs" role="group" aria-label="Product images">' +
+    [["front", "Product"], ["life", "Lifestyle"]].map(function (v, i) { return '<button type="button" data-view="' + v[0] + '" data-pid="' + id + '" aria-pressed="' + (i === 0) + '" aria-label="Show ' + v[1].toLowerCase() + ' image">' + gview(id, v[0]) + '</button>'; }).join("") + '</div></div>';
+}
+
+function vProduct(id) {
+  var p = P[id]; if (!p) return vMissing();
+  var sizes = Object.keys(p.sizes), def = sizes[Math.min(1, sizes.length - 1)];
+  document.title = p.name + " · CeraVe";
+  return '<div class="wrap">' + crumbs([["Home", "#/"], [CAT[p.cat], "#/c/" + p.cat], [p.name]]) +
+  '<section class="pd">' + gallery(id) +
+  '<div class="pd-info">' + (BADGE[id] ? '<span class="badge static">' + BADGE[id] + '</span>' : '') + '<h1 class="pt">' + esc(p.name) + '</h1>' + stars(RATE[id] || "4.5") + '<p style="color:var(--soft)">' + esc(p.does) + '</p>' +
+  '<ul class="madefor"><li><b>Made for:</b> ' + esc(skinT(p)) + '</li><li><b>Texture:</b> ' + esc(p.texture) + '</li><li><b>Free of:</b> fragrance, parabens</li></ul>' +
+  '<fieldset data-finding="1" data-rec="2"><legend>Size</legend><div class="sizes">' + sizes.map(function (s) { return '<label class="size"><input type="radio" name="size" value="' + s + '"' + (s === def ? " checked" : "") + '><span>' + s + '<small>from ' + money(minAt(id, s)) + '</small></span></label>'; }).join("") + '</div></fieldset>' +
+  '<div class="fromprice" data-finding="1" data-rec="1" aria-live="polite" id="fp"></div>' +
+  '<div class="acts"><button class="btn btn-p" type="button" id="buybtn" data-finding="1" data-rec="1">Compare retailer prices</button><a class="btn btn-s" href="#/stores">Find nearby stores</a></div>' +
+  '<p class="note" data-finding="1"><svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 8v5M9 5.5v.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>CeraVe sells through retailers. You\'ll pick one here and check out on their website.</span></p>' +
+  '</div></section></div>' +
+  '<nav class="subnav" aria-label="On this page" data-finding="3" data-rec="12"><div class="wrap"><b>On this page</b><a href="#ings">Ingredients</a><a href="#how">How to use</a><a href="#similar">Compare with similar</a></div></nav>' +
+  '<div class="wrap"><section class="psec" id="ings" aria-labelledby="h-ings"><h2 id="h-ings">Key ingredients</h2><div class="ings">' + p.ings.map(function (i) { return '<div class="ing"><b>' + esc(i) + '</b><p>' + esc(INGD[i] || "") + '</p></div>'; }).join("") + '</div></section>' +
+  '<section class="psec" id="how" aria-labelledby="h-how"><h2 id="h-how">How to use</h2><ol class="steps"><li>' + esc(p.use) + '</li><li>Follow with the next step in your routine.</li></ol></section>' +
+  '<section class="psec" id="similar" aria-labelledby="h-sim" data-finding="3" data-rec="10"><h2 id="h-sim">Compare with similar products</h2><p class="lede" style="margin-bottom:16px">See how this one differs from others in ' + CAT[p.cat].toLowerCase() + '.</p><a class="btn btn-s" href="#/compare?ids=' + [id].concat(Object.keys(P).filter(function (k) { return P[k].cat === p.cat && k !== id; }).slice(0, 1)).join(",") + '">Compare ' + esc(p.name) + '</a></section></div>';
+}
+var INGD = { "Ceramides": "Help restore and maintain the skin's protective barrier.", "Hyaluronic acid": "Draws in and holds moisture.", "Niacinamide": "Calms the skin and helps balance oil.", "2% salicylic acid": "Clears pores and treats breakouts.", "Petrolatum": "Seals in moisture for very dry skin.", "Broad spectrum SPF 30": "Protects against UVA and UVB rays.", "Salicylic acid": "Exfoliates to smooth rough, bumpy texture.", "Retinol": "Helps renew the skin surface and smooth fine lines." };
+function minAt(id, s) { var m = Infinity; Object.keys(R).forEach(function (r) { if (stock(id, s, r)) m = Math.min(m, priceAt(id, s, r)); }); return m === Infinity ? P[id].sizes[s] : m; }
+function fromPrice(id) {
+  var s = ($('input[name="size"]:checked') || {}).value, n = Object.keys(R).filter(function (r) { return stock(id, s, r); }).length;
+  $("#fp").innerHTML = '<b>' + money(minAt(id, s)) + '</b><span>lowest price for ' + s + ' · in stock at ' + n + ' of 6 retailers</span>';
+}
+
+function openBuy(id) {
+  var p = P[id], s = $('input[name="size"]:checked').value, d = $("#buy");
+  var rows = Object.keys(R).map(function (r) { return { r: r, pr: priceAt(id, s, r), in: stock(id, s, r) }; }).sort(function (a, b) { return (b.in - a.in) || (a.pr - b.pr); });
+  var best = rows.filter(function (x) { return x.in; })[0];
+  d.innerHTML = '<div class="dh"><div><h2 id="buyh">Buy ' + esc(p.name) + ', ' + s + '</h2><p>Lowest price first. Choosing a retailer opens their website in a new tab, where you check out.</p></div><button class="x" type="button" id="buyx"><span class="vh">Close</span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button></div>' +
+  '<div class="db"><p class="sortnote">Prices exclude shipping.</p><ul class="rets">' + rows.map(function (x) {
+    var tags = (x.in ? '<span class="tag ok">In stock</span>' : '<span class="tag">Out of stock</span>') + (x === best ? '<span class="tag ok">Lowest price</span>' : '') + (COUPON[x.r] && x.in ? '<span class="tag warn" data-finding="1" data-rec="3">' + COUPON[x.r] + '</span>' : '');
+    return '<li class="ret' + (x.in ? '' : ' out') + (x === best ? ' best' : '') + '"><span class="rn">' + R[x.r] + '</span><span class="rp">' + (x.in ? money(x.pr) : 'Unavailable') + '</span><span class="rm">' + tags + '</span>' +
+      (x.in ? '<a class="btn btn-s btn-sm rb" href="https://www.' + DOM[x.r] + '" target="_blank" rel="noopener noreferrer">Go to ' + R[x.r] + '<span class="vh"> (opens ' + DOM[x.r] + ' in a new tab)</span> <span aria-hidden="true">↗</span></a>' : '<span class="rb"></span>') + '</li>';
+  }).join("") + '</ul></div>';
+  d.showModal(); $("#buyx").focus();
+  $("#buyx").addEventListener("click", function () { d.close(); });
+}
+$("#buy").addEventListener("close", function () { var b = $("#buybtn"); if (b) b.focus(); });
+$("#buy").addEventListener("click", function (e) { if (e.target === this) this.close(); });
+
+/* ---------- Finder ---------- */
+var Q = [
+  { k: "concerns", t: "What would you like help with?", h: "Choose up to 2.", multi: 2, o: [["dryness", "Dryness", "Tight or flaky skin"], ["breakouts", "Breakouts", "Pimples or clogged pores"], ["eyes", "Dark circles and puffiness", "Under the eyes"], ["oil", "Oiliness", "Shine through the day"], ["sensitive", "Redness or sensitivity", "Easily irritated skin"], ["aging", "Fine lines", "Early signs of aging"]] },
+  { k: "skin", t: "How would you describe your skin?", h: "Choose one.", o: [["normal", "Normal", "Rarely dry or oily"], ["dry", "Dry", "Often feels tight"], ["oily", "Oily", "Shiny by midday"], ["combination", "Combination", "Oily T-zone, dry cheeks"], ["sensitive", "Sensitive", "Reacts to new products"]] },
+  { k: "scope", t: "What are you looking for?", h: "Choose one.", o: [["routine", "A full routine", "Cleanse, treat, moisturize, protect"], ["single", "Just products for my concern", "One or two targeted products"]] },
+  { k: "spf", t: "Do you already use a daily sunscreen?", h: "Choose one.", o: [["yes", "Yes", "Leave sunscreen out"], ["no", "No", "Include one in the morning"]] }
+];
+var A = {};
+function vFinderIntro(pre) {
+  document.title = "Find my routine · CeraVe";
+  if (pre) { A = { concerns: [pre] }; }
+  return '<div class="wrap"><div class="finder"><div><h1 class="pt" data-finding="2" data-rec="6">Find my routine</h1><p class="lede">Tell us about your skin and we\'ll suggest products for it.</p></div>' +
+  '<ul class="intro-points" data-finding="2" data-rec="6">' +
+  '<li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span><b>4 questions, about 1 minute.</b> No account or email needed.</span></li>' +
+  '<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4 10-10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Every pick comes with a reason,</b> tied to your answers.</span></li>' +
+  '<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h11l-3-3M17 17H6l3 3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Swap or compare any product</b> in your results.</span></li></ul>' +
+  (pre ? '<p class="note"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>We\'ve already selected <b>' + esc(Q[0].o.filter(function (o) { return o[0] === pre; })[0][1]) + '</b> from the menu. You can change it.</span></p>' : '') +
+  '<div><a class="btn btn-p" href="#/finder/1">Start</a></div></div></div>';
+}
+function vFinderQ(n) {
+  var q = Q[n - 1]; if (!q) return vMissing();
+  document.title = "Question " + n + " of 4 · Find my routine";
+  var cur = A[q.k] || (q.multi ? [] : "");
+  return '<div class="wrap"><form class="finder" id="fq" novalidate><div class="fprog"><p>Question ' + n + ' of 4</p><div class="dots" aria-hidden="true">' + [1,2,3,4].map(function (k) { return '<i' + (k < n ? ' class="on"' : k === n ? ' class="on cur"' : '') + '></i>'; }).join("") + '</div></div>' +
+  '<fieldset aria-describedby="fh ferr"><legend><h1 class="pt" style="font-size:clamp(24px,3vw,32px)">' + q.t + '</h1></legend><p id="fh" style="color:var(--soft);margin:-4px 0 16px">' + q.h + '</p><p class="ferr" id="ferr" role="alert"></p><div class="opts">' +
+  q.o.map(function (o) { var on = q.multi ? cur.indexOf(o[0]) > -1 : cur === o[0]; return '<label class="opt' + (q.multi ? '' : ' radio') + '"><input type="' + (q.multi ? 'checkbox' : 'radio') + '" name="' + q.k + '" value="' + o[0] + '"' + (on ? ' checked' : '') + '><span><b>' + o[1] + '</b><small>' + o[2] + '</small></span></label>'; }).join("") +
+  '</div></fieldset><div class="fnav"><a class="btn btn-s" href="' + (n === 1 ? '#/finder' : '#/finder/' + (n - 1)) + '">Back</a><button class="btn btn-p" type="submit">' + (n === 4 ? 'See my routine' : 'Next') + '</button></div></form></div>';
+}
+function bindFinderQ(n) {
+  var q = Q[n - 1], f = $("#fq");
+  function lim() { if (!q.multi) return; var c = f.querySelectorAll("input:checked").length; f.querySelectorAll("input").forEach(function (i) { i.disabled = !i.checked && c >= q.multi; }); }
+  f.addEventListener("change", function () { $("#ferr").classList.remove("on"); lim(); });
+  lim();
+  f.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var v = q.multi ? Array.prototype.map.call(f.querySelectorAll("input:checked"), function (i) { return i.value; }) : (f.querySelector("input:checked") || {}).value;
+    if (!v || (q.multi && !v.length)) { var er = $("#ferr"); er.textContent = q.multi ? "Choose at least one concern to continue." : "Choose an answer to continue."; er.classList.add("on"); f.querySelector("input").focus(); return; }
+    A[q.k] = v; location.hash = n === 4 ? "#/finder/results" : "#/finder/" + (n + 1);
+  });
+}
+function pick(step, a) {
+  var c = a.concerns || [], skin = a.skin;
+  var cands = Object.keys(P).filter(function (k) { return P[k].step === step && P[k].skin.indexOf(skin) > -1; });
+  cands.sort(function (x, y) { return score(y) - score(x); });
+  function score(k) { return P[k].concerns.filter(function (z) { return c.indexOf(z) > -1; }).length * 2 + (P[k].skin[0] === skin ? 1 : 0); }
+  return { main: cands[0], alts: cands.slice(1) };
+}
+function reasons(id, a) {
+  var p = P[id], out = [], lab = {}; Q[0].o.forEach(function (o) { lab[o[0]] = o[1].toLowerCase(); });
+  var hit = p.concerns.filter(function (z) { return (a.concerns || []).indexOf(z) > -1; });
+  if (hit.length) out.push("Targets " + hit.map(function (h) { return lab[h]; }).join(" and ") + ", which you chose.");
+  if (p.step === "protect") out.push("You said you don't use a daily sunscreen yet.");
+  out.push("Suits " + a.skin + " skin: " + p.type.toLowerCase() + ", " + p.texture.toLowerCase() + ".");
+  out.push("Key ingredients: " + p.ings.slice(0, 2).join(" and ") + ".");
+  return out;
+}
+var RES = {};
+function vResults() {
+  if (!A.concerns || !A.skin || !A.scope || !A.spf) { location.hash = "#/finder"; return ""; }
+  document.title = "Your routine · CeraVe";
+  var steps = [];
+  var eyes = A.concerns.indexOf("eyes") > -1;
+  if (A.scope === "routine") { steps.push(["cleanse", "Cleanse"]); if (eyes) steps.push(["treat", "Treat"]); steps.push(["moisturize", "Moisturize"]); if (A.spf === "no") steps.push(["protect", "Protect, mornings"]); }
+  else { if (eyes) steps.push(["treat", "For dark circles and puffiness"]); var other = A.concerns.filter(function (c) { return c !== "eyes"; }); if (other.length || !eyes) steps.push([other.indexOf("breakouts") > -1 || other.indexOf("oil") > -1 ? "cleanse" : "moisturize", "For " + (other.length ? Q[0].o.filter(function (o) { return o[0] === other[0]; })[0][1].toLowerCase() : "your skin")]); if (A.spf === "no") steps.push(["protect", "Daily sunscreen"]); }
+  var lab = {}; Q.forEach(function (q) { q.o.forEach(function (o) { lab[o[0]] = o[1]; }); });
+  return '<div class="wrap"><div class="res">' + crumbs([["Home", "#/"], ["Find my routine", "#/finder"], ["Your routine"]]) +
+  '<div><h1 class="pt">Your ' + (A.scope === "routine" ? "routine" : "picks") + '</h1><p class="lede">Based on your answers. Each product says why it\'s here, and you can swap any of them.</p></div>' +
+  '<div class="answers"><span>Your answers:</span>' + [].concat(A.concerns.map(function (c) { return lab[c]; }), [lab[A.skin] + " skin", lab[A.scope], A.spf === "yes" ? "Already use sunscreen" : "No sunscreen yet"]).map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join("") + '<a href="#/finder/1">Change answers</a></div>' +
+  '<ol class="routine">' + steps.map(function (s, i) {
+    var pk = pick(s[0], A); RES[s[0]] = RES[s[0]] && (pk.main === RES[s[0]] || pk.alts.indexOf(RES[s[0]]) > -1) ? RES[s[0]] : pk.main;
+    var id = RES[s[0]], all = [pk.main].concat(pk.alts);
+    if (!id) return "";
+    return '<li class="rstep" data-step="' + s[0] + '"><h2 class="stepn">' + esc(s[1]) + '<span class="vh">, step ' + (i + 1) + '</span></h2>' + art(id) + '<div><h3><a href="#/p/' + id + '" style="color:inherit">' + esc(P[id].name) + '</a></h3><p style="color:var(--soft)">' + esc(P[id].does) + '</p>' +
+      '<div class="why" data-finding="2" data-rec="9"><b>Why this fits you</b><ul>' + reasons(id, A).map(function (r) { return '<li>' + esc(r) + '</li>'; }).join("") + '</ul></div>' +
+      '<div class="rrow"><span style="font-weight:600">From ' + money(minPrice(id)) + '</span>' +
+      (all.length > 1 ? '<span class="swap" data-finding="2" data-rec="8"><label for="sw-' + s[0] + '">Swap for</label><select id="sw-' + s[0] + '" data-step="' + s[0] + '">' + all.map(function (k) { return '<option value="' + k + '"' + (k === id ? ' selected' : '') + '>' + esc(P[k].name) + '</option>'; }).join("") + '</select></span>' : '') +
+      (all.length > 1 ? '<a class="btn btn-s btn-sm" href="#/compare?ids=' + all.slice(0, 3).join(",") + '" data-finding="3">Compare options</a>' : '') +
+      '<a class="btn btn-p btn-sm" href="#/p/' + id + '">See prices</a></div></div></li>';
+  }).join("") + '</ol></div></div>';
+}
+
+/* ---------- Compare ---------- */
+function vCompare(ids) {
+  ids = (ids || []).filter(function (k) { return P[k]; }).slice(0, 3);
+  sel = ids.slice(); saveSel();
+  document.title = "Compare products · CeraVe";
+  var head = '<div class="wrap">' + crumbs([["Home", "#/"], ["Compare products"]]) + '<h1 class="pt">Compare products</h1><p class="lede">Choose up to 3 products. Rows where they differ are highlighted.</p>';
+  var adder = function () { var rest = Object.keys(P).filter(function (k) { return ids.indexOf(k) < 0; }); return ids.length < 3 ? '<div class="add" data-finding="3" data-rec="11"><label for="addp" style="font-weight:600">Add a product</label><select id="addp"><option value="">Choose a product</option>' + Object.keys(CAT).map(function (c) { return '<optgroup label="' + CAT[c] + '">' + rest.filter(function (k) { return P[k].cat === c; }).map(function (k) { return '<option value="' + k + '">' + esc(P[k].name) + '</option>'; }).join("") + '</optgroup>'; }).join("") + '</select></div>' : ''; };
+  if (ids.length < 2) return head + '<div class="cmpbar"><div class="l">' + adder() + '</div></div><div class="empty"><p><b>' + (ids.length ? 'Add one more product' : 'Pick 2 or 3 products') + '</b> to see them side by side.</p><p>You can also tick <b>Compare</b> on any product in <a href="#/c/cleansers">Facial cleansers</a> or <a href="#/c/moisturizers">Facial moisturizers</a>.</p></div></div>';
+  var rows = [["Best for", function (p) { return esc(p.type); }], ["Texture", function (p) { return esc(p.texture); }], ["Key ingredients", function (p) { return '<ul>' + p.ings.map(function (i) { return '<li>' + esc(i) + '</li>'; }).join("") + '</ul>'; }], ["What it does", function (p) { return esc(p.does); }], ["How to use", function (p) { return esc(p.use); }], ["Sizes", function (p) { return Object.keys(p.sizes).join(", "); }], ["Price from", function (p, k) { return '<b>' + money(minPrice(k)) + '</b>'; }]];
+  return head + '<div class="cmpbar"><div class="l">' + adder() + '</div><label class="switch"><input type="checkbox" id="onlydiff" role="switch"> Show only differences</label></div>' +
+  '<div class="tblwrap" data-finding="3" data-rec="11"><table class="ct"><caption class="vh">Comparison of ' + ids.map(function (k) { return P[k].name; }).join(", ") + '</caption><thead><tr><td></td>' + ids.map(function (k) { return '<th scope="col"><div class="ph">' + art(k) + '<a href="#/p/' + k + '">' + esc(P[k].name) + '</a><button class="rm" type="button" data-rm="' + k + '">Remove<span class="vh"> ' + esc(P[k].name) + '</span></button></div></th>'; }).join("") + '</tr></thead><tbody>' +
+  rows.map(function (r) { var vals = ids.map(function (k) { return r[1](P[k], k); }); var diff = vals.some(function (v) { return v !== vals[0]; }); return '<tr data-diff="' + (diff ? 1 : 0) + '"><th scope="row">' + r[0] + '</th>' + vals.map(function (v) { return '<td' + (diff ? ' class="diff"' : '') + '>' + v + '</td>'; }).join("") + '</tr>'; }).join("") +
+  '<tr data-diff="1"><th scope="row">Buy</th>' + ids.map(function (k) { return '<td><a class="btn btn-s btn-sm" href="#/p/' + k + '">See retailer prices</a></td>'; }).join("") + '</tr></tbody></table></div></div>';
+}
+
+var STORES = [["CVS Pharmacy", "0.4 mi", "2633 N Clark St", "Open until 10 pm", 9], ["Walgreens", "0.8 mi", "2410 N Lincoln Ave", "Open 24 hours", 8], ["Target", "1.2 mi", "2656 N Elston Ave", "Open until 10 pm", 10]];
+function vStores() {
+  document.title = "Find nearby stores · CeraVe";
+  var groups = Object.keys(CAT).map(function (c) {
+    var ids = Object.keys(P).filter(function (k) { return P[k].cat === c; });
+    return '<section class="sgrp" aria-labelledby="sg-' + c + '"><div class="sgh"><h3 id="sg-' + c + '">' + CAT[c] + '</h3><a class="more" href="#/c/' + c + '">See all <span aria-hidden="true">›</span></a></div><ul class="srow" role="list">' +
+      ids.map(function (id, i) { return '<li><a href="#/p/' + id + '"><span class="art">' + photo(id) + '</span><span class="sn">' + esc(P[id].name) + '</span><span class="sp">From ' + money(minPrice(id)) + '</span><span class="tag ok">' + (i % 4 === 3 ? "At 2 of 3 stores" : "At all 3 stores") + '</span></a></li>'; }).join("") + '</ul></section>';
+  }).join("");
+  return '<div class="wrap">' + crumbs([["Home", "#/"], ["Find nearby stores"]]) +
+    '<div class="stores-p"><h1 class="pt">Find nearby stores</h1><p class="lede">Find a store near you that carries CeraVe. To buy online instead, open any product and choose <b>Compare retailer prices</b>.</p>' +
+    '<form class="zip" id="zipf"><label>ZIP code<input id="zip" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}" placeholder="60614"></label><button class="btn btn-p" type="submit">Search</button></form><div id="zipr" aria-live="polite"></div></div>' +
+    '<div class="sprods" data-finding="1" data-rec="5"><h2 class="sechead">What you can find in stores</h2><p class="lede">Products are grouped by category, so you can check what a store carries before you go.</p>' + groups + '</div></div>';
+}
+function storeResults(z) {
+  return '<p class="sortnote">3 stores near ' + esc(z) + '</p><ul class="scards" role="list">' + STORES.map(function (s) { return '<li><b>' + s[0] + '</b><span class="sd">' + s[1] + ' · ' + s[2] + '</span><span class="sh">' + s[3] + '</span><span class="tag ok">Carries ' + s[4] + ' of 10 products</span></li>'; }).join("") + '</ul>';
+}
+function vMissing() { document.title = "Page not found · CeraVe"; return '<div class="wrap" style="padding:64px 0"><h1 class="pt">Page not found</h1><p class="lede"><a href="#/">Go to the home page</a></p></div>'; }
+
+/* ---------- Router ---------- */
+var main = $("#main"), CUR = null;
+function route() {
+  var h = location.hash || "#/", path = h.slice(1).split("?")[0], qs = new URLSearchParams(h.split("?")[1] || ""), html, after = null;
+  closeMega();
+  var dlg = $("#buy"); if (dlg && dlg.open) dlg.close();
+  if (path === "/" || path === "") { html = vHome(); CIDX = 0; }
+  else if (path.indexOf("/c/") === 0) { var c = path.slice(3); html = CAT[c] ? vList(c) : vMissing(); }
+  else if (path.indexOf("/p/") === 0) { var id = path.slice(3); html = vProduct(id); after = function () { if (!P[id]) return; CUR = id; fromPrice(id); $("#buybtn").addEventListener("click", function () { openBuy(id); }); }; }
+  else if (path === "/finder") html = vFinderIntro(qs.get("c"));
+  else if (/^\/finder\/[1-4]$/.test(path)) { var n = +path.slice(-1); html = vFinderQ(n); after = function () { bindFinderQ(n); }; }
+  else if (path === "/finder/results") { html = vResults(); }
+  else if (path === "/compare") html = vCompare((qs.get("ids") || "").split(",").filter(Boolean).length ? qs.get("ids").split(",") : sel);
+  else if (path === "/stores") { html = vStores(); after = function () { $("#zipf").addEventListener("submit", function (e) { e.preventDefault(); var z = $("#zip").value.trim(); $("#zipr").innerHTML = /^\d{5}$/.test(z) ? storeResults(z) : '<p style="color:#B42318;font-weight:600">Enter a 5-digit ZIP code, for example 60614.</p>'; }); }; }
+  else html = vMissing();
+  if (html === "") return;
+  main.innerHTML = '<div class="enter">' + html + '</div>';
+  if (after) after();
+  tray();
+  var h1 = main.querySelector("h1"); if (h1) { h1.setAttribute("tabindex", "-1"); h1.focus({ preventScroll: true }); }
+  window.scrollTo(0, 0);
+}
+main.addEventListener("change", function (e) {
+  var t = e.target;
+  if (t.name === "size" && CUR) fromPrice(CUR);
+  if (t.dataset.cmp) {
+    var id = t.dataset.cmp, i = sel.indexOf(id);
+    if (t.checked && i < 0) { if (sel.length >= 3) { t.checked = false; $("#trayt").textContent = "You can compare up to 3 products."; return; } sel.push(id); }
+    if (!t.checked && i > -1) sel.splice(i, 1);
+    saveSel();
+  }
+  if (t.id === "addp" && t.value) { var ids = sel.concat([t.value]); location.hash = "#/compare?ids=" + ids.join(","); }
+  if (t.id === "onlydiff") { main.querySelectorAll('tr[data-diff="0"]').forEach(function (r) { r.hidden = t.checked; }); }
+  if (t.dataset.step && t.tagName === "SELECT") { RES[t.dataset.step] = t.value; var keep = t.id; main.innerHTML = '<div>' + vResults() + '</div>'; var s = document.getElementById(keep); if (s) s.focus(); }
+});
+main.addEventListener("click", function (e) {
+  var rm = e.target.closest("[data-rm]"); if (rm) { var ids = sel.filter(function (k) { return k !== rm.dataset.rm; }); location.hash = "#/compare?ids=" + ids.join(","); }
+});
+
+/* ---------- Header ---------- */
+var mb = $("#megabtn"), mega = $("#mega"), mt = $("#menut"), mn = $("#mainnav");
+function closeMega() { mega.hidden = true; mb.setAttribute("aria-expanded", "false"); mn.classList.remove("open"); mt.setAttribute("aria-expanded", "false"); }
+mb.addEventListener("click", function () { var o = mega.hidden; mega.hidden = !o; mb.setAttribute("aria-expanded", o ? "true" : "false"); });
+mt.addEventListener("click", function () { var o = !mn.classList.contains("open"); mn.classList.toggle("open", o); mt.setAttribute("aria-expanded", o ? "true" : "false"); if (!o) { mega.hidden = true; mb.setAttribute("aria-expanded", "false"); } });
+document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !mega.hidden) { closeMega(); mb.focus(); } });
+document.addEventListener("click", function (e) { if (!mega.hidden && !e.target.closest("#mega, #megabtn, #menut, #mainnav")) closeMega(); });
+$("#q").addEventListener("keydown", function (e) { if (e.key === "Enter") { var v = this.value.toLowerCase(); var hit = Object.keys(P).filter(function (k) { return P[k].name.toLowerCase().indexOf(v) > -1; })[0]; if (hit) location.hash = "#/p/" + hit; } });
+
+window.addEventListener("hashchange", route);
+route();
+})();
+</script>
+</body>
+</html>
