@@ -593,6 +593,27 @@ img { max-width: 100%; display: block; }
 .wk:hover .whp { transform: translateY(calc(4cqw - 10px)); }
 @media (max-width: 900px) { .wk-wide { grid-template-columns: 1fr; gap: 0; } .wk-wide .wk-row { margin-top: var(--s2); } }
 @media (prefers-reduced-motion: reduce) { .wf { animation: none !important; } .wf.f1 { opacity: 1; } .wbr { animation: none !important; } .wk:hover .whw { transform: none; } .wk:hover .whp { transform: translateY(4cqw); } }
+.wk-body { display: flex; flex-direction: column; flex: 1; }
+/* NPS card: animated sitemap */
+.t-np { --t1: #EADFCB; --t2: #FAF6EE; }
+:root[data-mode="dark"] .t-np { --t1: #2E2920; --t2: #1A1917; }
+.npt { position: absolute; inset: 0; --bx: #FFFFFF; --bt: #3A3128; --ln: #C9B99F; --hl: #2F4A3A; }
+:root[data-mode="dark"] .npt { --bx: #2A2622; --bt: #E8E0D4; --ln: #5A5246; --hl: #3A6E4D; }
+.nb { position: absolute; top: 20cqw; width: 10.4cqw; height: 7cqw; display: grid; place-items: center; border-radius: .8cqw; background: var(--bx); color: var(--bt); font-size: 1.55cqw; font-weight: 600; box-shadow: 0 .3cqw 1cqw -.4cqw rgba(60,40,20,.35); }
+.nb.root { top: 6cqw; left: 43cqw; width: 14cqw; height: 6cqw; background: var(--hl); color: #fff; }
+.nb.sub { width: 14cqw; height: 5.4cqw; font-weight: 500; }
+.nl { position: absolute; background: var(--ln); }
+.nl.v { width: .25cqw; } .nl.h { height: .25cqw; }
+.npt .c0, .npt .pa1 { animation: nph 12s infinite; }
+.npt .c5 { animation: nph 12s infinite -8s; }
+.npt .c7, .npt .pc1 { animation: nph 12s infinite -4s; }
+@keyframes nph { 0%, 2% { background: var(--bx); color: var(--bt); } 5%, 30% { background: var(--hl); color: #fff; } 33%, 100% { background: var(--bx); color: var(--bt); } }
+.np-task { position: absolute; left: 50%; bottom: 5cqw; transform: translateX(-50%); white-space: nowrap; padding: 1.2cqw 2.2cqw; border-radius: 99px; background: var(--hl); color: #fff; font-size: 1.9cqw; font-weight: 600; opacity: 0; animation: npf 12s infinite; }
+.np-task em { font-style: normal; font-weight: 500; opacity: .8; margin-left: .8cqw; }
+.np-task.tb { animation-delay: -8s; } .np-task.tc { animation-delay: -4s; }
+@keyframes npf { 0% { opacity: 0; } 4%, 30% { opacity: 1; } 34%, 100% { opacity: 0; } }
+.wk:hover .npt .nb { transform: translateY(-2px); transition: transform .3s; }
+@media (prefers-reduced-motion: reduce) { .np-task.ta { opacity: 1; } .npt .c0, .npt .pa1 { background: var(--hl); color: #fff; } }
 </style>
 </head>
 <body>
@@ -629,7 +650,7 @@ img { max-width: 100%; display: block; }
   <section class="work wrap" id="work" aria-labelledby="h-work">
     <div class="head rv">
       <h2 id="h-work">Selected work</h2>
-      <p>3 case studies</p>
+      <p>4 case studies</p>
     </div>
 
     <div class="cases"><article class="wk rv t-io" aria-labelledby="case-01">
@@ -666,7 +687,7 @@ img { max-width: 100%; display: block; }
       <p class="wk-sum">CeraVe’s website sends shoppers to other stores to buy, so its real job is helping them choose. I tested it with five shoppers, then redesigned how they find, compare and buy.</p>
       <p class="go2"><a class="rd" href="cerave.html">Read case study<span class="vh">: CeraVe</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="pt2" href="prototypes/cerave/" target="_blank" rel="noopener">Try the prototype<span class="vh"> for CeraVe (opens in a new tab)</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a></p>
     </article>
-    <article class="wk rv t-wh wk-wide" aria-labelledby="case-03">
+    <article class="wk rv t-wh" aria-labelledby="case-03">
       <a class="wk-thumb th-wh" href="wearable-health.html" tabindex="-1" aria-hidden="true">
         <div class="whs">
           <div class="whw"><i class="bt"></i><i class="bb"></i><div class="whc"><div class="wsc">
@@ -678,10 +699,28 @@ img { max-width: 100%; display: block; }
         </div>
       </a>
       <div class="wk-body">
-        <div class="wk-row"><h3 id="case-03"><a href="wearable-health.html">Wearable Health</a></h3><ul class="wk-tags" aria-label="Project type and year"><li>Observation and interviews</li><li>Watch and phone</li><li>2025–26</li></ul></div>
+        <div class="wk-row"><h3 id="case-03"><a href="wearable-health.html">Wearable Health</a></h3><ul class="wk-tags" aria-label="Project type and year"><li>User research</li><li>Watch and phone</li><li>2025–26</li></ul></div>
         <p class="wk-role">UX Researcher &amp; Designer · Team of 3 · Prototype by me</p>
         <p class="wk-sum">People buy a smartwatch for their health, then quietly stop using most of it. We watched and interviewed 14 wearable users to find out why, and I designed a watch and phone app around what they told us.</p>
         <p class="go2"><a class="rd" href="wearable-health.html">Read case study<span class="vh">: Wearable Health</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="pt2" href="prototypes/wearable-health/" target="_blank" rel="noopener">Try the prototype<span class="vh"> for Wearable Health (opens in a new tab)</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a></p>
+      </div>
+    </article>
+    <article class="wk rv t-np" aria-labelledby="case-04">
+      <a class="wk-thumb th-np" href="national-parks.html" tabindex="-1" aria-hidden="true">
+        <div class="npt">
+          <b class="nb root">Home</b><i class="nl v" style="left:50cqw;top:12cqw;height:4cqw"></i><i class="nl h" style="left:9.4cqw;top:16cqw;width:81.2cqw"></i><i class="nl v" style="left:9.4cqw;top:16cqw;height:4cqw"></i><i class="nl v" style="left:21.0cqw;top:16cqw;height:4cqw"></i><i class="nl v" style="left:32.6cqw;top:16cqw;height:4cqw"></i><i class="nl v" style="left:44.2cqw;top:16cqw;height:4cqw"></i><i class="nl v" style="left:55.8cqw;top:16cqw;height:4cqw"></i><i class="nl v" style="left:67.4cqw;top:16cqw;height:4cqw"></i><i class="nl v" style="left:79.0cqw;top:16cqw;height:4cqw"></i><i class="nl v" style="left:90.6cqw;top:16cqw;height:4cqw"></i><b class="nb c0" style="left:4.2cqw">Visit</b><b class="nb c1" style="left:15.8cqw">About</b><b class="nb c2" style="left:27.4cqw">History</b><b class="nb c3" style="left:39.0cqw">Science</b><b class="nb c4" style="left:50.6cqw">Kids</b><b class="nb c5" style="left:62.2cqw">Teach</b><b class="nb c6" style="left:73.8cqw">Media</b><b class="nb c7" style="left:85.4cqw">Support</b>
+          <i class="nl v" style="left:9.4cqw;top:27cqw;height:21cqw"></i>
+          <b class="nb sub pa1" style="left:12cqw;top:31cqw">Parks</b><b class="nb sub" style="left:12cqw;top:38.5cqw">Events</b><b class="nb sub" style="left:12cqw;top:46cqw">Passes</b>
+          <i class="nl v" style="left:90.6cqw;top:27cqw;height:21cqw"></i>
+          <b class="nb sub" style="left:74cqw;top:31cqw">Donations</b><b class="nb sub pc1" style="left:74cqw;top:38.5cqw">Volunteering</b><b class="nb sub" style="left:74cqw;top:46cqw">Careers</b>
+          <span class="np-task ta">Plan a camping trip <em>80% found it</em></span><span class="np-task tb">Find a field trip <em>40% found it</em></span><span class="np-task tc">Volunteer at Redwood <em>50% found it</em></span>
+        </div>
+      </a>
+      <div class="wk-body">
+        <div class="wk-row"><h3 id="case-04"><a href="national-parks.html">NPS.gov</a></h3><ul class="wk-tags" aria-label="Project type and year"><li>Information architecture</li><li>Mobile</li><li>2025–26</li></ul></div>
+        <p class="wk-role">UX Designer · Team of 3 · Wireframes and prototype by me</p>
+        <p class="wk-sum">We restructured the National Park Service website with a content audit, three card sorts and three tree tests. People agreed on the new labels but still struggled with real tasks, and that shaped my wireframes.</p>
+        <p class="go2"><a class="rd" href="national-parks.html">Read case study<span class="vh">: NPS.gov</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="pt2" href="prototypes/national-parks/" target="_blank" rel="noopener">Try the prototype<span class="vh"> for NPS.gov (opens in a new tab)</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a></p>
       </div>
     </article></div>
   </section>

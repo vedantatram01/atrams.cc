@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>National Park Service IA redesign · Prototype</title>
+<meta name="description" content="A mobile prototype of a redesigned information architecture for nps.gov, built from card sorts, tree tests and wireframes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --page: #EEEAE2; --bg: #FBF9F5; --card: #FFFFFF; --ink: #1D2420; --soft: #45504A; --muted: #5C665F; --line: #E3DDD2;
+  --forest: #23382D; --forest-2: #2F4A3A; --sage: #DCE6DD; --rust: #A64B24; --rust-soft: #F6E4DA; --sky: #D9E7EE;
+  --serif: "Source Serif 4", Georgia, serif; --sans: Inter, system-ui, sans-serif; --r: 5px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { font-family: var(--sans); background: var(--page); color: var(--ink); -webkit-font-smoothing: antialiased; }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--rust); outline-offset: 2px; }
+[hidden] { display: none !important; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.wrap { max-width: 1180px; margin: 0 auto; padding: 32px 24px 56px; display: grid; grid-template-columns: 390px minmax(0, 1fr); gap: 56px; align-items: start; }
+.note { grid-column: 1 / -1; font-size: 13px; color: var(--muted); margin: 0; }
+
+/* phone */
+.device { position: sticky; top: 24px; width: 390px; padding: 11px; border-radius: 52px; background: #161A18; box-shadow: 0 40px 70px -35px rgba(25,35,30,.6), inset 0 0 0 1px rgba(255,255,255,.08); }
+.screen { position: relative; height: 780px; border-radius: 42px; overflow: hidden; background: var(--bg); display: flex; flex-direction: column; }
+.status { flex: none; display: flex; justify-content: space-between; align-items: center; height: 46px; padding: 0 30px; background: var(--forest); color: #fff; font-size: 14px; font-weight: 600; }
+.status .isl { width: 100px; height: 28px; border-radius: 999px; background: #000; }
+.bar { flex: none; display: flex; align-items: center; gap: 10px; height: 56px; padding: 0 12px 0 16px; background: var(--forest); color: #fff; }
+.bar .back { width: 36px; height: 36px; margin-left: -8px; border: 0; background: transparent; color: #fff; border-radius: 50%; display: grid; place-items: center; }
+.brand { display: flex; align-items: center; gap: 8px; border: 0; background: transparent; color: #fff; padding: 0; font-weight: 700; font-size: 15px; letter-spacing: -.01em; }
+.brand i { width: 22px; height: 22px; border-radius: 50%; background: radial-gradient(circle at 50% 70%, #6FA37A 0 38%, #E7D7B8 39% 100%); box-shadow: inset 0 0 0 2px #E7D7B8; }
+.bar .sp { flex: 1; }
+.icb { width: 40px; height: 40px; border: 0; border-radius: 10px; background: transparent; color: #fff; display: grid; place-items: center; }
+.icb:hover { background: rgba(255,255,255,.1); }
+.icb svg, .back svg { width: 22px; height: 22px; }
+.view { flex: 1; overflow-y: auto; scrollbar-width: none; }
+.view::-webkit-scrollbar { display: none; }
+
+/* menu */
+.menu { position: absolute; z-index: 4; inset: 102px 0 0; background: var(--bg); overflow-y: auto; transform: translateX(100%); transition: transform .28s cubic-bezier(.2,.8,.2,1); visibility: hidden; }
+.menu.open { transform: none; visibility: visible; }
+.menu ul { list-style: none; margin: 0; padding: 0; }
+.mi { border-bottom: 1px solid var(--line); }
+.mi > button, .mi > a.m-top { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border: 0; background: transparent; font-size: 16px; font-weight: 600; text-align: left; text-decoration: none; color: var(--ink); }
+.mi > button svg { width: 18px; height: 18px; transition: transform .2s; }
+.mi > button[aria-expanded="true"] svg { transform: rotate(180deg); }
+.sub { background: #F3EFE8; padding: 4px 0 8px; }
+.sub button { width: 100%; text-align: left; border: 0; background: transparent; padding: 11px 20px 11px 32px; font-size: 15px; color: var(--soft); }
+.sub button:hover, .mi > button:hover { background: rgba(35,56,45,.06); }
+.sub button.hit { background: var(--rust-soft); color: var(--rust); font-weight: 600; }
+.menu .mfoot { padding: 16px 20px 24px; font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+/* content */
+.pad { padding: 20px; }
+.h1 { margin: 0; font-family: var(--serif); font-size: 28px; line-height: 1.15; letter-spacing: -.01em; }
+.h2 { margin: 0; font-family: var(--serif); font-size: 21px; line-height: 1.2; }
+.lead { margin: 8px 0 0; font-size: 15px; line-height: 1.5; color: var(--soft); }
+.crumb { font-size: 12px; color: var(--muted); margin: 0 0 8px; }
+.crumb b { color: var(--rust); font-weight: 600; }
+.sechead { display: flex; justify-content: space-between; align-items: baseline; margin: 26px 20px 12px; }
+.sechead a, .link { font-size: 13px; font-weight: 600; color: var(--rust); text-decoration: underline; text-underline-offset: 3px; background: none; border: 0; padding: 0; }
+.hero { position: relative; height: 300px; color: #fff; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; overflow: hidden; }
+.hero .art { position: absolute; inset: 0; }
+.hero .art svg { width: 100%; height: 100%; display: block; }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(10,20,14,.65) 100%); }
+.hero > *:not(.art) { position: relative; z-index: 1; }
+.hero .h1 { color: #fff; }
+.hero p { margin: 6px 0 14px; font-size: 15px; opacity: .92; }
+.searchrow { display: flex; gap: 6px; }
+.searchrow input { flex: 1; min-width: 0; height: 46px; border-radius: 10px; border: 1px solid var(--line); background: #fff; color: var(--ink); padding: 0 14px; font-size: 15px; }
+.btn { height: 46px; border: 0; border-radius: 10px; background: var(--rust); color: #fff; font-weight: 600; font-size: 15px; padding: 0 18px; }
+.btn.full { width: 100%; }
+.btn.dark { background: var(--forest); }
+.btn.ghost { background: transparent; color: var(--forest); box-shadow: inset 0 0 0 1.5px var(--forest); }
+.scroller { display: flex; gap: 12px; overflow-x: auto; padding: 0 20px 4px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.scroller::-webkit-scrollbar { display: none; }
+.pc { flex: none; width: 236px; scroll-snap-align: start; border: 0; padding: 0; text-align: left; background: var(--card); border-radius: 14px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+.pc .art { height: 132px; }
+.pc .art svg { width: 100%; height: 100%; display: block; }
+.pc .t { padding: 12px 14px 14px; }
+.pc b { display: block; font-size: 15px; }
+.pc span { display: block; font-size: 13px; color: var(--muted); margin-top: 2px; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+.chip { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 7px 12px; font-size: 13px; font-weight: 500; }
+.chip[aria-pressed="true"] { background: var(--forest); color: #fff; border-color: var(--forest); }
+.list { display: grid; gap: 12px; padding: 0 20px 24px; }
+.row { display: grid; grid-template-columns: 96px 1fr; gap: 12px; align-items: center; width: 100%; border: 0; padding: 0; text-align: left; background: var(--card); border-radius: 14px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+.row .art { height: 96px; }
+.row .art svg { width: 100%; height: 100%; display: block; }
+.row b { display: block; font-size: 15px; }
+.row span { display: block; font-size: 13px; color: var(--muted); margin-top: 3px; padding-right: 10px; line-height: 1.4; }
+.tag, .row .tag { display: inline-block; width: auto; margin-top: 6px; font-size: 11px; font-weight: 600; color: var(--forest); background: var(--sage); border-radius: 999px; padding: 3px 8px; }
+.seg { display: inline-flex; padding: 3px; border-radius: 10px; background: #ECE7DE; }
+.seg button { border: 0; background: transparent; border-radius: 8px; padding: 7px 12px; font-size: 13px; font-weight: 600; color: var(--soft); }
+.seg button[aria-pressed="true"] { background: #fff; color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+.tools { display: flex; justify-content: space-between; align-items: center; margin: 18px 20px 12px; }
+.facts { margin: 16px 0 0; display: grid; gap: 0; background: var(--card); border-radius: 14px; padding: 4px 16px; }
+.facts div { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-top: 1px solid #EFEAE1; font-size: 14px; }
+.facts div:first-child { border-top: 0; }
+.facts dt { color: var(--muted); } .facts dd { margin: 0; font-weight: 600; text-align: right; }
+.block { background: var(--card); border-radius: 14px; padding: 16px; margin-top: 12px; }
+.block h3 { margin: 0 0 6px; font-size: 16px; }
+.block p, .block li { font-size: 14px; line-height: 1.5; color: var(--soft); margin: 0; }
+.block ul, .block ol { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 4px; }
+.band { margin: 0 20px; border-radius: 14px; padding: 18px; background: var(--forest); color: #fff; }
+.band b { display: block; font-family: var(--serif); font-size: 19px; }
+.band p { margin: 6px 0 12px; font-size: 14px; opacity: .9; line-height: 1.45; }
+.band .btn { background: #fff; color: var(--forest); height: 42px; }
+.res { display: grid; gap: 12px; padding: 0 20px 24px; }
+.ri { width: 100%; text-align: left; border: 0; background: var(--card); border-radius: 14px; overflow: hidden; padding: 0; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+.ri .art { height: 120px; }
+.ri .art svg { width: 100%; height: 100%; display: block; }
+.ri .t { padding: 12px 14px 14px; }
+.ri b { display: block; font-size: 15px; }
+.ri span { display: block; font-size: 13px; color: var(--muted); margin-top: 3px; }
+.form label { display: block; font-size: 13px; font-weight: 600; margin: 12px 0 6px; }
+.form input { width: 100%; height: 44px; border-radius: 10px; border: 1px solid #CFC7B8; background: #fff; padding: 0 12px; font-size: 15px; }
+.ok { text-align: center; padding: 48px 24px; }
+.ok .tick { width: 56px; height: 56px; margin: 0 auto 14px; border-radius: 50%; background: var(--sage); color: var(--forest); display: grid; place-items: center; }
+.ok .tick svg { width: 28px; height: 28px; }
+.foot { margin-top: 28px; padding: 20px; background: #E9E3D8; font-size: 12px; line-height: 1.5; color: var(--muted); }
+.toast { position: absolute; left: 16px; right: 16px; bottom: 20px; z-index: 5; background: var(--ink); color: #fff; border-radius: 12px; padding: 12px 14px; font-size: 14px; transform: translateY(140%); transition: transform .25s; }
+.toast.on { transform: none; }
+
+/* side panel */
+.side h1 { margin: 0; font-family: var(--serif); font-size: clamp(26px, 3vw, 34px); line-height: 1.15; letter-spacing: -.01em; }
+.side > p { margin: 10px 0 0; font-size: 16px; line-height: 1.55; color: var(--soft); max-width: 620px; }
+.tasks { margin-top: 24px; display: grid; gap: 12px; }
+.task { border: 1px solid var(--line); background: var(--card); border-radius: var(--r); padding: 18px 20px; }
+.task.cur { border-color: var(--forest); box-shadow: inset 3px 0 0 var(--forest); }
+.task .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.task h2 { margin: 0; font-size: 17px; }
+.task .q { margin: 6px 0 0; font-size: 14px; line-height: 1.5; color: var(--soft); }
+.task .go { flex: none; border: 1px solid var(--forest); background: var(--forest); color: #fff; border-radius: 999px; padding: 7px 14px; font-size: 13px; font-weight: 600; }
+.task.cur .go { background: #fff; color: var(--forest); }
+.steps { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.steps li { display: flex; align-items: center; gap: 6px; font-size: 13px; padding: 5px 10px; border-radius: 999px; background: #F1EDE5; color: var(--soft); }
+.steps li.done { background: var(--sage); color: var(--forest); font-weight: 600; }
+.steps li i { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid currentColor; display: grid; place-items: center; font-style: normal; font-size: 9px; }
+.steps li.done i { background: var(--forest); border-color: var(--forest); color: #fff; }
+.rates { margin-top: 14px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.rate { font-size: 12px; color: var(--muted); }
+.rate b { display: block; font-size: 18px; color: var(--ink); margin-top: 2px; }
+.rate .m { height: 6px; border-radius: 3px; background: #ECE7DE; margin-top: 6px; overflow: hidden; }
+.rate .m i { display: block; height: 100%; background: var(--rust); }
+.task .learn { margin: 12px 0 0; font-size: 14px; line-height: 1.5; color: var(--soft); }
+.task .learn b { color: var(--ink); }
+.done-msg { margin-top: 12px; font-size: 14px; font-weight: 600; color: var(--forest); }
+.reset { margin-top: 16px; border: 1px solid var(--line); background: var(--card); border-radius: 999px; padding: 8px 14px; font-weight: 600; font-size: 13px; }
+
+@media (max-width: 960px) { .wrap { grid-template-columns: minmax(0, 1fr); gap: 32px; } .device { position: static; margin: 0 auto; } .side { order: -1; } }
+@media (max-width: 440px) {
+  .wrap { padding: 16px 12px 40px; }
+  .device { width: 100%; padding: 0; border-radius: 0; background: none; box-shadow: none; }
+  .screen { border-radius: 18px; height: 720px; box-shadow: 0 0 0 1px var(--line); }
+  .status { display: none; }
+  .menu { inset: 56px 0 0; }
+}
+@media (prefers-reduced-motion: reduce) { .menu, .toast, .mi > button svg { transition: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="device" aria-label="Phone prototype">
+    <div class="screen">
+      <div class="status" aria-hidden="true"><span>9:41</span><span class="isl"></span><span>5G</span></div>
+      <header class="bar">
+        <button class="back" type="button" id="back" aria-label="Back" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button class="brand" type="button" data-go="home"><i aria-hidden="true"></i>National Park Service</button>
+        <span class="sp"></span>
+        <button class="icb" type="button" data-go="search" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg></button>
+        <button class="icb" type="button" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" id="menu-ic"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      </header>
+      <main class="view" id="view" tabindex="-1" aria-live="polite"></main>
+      <nav class="menu" id="menu" aria-label="Main menu"></nav>
+      <div class="toast" id="toast" role="status"></div>
+    </div>
+  </div>
+
+  <section class="side" aria-labelledby="side-h">
+    <h1 id="side-h">Try the three tree-test tasks</h1>
+    <p>This is the mobile site built from our final sitemap and my wireframes. Pick a task and use the phone. The steps tick off as you go, and each task shows how participants did in the tree tests.</p>
+    <div class="tasks" id="tasks"></div>
+    <button class="reset" type="button" id="reset">Start over</button>
+  </section>
+  <p class="note">Student redesign concept by Vedant Atram for HCI 457 at DePaul University. Not affiliated with or endorsed by the National Park Service. Park details, events and opportunities are sample content.</p>
+</div>
+
+<script>
+(function () {
+  var IA = [
+    { id: "visitors", n: "Visitor’s Guide", kids: [["parks", "Parks"], ["events", "Upcoming Events"], ["passes", "Passes"]] },
+    { id: "history", n: "History", kids: [["stories", "American Stories"], ["preservation", "Historical Preservation"], ["training", "Education & Training"], ["heritage", "Heritage"], ["grants", "Historical Research & Grants"]] },
+    { id: "science", n: "Science & Nature", kids: [["topics", "Nature Topics"], ["discovery", "Science & Discovery"], ["pubs", "Scholarly Publications"], ["updates", "Nature Updates"]] },
+    { id: "kids", n: "Kids", kids: [["kidtrips", "Trips for Kids"], ["kidevents", "Events for Kids"], ["rangers", "Junior Rangers"]] },
+    { id: "teach", n: "Teaching & Education" },
+    { id: "media", n: "Photos & Multimedia" },
+    { id: "about", n: "About Us" },
+    { id: "support", n: "Supporting NPS", kids: [["donate", "Donations"], ["partners", "Partnerships"], ["volunteer", "Volunteering"], ["careers", "Careers"], ["community", "Community Support"]] }
+  ];
+  var DESC = {
+    events: "An interactive calendar of programs, talks and tours across parks, filterable by date, park or event type.",
+    passes: "Annual, senior and access passes, with an eligibility checker and online purchase.",
+    stories: "Stories of the people, events and cultures tied to the parks.",
+    preservation: "Preservation projects, case studies and tools.",
+    training: "Professional training in heritage conservation and history.",
+    heritage: "The cultural and Indigenous heritage of park lands.",
+    grants: "Grants and funding for historical research.",
+    topics: "Wildlife, ecosystems, climate and conservation.",
+    discovery: "Field research and experiments conducted in parks.",
+    pubs: "Peer-reviewed studies, by author, subject or park.",
+    updates: "Wildfires, migrations and climate alerts as they happen.",
+    kidtrips: "Family-friendly park experiences, filterable by age and accessibility.",
+    kidevents: "Story hours, ranger talks and camps for kids.",
+    rangers: "The Junior Ranger program, with badges and activities.",
+    media: "Photos, videos, audio guides and virtual tours.",
+    about: "The NPS mission, leadership and structure.",
+    donate: "Support a specific park or cause.",
+    partners: "How individuals, companies and nonprofits can partner with the NPS.",
+    careers: "Full-time, seasonal and internship roles.",
+    community: "Local programs and citizen science.",
+    visitors: "Plan a trip: find a park, see what’s on, and buy a pass.",
+    history: "The people, places and stories the parks preserve.",
+    science: "Nature, research and real-time updates from the parks.",
+    kids: "Trips, events and the Junior Ranger program.",
+    support: "Donate, partner, volunteer or work with the parks."
+  };
+  var PAL = [
+    ["#F2C6A0", "#E8A87C", "#7E9C8A", "#4E6B5A", "#2F4A3A"],
+    ["#BFD8E6", "#9CC2D6", "#8BA8B8", "#5D7A88", "#34505C"],
+    ["#F5DDB8", "#EDC28E", "#C98A5B", "#9A5E3C", "#5E3B28"],
+    ["#D6E4D0", "#B9D1B0", "#86A78A", "#567A60", "#2E4A38"],
+    ["#E7D3E6", "#D8B4C9", "#9B8AA8", "#6A5E7E", "#3E3650"],
+    ["#CFE3E8", "#F1E2C4", "#C7B58C", "#8E8566", "#4D5641"]
+  ];
+  function art(i) {
+    var p = PAL[i % PAL.length], s = i * 37;
+    function ridge(y, amp, seed) { var pts = "0," + y; for (var x = 0; x <= 400; x += 40) { var v = y - amp * (0.5 + 0.5 * Math.sin((x + seed) / 47) * Math.cos((x + seed * 2) / 83)); pts += " " + x + "," + v.toFixed(1); } return pts + " 400,300 0,300"; }
+    return '<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="g' + i + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="' + p[0] + '"/><stop offset="1" stop-color="' + p[1] + '"/></linearGradient></defs><rect width="400" height="300" fill="url(#g' + i + ')"/><circle cx="' + (280 - (s % 140)) + '" cy="80" r="26" fill="#FFF6E5" opacity=".85"/><polygon points="' + ridge(170, 90, s) + '" fill="' + p[2] + '"/><polygon points="' + ridge(215, 70, s + 90) + '" fill="' + p[3] + '"/><polygon points="' + ridge(255, 45, s + 200) + '" fill="' + p[4] + '"/></svg>';
+  }
+  var PARKS = [
+    { id: "dunes", n: "Indiana Dunes National Park", st: "Indiana", mi: 50, tags: ["camping", "family", "access"], a: 0, blurb: "Beaches, dunes and woodland trails on Lake Michigan." },
+    { id: "smoky", n: "Great Smoky Mountains National Park", st: "Tennessee and North Carolina", mi: 560, tags: ["camping", "family"], a: 3, blurb: "Misty ridges, waterfalls and historic cabins." },
+    { id: "rocky", n: "Rocky Mountain National Park", st: "Colorado", mi: 1000, tags: ["camping", "access"], a: 1, blurb: "Alpine lakes, tundra and wildlife along Trail Ridge Road." },
+    { id: "acadia", n: "Acadia National Park", st: "Maine", mi: 1100, tags: ["camping", "family", "access"], a: 5, blurb: "Rocky coastline, carriage roads and Cadillac Mountain." },
+    { id: "yosemite", n: "Yosemite National Park", st: "California", mi: 2100, tags: ["camping"], a: 2, blurb: "Granite cliffs, giant sequoias and waterfalls." }
+  ];
+  var RES = [
+    { id: "dunesgeo", n: "Geology of the Dunes: field trip guide", s: "Grades 6–8 · Indiana Dunes National Park · 1 day", a: 0 },
+    { id: "rockcycle", n: "The rock cycle, in the field", s: "Lesson kit · Grades 6–8 · Downloadable", a: 2 },
+    { id: "layers", n: "Virtual field trip: canyon layers", s: "Video and worksheet · Grades 5–9", a: 4 }
+  ];
+  var OPPS = [
+    { id: "redwood", n: "Trail and habitat restoration", p: "Redwood National and State Parks, California", w: "Weekends, March to October", a: 3 },
+    { id: "dunesvol", n: "Beach and dune clean-up", p: "Indiana Dunes National Park, Indiana", w: "Monthly, year-round", a: 0 },
+    { id: "rockyvol", n: "Visitor center greeter", p: "Rocky Mountain National Park, Colorado", w: "Summer season", a: 1 }
+  ];
+  var TASKS = [
+    { id: "trip", t: "Bring students on a field trip", q: "You are a middle school teacher and want to take your class on a field trip to a national park. Where would you find field trip information?",
+      steps: [["menu", "Open the menu"], ["teach", "Teaching & Education"], ["results", "Search for a topic"], ["trip", "Open a field trip"]],
+      r: [90, 22.2, 40], learn: "<b>What we learned:</b> answers split between Visitor’s Guide, Science & Nature and Kids. “Educators” became “Teaching & Education” after round 1, and this screen gives teachers a search built for lessons." },
+    { id: "camp", t: "Plan a family camping trip", q: "You are planning a camping trip for your family. Where would you find a national park?",
+      steps: [["menu", "Open the menu"], ["parks", "Visitor’s Guide › Parks"], ["filter", "Search or filter"], ["park", "Open a park"]],
+      r: [60, 44.4, 80], learn: "<b>What we learned:</b> the word “family” pulled people towards Kids. Once the task named the goal, finding a park, 8 of 10 succeeded. Here, Parks is also one tap from the home page." },
+    { id: "vol", t: "Become a park volunteer", q: "You are an environmental enthusiast and want to volunteer at Redwood National Park. Where would you sign up?",
+      steps: [["menu", "Open the menu"], ["volunteer", "Supporting NPS › Volunteering"], ["opp", "Open the Redwood opportunity"], ["apply", "Apply on this site"]],
+      r: [90, 66.7, 50], learn: "<b>What we learned:</b> people looked in Visitor’s Guide, not Supporting NPS. Our scenario user gave up when “contact a park” sent him to another website, so here you apply without leaving." }
+  ];
+  var S = { stack: ["home"], task: null, done: {}, view: "list", f: {}, q: "", open: null, applied: false };
+  var $ = function (id) { return document.getElementById(id); };
+  var ic = { chev: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>', tick: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>' };
+  function mark(k) { if (!S.task) return; var t = TASKS.find(function (x) { return x.id === S.task; }); if (t.steps.some(function (s) { return s[0] === k; })) { S.done[k] = true; tasks(); } }
+  function cur() { return S.stack[S.stack.length - 1]; }
+  function go(r, replace) { if (replace) S.stack[S.stack.length - 1] = r; else S.stack.push(r); closeMenu(); render(); $("view").scrollTop = 0; }
+  function crumb(a, b) { return '<p class="crumb">' + a + (b ? ' › <b>' + b + '</b>' : '') + '</p>'; }
+  function find(id) { for (var i = 0; i < IA.length; i++) { if (IA[i].id === id) return [IA[i], null]; if (IA[i].kids) for (var j = 0; j < IA[i].kids.length; j++) if (IA[i].kids[j][0] === id) return [IA[i], IA[i].kids[j]]; } return null; }
+
+  var V = {
+    home: function () {
+      return '<section class="hero"><div class="art">' + art(0) + '</div><h1 class="h1">Find your next park</h1><p>Search 400+ parks by name, state or zip code.</p><form class="searchrow" data-form="hero"><label class="vh" for="hq">Park name, state or zip code</label><input id="hq" placeholder="Park, state or zip code" autocomplete="off"><button class="btn" type="submit">Search</button></form></section>' +
+        '<div class="sechead"><h2 class="h2">Popular parks</h2><button class="link" data-go="parks">See all parks</button></div><div class="scroller">' + PARKS.slice(0, 4).map(function (p) { return '<button class="pc" data-go="park:' + p.id + '"><div class="art">' + art(p.a) + '</div><div class="t"><b>' + p.n.replace(" National Park", "") + '</b><span>' + p.st + '</span></div></button>'; }).join("") + '</div>' +
+        '<div class="sechead"><h2 class="h2">Plan, teach or help</h2></div><div class="list">' +
+        [["parks", "Plan a visit", "Parks, events and passes", 3], ["teach", "Teaching & Education", "Field trips and lesson plans", 2], ["volunteer", "Volunteer", "Opportunities in parks near you", 1]].map(function (x) { return '<button class="row" data-go="' + x[0] + '"><div class="art">' + art(x[3]) + '</div><div><b>' + x[1] + '</b><span>' + x[2] + '</span></div></button>'; }).join("") + '</div>' +
+        '<div class="sechead"><h2 class="h2">Featured stories</h2><button class="link" data-go="sec:stories">More stories</button></div><div class="scroller">' + [["Women of the early ranger service", 4], ["How dunes move", 0], ["The Civilian Conservation Corps", 2]].map(function (x) { return '<button class="pc" data-go="sec:stories"><div class="art">' + art(x[1]) + '</div><div class="t"><b>' + x[0] + '</b><span>American Stories</span></div></button>'; }).join("") + '</div>' + foot();
+    },
+    parks: function () {
+      mark("parks");
+      var list = PARKS.filter(function (p) { var q = S.q.trim().toLowerCase(); var okq = !q || /^\d{5}$/.test(q) || (p.n + " " + p.st).toLowerCase().indexOf(q) > -1; var okf = Object.keys(S.f).every(function (k) { return !S.f[k] || p.tags.indexOf(k) > -1; }); return okq && okf; });
+      var zip = /^\d{5}$/.test(S.q.trim());
+      if (zip) list = list.slice().sort(function (a, b) { return a.mi - b.mi; });
+      return '<div class="pad">' + crumb("Visitor’s Guide", "Parks") + '<h1 class="h1">Find a park</h1><form class="searchrow" data-form="parks" style="margin-top:14px"><label class="vh" for="pq">Park name, state or zip code</label><input id="pq" value="' + S.q.replace(/"/g, "") + '" placeholder="Name, state or zip code" autocomplete="off"><button class="btn" type="submit">Search</button></form>' +
+        '<div class="chips" role="group" aria-label="Filters">' + [["camping", "Camping"], ["family", "Family-friendly"], ["access", "Accessible trails"]].map(function (c) { return '<button class="chip" data-f="' + c[0] + '" aria-pressed="' + !!S.f[c[0]] + '">' + c[1] + '</button>'; }).join("") + '</div></div>' +
+        '<div class="tools"><span style="font-size:13px;color:var(--muted)">' + list.length + ' parks' + (zip ? ' · nearest to ' + S.q.trim() : '') + '</span><div class="seg" role="group" aria-label="View"><button data-v="list" aria-pressed="' + (S.view === "list") + '">List</button><button data-v="map" aria-pressed="' + (S.view === "map") + '">Map</button></div></div>' +
+        (S.view === "map" ? '<div style="margin:0 20px 24px;height:300px;border-radius:14px;background:#DCE6DD;position:relative;overflow:hidden">' + art(5) + list.map(function (p, i) { return '<button class="chip" data-go="park:' + p.id + '" style="position:absolute;left:' + (12 + (i * 37) % 60) + '%;top:' + (18 + (i * 23) % 60) + '%">' + p.n.replace(" National Park", "") + '</button>'; }).join("") + '</div>'
+          : '<div class="list">' + (list.length ? list.map(function (p) { return '<button class="row" data-go="park:' + p.id + '"><div class="art">' + art(p.a) + '</div><div><b>' + p.n + '</b><span>' + p.st + (zip ? ' · about ' + p.mi + ' miles' : '') + '</span>' + (p.tags.indexOf("camping") > -1 ? '<span class="tag">Campgrounds</span>' : '') + '</div></button>'; }).join("") : '<p style="font-size:14px;color:var(--muted)">No parks match. Try removing a filter.</p>') + '</div>') + foot();
+    },
+    park: function (id) {
+      mark("park");
+      var p = PARKS.find(function (x) { return x.id === id; }) || PARKS[0];
+      return '<section class="hero" style="height:220px"><div class="art">' + art(p.a) + '</div><p class="crumb" style="color:#fff;opacity:.85;margin:0 0 4px">Visitor’s Guide › Parks</p><h1 class="h1">' + p.n + '</h1></section><div class="pad"><p class="lead" style="margin-top:0">' + p.blurb + '</p>' +
+        '<dl class="facts"><div><dt>Location</dt><dd>' + p.st + '</dd></div><div><dt>Camping</dt><dd>' + (p.tags.indexOf("camping") > -1 ? "Campgrounds, reservations needed" : "Nearby only") + '</dd></div><div><dt>Good for families</dt><dd>' + (p.tags.indexOf("family") > -1 ? "Yes: short trails, ranger programs" : "Some areas") + '</dd></div><div><dt>Best time to visit</dt><dd>Late spring to early fall</dd></div><div><dt>Entrance</dt><dd>Fee or pass required</dd></div></dl>' +
+        '<div class="block"><h3>Plan your camping trip</h3><ol><li>Pick a campground and check the season.</li><li>Reserve a site online, up to 6 months ahead.</li><li>Check alerts for closures before you go.</li></ol></div>' +
+        '<button class="btn full" style="margin-top:16px" data-act="reserve">Check campsite availability</button><button class="btn ghost full" style="margin-top:8px" data-go="passes">Get a park pass</button></div>' + foot();
+    },
+    teach: function () {
+      mark("teach");
+      return '<div class="pad" style="background:var(--sky)">' + crumb("Teaching & Education") + '<h1 class="h1">National parks are America’s largest classrooms</h1><p class="lead">Find field trips, lesson plans and activities by topic or grade.</p><form class="searchrow" data-form="teach" style="margin-top:14px"><label class="vh" for="tq">Topic, subject or grade</label><input id="tq" placeholder="Try “geology” or “grade 7”" autocomplete="off"><button class="btn" type="submit">Search</button></form>' +
+        '<div class="chips">' + ["Field trips", "Lesson plans", "Virtual visits", "Grades 6–8"].map(function (c) { return '<button class="chip" data-teach="' + c + '">' + c + '</button>'; }).join("") + '</div></div>' +
+        '<div class="sechead"><h2 class="h2">Popular activities</h2></div><div class="scroller">' + [["Every Kid Outdoors", 3], ["Junior Ranger at school", 1], ["Citizen science days", 0]].map(function (x) { return '<button class="pc" data-act="soon"><div class="art">' + art(x[1]) + '</div><div class="t"><b>' + x[0] + '</b><span>Program for classes</span></div></button>'; }).join("") + '</div>' +
+        '<div class="sechead"><h2 class="h2">Recommended materials</h2></div><div class="list">' + RES.slice(1).map(function (r) { return '<button class="row" data-go="trip:' + r.id + '"><div class="art">' + art(r.a) + '</div><div><b>' + r.n + '</b><span>' + r.s + '</span></div></button>'; }).join("") + '</div>' + foot();
+    },
+    results: function () {
+      mark("results");
+      return '<div class="pad">' + crumb("Teaching & Education", "Search") + '<h1 class="h1">Results for “' + (S.tq || "geology") + '”</h1><p class="lead">3 field trips and materials</p><div class="chips"><button class="chip" aria-pressed="true">Grades 6–8</button><button class="chip">Field trips</button><button class="chip">Downloadable</button></div></div><div class="res">' + RES.map(function (r) { return '<button class="ri" data-go="trip:' + r.id + '"><div class="art">' + art(r.a) + '</div><div class="t"><b>' + r.n + '</b><span>' + r.s + '</span></div></button>'; }).join("") + '</div>' + foot();
+    },
+    trip: function (id) {
+      mark("trip");
+      var r = RES.find(function (x) { return x.id === id; }) || RES[0];
+      return '<section class="hero" style="height:200px"><div class="art">' + art(r.a) + '</div><p class="crumb" style="color:#fff;opacity:.85;margin:0 0 4px">Teaching & Education › Field trips</p><h1 class="h1" style="font-size:24px">' + r.n + '</h1></section><div class="pad"><dl class="facts" style="margin-top:0"><div><dt>Grades</dt><dd>6–8</dd></div><div><dt>Length</dt><dd>Half or full day</dd></div><div><dt>Group size</dt><dd>Up to 40 students</dd></div><div><dt>Cost</dt><dd>Free for school groups</dd></div></dl>' +
+        '<div class="block"><h3>What students do</h3><ul><li>Read the dunes like a geologist: wind, water and time.</li><li>Collect and sort sand samples.</li><li>Meet a ranger and log observations in a field journal.</li></ul></div>' +
+        '<div class="block"><h3>How to book</h3><ol><li>Pick two or three preferred dates.</li><li>Send the request; a ranger confirms within a week.</li><li>Download the pre-visit lesson for your class.</li></ol></div>' +
+        '<button class="btn full" style="margin-top:16px" data-act="book">Request a date</button><button class="btn ghost full" style="margin-top:8px" data-act="soon">Download teacher guide (PDF)</button></div>' + foot();
+    },
+    volunteer: function () {
+      mark("volunteer");
+      return '<div class="pad">' + crumb("Supporting NPS", "Volunteering") + '<h1 class="h1">Volunteer in the parks</h1><p class="lead">Help care for parks near home or across the country. No experience needed for most roles.</p></div>' +
+        '<div class="band"><b>New to volunteering?</b><p>Our guide explains roles, time commitments, training and what to expect.</p><button class="btn" data-act="soon">Read the volunteer guide</button></div>' +
+        '<div class="sechead"><h2 class="h2">Opportunities</h2></div><div class="pad" style="padding-top:0"><div class="chips" style="margin-top:0"><button class="chip" aria-pressed="true">Outdoors</button><button class="chip">Visitor services</button><button class="chip">Science</button></div></div><div class="list">' + OPPS.map(function (o) { return '<button class="row" data-go="opp:' + o.id + '"><div class="art">' + art(o.a) + '</div><div><b>' + o.n + '</b><span>' + o.p + '</span></div></button>'; }).join("") + '</div>' +
+        '<div class="pad" style="padding-top:0"><div class="block" style="margin-top:0"><h3>What volunteers do</h3><ul><li>Restore trails and habitats</li><li>Welcome visitors and lead walks</li><li>Help with research and citizen science</li></ul></div></div>' + foot();
+    },
+    opp: function (id) {
+      if (id === "redwood") mark("opp");
+      var o = OPPS.find(function (x) { return x.id === id; }) || OPPS[0];
+      if (S.applied === id) return '<div class="ok"><div class="tick">' + ic.tick + '</div><h1 class="h2">Application sent</h1><p class="lead">The volunteer coordinator at ' + o.p.split(",")[0] + ' will email you within two weeks. You never left this site.</p><button class="btn dark" style="margin-top:18px" data-go="volunteer">Back to opportunities</button></div>';
+      return '<section class="hero" style="height:180px"><div class="art">' + art(o.a) + '</div><p class="crumb" style="color:#fff;opacity:.85;margin:0 0 4px">Supporting NPS › Volunteering</p><h1 class="h1" style="font-size:24px">' + o.n + '</h1></section><div class="pad"><dl class="facts" style="margin-top:0"><div><dt>Park</dt><dd>' + o.p + '</dd></div><div><dt>When</dt><dd>' + o.w + '</dd></div><div><dt>Training</dt><dd>Provided on your first day</dd></div></dl>' +
+        '<form class="form block" data-form="apply"><h3>Apply here</h3><p>No separate account or outside website needed.</p><label for="an">Full name</label><input id="an" autocomplete="name" required><label for="ae">Email</label><input id="ae" type="email" autocomplete="email" required><button class="btn full" style="margin-top:16px" type="submit">Send application</button></form></div>' + foot();
+    },
+    search: function () { return '<div class="pad">' + crumb("Search") + '<h1 class="h1">Search the site</h1><form class="searchrow" data-form="site" style="margin-top:14px"><label class="vh" for="sq">Search</label><input id="sq" placeholder="Parks, topics or programs" autocomplete="off"><button class="btn" type="submit">Search</button></form><p class="lead" style="margin-top:18px">Popular: <button class="link" data-go="parks">Parks near me</button> · <button class="link" data-go="teach">Field trips</button> · <button class="link" data-go="volunteer">Volunteer</button></p></div>'; },
+    sec: function (id) {
+      var f = find(id); if (!f) return V.home();
+      var top = f[0], leaf = f[1];
+      if (!leaf && top.kids) return '<div class="pad">' + crumb(top.n) + '<h1 class="h1">' + top.n + '</h1><p class="lead">' + (DESC[top.id] || "") + '</p></div><div class="list">' + top.kids.map(function (k, i) { var r = ({ parks: "parks", volunteer: "volunteer" })[k[0]] || "sec:" + k[0]; return '<button class="row" data-go="' + r + '"><div class="art">' + art(i + 1) + '</div><div><b>' + k[1] + '</b><span>' + (DESC[k[0]] || "") + '</span></div></button>'; }).join("") + '</div>' + foot();
+      var name = leaf ? leaf[1] : top.n;
+      return '<div class="pad">' + crumb(top.n, leaf ? leaf[1] : null) + '<h1 class="h1">' + name + '</h1><p class="lead">' + (DESC[leaf ? leaf[0] : top.id] || "") + '</p><div class="block" style="margin-top:18px"><h3>Part of the new structure</h3><p>This page sits under ' + top.n + ' in our sitemap. The prototype builds out the three tested journeys in full; other pages show where content lives.</p></div></div>' + foot();
+    }
+  };
+  V.passes = function () { return V.sec("passes"); };
+  function foot() { return '<div class="foot">Student redesign concept by Vedant Atram. Not affiliated with the National Park Service. Park details are sample content.</div>'; }
+
+  function menu() {
+    $("menu").innerHTML = '<ul>' + IA.map(function (s) {
+      if (!s.kids) return '<li class="mi"><button type="button" data-go="' + (s.id === "teach" ? "teach" : "sec:" + s.id) + '">' + s.n + '</button></li>';
+      var open = S.open === s.id;
+      return '<li class="mi"><button type="button" data-acc="' + s.id + '" aria-expanded="' + open + '" aria-controls="sub-' + s.id + '">' + s.n + ic.chev + '</button><div class="sub" id="sub-' + s.id + '"' + (open ? '' : ' hidden') + '><button type="button" data-go="sec:' + s.id + '">All of ' + s.n + '</button>' + s.kids.map(function (k) { var r = ({ parks: "parks", volunteer: "volunteer" })[k[0]] || "sec:" + k[0]; return '<button type="button" data-go="' + r + '">' + k[1] + '</button>'; }).join("") + '</div></li>';
+    }).join("") + '</ul><p class="mfoot">8 sections, from 3 rounds of card sorting and 3 rounds of tree testing.</p>';
+  }
+  function openMenu() { menu(); $("menu").classList.add("open"); $("menu-btn").setAttribute("aria-expanded", "true"); $("menu-btn").setAttribute("aria-label", "Close menu"); $("menu-ic").innerHTML = '<path d="M6 6l12 12M18 6L6 18"/>'; mark("menu"); var f = $("menu").querySelector("button"); if (f) f.focus(); }
+  function closeMenu() { $("menu").classList.remove("open"); $("menu-btn").setAttribute("aria-expanded", "false"); $("menu-btn").setAttribute("aria-label", "Open menu"); $("menu-ic").innerHTML = '<path d="M4 7h16M4 12h16M4 17h16"/>'; }
+  function tasks() {
+    $("tasks").innerHTML = TASKS.map(function (t) {
+      var on = S.task === t.id, all = t.steps.every(function (s) { return S.done[s[0]]; });
+      return '<article class="task' + (on ? ' cur' : '') + '"><div class="top"><div><h2>' + t.t + '</h2><p class="q">“' + t.q + '”</p></div><button class="go" type="button" data-task="' + t.id + '">' + (on ? "Restart" : "Try it") + '</button></div>' +
+        (on ? '<ol class="steps" aria-label="Your progress">' + t.steps.map(function (s, i) { var d = !!S.done[s[0]]; return '<li class="' + (d ? 'done' : '') + '"><i aria-hidden="true">' + (d ? '✓' : i + 1) + '</i>' + s[1] + '<span class="vh">' + (d ? ', done' : ', not yet') + '</span></li>'; }).join("") + '</ol>' + (all ? '<p class="done-msg">Done. That’s the path we hoped participants would take.</p>' : '') : '') +
+        '<div class="rates">' + [["Pilot", 0], ["Round 1", 1], ["Round 2", 2]].map(function (x) { var v = t.r[x[1]]; return '<div class="rate">' + x[0] + '<b>' + (v % 1 ? v.toFixed(1) : v) + '%</b><div class="m"><i style="width:' + v + '%"></i></div></div>'; }).join("") + '</div><p class="learn">' + t.learn + '</p></article>';
+    }).join("");
+  }
+  function render() {
+    var r = cur(), parts = r.split(":"), v = V[parts[0]] || V.home;
+    $("view").innerHTML = v(parts[1]);
+    $("back").hidden = S.stack.length < 2;
+  }
+  function toast(m) { var t = $("toast"); t.textContent = m; t.classList.add("on"); clearTimeout(toast.t); toast.t = setTimeout(function () { t.classList.remove("on"); }, 2600); }
+
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    if (b.id === "menu-btn") { $("menu").classList.contains("open") ? closeMenu() : openMenu(); return; }
+    if (b.id === "back") { if (S.stack.length > 1) { S.stack.pop(); closeMenu(); render(); } return; }
+    if (b.id === "reset") { S = { stack: ["home"], task: null, done: {}, view: "list", f: {}, q: "", open: null, applied: false }; closeMenu(); render(); tasks(); return; }
+    if (b.dataset.acc) { S.open = S.open === b.dataset.acc ? null : b.dataset.acc; menu(); var a = $("menu").querySelector('[data-acc="' + b.dataset.acc + '"]'); if (a) a.focus(); return; }
+    if (b.dataset.go) { go(b.dataset.go); return; }
+    if (b.dataset.f) { S.f[b.dataset.f] = !S.f[b.dataset.f]; mark("filter"); render(); var c = $("view").querySelector('[data-f="' + b.dataset.f + '"]'); if (c) c.focus(); return; }
+    if (b.dataset.v) { S.view = b.dataset.v; render(); return; }
+    if (b.dataset.teach) { S.tq = b.dataset.teach.toLowerCase(); go("results"); return; }
+    if (b.dataset.task) { S.task = b.dataset.task; S.done = {}; S.stack = ["home"]; S.f = {}; S.q = ""; S.applied = false; S.open = null; closeMenu(); render(); tasks(); if (window.innerWidth <= 960) document.querySelector(".device").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }); $("view").focus({ preventScroll: true }); return; }
+    var act = b.dataset.act;
+    if (act === "reserve") toast("Campsite booking would open here, on the same site.");
+    if (act === "book") toast("A booking form would open here. A ranger confirms within a week.");
+    if (act === "soon") toast("Not built in this prototype.");
+  });
+  document.addEventListener("submit", function (e) {
+    var f = e.target.closest("form"); if (!f) return; e.preventDefault();
+    var k = f.dataset.form, inp = f.querySelector("input");
+    if (k === "hero" || k === "parks") { S.q = inp.value; mark("filter"); if (k === "hero") go("parks"); else render(); }
+    else if (k === "teach") { S.tq = (inp.value || "geology").toLowerCase(); go("results"); }
+    else if (k === "site") { var q = inp.value.toLowerCase(); go(/volunt/.test(q) ? "volunteer" : /trip|teach|geo|lesson/.test(q) ? "teach" : "parks"); }
+    else if (k === "apply") { S.applied = cur().split(":")[1]; if (S.applied === "redwood") mark("apply"); render(); }
+  });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && $("menu").classList.contains("open")) { closeMenu(); $("menu-btn").focus(); } });
+  render(); tasks();
+})();
+</script>
+</body>
+</html>

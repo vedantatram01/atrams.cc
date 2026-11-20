@@ -10,9 +10,11 @@ A plain static site: HTML, CSS and a little JavaScript. No build step.
 - `invisible-obstacles.html`: case study
 - `cerave.html`: case study
 - `wearable-health.html`: case study
+- `national-parks.html`: case study
 - `prototypes/invisible-obstacles/`: coded form prototype
 - `prototypes/cerave/`: coded CeraVe prototype
 - `prototypes/wearable-health/`: Tend watch and phone prototype
+- `prototypes/national-parks/`: NPS.gov mobile IA prototype
 - `assets/`, `vid/`: images and videos
 - `Vedant-Atram-Resume.pdf`: resume (opens in a new tab)
 - `CNAME`: tells GitHub Pages to serve the site at atrams.cc
