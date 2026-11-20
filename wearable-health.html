@@ -435,6 +435,56 @@ td:first-child { width: 30%; }
 }
 /* sharp corners: 4–5px everywhere */
 :root { --r-s: 4px; --r-m: 5px; --r-l: 5px; }
+/* persona spectrum */
+.specfig { margin: var(--s3) 0 0; }
+.spec { border-top: 1px solid var(--line); }
+.sr { padding: var(--s2) 0 var(--s1); border-bottom: 1px solid var(--line); }
+.st { font-size: 14px; line-height: 20px; color: var(--text); font-weight: 500; margin: 0; }
+.trk { position: relative; height: 76px; margin: 0 14px; }
+.trk::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--line); }
+.sd { position: absolute; top: 50%; width: 26px; height: 26px; margin: -13px 0 0 -13px; transform: translateY(var(--dy)); display: grid; place-items: center; border-radius: 50%; background: var(--surface); border: 1px solid var(--muted); color: var(--text); font-size: 10px; line-height: 1; font-weight: 600; }
+.se { display: flex; justify-content: space-between; margin: 0; font-size: 13px; line-height: 20px; color: var(--muted); }
+.specfig figcaption p { margin-top: var(--s1); font-size: 14px; line-height: 20px; color: var(--muted); }
+/* persona tabs */
+.ptabs { margin-top: var(--s2); }
+.tl { display: flex; gap: 4px; flex-wrap: wrap; border-bottom: 1px solid var(--line); }
+.tl [role=tab] { appearance: none; border: 0; background: none; font: inherit; font-size: 14px; line-height: 20px; font-weight: 500; color: var(--muted); padding: 10px 14px; margin-bottom: -1px; border-bottom: 2px solid transparent; cursor: pointer; border-radius: 4px 4px 0 0; }
+.tl [role=tab]:hover { color: var(--text); background: var(--mat); }
+.tl [role=tab][aria-selected=true] { color: var(--text); border-bottom-color: var(--accent); }
+.pp2 { padding-top: var(--s2); }
+.pp2 h3.h4 { margin: 0; }
+.flow { list-style: none; counter-reset: f; margin: var(--s1) 0 0; padding: 0; display: grid; gap: 6px; }
+.flow li { position: relative; padding: 8px 12px 8px 32px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); font-size: 14px; line-height: 20px; color: var(--soft); }
+.flow li::before { content: ""; position: absolute; left: 14px; top: 16px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.flow li + li::after { content: ""; position: absolute; left: 16px; top: -7px; width: 2px; height: 8px; background: var(--line); }
+.out { margin-top: var(--s1); font-size: 14px; line-height: 22px; color: var(--soft); }
+.out b { font-weight: 600; color: var(--text); margin-right: 4px; }
+.jt { margin-top: var(--s2); }
+.jt table { min-width: 640px; table-layout: fixed; width: 100%; }
+.jt thead td, .jt tbody th { width: 112px; }
+.jt td:first-child { width: auto; }
+.jt thead td:first-child { width: 112px; }
+@media (max-width: 640px) {
+  .jt { overflow-x: auto; }
+  .jt table { display: table; min-width: 600px; }
+  .jt thead { position: static; width: auto; height: auto; overflow: visible; clip: auto; display: table-header-group; }
+  .jt tbody { display: table-row-group; } .jt tr { display: table-row; padding: 0; }
+  .jt th, .jt td { display: table-cell; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  .jt td + td { margin-top: 0; } .jt td:first-child { font-weight: 400; } .jt td::before { content: none !important; }
+  .jt thead td, .jt tbody th { position: sticky; left: 0; z-index: 1; background: var(--bg); width: 92px !important; }
+}
+.jt th, .jt td { font-size: 13px; line-height: 19px; vertical-align: top; }
+.jt tbody th { color: var(--muted); font-weight: 500; white-space: nowrap; }
+.jt .nil { color: var(--muted); }
+/* engagement + reflection */
+.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s1); margin-top: var(--s2); }
+.trio .goal { padding: var(--s1) var(--s1) var(--s2); }
+.trio .goal b { font-size: 18px; line-height: 26px; }
+@media (max-width: 640px) { .trio { grid-template-columns: minmax(0, 1fr); } }
+.refl { list-style: none; margin: var(--s2) 0 0; padding: 0; display: grid; gap: var(--s2); }
+.refl li { font-size: 16px; line-height: 24px; color: var(--soft); padding-top: var(--s1); border-top: 1px solid var(--line); }
+.refl b { display: block; color: var(--text); font-weight: 500; margin-bottom: 4px; }
+
 .btn, .pill, .menu, .mt, .sevp, .tags li, .toc a, .mode, .menu-btn, .logo, .nav-r > .mode { border-radius: 4px !important; }
 .box, .ring, .fr-in, .sk-cal, .sk-f { border-radius: 4px; }
 .meter i, .meter i::after { border-radius: 2px; }
@@ -485,7 +535,7 @@ td:first-child { width: 30%; }
   </div>
 </header>
 
-<nav class="toc" id="toc" aria-label="Sections"><ol><li><a href="#brief">Brief</a></li><li><a href="#research">Research</a></li><li><a href="#findings">Findings</a></li><li><a href="#people">People</a></li><li><a href="#priorities">Priorities</a></li><li><a href="#design">Design</a></li><li><a href="#testing">Testing</a></li><li><a href="#limitations">Limitations</a></li></ol></nav>
+<nav class="toc" id="toc" aria-label="Sections"><ol><li><a href="#brief">Brief</a></li><li><a href="#research">Research</a></li><li><a href="#findings">Findings</a></li><li><a href="#people">People</a></li><li><a href="#engaged">Engagement</a></li><li><a href="#priorities">Priorities</a></li><li><a href="#design">Design</a></li><li><a href="#testing">Testing</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#reflection">Reflection</a></li></ol></nav>
 <main id="main" tabindex="-1">
 
 <section class="sec col" id="brief" aria-labelledby="h-brief">
@@ -510,6 +560,8 @@ td:first-child { width: 30%; }
   </table></div>
   <p>To analyse the observations, we mapped an activity sequence for each scenario and grouped what we saw into an affinity diagram. For the interviews, each of us coded our own transcripts in Atlas.ti. We then agreed one shared codebook and counted how often each theme came up.</p>
   <figure class="shot wide full"><div class="frame"><div class="fr-in" style="aspect-ratio:1600/835"><img src="assets/wh-affinity.webp" width="1600" height="835" alt="Affinity diagram from the observation sessions, with sticky notes grouped into six themes: notification management and relevance, overreliance and autonomy, device and phone interplay, emotional engagement and motivation, interpretability of health data, and contextual awareness and personalisation." loading="lazy"></div></div><figcaption><p>The observation affinity diagram: six themes, from notification relevance to whether people could make sense of their data.</p><ul class="quiet-list"><li>Notes like “Reminders during focus work annoyed me” and “Felt guilty skipping a suggested workout” became the findings below.</li><li>Each note is a researcher’s summary of something we saw or heard, not a direct quote.</li></ul></figcaption></figure>
+  <figure class="shot wide full"><div class="frame"><div class="fr-in" style="aspect-ratio:1600/589"><img src="assets/wh-sequence.webp" width="1600" height="589" alt="Activity sequence for the three observation scenarios. From a start point, the flow splits into a morning check-in (wake the watch, answer a mood prompt, rate sleep, submit), a midday nudge (the watch buzzes, the person views it, then either follows the prompt or snoozes and gets the same alert again), and a workout (choose a type, start, watch live stats and cues, end, then view the summary and sync)." loading="lazy"></div></div><figcaption><p>The observation activity sequence: all three scenarios, step by step. <a href="assets/wh-sequence-full.webp">Open full size</a></p><ul class="quiet-list"><li>Snoozing a nudge brings the same alert back later.</li><li>A workout runs from picking a type to syncing with the phone, with live cues in between.</li></ul></figcaption></figure>
+  <figure class="shot wide full"><div class="frame"><div class="fr-in" style="aspect-ratio:1600/1098"><img src="assets/wh-codebook.webp" width="1600" height="1098" alt="Interview affinity diagram built from the shared codebook, with six code groups: usage motivation, main features used, emotional responses, daily integration, challenges and desired improvements. Desired improvements include emotion recognition, insights that fit the moment, better media controls, water reminders and more accurate calorie sensors." loading="lazy"></div></div><figcaption><p>The interview codebook, as an affinity diagram: six code groups, from why people wear a watch to what they want next.</p><ul class="quiet-list"><li>Emotional responses ranged from peaceful and satisfied to guilty and mildly anxious.</li><li>The desired improvements became the rows of the priority matrix below.</li></ul></figcaption></figure>
 </section>
 
 <section class="sec col" id="findings" aria-labelledby="h-findings">
@@ -520,14 +572,28 @@ td:first-child { width: 30%; }
 
 <section class="sec col" id="people" aria-labelledby="h-people">
   <h2 id="h-people">Four kinds of wearable user</h2>
-  <p>We mapped every participant along six spectrums, from passive to active use and from “doesn’t care much” to “responds emotionally to goals”. Four clusters emerged, and became the personas that guided the design.</p>
+  <p>We placed the eight people we interviewed along six spectrums, from passive to active use and from “doesn’t care much” to “responds emotionally to goals”. Four clusters emerged, and became the personas that guided the design.</p>
+  <figure class="specfig"><div class="spec" role="group" aria-labelledby="spec-cap"><div class="sr"><p class="st">How often they use the data</p><div class="trk" aria-hidden="true"><span class="sd" style="left:23.8%;--dy:-13px">P1</span><span class="sd" style="left:23.8%;--dy:13px">P2</span><span class="sd" style="left:45.7%;--dy:0px">P3</span><span class="sd" style="left:54.4%;--dy:0px">P4</span><span class="sd" style="left:75.6%;--dy:-13px">P5</span><span class="sd" style="left:79.7%;--dy:13px">P7</span><span class="sd" style="left:91.4%;--dy:0px">P6</span><span class="sd" style="left:96.2%;--dy:0px">P8</span></div><p class="se"><span>Passive</span><span>Active</span></p><p class="vh">How often they use the data: from passive to active. Placement, left to right: P1, P2, P3, P4, P5, P7, P6, P8.</p></div><div class="sr"><p class="st">Main reason for wearing it</p><div class="trk" aria-hidden="true"><span class="sd" style="left:3.9%;--dy:0px">P1</span><span class="sd" style="left:23.9%;--dy:0px">P3</span><span class="sd" style="left:49.8%;--dy:-13px">P2</span><span class="sd" style="left:49.8%;--dy:13px">P7</span><span class="sd" style="left:71.6%;--dy:0px">P4</span><span class="sd" style="left:76.2%;--dy:0px">P5</span><span class="sd" style="left:91.6%;--dy:0px">P6</span><span class="sd" style="left:96.3%;--dy:0px">P8</span></div><p class="se"><span>Wellness</span><span>Performance</span></p><p class="vh">Main reason for wearing it: from wellness to performance. Placement, left to right: P1, P3, P2, P7, P4, P5, P6, P8.</p></div><div class="sr"><p class="st">How often they wear it</p><div class="trk" aria-hidden="true"><span class="sd" style="left:24.0%;--dy:-13px">P2</span><span class="sd" style="left:24.0%;--dy:13px">P4</span><span class="sd" style="left:41.5%;--dy:0px">P1</span><span class="sd" style="left:45.8%;--dy:0px">P3</span><span class="sd" style="left:75.8%;--dy:0px">P5</span><span class="sd" style="left:91.7%;--dy:-13px">P6</span><span class="sd" style="left:91.8%;--dy:13px">P7</span><span class="sd" style="left:96.3%;--dy:0px">P8</span></div><p class="se"><span>Sometimes</span><span>Always on</span></p><p class="vh">How often they wear it: from sometimes to always on. Placement, left to right: P2, P4, P1, P3, P5, P6, P7, P8.</p></div><div class="sr"><p class="st">How they feel about goals</p><div class="trk" aria-hidden="true"><span class="sd" style="left:24.0%;--dy:-26px">P1</span><span class="sd" style="left:24.0%;--dy:0px">P2</span><span class="sd" style="left:24.0%;--dy:26px">P3</span><span class="sd" style="left:72.5%;--dy:0px">P4</span><span class="sd" style="left:76.8%;--dy:0px">P7</span><span class="sd" style="left:87.9%;--dy:-13px">P5</span><span class="sd" style="left:91.7%;--dy:13px">P6</span><span class="sd" style="left:96.3%;--dy:0px">P8</span></div><p class="se"><span>Don’t care much</span><span>Respond emotionally</span></p><p class="vh">How they feel about goals: from don’t care much to respond emotionally. Placement, left to right: P1, P2, P3, P4, P7, P5, P6, P8.</p></div><div class="sr"><p class="st">Features they want</p><div class="trk" aria-hidden="true"><span class="sd" style="left:24.0%;--dy:-26px">P1</span><span class="sd" style="left:24.0%;--dy:0px">P2</span><span class="sd" style="left:28.0%;--dy:26px">P4</span><span class="sd" style="left:45.8%;--dy:0px">P3</span><span class="sd" style="left:74.7%;--dy:0px">P5</span><span class="sd" style="left:91.7%;--dy:-26px">P6</span><span class="sd" style="left:93.1%;--dy:0px">P7</span><span class="sd" style="left:96.3%;--dy:26px">P8</span></div><p class="se"><span>Basic</span><span>Advanced</span></p><p class="vh">Features they want: from basic to advanced. Placement, left to right: P1, P2, P4, P3, P5, P6, P7, P8.</p></div><div class="sr"><p class="st">Change behaviour from data</p><div class="trk" aria-hidden="true"><span class="sd" style="left:23.3%;--dy:-13px">P2</span><span class="sd" style="left:23.3%;--dy:13px">P4</span><span class="sd" style="left:43.7%;--dy:-13px">P1</span><span class="sd" style="left:47.7%;--dy:13px">P3</span><span class="sd" style="left:75.1%;--dy:0px">P5</span><span class="sd" style="left:86.8%;--dy:0px">P7</span><span class="sd" style="left:91.0%;--dy:0px">P6</span><span class="sd" style="left:95.6%;--dy:0px">P8</span></div><p class="se"><span>Just aware</span><span>Change based on it</span></p><p class="vh">Change behaviour from data: from just aware to change based on it. Placement, left to right: P2, P4, P1, P3, P5, P7, P6, P8.</p></div></div><figcaption id="spec-cap"><p>The persona spectrum. Participants are shown as codes, not names.</p></figcaption></figure>
   <div class="stat-row">
     <div class="goal"><b>Lisa, the wellness explorer</b><p>Uses everything, all day. Wants context-aware, kind suggestions, and feels guilty when she misses a goal.</p></div>
     <div class="goal"><b>Peter, the fitness optimiser</b><p>Lives in workout mode. Wants accurate heart rate and calories, automatic detection and easy music control.</p></div>
     <div class="goal"><b>Ron, the balanced worker and parent</b><p>Uses breathing and trends to manage busy days. Gets overwhelmed by data when stressed and wants gentle, unobtrusive nudges.</p></div>
     <div class="goal"><b>Sky, the tech casual</b><p>Wears it mainly for sleep and steps. Distrusts calorie numbers and wants a minimal mode with features he can switch off.</p></div>
   </div>
-  <figure class="shot wide full"><div class="frame"><div class="fr-in" style="aspect-ratio:1600/946"><img src="assets/wh-journey.webp" width="1600" height="946" alt="Lisa’s journey map across morning, throughout the day, evening and in general, with rows for goals, actions, thoughts and feelings, and pain points. Pain points include activity rings triggering guilt." loading="lazy"></div></div><figcaption><p>We drew a journey for each persona. Lisa’s shows the pattern most clearly: sleep in the morning, rings and breathing in the day, guilt when goals slip.</p><ul class="quiet-list"><li>Journeys for Peter, Ron and Sky surfaced the workout and casual-use pain points.</li></ul></figcaption></figure>
+  <h3>A day in each persona’s life</h3>
+  <p>For each persona we wrote a scenario from what we saw and heard, then mapped their journey through the day: goals, actions, thoughts and pain points.</p>
+  <div class="ptabs"><div class="tl" role="tablist" aria-label="Personas"><button type="button" role="tab" id="tab-lisa" aria-controls="pan-lisa" aria-selected="true">Lisa</button><button type="button" role="tab" id="tab-peter" aria-controls="pan-peter" aria-selected="false" tabindex="-1">Peter</button><button type="button" role="tab" id="tab-ron" aria-controls="pan-ron" aria-selected="false" tabindex="-1">Ron</button><button type="button" role="tab" id="tab-sky" aria-controls="pan-sky" aria-selected="false" tabindex="-1">Sky</button></div><div class="pp2" role="tabpanel" id="pan-lisa" aria-labelledby="tab-lisa"><h3 class="h4">A typical day for Lisa, the wellness explorer: A stressful workday, handled mindfully</h3><ol class="flow"><li>Checks her sleep score and heart rate</li><li>Sees a poor night and lowers her expectations</li><li>Stays lightly active with the rings</li><li>Takes a guided mindfulness break</li><li>Reviews her trends in the evening</li></ol><p class="out"><b>Outcome</b> More self-aware by evening, but a missed goal still brings guilt.</p><div class="table bleed jt" tabindex="0" role="region" aria-label="Journey map, scrolls sideways"><table><caption class="vh">Lisa’s journey map</caption><thead><tr><td></td><th scope="col">Morning</th><th scope="col">During the day</th><th scope="col">Evening</th><th scope="col">Overall</th></tr></thead><tbody><tr><th scope="row">Goals</th><td>Understand how well she rested</td><td>Stay active and manage stress</td><td>Reflect on activity and well-being</td><td>Improve self-awareness and well-being</td></tr><tr><th scope="row">Actions</th><td>Checks sleep stages and heart rate</td><td>Tracks rings, steps and heart rate; uses the Mindfulness app</td><td>Reviews activity trends</td><td>Uses the watch all day, alongside other apps</td></tr><tr><th scope="row">Thoughts</th><td>“Morning starts with checking my sleep and heart rate.”</td><td>“I like doing a quick mindfulness or breathing session.”</td><td>“In the evening, I review my activity.”</td><td>“It’s empowering… validates the effort I put into self-care.”</td></tr><tr><th scope="row">Pain points</th><td><span class="nil">—</span></td><td>Rings can trigger guilt: “Frustrated… triggers this internal narrative.”</td><td><span class="nil">—</span></td><td>Wants feedback that reads her mood: “I’d love to see emotion recognition.”</td></tr></tbody></table></div></div><div class="pp2" role="tabpanel" id="pan-peter" aria-labelledby="tab-peter" hidden><h3 class="h4">A typical day for Peter, the fitness optimiser: Getting the most from a gym session</h3><ol class="flow"><li>Wears the watch to the gym</li><li>Starts a treadmill workout by hand</li><li>Watches heart rate zones and calories</li><li>Checks calories after; happy if he hit his target</li><li>Glances at his steps later</li></ol><p class="out"><b>Outcome</b> The data makes him feel his effort counted. He wants better sensors and smoother tracking.</p><div class="table bleed jt" tabindex="0" role="region" aria-label="Journey map, scrolls sideways"><table><caption class="vh">Peter’s journey map</caption><thead><tr><td></td><th scope="col">Before a workout</th><th scope="col">During</th><th scope="col">After</th><th scope="col">Overall</th></tr></thead><tbody><tr><th scope="row">Goals</th><td>Get ready to train</td><td>Track performance</td><td>See results</td><td>Improve fitness</td></tr><tr><th scope="row">Actions</th><td>Wears the watch to the gym</td><td>Starts the workout by hand; tracks calories, steps and heart rate zones</td><td>Checks calories burned and steps</td><td>Focuses on workouts; checks steps now and then</td></tr><tr><th scope="row">Thoughts</th><td><span class="nil">—</span></td><td>“I use it to track my workout time on treadmill.”</td><td>“It is very satisfying… it feels like I achieved something that day.”</td><td>“It helps me keep active.”</td></tr><tr><th scope="row">Pain points</th><td>No automatic workout detection</td><td>Doubts the calorie count: “I would work on the calorie sensor.”</td><td><span class="nil">—</span></td><td>Wants better music controls mid-workout</td></tr></tbody></table></div></div><div class="pp2" role="tabpanel" id="pan-ron" aria-labelledby="tab-ron" hidden><h3 class="h4">A typical day for Ron, the balanced worker and parent: A busy teaching day</h3><ol class="flow"><li>Checks his sleep score and adjusts the day</li><li>Uses guided breathing in class when stressed</li><li>Checks his heart rate if he feels off</li><li>Glances at steps between classes</li><li>Uses the relaxation timer while grading</li></ol><p class="out"><b>Outcome</b> The watch helps without adding stress, but on hard days he stops looking at the data.</p><div class="table bleed jt" tabindex="0" role="region" aria-label="Journey map, scrolls sideways"><table><caption class="vh">Ron’s journey map</caption><thead><tr><td></td><th scope="col">Morning</th><th scope="col">During the day</th><th scope="col">Evening</th><th scope="col">Overall</th></tr></thead><tbody><tr><th scope="row">Goals</th><td>Understand sleep quality</td><td>Stay aware of stress and movement</td><td>Wind down and manage stress</td><td>Stay balanced without obsessing</td></tr><tr><th scope="row">Actions</th><td>Checks his sleep score</td><td>Checks heart rate if he feels off, steps between classes, guided breathing</td><td>Sometimes uses the relaxation timer</td><td>Uses it flexibly, looking at trends</td></tr><tr><th scope="row">Thoughts</th><td>“I check my sleep score in the morning.”</td><td>“The guided breathing feature has become part of my classroom routine.”</td><td>“At night, I sometimes use the relaxation timer while grading.”</td><td>“It’s more about small, consistent awareness than chasing metrics.”</td></tr><tr><th scope="row">Pain points</th><td><span class="nil">—</span></td><td>Skips data when stressed: “I stop checking data altogether.”</td><td>Wants less data: “Less data, more meaning.”</td><td>Misses the watch when his routine breaks</td></tr></tbody></table></div></div><div class="pp2" role="tabpanel" id="pan-sky" aria-labelledby="tab-sky" hidden><h3 class="h4">A typical day for Sky, the tech casual: Sleep insights, and little else</h3><ol class="flow"><li>Wears it overnight and checks sleep in the morning</li><li>Wears it in the day if it’s charged</li><li>Skips the rings and mindfulness</li><li>Ignores calories, which he doesn’t trust</li></ol><p class="out"><b>Outcome</b> A passive tracker he uses as a reference, not a coach.</p><div class="table bleed jt" tabindex="0" role="region" aria-label="Journey map, scrolls sideways"><table><caption class="vh">Sky’s journey map</caption><thead><tr><td></td><th scope="col">Morning</th><th scope="col">During the day</th><th scope="col">Evening</th><th scope="col">Overall</th></tr></thead><tbody><tr><th scope="row">Goals</th><td>Check one basic health number</td><td>Stay casually aware of movement</td><td><span class="nil">—</span></td><td>Basic tracking only</td></tr><tr><th scope="row">Actions</th><td>Checks sleep</td><td>Checks steps now and then</td><td>No regular evening use</td><td>Wears it at night, sometimes in the day</td></tr><tr><th scope="row">Thoughts</th><td>“I wear it even while sleeping… mainly for tracking sleep.”</td><td>“I still use it mainly for tracking sleep and steps.”</td><td><span class="nil">—</span></td><td>“It doesn’t affect my day much.”</td></tr><tr><th scope="row">Pain points</th><td><span class="nil">—</span></td><td><span class="nil">—</span></td><td><span class="nil">—</span></td><td>Doesn’t trust calories: “Started thinking the calorie numbers might be way off.”</td></tr></tbody></table></div></div></div>
+</section>
+
+<section class="sec col" id="engaged" aria-labelledby="h-engaged">
+  <h2 id="h-engaged">What keeps people engaged</h2>
+  <p>Across both studies, three things decided whether a feature stayed in someone’s day.</p>
+  <div class="trio">
+    <div class="goal"><b>Relevance</b><p>It fits what they need right now. The same nudge is noise in class and helpful after it.</p></div>
+    <div class="goal"><b>Emotional payoff</b><p>It feels rewarding, like a closed ring or a good night’s sleep. Guilt makes people look away.</p></div>
+    <div class="goal"><b>Simplicity</b><p>It takes no effort to read. With too much data, people stop checking.</p></div>
+  </div>
+  <p style="margin-top:var(--s2)">So the design should adapt to context, nudge gently, and let each person choose how much feedback they get, whether they train daily or just want to sleep better.</p>
 </section>
 
 <section class="sec col" id="priorities" aria-labelledby="h-priorities">
@@ -570,6 +636,15 @@ td:first-child { width: 30%; }
 <section class="sec col" id="limitations" aria-labelledby="h-learn">
   <h2 id="h-learn">Limitations</h2>
   <ul class="quiet-list"><li>Different people took part in the observations and the interviews, so we couldn’t link someone’s behaviour to their own long-term habits.</li><li>Most participants used an Apple Watch, and all observation participants were men in their twenties.</li><li>People knew they were being observed, and interviews rely on memory.</li><li>Tend is a fictional product with sample data. Context-aware nudges would depend on calendar access and heart rate data, which raises privacy questions I’d explore with users before building.</li></ul>
+</section>
+
+<section class="sec col" id="reflection" aria-labelledby="h-reflect">
+  <h2 id="h-reflect">Reflection</h2>
+  <ul class="refl">
+    <li><b>Watching and asking answer different questions.</b> Observation showed what people did with a nudge in the moment. Interviews explained why some had dropped features altogether.</li>
+    <li><b>Design for the bad day.</b> The guilt we heard shaped more of Tend than any feature request: rest days, weekly streaks and kinder words.</li>
+    <li><b>Next time, the same people for both.</b> With different groups, we couldn’t link a moment to a habit. I’d run both methods with one group, and test Tend with all four kinds of user.</li>
+  </ul>
 </section>
 
 </main>
@@ -644,6 +719,23 @@ td:first-child { width: 30%; }
   m.addEventListener("click", function (e) { if (e.target.closest("a")) set(false); });
   function sync() { if (!mq.matches) set(false); m.toggleAttribute("inert", mq.matches && !m.classList.contains("open")); }
   b.addEventListener("click", sync); mq.addEventListener ? mq.addEventListener("change", sync) : mq.addListener(sync); sync();
+})();
+</script>
+<script>
+(function () {
+  var list = document.querySelector(".ptabs [role=tablist]"); if (!list) return;
+  var tabs = [].slice.call(list.querySelectorAll("[role=tab]"));
+  function pick(t, focus) {
+    tabs.forEach(function (x) { var on = x === t; x.setAttribute("aria-selected", on); x.tabIndex = on ? 0 : -1; document.getElementById(x.getAttribute("aria-controls")).hidden = !on; });
+    if (focus) t.focus();
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { pick(t); });
+    t.addEventListener("keydown", function (e) {
+      var j = e.key === "ArrowRight" ? i + 1 : e.key === "ArrowLeft" ? i - 1 : e.key === "Home" ? 0 : e.key === "End" ? tabs.length - 1 : null;
+      if (j === null) return; e.preventDefault(); pick(tabs[(j + tabs.length) % tabs.length], true);
+    });
+  });
 })();
 </script>
 </body>
