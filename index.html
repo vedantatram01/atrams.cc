@@ -614,6 +614,56 @@ img { max-width: 100%; display: block; }
 @keyframes npf { 0% { opacity: 0; } 4%, 30% { opacity: 1; } 34%, 100% { opacity: 0; } }
 .wk:hover .npt .nb { transform: translateY(-2px); transition: transform .3s; }
 @media (prefers-reduced-motion: reduce) { .np-task.ta { opacity: 1; } .npt .c0, .npt .pa1 { background: var(--hl); color: #fff; } }
+/* thumbnails v2: realistic devices */
+.pp, .whp, .devp { padding: .85cqw !important; border-radius: 4.4cqw !important; background: linear-gradient(150deg, #6A6F75 0%, #2A2D31 14%, #121315 55%, #2E3135 100%) !important; box-shadow: inset 0 0 0 .16cqw rgba(255,255,255,.22), inset 0 0 0 .5cqw #0B0C0D, 0 .3cqw .6cqw rgba(0,0,0,.18), 0 4cqw 7cqw -3cqw rgba(16,24,40,.5) !important; }
+.pp::before, .whp::before, .devp::before { content: ""; position: absolute; right: -.32cqw; top: 23%; width: .32cqw; height: 10%; border-radius: 0 .3cqw .3cqw 0; background: linear-gradient(90deg, #2A2D31, #55595E); }
+.pp::after, .whp::after, .devp::after { content: ""; position: absolute; left: -.32cqw; top: 18%; width: .32cqw; height: 6%; border-radius: .3cqw 0 0 .3cqw; background: linear-gradient(270deg, #2A2D31, #55595E); box-shadow: 0 2.6cqw 0 #3A3D42; }
+.whp, .devp { position: relative; }
+.ps, .whps, .devp .scr { position: relative; border-radius: 3.6cqw !important; overflow: hidden; background: #fff; }
+.ps::after, .devp .scr::after { content: ""; position: absolute; z-index: 2; top: 1cqw; left: 50%; width: 30%; height: 2.4cqw; transform: translateX(-50%); border-radius: 99px; background: #050505; }
+.ps::before, .whps::before, .devp .scr::before { content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none; background: linear-gradient(125deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,0) 32%); }
+.ps img { padding-top: 0; }
+.pb { width: 29% !important; margin-left: -14.5% !important; top: 7% !important; }
+.pa, .pc { width: 25% !important; top: 15% !important; }
+.pa { left: 6% !important; } .pc { right: 6% !important; }
+:root[data-mode="dark"] .pp, :root[data-mode="dark"] .whp, :root[data-mode="dark"] .devp { box-shadow: inset 0 0 0 .16cqw rgba(255,255,255,.28), inset 0 0 0 .5cqw #0B0C0D, 0 0 0 1px rgba(255,255,255,.08), 0 4cqw 7cqw -3cqw rgba(0,0,0,.8) !important; }
+/* watch polish */
+.whc { background: linear-gradient(150deg, #6A6F75 0%, #2A2D31 18%, #121315 60%, #34373B 100%) !important; box-shadow: inset 0 0 0 .16cqw rgba(255,255,255,.22), 0 4cqw 7cqw -3cqw rgba(16,40,30,.5) !important; }
+.whw .bt, .whw .bb { background: repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 .25cqw, transparent .25cqw .7cqw), linear-gradient(180deg, #3B4A43, #2A3530) !important; }
+.whw::after { content: ""; position: absolute; right: -1cqw; top: 30%; width: 1.3cqw; height: 4.5cqw; border-radius: .4cqw; background: linear-gradient(90deg, #2A2D31, #6A6F75); z-index: 0; }
+/* IO: browser window */
+.th-io { display: block !important; }
+.bw { position: absolute; left: 12cqw; right: 12cqw; top: 7cqw; bottom: -2cqw; border-radius: 1.2cqw 1.2cqw 0 0; overflow: hidden; background: var(--surface); box-shadow: 0 0 0 1px rgba(17,24,64,.08), 0 4cqw 8cqw -3cqw rgba(17,24,64,.35); transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+:root[data-mode="dark"] .bw { background: #1E1F24; box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 4cqw 8cqw -3cqw rgba(0,0,0,.8); }
+.bw-bar { display: flex; align-items: center; gap: .7cqw; height: 4.4cqw; padding: 0 1.6cqw; background: #F1F1F4; border-bottom: 1px solid rgba(0,0,0,.06); }
+:root[data-mode="dark"] .bw-bar { background: #26272D; border-bottom-color: rgba(255,255,255,.06); }
+.bw-bar i { width: 1.1cqw; height: 1.1cqw; border-radius: 50%; background: #FF6159; } .bw-bar i:nth-child(2) { background: #FFBD2E; } .bw-bar i:nth-child(3) { background: #28C941; }
+.bw-bar span { flex: 0 1 50%; margin: 0 auto; height: 2.4cqw; border-radius: .6cqw; background: rgba(0,0,0,.05); display: grid; place-items: center; font-size: 1.3cqw; line-height: 1; color: var(--soft); white-space: nowrap; overflow: hidden; }
+:root[data-mode="dark"] .bw-bar span { background: rgba(255,255,255,.06); }
+.bw-body .sr-card { width: auto !important; margin: 0 auto; max-width: 52cqw; box-shadow: none !important; background: transparent !important; padding: 3.6cqw 0 0 !important; }
+.wk:hover .bw { transform: translateY(-6px); }
+.wk:hover .bw .sr-card { transform: none !important; }
+.th-io .sr-cap { position: absolute !important; z-index: 2; right: 6cqw; bottom: 5cqw; width: 46cqw !important; box-shadow: 0 2cqw 4cqw -1.5cqw rgba(0,0,0,.45); }
+@media (max-width: 560px) { .th-io { --u: 1.15cqw !important; } .bw { left: 6cqw; right: 6cqw; } .bw-body .sr-card { max-width: 72cqw; } .th-io .sr-cap { right: 4cqw; width: 60cqw !important; } }
+/* NPS: phone + sitemap card */
+.th-np { --bx: #FFFFFF; --bt: #3A3128; --ln: #D8CCB8; --hl: #2F4A3A; }
+:root[data-mode="dark"] .th-np { --bx: #2A2622; --bt: #E8E0D4; --ln: #4A443C; --hl: #3A6E4D; }
+.npp { position: absolute !important; left: 13cqw; top: 6cqw; width: 25cqw; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+.npp .scr { aspect-ratio: 441 / 936; }
+.npp .scr::after { display: none; }
+.npp img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; opacity: 0; animation: npf 12s infinite; }
+.npp .nsb { animation-delay: -8s; } .npp .nsc { animation-delay: -4s; }
+.npc { position: absolute; left: 46cqw; top: 6cqw; width: 38cqw; padding: 1.8cqw 2.2cqw; border-radius: 1.2cqw; background: var(--bx); box-shadow: 0 0 0 1px rgba(60,40,20,.08), 0 3cqw 6cqw -2.5cqw rgba(60,40,20,.35); transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+.npc-h { margin: 0 0 .6cqw; font-size: 1.5cqw; font-weight: 600; color: var(--bt); opacity: .6; }
+.npc-t, .npc-t ul { list-style: none; margin: 0; padding: 0; }
+.npc-t li { margin: 0 !important; padding: 0 !important; line-height: 0; font-size: 0; }
+.npc-t li::before { display: none !important; }
+.npc-t ul { padding-left: 2.2cqw; border-left: .2cqw solid var(--ln); margin: .3cqw 0 .3cqw 1cqw; }
+.npc-t span { display: inline-block; margin: .05cqw 0; padding: .4cqw 1cqw; border-radius: .6cqw; font-size: 1.45cqw; line-height: 1.3; font-weight: 500; color: var(--bt); }
+.npc-t .ka { animation: nph 12s infinite; } .npc-t .kb { animation: nph 12s infinite -8s; } .npc-t .kc { animation: nph 12s infinite -4s; }
+.th-np .np-task { left: 65cqw; bottom: 8cqw; }
+.wk:hover .npp { transform: translateY(-6px); } .wk:hover .npc { transform: translateY(-3px); }
+@media (prefers-reduced-motion: reduce) { .npp .nsa { opacity: 1; } .npc-t .ka { background: var(--hl); color: #fff; } .wk:hover .bw, .wk:hover .npp, .wk:hover .npc { transform: none; } }
 </style>
 </head>
 <body>
@@ -674,14 +724,15 @@ img { max-width: 100%; display: block; }
     </article>
     <article class="wk rv t-np" aria-labelledby="case-04">
       <a class="wk-thumb th-np" href="national-parks.html" tabindex="-1" aria-hidden="true">
-        <div class="npt">
-          <b class="nb root">Home</b><i class="nl v" style="left:50cqw;top:12cqw;height:4cqw"></i><i class="nl h" style="left:9.4cqw;top:16cqw;width:81.2cqw"></i><i class="nl v" style="left:9.4cqw;top:16cqw;height:4cqw"></i><i class="nl v" style="left:21.0cqw;top:16cqw;height:4cqw"></i><i class="nl v" style="left:32.6cqw;top:16cqw;height:4cqw"></i><i class="nl v" style="left:44.2cqw;top:16cqw;height:4cqw"></i><i class="nl v" style="left:55.8cqw;top:16cqw;height:4cqw"></i><i class="nl v" style="left:67.4cqw;top:16cqw;height:4cqw"></i><i class="nl v" style="left:79.0cqw;top:16cqw;height:4cqw"></i><i class="nl v" style="left:90.6cqw;top:16cqw;height:4cqw"></i><b class="nb c0" style="left:4.2cqw">Visit</b><b class="nb c1" style="left:15.8cqw">About</b><b class="nb c2" style="left:27.4cqw">History</b><b class="nb c3" style="left:39.0cqw">Science</b><b class="nb c4" style="left:50.6cqw">Kids</b><b class="nb c5" style="left:62.2cqw">Teach</b><b class="nb c6" style="left:73.8cqw">Media</b><b class="nb c7" style="left:85.4cqw">Support</b>
-          <i class="nl v" style="left:9.4cqw;top:27cqw;height:21cqw"></i>
-          <b class="nb sub pa1" style="left:12cqw;top:31cqw">Parks</b><b class="nb sub" style="left:12cqw;top:38.5cqw">Events</b><b class="nb sub" style="left:12cqw;top:46cqw">Passes</b>
-          <i class="nl v" style="left:90.6cqw;top:27cqw;height:21cqw"></i>
-          <b class="nb sub" style="left:74cqw;top:31cqw">Donations</b><b class="nb sub pc1" style="left:74cqw;top:38.5cqw">Volunteering</b><b class="nb sub" style="left:74cqw;top:46cqw">Careers</b>
-          <span class="np-task ta">Plan a camping trip <em>80% found it</em></span><span class="np-task tb">Find a field trip <em>40% found it</em></span><span class="np-task tc">Volunteer at Redwood <em>50% found it</em></span>
-        </div>
+        <div class="devp npp"><div class="scr"><img class="nsa" src="assets/th-np-parks.webp" width="441" height="936" alt="" loading="lazy"><img class="nsb" src="assets/th-np-teach.webp" width="441" height="936" alt="" loading="lazy"><img class="nsc" src="assets/th-np-vol.webp" width="441" height="936" alt="" loading="lazy"></div></div>
+        <div class="npc"><p class="npc-h">Sitemap</p><ul class="npc-t">
+          <li><span class="ka">Visitor’s Guide</span><ul><li><span class="ka">Parks</span></li></ul></li>
+          <li><span>History</span></li><li><span>Science &amp; Nature</span></li><li><span>Kids</span></li>
+          <li><span class="kb">Teaching &amp; Education</span></li>
+          <li><span>Photos &amp; Multimedia</span></li><li><span>About Us</span></li>
+          <li><span class="kc">Supporting NPS</span><ul><li><span class="kc">Volunteering</span></li></ul></li>
+        </ul></div>
+        <span class="np-task ta">Plan a camping trip <em>80% found it</em></span><span class="np-task tb">Find a field trip <em>40% found it</em></span><span class="np-task tc">Volunteer at Redwood <em>50% found it</em></span>
       </a>
       <div class="wk-body">
         <div class="wk-row"><h3 id="case-04"><a href="national-parks.html">NPS.gov</a></h3><ul class="wk-tags" aria-label="Project type and year"><li>Information architecture</li><li>Mobile</li><li>2025–26</li></ul></div>
@@ -692,6 +743,7 @@ img { max-width: 100%; display: block; }
     </article>
     <article class="wk rv t-io" aria-labelledby="case-01">
       <a class="wk-thumb th-io" href="invisible-obstacles.html" tabindex="-1" aria-hidden="true">
+        <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Job application · Step 1 of 8</span></div><div class="bw-body">
         <div class="sr-card">
           <p class="sr-step"><span>Step 1 of 8</span><span>Contact</span></p>
           <p class="sr-h">Your name and today’s date</p>
@@ -704,6 +756,7 @@ img { max-width: 100%; display: block; }
             <em class="sr-ring"></em>
           </div>
         </div>
+        </div></div>
         <div class="sr-cap"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6v4h2.5l3.5 3V3L5 6z"/><path d="M11 5.5a3.5 3.5 0 010 5M12.8 3.8a6 6 0 010 8.4"/></svg><span class="cs"><span class="c c1">“Today’s date, group. Month, 1 of 3”</span><span class="c c2">“Day, 2 of 3”</span><span class="c c3">“Year, 3 of 3”</span><span class="c c4">“Date entered. Next: your address”</span></span></div>
       </a>
       <div class="wk-row"><h3 id="case-01"><a href="invisible-obstacles.html">Invisible Obstacles</a></h3><ul class="wk-tags" aria-label="Project type and year"><li>Accessibility</li><li>Form design</li><li>2025</li></ul></div>
