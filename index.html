@@ -67,20 +67,21 @@ img { max-width: 100%; display: block; }
 
 /* Intro */
 .intro { padding-top: var(--s5); padding-bottom: var(--s4); }
-.hello { display: flex; align-items: center; flex-wrap: wrap; gap: var(--s1) var(--s3); }
-.hello .otw { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px; border: 1px solid var(--line); border-radius: 999px; font-size: 14px; line-height: 20px; color: var(--text); font-weight: 500; }
+.otw { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); font-size: 14px; line-height: 20px; color: var(--text); font-weight: 500; }
 .otw .dot { position: relative; width: 8px; height: 8px; border-radius: 50%; background: #1FA25A; }
 .otw .dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: #1FA25A; animation: otw 2s ease-out infinite; }
 @keyframes otw { 0% { transform: scale(1); opacity: .6; } 100% { transform: scale(2.8); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .otw .dot::after { animation: none; display: none; } }
-.now { list-style: none; margin: var(--s2) 0 0; padding: 0; display: grid; gap: 6px; max-width: 640px; }
-.now li { position: relative; padding-left: 20px; font-size: 16px; line-height: 26px; color: var(--soft); }
-.now li::before { content: ""; position: absolute; left: 2px; top: 11px; width: 6px; height: 6px; border-radius: 50%; background: var(--muted); }
-.intro .links { display: flex; align-items: center; flex-wrap: wrap; gap: var(--s1) var(--s3); }
+.now { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2); margin: var(--s4) 0 0; max-width: 960px; }
+.now div { padding-top: var(--s1); border-top: 1px solid var(--line); }
+.now dt { font-size: 14px; line-height: 20px; color: var(--muted); }
+.now dd { margin: 4px 0 0; font-size: 16px; line-height: 24px; color: var(--text); max-width: 280px; }
+@media (max-width: 720px) { .now { grid-template-columns: minmax(0, 1fr); gap: var(--s1); } .now dd { max-width: none; } }
+.intro .links { display: flex; align-items: center; flex-wrap: wrap; gap: var(--s0); margin-top: var(--s3); }
 .avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; background: var(--mat); box-shadow: 0 0 0 1px var(--line); flex: none; }
 .hello p { font-size: 16px; line-height: 24px; color: var(--muted); }
 .hello b { display: block; color: var(--text); font-weight: 500; }
-.intro h1 { margin-top: var(--s2); max-width: 880px; font-size: clamp(32px, 4.6vw, 56px); line-height: 1.14; letter-spacing: -.025em; }
+.intro h1 { margin-top: var(--s2); max-width: 900px; font-size: clamp(32px, 4.2vw, 52px); line-height: 1.14; letter-spacing: -.025em; }
 .intro h1 .q { color: var(--muted); }
 .intro .lede { margin-top: var(--s2); max-width: 640px; color: var(--soft); }
 .links { margin-top: var(--s2); display: flex; flex-wrap: wrap; align-items: center; gap: var(--s0); }
@@ -706,19 +707,16 @@ img { max-width: 100%; display: block; }
 
 <main id="main">
   <header class="intro wrap" id="top">
-    <div class="hello rv">
-      <p><b>Vedant Atram</b>Product Designer at Intuit · Chicago</p>
-      <p class="otw"><span class="dot" aria-hidden="true"></span>Open to work</p>
-    </div>
-    <h1 class="rv">Product designer and UX researcher with 5+ years of experience. <span class="q">I turn research into simple, useful products for B2B and B2C teams.</span></h1>
-    <ul class="now rv">
-      <li>Designing core experiences for TurboTax and QuickBooks at Intuit</li>
-      <li>M.S. in Human-Computer Interaction, DePaul University, 2026</li>
-      <li>4 years designing web and mobile apps at Hexaware before that</li>
-    </ul>
+    <p class="otw rv"><span class="dot" aria-hidden="true"></span>Open to work · Chicago</p>
+    <h1 class="rv">I’m Vedant, a product designer and UX researcher with 5+ years of experience. <span class="q">I turn research into simple, useful products.</span></h1>
+    <dl class="now rv">
+      <div><dt>Now</dt><dd>Product Designer at Intuit, on TurboTax and QuickBooks</dd></div>
+      <div><dt>Before</dt><dd>4 years as a UI/UX Designer at Hexaware</dd></div>
+      <div><dt>Studied</dt><dd>M.S. Human-Computer Interaction, DePaul University</dd></div>
+    </dl>
     <div class="links rv">
       <a class="btn btn-primary" href="#contact">Get in touch</a>
-      <a class="xp-more" href="about.html">More about me <span aria-hidden="true">→</span></a>
+      <a class="btn btn-quiet" href="about.html">More about me</a>
     </div>
   </header>
 
