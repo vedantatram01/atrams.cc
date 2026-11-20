@@ -445,6 +445,30 @@ td:first-child { width: 30%; }
 .devshot img { display: block; width: 100%; height: auto; border-radius: 5px; }
 .shot.full { grid-template-columns: 1fr; gap: var(--s2); }
 .shot.full figcaption { max-width: 720px; }
+.sub-h { margin: var(--s3) 0 var(--s1); }
+.paths { display: grid; gap: var(--s2); margin-top: var(--s2); }
+.path { min-width: 0; border: 1px solid var(--line); border-radius: 5px; padding: var(--s2); }
+.tt-h { display: flex; justify-content: space-between; gap: var(--s1); flex-wrap: wrap; align-items: baseline; }
+.tt-h b { font-family: var(--display); font-weight: 500; font-size: 18px; color: var(--text); }
+.tt-h span { font-size: 14px; color: var(--muted); }
+.pbar { display: flex; height: 32px; margin-top: var(--s1); border-radius: 4px; overflow: hidden; font-size: 13px; font-weight: 600; }
+.pbar i, .pbar s { min-width: 0; text-overflow: ellipsis; display: flex; align-items: center; padding: 0 10px; white-space: nowrap; overflow: hidden; text-decoration: none; font-style: normal; }
+.pbar i { background: var(--accent); color: #fff; }
+:root[data-mode="dark"] .pbar i { color: #0B0C0E; }
+.pbar s { background: var(--mat); color: var(--text); }
+.went { margin: var(--s1) 0 0; font-size: 14px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.went em { font-style: normal; color: var(--text); border: 1px solid var(--line); border-radius: 4px; padding: 2px 8px; }
+.ia2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); margin-top: var(--s2); }
+.iac { border: 1px solid var(--line); border-radius: 5px; padding: var(--s2); }
+.iac.new { background: var(--accent-soft); border-color: transparent; }
+.iat { margin: 0; font-family: var(--display); font-weight: 500; font-size: 18px; color: var(--text); }
+.ian { margin: 4px 0 0; font-size: 14px; line-height: 20px; color: var(--muted); }
+.iac.new .ian { color: var(--text); }
+.iat-l { list-style: none; margin: var(--s1) 0; padding: 0; display: grid; gap: 8px; }
+.iat-l li { background: var(--surface); border-radius: 4px; padding: 10px 12px; box-shadow: 0 0 0 1px var(--line); }
+.iat-l b { display: block; font-weight: 600; font-size: 15px; color: var(--text); }
+.iat-l span { display: block; margin-top: 2px; font-size: 13px; line-height: 18px; color: var(--muted); }
+@media (max-width: 760px) { .ia2 { grid-template-columns: 1fr; } }
 td .sub, th .sub { font-size: 13px; line-height: 18px; color: var(--muted); font-weight: 400; }
 @media (max-width: 560px) { .stage.dev { padding: 0 var(--s1) var(--s2); } }
 </style>
@@ -471,7 +495,7 @@ td .sub, th .sub { font-size: 13px; line-height: 18px; color: var(--muted); font
   </div>
   <div class="col title">
     <h1>NPS.gov</h1>
-    <p>The National Park Service website holds everything from campsite bookings to scholarly papers, and it shows. We restructured its information architecture with a content audit, three card sorts and three tree tests. The tests didn’t go the way we hoped, and that’s the most useful part of this story.</p>
+    <p>What happens when people understand a menu but still can’t use it? We restructured the National Park Service website, which holds everything from campsite bookings to scholarly papers, through a content audit, three card sorts and three tree tests. The tests didn’t go the way we hoped, and that’s the most useful part of this story.</p>
     <div class="cta"><a class="btn" href="prototypes/national-parks/">Try the prototype <span aria-hidden="true">→</span></a><a class="pill-link" href="#brief">Read the case study</a></div>
     <dl class="meta">
       <div><dt>Problem</dt><dd>Inconsistent navigation, overlapping categories and buried actions made it hard to plan a visit, find teaching resources or volunteer.</dd></div>
@@ -519,7 +543,7 @@ td .sub, th .sub { font-size: 13px; line-height: 18px; color: var(--muted); font
 
 <section class="sec col" id="cardsort" aria-labelledby="h-cards">
   <h2 id="h-cards">Card sorting: from 9 groups to 5</h2>
-  <p>We proposed a new structure from the audit, then tested it with closed card sorts on Proven by Users. Each round, participants placed about 20 cards into our categories, and we changed labels and groups based on where they agreed and where they hesitated.</p>
+  <p>We proposed a new structure from the audit, then tested it with closed card sorts on Proven by Users. Participants for every card sort and tree test came from DePaul’s research participant pool, mostly students, with a different group each round. We didn’t screen for NPS visitors, teachers or volunteers, which matters for how far the results reach. Each round, participants placed about 20 cards into our categories, and we changed labels and groups based on where they agreed and where they hesitated.</p>
   <div class="table bleed" style="margin-top:var(--s2)"><table>
     <thead><tr><th scope="col">Round</th><th scope="col">What we saw</th><th scope="col">What we changed</th></tr></thead>
     <tbody>
@@ -537,14 +561,39 @@ td .sub, th .sub { font-size: 13px; line-height: 18px; color: var(--muted); font
     <thead><tr><th scope="col">Task</th><th scope="col">Pilot<br><span class="sub">10 people</span></th><th scope="col">Round 1<br><span class="sub">9 people</span></th><th scope="col">Round 2<br><span class="sub">10 people</span></th></tr></thead>
     <tbody><tr><td><b>Field trip</b><br><span class="sub">A middle school teacher looks for field trip information</span></td><td><span class="meter"><i style="--v:90%" aria-hidden="true"></i>90%</span></td><td><span class="meter"><i style="--v:22.2%" aria-hidden="true"></i>22.2%</span></td><td><span class="meter"><i style="--v:40%" aria-hidden="true"></i>40%</span></td></tr><tr><td><b>Camping trip</b><br><span class="sub">A family looks for a national park to camp in</span></td><td><span class="meter"><i style="--v:60%" aria-hidden="true"></i>60%</span></td><td><span class="meter"><i style="--v:44.4%" aria-hidden="true"></i>44.4%</span></td><td><span class="meter"><i style="--v:80%" aria-hidden="true"></i>80%</span></td></tr><tr><td><b>Volunteering</b><br><span class="sub">An environmental enthusiast signs up to volunteer at Redwood</span></td><td><span class="meter"><i style="--v:90%" aria-hidden="true"></i>90%</span></td><td><span class="meter"><i style="--v:66.7%" aria-hidden="true"></i>66.7%</span></td><td><span class="meter"><i style="--v:50%" aria-hidden="true"></i>50%</span></td></tr></tbody>
   </table></div>
-  <p class="cap">Success rate: the share of participants who chose the correct destination. Participants came from a university participant pool.</p>
+  <p class="cap">Success rate: the share of participants who chose the correct destination. </p>
   <div class="gap"><p class="kick">After the pilot</p><h3>The same test, much worse results</h3><div class="vs"><div class="got"><small>What happened</small><p>The pilot went well, so we ran round 1 with the same tasks and menu. Success fell, to 22% for field trips. With small, different groups, the pilot had flattered us.</p></div><div class="exp"><small>What we changed</small><p>We rewrote tasks that leaked the answer or misled: “geology” sent people to Science &amp; Nature, and “family” to Kids. “Educators” became “Teaching &amp; Education”.</p></div></div></div>
   <div class="gap"><p class="kick">After round 2</p><h3>One clear win, two open problems</h3><div class="vs"><div class="got"><small>What happened</small><p>Camping rose to 80%. Field trips reached 40%, with answers split between Visitor’s Guide, Science &amp; Nature and Kids. Volunteering fell to 50%: people looked in Visitor’s Guide, not Supporting NPS.</p></div><div class="exp"><small>What it told us</small><p>People understood our labels but couldn’t use them to reach a goal. We believe that’s partly content strategy and partly our guesses about NPS users’ goals, made without time for user or stakeholder interviews.</p></div></div></div>
+  <h3 class="sub-h">Where the wrong answers went</h3>
+  <p>Success rates hide the more useful question: where did people look instead? In round 2, these were the sections people chose when they missed.</p>
+  <div class="paths">
+    <div class="path"><div class="tt-h"><b>Field trip</b><span>Expected: Teaching &amp; Education</span></div><div class="pbar" role="img" aria-label="40% correct, 60% chose another section"><i style="width:40%">40% found it</i><s style="width:60%">60% went elsewhere</s></div><p class="went">Went to <em>Visitor’s Guide</em><em>Science &amp; Nature</em><em>Kids</em></p></div>
+    <div class="path"><div class="tt-h"><b>Camping trip</b><span>Expected: Visitor’s Guide › Parks</span></div><div class="pbar" role="img" aria-label="80% correct, 20% chose another section"><i style="width:80%">80% found it</i><s style="width:20%">20%</s></div><p class="went">Went to <em>Kids</em></p></div>
+    <div class="path"><div class="tt-h"><b>Volunteering</b><span>Expected: Supporting NPS › Volunteering</span></div><div class="pbar" role="img" aria-label="50% correct, 50% chose another section"><i style="width:50%">50% found it</i><s style="width:50%">50% went elsewhere</s></div><p class="went">Went to <em>Visitor’s Guide</em><em>Kids › Events for Kids</em></p></div>
+  </div>
+  <p class="cap">Our analysis recorded which sections attracted wrong answers, not how many people chose each, so the wrong destinations aren’t split by share. In round 1, “geology” in the task pulled teachers to Science &amp; Nature, “family” pulled campers to Kids, and “environmental science student” pulled volunteers to Educators.</p>
 </section>
 
 <section class="sec col" id="sitemap" aria-labelledby="h-sitemap">
   <h2 id="h-sitemap">The sitemap</h2>
-  <p>Ramya drew the final sitemap from three rounds of card sorting and tree testing. It keeps the five tested groups and brings back three top-level sections the card sort had removed, including Teaching &amp; Education, which round 1 of the tree test showed teachers needed. Four headings were renamed along the way.</p>
+  <p>Ramya drew the final sitemap from three rounds of card sorting and tree testing. Here it is next to the structure we started from, recorded in our content inventory.</p>
+  <div class="ia2">
+    <div class="iac"><p class="iat">Before: nps.gov in 2025</p><p class="ian">3 sections, all behind a hamburger menu, even on desktop</p>
+      <ul class="iat-l"><li><b>Plan Your Visit</b><span>Find a Park · Events · Passes · Trip Ideas</span></li><li><b>Learn &amp; Explore</b><span>About Us · Discover History (6 pages) · Explore Nature (8 pages) · Kids (5 pages) · Educators · News · Photos &amp; Multimedia · Explore by Topic</span></li><li><b>Get Involved</b><span>Donate · Partner · Volunteer · Work for Us · Community Resources</span></li></ul>
+      <p class="ian">Learn &amp; Explore held 8 different kinds of content, several with their own separate menus. Photos &amp; Multimedia existed twice. “Work for Us” lived under About Us.</p></div>
+    <div class="iac new"><p class="iat">After: our sitemap</p><p class="ian">8 sections, each named for what people come to do</p>
+      <ul class="iat-l"><li><b>Visitor’s Guide</b><span>Parks · Upcoming Events · Passes</span></li><li><b>History</b><span>American Stories · Historical Preservation · Education &amp; Training · Heritage · Research &amp; Grants</span></li><li><b>Science &amp; Nature</b><span>Nature Topics · Science &amp; Discovery · Scholarly Publications · Nature Updates</span></li><li><b>Kids</b><span>Trips for Kids · Events for Kids · Junior Rangers</span></li><li><b>Teaching &amp; Education</b></li><li><b>Photos &amp; Multimedia</b></li><li><b>About Us</b></li><li><b>Supporting NPS</b><span>Donations · Partnerships · Volunteering · Careers · Community Support</span></li></ul></div>
+  </div>
+  <h3 class="sub-h">From 5 tested groups to 8 sections</h3>
+  <p>The card sorts ended with 5 groups, but the sitemap has 8 sections. The 3 extra sections were all buried inside Learn &amp; Explore on the original site, and the card sort had spread their cards across other groups.</p>
+  <div class="table" style="margin-top:var(--s2)"><table>
+    <thead><tr><th scope="col">Section</th><th scope="col">Where it came from</th></tr></thead>
+    <tbody>
+      <tr><td>Visitor’s Guide, History, Science &amp; Nature, Kids, Supporting NPS</td><td>The 5 groups that reached 80–100% agreement in card sort round 2.</td></tr>
+      <tr><td>Teaching &amp; Education</td><td>Added after tree test round 1. Teachers couldn’t find field trips, and “Educators” was renamed to describe the content, not the audience.</td></tr>
+      <tr><td>About Us, Photos &amp; Multimedia</td><td>Restored as their own sections in the sitemap, after the card sort folded them into other groups. They were never tree tested, so this is a decision to validate.</td></tr>
+    </tbody>
+  </table></div>
   <figure class="shot wide full"><div class="frame"><div class="fr-in" style="aspect-ratio:1130/960"><img src="assets/np-sitemap.webp" width="1130" height="960" alt="Sitemap of the redesigned site. Eight top-level sections under the homepage: Visitor’s Guide, About Us, History, Science and Nature, Kids, Teaching and Education, Photos and Multimedia, and Supporting NPS, with their pages beneath. Four headings are starred as revised." loading="lazy"></div></div><figcaption><p>Eight sections, with four revised headings marked by stars.</p><ul class="quiet-list"><li>Visitor’s Guide puts Parks, Upcoming Events and Passes together, as participants grouped them.</li><li>“Volunteer” became “Volunteering”, because a menu item should describe a place, not a command.</li></ul></figcaption></figure>
 </section>
 
