@@ -643,8 +643,8 @@ img { max-width: 100%; display: block; }
 .bw-body .sr-card { width: auto !important; margin: 0 auto; max-width: 52cqw; box-shadow: none !important; background: transparent !important; padding: 3.6cqw 0 0 !important; }
 .wk:hover .bw { transform: translateY(-6px); }
 .wk:hover .bw .sr-card { transform: none !important; }
-.th-io .sr-cap { position: absolute !important; z-index: 2; right: 6cqw; bottom: 5cqw; width: 46cqw !important; box-shadow: 0 2cqw 4cqw -1.5cqw rgba(0,0,0,.45); }
-@media (max-width: 560px) { .th-io { --u: 1.15cqw !important; } .bw { left: 6cqw; right: 6cqw; } .bw-body .sr-card { max-width: 72cqw; } .th-io .sr-cap { right: 4cqw; width: 60cqw !important; } }
+.th-io .sr-cap { position: absolute !important; z-index: 2; right: 6cqw; bottom: 2.5cqw; width: 46cqw !important; box-shadow: 0 2cqw 4cqw -1.5cqw rgba(0,0,0,.45); }
+@media (max-width: 560px) { .th-io { --u: 1.15cqw !important; } .bw { left: 6cqw; right: 6cqw; } .bw-body .sr-card { max-width: 72cqw; } .th-io .sr-cap { right: 4cqw; bottom: 1.5cqw; width: 60cqw !important; } }
 /* NPS: phone + sitemap card */
 .th-np { --bx: #FFFFFF; --bt: #3A3128; --ln: #D8CCB8; --hl: #2F4A3A; }
 :root[data-mode="dark"] .th-np { --bx: #2A2622; --bt: #E8E0D4; --ln: #4A443C; --hl: #3A6E4D; }
@@ -664,6 +664,11 @@ img { max-width: 100%; display: block; }
 .th-np .np-task { left: 65cqw; bottom: 8cqw; }
 .wk:hover .npp { transform: translateY(-6px); } .wk:hover .npc { transform: translateY(-3px); }
 @media (prefers-reduced-motion: reduce) { .npp .nsa { opacity: 1; } .npc-t .ka { background: var(--hl); color: #fff; } .wk:hover .bw, .wk:hover .npp, .wk:hover .npc { transform: none; } }
+.sr-ans { display: flex; gap: calc(1.2 * var(--u)); margin-top: calc(1.4 * var(--u)) !important; }
+.sr-ans span { display: inline-flex; align-items: center; gap: calc(.8 * var(--u)); font-size: calc(2 * var(--u)); color: var(--soft); }
+.sr-ans span::before { content: ""; width: calc(1.8 * var(--u)); height: calc(1.8 * var(--u)); border-radius: 50%; box-shadow: inset 0 0 0 calc(.25 * var(--u)) var(--muted); }
+.sr-ans span.on { color: var(--text); font-weight: 500; }
+.sr-ans span.on::before { box-shadow: inset 0 0 0 calc(.55 * var(--u)) var(--accent); }
 </style>
 </head>
 <body>
@@ -743,21 +748,22 @@ img { max-width: 100%; display: block; }
     </article>
     <article class="wk rv t-io" aria-labelledby="case-01">
       <a class="wk-thumb th-io" href="invisible-obstacles.html" tabindex="-1" aria-hidden="true">
-        <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Job application · Step 1 of 8</span></div><div class="bw-body">
+        <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Job application · Step 2 of 8</span></div><div class="bw-body">
         <div class="sr-card">
-          <p class="sr-step"><span>Step 1 of 8</span><span>Contact</span></p>
-          <p class="sr-h">Your name and today’s date</p>
-          <p class="sr-lbl">Today’s date</p>
+          <p class="sr-step"><span>Step 2 of 8</span><span>Eligibility</span></p>
+          <p class="sr-h">If hired, could you start immediately?</p>
+          <p class="sr-ans"><span>Yes</span><span class="on">No</span></p>
+          <p class="sr-lbl">When could you start?</p>
           <p class="sr-hint">For example, 3 15 2027</p>
           <div class="sr-row">
-            <div class="sr-f"><span>Month</span><b><i class="v1">11</i></b></div>
-            <div class="sr-f"><span>Day</span><b><i class="v2">16</i></b></div>
-            <div class="sr-f"><span>Year</span><b><i class="v3">2026</i></b></div>
+            <div class="sr-f"><span>Month</span><b><i class="v1">1</i></b></div>
+            <div class="sr-f"><span>Day</span><b><i class="v2">5</i></b></div>
+            <div class="sr-f"><span>Year</span><b><i class="v3">2027</i></b></div>
             <em class="sr-ring"></em>
           </div>
         </div>
         </div></div>
-        <div class="sr-cap"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6v4h2.5l3.5 3V3L5 6z"/><path d="M11 5.5a3.5 3.5 0 010 5M12.8 3.8a6 6 0 010 8.4"/></svg><span class="cs"><span class="c c1">“Today’s date, group. Month, 1 of 3”</span><span class="c c2">“Day, 2 of 3”</span><span class="c c3">“Year, 3 of 3”</span><span class="c c4">“Date entered. Next: your address”</span></span></div>
+        <div class="sr-cap"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6v4h2.5l3.5 3V3L5 6z"/><path d="M11 5.5a3.5 3.5 0 010 5M12.8 3.8a6 6 0 010 8.4"/></svg><span class="cs"><span class="c c1">“When could you start? group. Month, 1 of 3”</span><span class="c c2">“Day, 2 of 3”</span><span class="c c3">“Year, 3 of 3”</span><span class="c c4">“Date entered. Next: desired salary”</span></span></div>
       </a>
       <div class="wk-row"><h3 id="case-01"><a href="invisible-obstacles.html">Invisible Obstacles</a></h3><ul class="wk-tags" aria-label="Project type and year"><li>Accessibility</li><li>Form design</li><li>2025</li></ul></div>
       <p class="wk-role">UX Researcher &amp; Designer · Team of 4 · Redesign by me</p>

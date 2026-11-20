@@ -404,9 +404,8 @@ fieldset.has-error .choice { border-color: var(--error); }
         '<ul class="checklist" data-finding="3"><li>' + I.home + 'Your contact details and home address</li><li>' + I.case + 'Your past jobs, with the month and year you started and left each one</li><li>' + I.cap + 'The schools you attended and for how many years</li><li>' + I.people + 'Names and phone numbers for up to three references</li></ul>';
     },
     1: function () {
-      return progress() + head(TITLES[1], "We use these details to contact you.") +
-        section(I.user, "Your name and today’s date") + '<div class="fields">' +
-        dateMDY("today", "Today’s date") +
+      return progress() + head(TITLES[1], "We use these details to contact you. Today’s date is added for you when you submit.") +
+        section(I.user, "Your name") + '<div class="fields">' +
         '<div class="row3 names">' + text("first", "First name", { auto: "given-name" }) + text("middle", "Middle initial", { auto: "additional-name", optional: true, max: 1, cls: "w-2" }) + text("last", "Last name", { auto: "family-name" }) + '</div></div>' +
         section(I.home, "Home address") + '<div class="fields">' +
         text("addr1", "Address line 1", { auto: "address-line1" }) + text("addr2", "Address line 2", { auto: "address-line2", optional: true, hint: "Apartment, suite or unit" }) +
@@ -488,7 +487,7 @@ fieldset.has-error .choice { border-color: var(--error); }
       var refs = [1, 2, 3].map(function (n) { var p = "r" + n; return ["Reference " + n, [g(p + "name"), g(p + "phone"), g(p + "business")].filter(Boolean).join("\n"), n === 1 || !!g(p + "name")]; });
       return progress() + head(TITLES[8], "Choose Change to edit a section. You will come straight back here.") +
         section(I.list, "Your answers") + '<div class="fields">' +
-        rsec("Personal contact information", 1, [["Today’s date", mdy("today")], ["Name", [g("first"), g("middle") ? g("middle") + "." : "", g("last")].filter(Boolean).join(" ")], ["Address", addr], ["Phone number", g("phone")], ["Email address", g("email")]]) +
+        rsec("Personal contact information", 1, [["Application date", (function () { var d = new Date(); return MONTHS[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear() + " (added automatically)"; })()], ["Name", [g("first"), g("middle") ? g("middle") + "." : "", g("last")].filter(Boolean).join(" ")], ["Address", addr], ["Phone number", g("phone")], ["Email address", g("email")]]) +
         rsec("Eligibility, position and salary", 2, [["18 or older", g("adult")], ["Authorized to work in the US", g("auth")], ["Position", g("position")], ["Hours a week", g("hours")], ["Start immediately", g("immediate")], ["Could start", mdy("start"), g("immediate") === "No"], ["Desired salary", g("salary")], ["Employed now", g("employed")], ["May contact present employer", g("inquire"), g("employed") === "Yes"], ["Applied before", g("appliedbefore")], ["Referred by", g("referred")]]) +
         rsec("Education, training and military service", 3, [schoolRow("hs", "High school"), schoolRow("col", "College"), schoolRow("grad", "Graduate school"), ["Special skills", g("skills")], ["Veteran", g("veteran")], ["Military service", g("military"), g("veteran") === "Yes"]]) +
         rsec("Employment history", 4, jobs.concat([["Liked best", g("likedbest")], ["Dismissed or forced to resign", g("dismissed")]])) +
@@ -600,7 +599,6 @@ fieldset.has-error .choice { border-color: var(--error); }
   function validate() {
     var e = [];
     if (step === 1) {
-      checkMDY(e, "today", "today’s date");
       if (!g("first")) e.push(["first", "Enter your first name"]);
       if (!g("last")) e.push(["last", "Enter your last name"]);
       if (g("middle") && !/^[A-Za-z]$/.test(g("middle"))) e.push(["middle", "Middle initial must be one letter"]);
