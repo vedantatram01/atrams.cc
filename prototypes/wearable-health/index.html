@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tend · Wearable health prototype</title>
+<meta name="description" content="A watch and phone prototype that turns wearable health research into calmer check-ins, better-timed nudges and simpler workout feedback.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F3F1EC; --card: #FFFFFF; --ink: #17201D; --soft: #4B5752; --muted: #5B6661; --line: #E2DED6;
+  --brand: #2E6F5E; --brand-ink: #FFFFFF; --brand-soft: #E3EFEA;
+  --sleep: #A99BFF; --move: #FF8F6B; --mind: #52D6C4; --heart: #FF6B7D; --steps: #FFCB5C;
+  --w-bg: #000; --w-card: #1B1D1F; --w-line: #2A2D30; --w-soft: #A5ADAA;
+  --r: 5px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { font-family: Manrope, system-ui, sans-serif; background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* top bar */
+.top { position: sticky; top: 0; z-index: 5; background: rgba(243,241,236,.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.top-in { max-width: 1240px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; letter-spacing: -.02em; }
+.logo i { width: 26px; height: 26px; border-radius: 50%; background: conic-gradient(var(--sleep) 0 33%, var(--move) 0 66%, var(--mind) 0); position: relative; }
+.logo i::after { content: ""; position: absolute; inset: 6px; border-radius: 50%; background: var(--bg); }
+.logo small { font-weight: 500; font-size: 13px; color: var(--muted); letter-spacing: 0; }
+.tabs { display: flex; gap: 4px; flex-wrap: wrap; margin-left: auto; }
+.tabs button { border: 1px solid transparent; background: transparent; padding: 8px 14px; border-radius: 999px; font-weight: 600; font-size: 14px; color: var(--soft); }
+.tabs button:hover { background: rgba(23,32,29,.06); }
+.tabs button[aria-selected="true"] { background: var(--ink); color: #fff; }
+.tabs b { font-weight: 600; opacity: .6; margin-right: 6px; }
+
+/* stage */
+.stage { max-width: 1240px; margin: 0 auto; padding: 32px 24px 64px; display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 40px; align-items: start; }
+.intro h1 { margin: 0; font-size: clamp(24px, 3vw, 32px); line-height: 1.2; letter-spacing: -.02em; font-weight: 700; }
+.intro p { margin: 8px 0 0; color: var(--soft); font-size: 16px; line-height: 1.55; max-width: 620px; }
+.devices { margin-top: 28px; display: flex; gap: 48px; align-items: center; justify-content: center; flex-wrap: wrap; padding: 40px 24px; border-radius: var(--r); background: radial-gradient(120% 90% at 30% 20%, #FFFFFF 0%, #EAE6DE 100%); }
+
+/* watch */
+.watch { position: relative; width: 260px; }
+.watch .band { position: absolute; left: 50%; transform: translateX(-50%); width: 64%; height: 90px; background: linear-gradient(180deg, #2E3B36, #26302C); border-radius: 18px; }
+.watch .band.t { top: -62px; } .watch .band.b { bottom: -62px; }
+.watch .case { position: relative; z-index: 1; padding: 12px; border-radius: 56px; background: linear-gradient(145deg, #3A3F42, #16191B); box-shadow: 0 30px 60px -30px rgba(20,30,25,.6), inset 0 0 0 1px rgba(255,255,255,.08); }
+.watch .crown { position: absolute; z-index: 0; right: -9px; top: 32%; width: 14px; height: 46px; border-radius: 5px; background: linear-gradient(90deg, #2A2E30, #4A5053); }
+.screen { position: relative; aspect-ratio: 236 / 284; border-radius: 44px; background: var(--w-bg); color: #fff; overflow: hidden; padding: 22px 18px 18px; display: flex; flex-direction: column; font-size: 14px; }
+.w-time { position: absolute; top: 12px; right: 22px; font-size: 13px; font-weight: 600; color: #fff; }
+.w-app { font-size: 12px; font-weight: 700; color: var(--w-soft); letter-spacing: .01em; }
+.w-h { margin: 6px 0 0; font-size: 20px; line-height: 1.15; font-weight: 700; letter-spacing: -.01em; }
+.w-p { margin: 6px 0 0; font-size: 13px; line-height: 1.35; color: #D6DBD9; }
+.w-big { font-size: 40px; line-height: 1; font-weight: 800; letter-spacing: -.03em; }
+.w-big small { font-size: 16px; font-weight: 600; color: var(--w-soft); margin-left: 4px; letter-spacing: 0; }
+.w-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; border-radius: 12px; background: var(--w-card); font-size: 13px; margin-top: 6px; }
+.w-row b { font-weight: 700; }
+.w-row s { color: var(--w-soft); text-decoration: line-through; margin-right: 6px; font-weight: 500; }
+.w-btns { margin-top: auto; display: grid; gap: 6px; }
+.w-btn { border: 0; border-radius: 999px; padding: 9px 12px; font-weight: 700; font-size: 14px; background: var(--w-card); color: #fff; }
+.w-btn.pri { background: var(--mind); color: #06231F; }
+.w-btn.sleep { background: var(--sleep); color: #15103A; }
+.w-btn.move { background: var(--move); color: #3A1206; }
+.w-btn:hover { filter: brightness(1.08); }
+.w-chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px; background: var(--w-card); font-size: 12px; font-weight: 600; color: #D6DBD9; }
+.dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+.stages { display: flex; gap: 2px; height: 22px; margin-top: 10px; align-items: flex-end; }
+.stages i { flex: 1; border-radius: 3px; background: var(--sleep); }
+.face { margin: auto 0; text-align: center; }
+.face .clock { font-size: 52px; font-weight: 800; letter-spacing: -.04em; line-height: 1; }
+.face .date { color: var(--w-soft); font-size: 13px; font-weight: 600; margin-top: 4px; }
+.comps { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+.comp { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-weight: 700; }
+.ring { --p: 60; --c: var(--move); width: 92px; height: 92px; border-radius: 50%; background: conic-gradient(var(--c) calc(var(--p) * 1%), #2A2D30 0); display: grid; place-items: center; margin: 10px auto 0; }
+.ring > div { width: 70px; height: 70px; border-radius: 50%; background: #000; display: grid; place-items: center; text-align: center; font-weight: 800; font-size: 18px; line-height: 1.05; }
+.ring small { display: block; font-size: 10px; color: var(--w-soft); font-weight: 600; }
+.zones { display: flex; gap: 3px; margin-top: 10px; }
+.zones i { flex: 1; height: 8px; border-radius: 4px; background: #2A2D30; }
+.zones i.on { background: var(--move); }
+.media { margin-top: auto; display: flex; align-items: center; gap: 6px; padding: 7px 8px 7px 12px; border-radius: 999px; background: var(--w-card); }
+.media span { flex: 1; min-width: 0; font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #D6DBD9; }
+.media button { width: 30px; height: 30px; border-radius: 50%; border: 0; background: #2A2D30; color: #fff; display: grid; place-items: center; padding: 0; }
+.media svg { width: 14px; height: 14px; }
+.breath { width: 120px; height: 120px; margin: 14px auto 6px; border-radius: 50%; background: radial-gradient(circle, rgba(82,214,196,.9) 0%, rgba(82,214,196,.25) 60%, transparent 70%); animation: breathe 8s ease-in-out infinite; }
+@keyframes breathe { 0%, 100% { transform: scale(.6); } 50% { transform: scale(1); } }
+.w-center { text-align: center; }
+.check { width: 48px; height: 48px; border-radius: 50%; background: var(--mind); color: #06231F; display: grid; place-items: center; margin: 18px auto 8px; }
+.check svg { width: 24px; height: 24px; }
+.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
+.tile { border-radius: 14px; background: var(--w-card); padding: 10px; }
+.tile .l { font-size: 11px; font-weight: 700; color: var(--w-soft); }
+.tile .v { font-size: 20px; font-weight: 800; margin-top: 2px; letter-spacing: -.02em; }
+.tile.wide { grid-column: 1 / -1; }
+.simple .tile .v { font-size: 30px; }
+
+/* phone */
+.phone { width: 320px; padding: 10px; border-radius: 46px; background: #121614; box-shadow: 0 40px 70px -35px rgba(20,30,25,.6), inset 0 0 0 1px rgba(255,255,255,.08); }
+.p-screen { position: relative; height: 640px; border-radius: 37px; background: var(--bg); overflow: hidden; display: flex; flex-direction: column; }
+.p-status { display: flex; justify-content: space-between; align-items: center; padding: 14px 26px 6px; font-size: 13px; font-weight: 700; }
+.p-status .isl { width: 92px; height: 26px; border-radius: 999px; background: #121614; }
+.p-body { flex: 1; overflow-y: auto; padding: 8px 16px 24px; scrollbar-width: none; }
+.p-body::-webkit-scrollbar { display: none; }
+.p-h { margin: 6px 0 2px; font-size: 24px; font-weight: 800; letter-spacing: -.02em; }
+.p-sub { margin: 0 0 12px; font-size: 13px; color: var(--muted); font-weight: 600; }
+.p-card { background: var(--card); border-radius: 16px; padding: 14px; margin-top: 10px; box-shadow: 0 1px 2px rgba(23,32,29,.05); }
+.p-card h3 { margin: 0; font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.p-card p { margin: 6px 0 0; font-size: 13px; line-height: 1.45; color: var(--soft); }
+.p-big { font-size: 28px; font-weight: 800; letter-spacing: -.02em; margin-top: 6px; }
+.p-big small { font-size: 14px; font-weight: 600; color: var(--muted); margin-left: 4px; }
+.p-hl { border: 1.5px solid var(--brand); }
+.p-tag { display: inline-block; font-size: 11px; font-weight: 700; color: var(--brand); background: var(--brand-soft); padding: 3px 8px; border-radius: 999px; margin-top: 8px; }
+.bar { height: 8px; border-radius: 4px; background: #ECE9E2; overflow: hidden; margin-top: 8px; }
+.bar i { display: block; height: 100%; border-radius: 4px; }
+.kv { display: flex; justify-content: space-between; font-size: 13px; padding: 8px 0; border-top: 1px solid #F0EDE7; }
+.kv:first-of-type { border-top: 0; }
+.kv span { color: var(--soft); }
+.kv b { font-weight: 700; }
+.tgl { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-top: 1px solid #F0EDE7; font-size: 13px; }
+.tgl:first-of-type { border-top: 0; }
+.tgl span small { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
+.sw { flex: none; width: 40px; height: 24px; border-radius: 999px; border: 0; background: #D7D3CB; position: relative; padding: 0; }
+.sw::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: left .2s; }
+.sw[aria-checked="true"] { background: var(--brand); }
+.sw[aria-checked="true"]::after { left: 19px; }
+.seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 4px; border-radius: 12px; background: #ECE9E2; margin-top: 10px; }
+.seg button { border: 0; border-radius: 9px; padding: 8px 4px; font-size: 13px; font-weight: 700; background: transparent; color: var(--soft); }
+.seg button[aria-pressed="true"] { background: #fff; color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+.week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-top: 10px; text-align: center; font-size: 11px; font-weight: 700; color: var(--muted); }
+.week i { display: block; width: 26px; height: 26px; margin: 4px auto 0; border-radius: 50%; background: #ECE9E2; }
+.week i.a { background: var(--move); }
+.week i.r { background: #fff; border: 2px dashed var(--sleep); }
+.week i.t { background: #fff; border: 2px solid var(--move); }
+.log { font-size: 12px; }
+.log .kv { font-size: 12px; }
+.zbars { display: flex; align-items: flex-end; gap: 6px; height: 70px; margin-top: 10px; }
+.zbars div { flex: 1; text-align: center; font-size: 10px; color: var(--muted); font-weight: 700; }
+.zbars i { display: block; border-radius: 4px 4px 0 0; background: #F3C3B2; margin-bottom: 4px; }
+.zbars i.on { background: var(--move); }
+.p-btn { width: 100%; border: 0; border-radius: 12px; padding: 11px; font-weight: 700; font-size: 14px; background: var(--brand); color: var(--brand-ink); margin-top: 12px; }
+
+/* why panel */
+.why { position: sticky; top: 84px; }
+.why h2 { margin: 0; font-size: 18px; font-weight: 700; letter-spacing: -.01em; }
+.why .try { margin: 8px 0 0; font-size: 14px; line-height: 1.5; color: var(--soft); }
+.why ol { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 10px; }
+.why li { background: var(--card); border-radius: var(--r); padding: 14px 16px; border: 1px solid var(--line); }
+.why li .f { font-size: 12px; font-weight: 700; color: var(--brand); }
+.why li h3 { margin: 4px 0 0; font-size: 15px; line-height: 1.35; font-weight: 700; }
+.why li p { margin: 6px 0 0; font-size: 13px; line-height: 1.5; color: var(--soft); }
+.why li q { display: block; margin-top: 8px; font-size: 13px; color: var(--ink); font-style: italic; }
+.why li q::before { content: "“"; } .why li q::after { content: "”"; }
+.why li cite { display: block; margin-top: 2px; font-size: 12px; font-style: normal; color: var(--muted); }
+.reset { margin-top: 14px; border: 1px solid var(--line); background: var(--card); border-radius: 999px; padding: 8px 14px; font-weight: 600; font-size: 13px; }
+.foot { max-width: 1240px; margin: 0 auto; padding: 0 24px 40px; font-size: 13px; color: var(--muted); }
+
+@media (max-width: 1080px) { .stage { grid-template-columns: 1fr; } .why { position: static; } }
+@media (max-width: 720px) {
+  .top-in { padding: 10px 16px; gap: 10px; }
+  .tabs { margin-left: 0; width: 100%; overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; }
+  .tabs button { white-space: nowrap; }
+  .stage { padding: 20px 16px 48px; }
+  .devices { gap: 72px; padding: 72px 12px; flex-direction: column; }
+  .phone { width: min(320px, 100%); }
+}
+@media (prefers-reduced-motion: reduce) { .breath { animation: none; transform: scale(.85); } .sw::after { transition: none; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <div class="logo"><i aria-hidden="true"></i>Tend <small>Watch + phone prototype</small></div>
+    <div class="tabs" role="tablist" aria-label="Moments in a day" id="tabs"></div>
+  </div>
+</header>
+
+<div class="stage">
+  <main>
+    <div class="intro">
+      <h1 id="sc-title"></h1>
+      <p id="sc-desc"></p>
+    </div>
+    <div class="devices">
+      <div class="watch" aria-label="Watch">
+        <div class="band t" aria-hidden="true"></div><div class="band b" aria-hidden="true"></div>
+        <div class="crown" aria-hidden="true"></div>
+        <div class="case"><div class="screen" id="watch" aria-live="polite"></div></div>
+      </div>
+      <div class="phone" aria-label="Phone">
+        <div class="p-screen"><div class="p-status" aria-hidden="true"><span id="p-time">9:41</span><span class="isl"></span><span>5G</span></div><div class="p-body" id="phone" aria-live="polite"></div></div>
+      </div>
+    </div>
+  </main>
+  <aside class="why" aria-labelledby="why-h">
+    <h2 id="why-h">Why it works this way</h2>
+    <p class="try" id="try"></p>
+    <ol id="why"></ol>
+    <button class="reset" type="button" data-act="reset">Start this moment again</button>
+  </aside>
+</div>
+<p class="foot">Portfolio prototype by Vedant Atram, based on a 2025 DePaul study of 14 wearable users. Tend is a fictional product and all health data is sample data.</p>
+
+<script>
+(function () {
+  var S = { sc: "morning", step: 0, eased: true, metric: 0, playing: true, mode: "balanced", restDays: true, pause: false, holdCal: true, holdWork: true, breathOff: false, evening: null };
+  var ic = {
+    check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+    prev: '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 3h1.6v10H4zM13 3v10L6.5 8z"/></svg>',
+    next: '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M10.4 3H12v10h-1.6zM3 3l6.5 5L3 13z"/></svg>',
+    play: '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>',
+    pause: '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/></svg>'
+  };
+  var SC = {
+    morning: { n: 1, tab: "Morning", title: "Morning check-in", desc: "Sleep comes first, and the day's plan adapts to how you slept, so a bad night doesn't turn into a failed day.",
+      tr: "On the watch, tap through the morning check-in and choose whether to ease today's goals.",
+      why: [
+        { f: "Finding 1 · Sleep is the daily anchor", h: "Sleep is the first thing you see, on the watch and the phone.", p: "In both studies, people opened sleep data first and adjusted their day around it. Tend leads with it instead of burying it under rings.", q: "I check my sleep score in the morning.", qs: "Interview participant" },
+        { f: "Finding 2 · Rings motivate and pressure", h: "After a short night, Tend offers a lighter goal, and keeping it doesn't break your streak.", p: "Missing goals made people feel guilty. Adjusting the goal to the day keeps the motivation without the pressure." }
+      ] },
+    midday: { n: 2, tab: "Midday", title: "A nudge at the right time", desc: "Reminders wait until you're free, and a breathing break is offered when your body suggests you need one.",
+      tr: "Skip ahead to the end of class, then choose how to respond to the nudge.",
+      why: [
+        { f: "Finding · Notifications arrive at the wrong time", h: "Nudges are held during calendar events and delivered together afterwards.", p: "Many reminders were dismissed because of poor timing, in class, at work or in the middle of something else.", q: "Reminders during focus work annoyed me.", qs: "Observation note" },
+        { f: "Finding 4 · Mindfulness is used under stress", h: "A breather is suggested when your heart rate stays high, not on a fixed timer.", p: "People used breathing tools during acute stress, but nothing prompted them at the right moment. Every nudge can be snoozed or turned off right on the watch." }
+      ] },
+    workout: { n: 3, tab: "Workout", title: "Workout feedback you can read mid-run", desc: "One big number at a time, music controls on the same screen, and calories shown honestly as an estimate.",
+      tr: "Start the detected run, cycle the metric, play or pause music, then end the workout.",
+      why: [
+        { f: "Finding 3 · Workout features have gaps", h: "Music controls sit on the workout screen, so you never leave it.", p: "Participants struggled switching between workout and media screens mid-session." },
+        { f: "Priority matrix · Auto workout detection", h: "Tend notices you're running and asks if you want to track it.", p: "People wanted the watch to start tracking without a manual start." },
+        { f: "Persona · Sky distrusts calories", h: "Calories appear as a range, labelled as an estimate.", p: "Several people ignored calorie numbers because they didn't trust them. A range is more honest and easier to trust." }
+      ] },
+    evening: { n: 4, tab: "Evening", title: "Ending the day without guilt", desc: "Missing a goal gets a kind response and a choice, and progress is counted across the week, not judged day by day.",
+      tr: "Your move goal is nearly done. Choose a short walk or call it a rest day.",
+      why: [
+        { f: "Finding 2 · Rings motivate and pressure", h: "Rest days protect your streak, so one off day doesn't erase a good week.", p: "Some participants avoided the app on days they hadn't moved. Pausing streaks without guilt was a high-value, low-effort fix in our priority matrix.", q: "Some days I feel like I'm being judged.", qs: "Interview participant" },
+        { f: "Design implication · Emotional reinforcement", h: "The language encourages; it never scolds.", p: "Users felt proud when they met goals and disengaged when they fell short. Supportive messages help them come back the next day." }
+      ] },
+    settings: { n: 5, tab: "Make it yours", title: "As much detail as you want", desc: "Casual users can keep it to sleep and steps; fitness users can turn everything on. The watch updates as you choose.",
+      tr: "On the phone, switch between Simple, Balanced and Detailed and watch the watch face change.",
+      why: [
+        { f: "Finding 5 · Casual users stay passive", h: "Simple mode shows only sleep and steps.", p: "Casual users valued simplicity and avoided complex features. A simpler UI mode was another high-value, low-effort fix in the matrix." },
+        { f: "Design implication · Let people decide", h: "Rest days, pausing goals and nudges are all under your control.", p: "Engagement came from relevance, emotional payoff and simplicity. People turned off features that felt intrusive, so Tend lets them tune instead of quit." }
+      ] }
+  };
+  var order = ["morning", "midday", "workout", "evening", "settings"];
+  var $ = function (id) { return document.getElementById(id); };
+  var times = { morning: "7:12", midday: "11:48", workout: "6:05", evening: "8:40", settings: "9:41" };
+
+  function tabs() {
+    $("tabs").innerHTML = order.map(function (k) { var s = SC[k]; return '<button type="button" role="tab" id="tab-' + k + '" aria-selected="' + (S.sc === k) + '" data-sc="' + k + '"><b>' + s.n + '</b>' + s.tab + '</button>'; }).join("");
+  }
+  function stagesBar() { var h = [60, 90, 40, 100, 70, 30, 85, 50, 95, 40, 25, 60, 35, 20]; return '<div class="stages" aria-hidden="true">' + h.map(function (x, i) { return '<i style="height:' + x + '%;opacity:' + (i > 9 ? .45 : 1) + '"></i>'; }).join("") + '</div>'; }
+
+  function watch() {
+    var t = '<span class="w-time" aria-hidden="true">' + (S.sc === "midday" && S.step > 0 ? "12:31" : times[S.sc]) + '</span>';
+    var s = S.step, h = "";
+    if (S.sc === "morning") {
+      if (s === 0) h = '<div class="w-app">Sleep</div><p class="w-h">Good morning</p><div class="w-big" style="margin-top:8px">6h 10m</div><p class="w-p">Restless after 3 am. About an hour less than usual.</p>' + stagesBar() + '<div class="w-btns"><button class="w-btn sleep" data-act="next">See today’s plan</button></div>';
+      else if (s === 1) h = '<div class="w-app">Today</div><p class="w-h">Let’s go easier today</p><p class="w-p">You slept less than usual, so here’s a lighter plan.</p><div class="w-row"><span>Move</span><b><s>30</s>20 min</b></div><div class="w-row"><span>Stand nudges</span><b>After noon</b></div><div class="w-btns"><button class="w-btn pri" data-act="ease">Sounds good</button><button class="w-btn" data-act="keep">Keep my usual goals</button></div>';
+      else h = '<div class="w-center"><div class="check">' + ic.check + '</div><p class="w-h">' + (S.eased ? "Plan set" : "Usual goals kept") + '</p><p class="w-p">' + (S.eased ? "Your streak isn’t affected. Go gently today." : "We’ll still go easy on nudges this morning.") + '</p></div><div class="w-btns"><button class="w-btn" data-act="reset">Back to start</button></div>';
+    } else if (S.sc === "midday") {
+      if (s === 0) h = '<div class="face"><div class="clock">11:48</div><div class="date">Tue 18 Nov</div><div style="margin-top:14px"><span class="w-chip"><i class="dot" style="background:var(--sleep)"></i>In class · 2 nudges held</span></div></div><div class="w-btns"><button class="w-btn" data-act="next">Skip to 12:31, after class</button></div>';
+      else if (s === 1) h = S.breathOff
+        ? '<div class="w-app">Tend</div><p class="w-h">Class is over</p><p class="w-p">While you were in class: stand up and drink some water.</p><div class="w-btns"><button class="w-btn pri" data-act="reset">Done</button></div>'
+        : '<div class="w-app">Tend · after class</div><p class="w-h">Take a minute?</p><p class="w-p">Your heart rate has been higher than usual for 40 minutes. A short breather can help.</p><div class="w-btns"><button class="w-btn pri" data-act="breathe">Start 1-minute breather</button><button class="w-btn" data-act="later">After lunch</button><button class="w-btn" data-act="off">Don’t suggest this</button></div>';
+      else if (s === 2) h = '<div class="w-app w-center">Breathe</div><div class="breath" aria-hidden="true"></div><p class="w-p w-center" id="br-t">Breathe in as the circle grows</p><div class="w-btns"><button class="w-btn" data-act="breathdone">Finish</button></div>';
+      else if (s === 3) h = '<div class="w-center"><div class="check">' + ic.check + '</div><p class="w-h">Nice</p><p class="w-p">Heart rate settling: 96 → 84 bpm.</p></div><div class="w-btns"><button class="w-btn" data-act="reset">Back to start</button></div>';
+      else if (s === 4) h = '<div class="w-center"><div class="check">' + ic.check + '</div><p class="w-h">I’ll check in at 1:15</p><p class="w-p">After lunch, when your calendar is free.</p></div><div class="w-btns"><button class="w-btn" data-act="reset">Back to start</button></div>';
+      else h = '<div class="w-center"><div class="check">' + ic.check + '</div><p class="w-h">Got it</p><p class="w-p">No more breather suggestions. Turn them back on anytime in the phone app.</p></div><div class="w-btns"><button class="w-btn" data-act="reset">Back to start</button></div>';
+    } else if (S.sc === "workout") {
+      if (s === 0) h = '<div class="w-app">Workout</div><p class="w-h">Looks like you’re running</p><p class="w-p">8 minutes so far. Track it as an outdoor run?</p><div class="w-btns"><button class="w-btn move" data-act="next">Track this run</button><button class="w-btn" data-act="notrun">Not a workout</button></div>';
+      else if (s === 1) {
+        var m = [
+          '<div class="w-app">Heart rate · Zone 3</div><div class="w-big" style="margin-top:6px">148<small>bpm</small></div><div class="zones" aria-label="Zone 3 of 5">' + [1, 2, 3, 4, 5].map(function (z) { return '<i class="' + (z === 3 ? "on" : "") + '"></i>'; }).join("") + '</div><p class="w-p">Steady. Hold this pace.</p>',
+          '<div class="w-app">Pace</div><div class="w-big" style="margin-top:6px">5:42<small>/km</small></div><p class="w-p">1.9 km · on target</p>',
+          '<div class="w-app">Time</div><div class="w-big" style="margin-top:6px">14:20</div><p class="w-p">Including the 8 minutes before you started tracking.</p>'
+        ][S.metric];
+        h = m + '<div class="media"><span>Run Mix</span><button type="button" data-act="track" aria-label="Previous song">' + ic.prev + '</button><button type="button" data-act="play" aria-label="' + (S.playing ? "Pause music" : "Play music") + '">' + (S.playing ? ic.pause : ic.play) + '</button><button type="button" data-act="track" aria-label="Next song">' + ic.next + '</button></div><div class="w-btns" style="grid-template-columns:1fr 1fr;margin-top:6px"><button class="w-btn" data-act="metric">Next</button><button class="w-btn move" data-act="end">End</button></div>';
+      } else if (s === 2) h = '<div class="w-app">Run complete</div><p class="w-h">32 min · 5.6 km</p><div class="w-row"><span>Mostly</span><b style="color:var(--move)">Zone 3</b></div><div class="w-row"><span>Calories, estimate</span><b>310–360</b></div><div class="w-btns"><button class="w-btn" data-act="reset">Done</button></div>';
+      else h = '<div class="w-center"><div class="check">' + ic.check + '</div><p class="w-h">OK, not tracking</p><p class="w-p">We’ll learn from this. Walks to the station won’t be flagged again.</p></div><div class="w-btns"><button class="w-btn" data-act="reset">Back to start</button></div>';
+    } else if (S.sc === "evening") {
+      if (s === 0) h = '<div class="w-app">Today</div><div class="ring" style="--p:90;--c:var(--move)"><div>18<small>of 20 min</small></div></div><p class="w-p w-center">So close. Every bit of movement counts.</p><div class="w-btns"><button class="w-btn move" data-act="walk">Take a 5-minute walk</button><button class="w-btn" data-act="rest">Call it a rest day</button></div>';
+      else if (S.evening === "walk") h = '<div class="w-app">Walk</div><div class="w-big" style="margin-top:8px">3:12</div><p class="w-p">2 more minutes and today’s goal is done.</p><div class="w-btns"><button class="w-btn" data-act="reset">Back to start</button></div>';
+      else h = '<div class="w-center"><div class="check" style="background:var(--sleep);color:#15103A">' + ic.check + '</div><p class="w-h">Rest day logged</p><p class="w-p">3 active days and a rest day. Your week is still on track.</p></div><div class="w-btns"><button class="w-btn" data-act="reset">Back to start</button></div>';
+    } else {
+      var mode = S.mode;
+      if (mode === "simple") h = '<div class="w-app">Today · Simple</div><div class="tiles simple"><div class="tile wide"><div class="l" style="color:var(--sleep)">Sleep</div><div class="v">6h 10m</div></div><div class="tile wide"><div class="l" style="color:var(--steps)">Steps</div><div class="v">4,820</div></div></div>';
+      else if (mode === "balanced") h = '<div class="w-app">Today · Balanced</div><div class="tiles"><div class="tile wide"><div class="l" style="color:var(--sleep)">Sleep</div><div class="v">6h 10m</div></div><div class="tile"><div class="l" style="color:var(--move)">Move</div><div class="v">18m</div></div><div class="tile"><div class="l" style="color:var(--mind)">Mindful</div><div class="v">1m</div></div><div class="tile wide"><div class="l" style="color:var(--steps)">Steps</div><div class="v">4,820</div></div></div>';
+      else h = '<div class="w-app">Today · Detailed</div><div class="tiles"><div class="tile"><div class="l" style="color:var(--sleep)">Sleep</div><div class="v">6h 10m</div></div><div class="tile"><div class="l" style="color:var(--heart)">Resting HR</div><div class="v">62</div></div><div class="tile"><div class="l" style="color:var(--move)">Move</div><div class="v">18m</div></div><div class="tile"><div class="l" style="color:var(--mind)">Mindful</div><div class="v">1m</div></div><div class="tile"><div class="l" style="color:var(--steps)">Steps</div><div class="v">4.8k</div></div><div class="tile"><div class="l">Calories</div><div class="v" style="font-size:16px">1.6–1.9k</div></div></div>';
+    }
+    $("watch").innerHTML = t + h;
+  }
+
+  function sw(key, label, sub) { return '<div class="tgl"><span>' + label + (sub ? '<small>' + sub + '</small>' : '') + '</span><button type="button" class="sw" role="switch" aria-checked="' + S[key] + '" data-tgl="' + key + '" aria-label="' + label + '"></button></div>'; }
+
+  function phone() {
+    var h = "", s = S.step;
+    $("p-time").textContent = S.sc === "midday" && s > 0 ? "12:31" : times[S.sc];
+    if (S.sc === "morning") {
+      var planned = s >= 2;
+      h = '<p class="p-h">Today</p><p class="p-sub">Tuesday 18 November</p>' +
+        '<div class="p-card"><h3><i class="dot" style="background:var(--sleep)"></i>Last night’s sleep</h3><div class="p-big">6h 10m<small>usually 7h 05m</small></div><p>Restless after 3 am. Two short wake-ups.</p>' + stagesBar().replace('class="stages"', 'class="stages" style="height:34px"') + '</div>' +
+        '<div class="p-card' + (planned ? ' p-hl' : '') + '"><h3>Today’s plan</h3>' +
+        (planned ? (S.eased ? '<p>Adjusted to your sleep. Lighter goal today, and your streak is safe.</p><div class="kv"><span>Move</span><b>20 min</b></div><div class="kv"><span>Stand nudges</span><b>After noon</b></div><span class="p-tag">Eased for today</span>' : '<p>You kept your usual goals. Nudges stay quiet until noon.</p><div class="kv"><span>Move</span><b>30 min</b></div><div class="kv"><span>Stand nudges</span><b>After noon</b></div>')
+          : '<p>Waiting for your check-in on the watch.</p><div class="kv"><span>Move</span><b>30 min</b></div><div class="kv"><span>Stand nudges</span><b>All day</b></div>') + '</div>' +
+        '<div class="p-card"><h3><i class="dot" style="background:var(--move)"></i>Move</h3><div class="bar"><i style="width:4%;background:var(--move)"></i></div><p>1 of ' + (planned && S.eased ? 20 : 30) + ' minutes so far</p></div>';
+    } else if (S.sc === "midday") {
+      var out = s === 0 ? "Held until class ends" : s === 1 ? "Suggested at 12:31" : s === 2 ? "Breathing now" : s === 3 ? "Done · 96 → 84 bpm" : s === 4 ? "Moved to 1:15 pm" : "Turned off";
+      h = '<p class="p-h">Nudges</p><p class="p-sub">They wait until you’re free</p>' +
+        '<div class="p-card"><h3>When to hold nudges</h3>' + sw("holdCal", "During calendar events", "Class, meetings, focus time") + sw("holdWork", "During workouts") + '<div class="tgl"><span>Quiet hours<small>10 pm to 7 am</small></span><b style="font-size:13px">On</b></div></div>' +
+        '<div class="p-card log"><h3>Today</h3><div class="kv"><span>10:05 · Stand up</span><b>' + (s === 0 ? "Held" : "Delivered 12:31") + '</b></div><div class="kv"><span>11:10 · Drink water</span><b>' + (s === 0 ? "Held" : "Delivered 12:31") + '</b></div><div class="kv"><span>12:31 · Breather</span><b>' + (S.breathOff && s === 1 ? "Turned off" : out) + '</b></div></div>' +
+        '<div class="p-card"><h3>Breather suggestions</h3><p>Offered when your heart rate stays high and your calendar is free.</p><button type="button" class="p-btn" data-act="togglebreath" style="background:' + (S.breathOff ? "var(--brand)" : "#ECE9E2") + ';color:' + (S.breathOff ? "#fff" : "var(--ink)") + '">' + (S.breathOff ? "Turn breather suggestions on" : "Turn breather suggestions off") + '</button></div>';
+    } else if (S.sc === "workout") {
+      if (s < 2 || s === 3) h = '<p class="p-h">Workouts</p><p class="p-sub">This week</p><div class="p-card"><h3><i class="dot" style="background:var(--move)"></i>' + (s === 1 ? "Run in progress" : "No workout in progress") + '</h3><p>' + (s === 1 ? "Live on your watch. Music, metrics and controls stay on one screen." : "Start moving and Tend will ask if you want to track it.") + '</p></div><div class="p-card"><h3>Auto-detect</h3>' + '<div class="kv"><span>Running</span><b>On</b></div><div class="kv"><span>Strength</span><b>Ask first</b></div><div class="kv"><span>Walking to places</span><b>' + (s === 3 ? "Ignored now" : "Ask first") + '</b></div></div>';
+      else h = '<p class="p-h">Run</p><p class="p-sub">Today, 6:05 am · 32 min · 5.6 km</p><div class="p-card"><h3>Time in each zone</h3><div class="zbars">' + [[8, 1], [22, 2], [64, 3], [18, 4], [4, 5]].map(function (z) { return '<div><i class="' + (z[1] === 3 ? "on" : "") + '" style="height:' + z[0] + 'px"></i>Z' + z[1] + '</div>'; }).join("") + '</div><p>Mostly Zone 3, a steady aerobic run.</p></div><div class="p-card"><h3>Calories</h3><div class="p-big">310–360<small>kcal</small></div><p>Wrist sensors estimate calories, so Tend shows a range instead of one exact number.</p></div><div class="p-card"><div class="kv"><span>Average pace</span><b>5:43 /km</b></div><div class="kv"><span>Average heart rate</span><b>146 bpm</b></div></div>';
+    } else if (S.sc === "evening") {
+      var rest = s > 0 && S.evening === "rest";
+      h = '<p class="p-h">This week</p><p class="p-sub">Consistency over perfection</p><div class="p-card"><h3>Active days</h3><div class="p-big">' + (s > 0 && S.evening === "walk" ? 4 : 3) + '<small>of 5 planned</small></div><div class="week">' + ["M", "T", "W", "T", "F", "S", "S"].map(function (d, i) { var c = i < 3 ? "a" : i === 3 ? (rest ? "r" : s > 0 && S.evening === "walk" ? "a" : "t") : ""; return '<div>' + d + '<i class="' + c + '"></i></div>'; }).join("") + '</div><p>' + (rest ? "Rest day logged. Rest days protect your streak." : "Thursday is today.") + '</p>' + (S.restDays ? '<span class="p-tag">2 rest days a week</span>' : '') + '</div><div class="p-card"><h3><i class="dot" style="background:var(--sleep)"></i>Sleep and movement</h3><p>On weeks you slept 7 hours or more, you moved about 20% more.</p></div><div class="p-card"><h3>Streak</h3><div class="p-big">3<small>weeks</small></div><p>Counted by week, so one quiet day never resets it.</p></div>';
+    } else {
+      var d = { simple: "Sleep and steps only. No rings, no streaks.", balanced: "Sleep, move, mindful minutes and steps.", detailed: "Everything, including heart rate and calorie ranges." };
+      h = '<p class="p-h">Make Tend yours</p><p class="p-sub">Change anything, anytime</p><div class="p-card"><h3>How much do you want to see?</h3><div class="seg" role="group" aria-label="Detail level">' + ["simple", "balanced", "detailed"].map(function (m) { return '<button type="button" data-mode="' + m + '" aria-pressed="' + (S.mode === m) + '">' + m.charAt(0).toUpperCase() + m.slice(1) + '</button>'; }).join("") + '</div><p>' + d[S.mode] + '</p></div>' +
+        '<div class="p-card"><h3>Goals and streaks</h3>' + sw("restDays", "Rest days", "2 a week, without breaking your streak") + sw("pause", "Pause goals", "For travel, illness or a busy week") + '</div>' +
+        '<div class="p-card"><h3>Tone</h3><div class="kv"><span>Messages</span><b>Encouraging</b></div><div class="kv"><span>Missed goals</span><b>Never shown as failures</b></div></div>';
+    }
+    $("phone").innerHTML = h;
+  }
+
+  function why() {
+    var s = SC[S.sc];
+    $("sc-title").textContent = s.title; $("sc-desc").textContent = s.desc; $("try").textContent = "Try it: " + s.tr;
+    $("why").innerHTML = s.why.map(function (w) { return '<li><div class="f">' + w.f + '</div><h3>' + w.h + '</h3><p>' + w.p + '</p>' + (w.q ? '<q>' + w.q + '</q><cite>' + w.qs + '</cite>' : '') + '</li>'; }).join("");
+  }
+  function render(all) { tabs(); watch(); phone(); if (all !== false) why(); }
+  function go(sc) { S.sc = sc; S.step = 0; S.metric = 0; S.evening = null; if (sc === "morning") S.eased = true; render(); }
+
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    if (b.dataset.sc) { go(b.dataset.sc); document.getElementById("tab-" + b.dataset.sc).focus(); return; }
+    if (b.dataset.mode) { S.mode = b.dataset.mode; render(false); return; }
+    if (b.dataset.tgl) { S[b.dataset.tgl] = !S[b.dataset.tgl]; render(false); return; }
+    var a = b.dataset.act; if (!a) return;
+    if (a === "reset") { go(S.sc); return; }
+    if (a === "next") S.step++;
+    else if (a === "ease") { S.eased = true; S.step = 2; }
+    else if (a === "keep") { S.eased = false; S.step = 2; }
+    else if (a === "breathe") S.step = 2;
+    else if (a === "breathdone") S.step = 3;
+    else if (a === "later") S.step = 4;
+    else if (a === "off") { S.breathOff = true; S.step = 5; }
+    else if (a === "togglebreath") S.breathOff = !S.breathOff;
+    else if (a === "notrun") S.step = 3;
+    else if (a === "metric") S.metric = (S.metric + 1) % 3;
+    else if (a === "play") S.playing = !S.playing;
+    else if (a === "track") {}
+    else if (a === "end") S.step = 2;
+    else if (a === "walk") { S.evening = "walk"; S.step = 1; }
+    else if (a === "rest") { S.evening = "rest"; S.step = 1; }
+    render(false);
+    var first = document.querySelector("#watch button"); if (first && b.closest("#watch")) first.focus();
+  });
+  document.getElementById("tabs").addEventListener("keydown", function (e) {
+    var i = order.indexOf(S.sc);
+    if (e.key === "ArrowRight") { e.preventDefault(); go(order[(i + 1) % order.length]); $("tab-" + S.sc).focus(); }
+    if (e.key === "ArrowLeft") { e.preventDefault(); go(order[(i + order.length - 1) % order.length]); $("tab-" + S.sc).focus(); }
+  });
+  var h = (location.hash || "").slice(1); if (SC[h]) S.sc = h;
+  render();
+})();
+</script>
+</body>
+</html>
