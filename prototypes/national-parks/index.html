@@ -125,8 +125,8 @@ button { cursor: pointer; }
 .ok .tick { width: 56px; height: 56px; margin: 0 auto 14px; border-radius: 50%; background: var(--sage); color: var(--forest); display: grid; place-items: center; }
 .ok .tick svg { width: 28px; height: 28px; }
 .foot { margin-top: 28px; padding: 20px; background: #E9E3D8; font-size: 12px; line-height: 1.5; color: var(--muted); }
-.toast { position: absolute; left: 16px; right: 16px; bottom: 20px; z-index: 5; background: var(--ink); color: #fff; border-radius: 12px; padding: 12px 14px; font-size: 14px; transform: translateY(140%); transition: transform .25s; }
-.toast.on { transform: none; }
+.toast { position: absolute; left: 16px; right: 16px; bottom: 20px; z-index: 5; background: var(--ink); color: #fff; border-radius: 12px; padding: 12px 14px; font-size: 14px; transform: translateY(calc(100% + 40px)); visibility: hidden; transition: transform .25s, visibility 0s .25s; }
+.toast.on { transform: none; visibility: visible; transition: transform .25s; }
 
 /* side panel */
 .side h1 { margin: 0; font-family: var(--serif); font-size: clamp(26px, 3vw, 34px); line-height: 1.15; letter-spacing: -.01em; }
@@ -245,17 +245,43 @@ button { cursor: pointer; }
     return '<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="g' + i + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="' + p[0] + '"/><stop offset="1" stop-color="' + p[1] + '"/></linearGradient></defs><rect width="400" height="300" fill="url(#g' + i + ')"/><circle cx="' + (280 - (s % 140)) + '" cy="80" r="26" fill="#FFF6E5" opacity=".85"/><polygon points="' + ridge(170, 90, s) + '" fill="' + p[2] + '"/><polygon points="' + ridge(215, 70, s + 90) + '" fill="' + p[3] + '"/><polygon points="' + ridge(255, 45, s + 200) + '" fill="' + p[4] + '"/></svg>';
   }
   var PARKS = [
-    { id: "dunes", n: "Indiana Dunes National Park", st: "Indiana", mi: 50, tags: ["camping", "family", "access"], a: 0, blurb: "Beaches, dunes and woodland trails on Lake Michigan." },
-    { id: "smoky", n: "Great Smoky Mountains National Park", st: "Tennessee and North Carolina", mi: 560, tags: ["camping", "family"], a: 3, blurb: "Misty ridges, waterfalls and historic cabins." },
-    { id: "rocky", n: "Rocky Mountain National Park", st: "Colorado", mi: 1000, tags: ["camping", "access"], a: 1, blurb: "Alpine lakes, tundra and wildlife along Trail Ridge Road." },
-    { id: "acadia", n: "Acadia National Park", st: "Maine", mi: 1100, tags: ["camping", "family", "access"], a: 5, blurb: "Rocky coastline, carriage roads and Cadillac Mountain." },
-    { id: "yosemite", n: "Yosemite National Park", st: "California", mi: 2100, tags: ["camping"], a: 2, blurb: "Granite cliffs, giant sequoias and waterfalls." }
+    { id: "dunes", n: "Indiana Dunes National Park", st: "Indiana", lat: 41.65, lon: -87.05, tags: ["camping", "family", "access"], a: 0, blurb: "Beaches, dunes and woodland trails on Lake Michigan." },
+    { id: "smoky", n: "Great Smoky Mountains National Park", st: "Tennessee and North Carolina", lat: 35.61, lon: -83.49, tags: ["camping", "family"], a: 3, blurb: "Misty ridges, waterfalls and historic cabins." },
+    { id: "rocky", n: "Rocky Mountain National Park", st: "Colorado", lat: 40.34, lon: -105.68, tags: ["camping", "access"], a: 1, blurb: "Alpine lakes, tundra and wildlife along Trail Ridge Road." },
+    { id: "acadia", n: "Acadia National Park", st: "Maine", lat: 44.34, lon: -68.27, tags: ["camping", "family", "access"], a: 5, blurb: "Rocky coastline, carriage roads and Cadillac Mountain." },
+    { id: "yosemite", n: "Yosemite National Park", st: "California", lat: 37.87, lon: -119.54, tags: ["camping"], a: 2, blurb: "Granite cliffs, giant sequoias and waterfalls." }
   ];
+  /* Straight-line distance from the searched zip code. Big metro areas by their first three digits, anywhere else by region */
+  var ZIPC = { "0": [42.4, -71.4], "1": [41.0, -75.5], "2": [37.5, -78.5], "3": [33.8, -84.4], "4": [40.0, -84.0], "5": [44.5, -96.0], "6": [40.0, -91.0], "7": [31.5, -96.5], "8": [39.0, -108.0], "9": [37.0, -120.5] };
+  var METRO = [[/^0(1|2)[0-7]/, [42.36, -71.06]], [/^1(0[0-4]|1[0-4])/, [40.71, -74.0]], [/^19[01]/, [39.95, -75.17]], [/^20[0-5]/, [38.9, -77.04]], [/^30[0-3]/, [33.75, -84.39]], [/^33[0-2]/, [25.76, -80.19]], [/^4[78][0-2]/, [42.33, -83.05]], [/^55[45]/, [44.98, -93.27]], [/^60[0-8]/, [41.88, -87.63]], [/^63[01]/, [38.63, -90.2]], [/^75[0-3]/, [32.78, -96.8]], [/^77[0-2]/, [29.76, -95.37]], [/^80[0-2]/, [39.74, -104.99]], [/^85[0-3]/, [33.45, -112.07]], [/^9(0[0-9]|1[0-8])/, [34.05, -118.24]], [/^94[0-1]/, [37.77, -122.42]], [/^9(4[2-8]|5[01])/, [37.8, -122.27]], [/^98[01]/, [47.61, -122.33]], [/^97[0-2]/, [45.52, -122.68]]];
+  function zipPoint(z) { for (var i = 0; i < METRO.length; i++) if (METRO[i][0].test(z)) return METRO[i][1]; return ZIPC[z.charAt(0)]; }
+  function milesTo(a, p) { var r = Math.PI / 180, dl = (p.lat - a[0]) * r, dn = (p.lon - a[1]) * r, h = Math.sin(dl / 2) * Math.sin(dl / 2) + Math.cos(a[0] * r) * Math.cos(p.lat * r) * Math.sin(dn / 2) * Math.sin(dn / 2); var mi = 3959 * 2 * Math.asin(Math.sqrt(h)); return mi < 100 ? Math.max(10, Math.round(mi / 5) * 5) : Math.round(mi / 50) * 50; }
   var RES = [
-    { id: "dunesgeo", n: "Geology of the Dunes: field trip guide", s: "Grades 6–8 · Indiana Dunes National Park · 1 day", a: 0 },
-    { id: "rockcycle", n: "The rock cycle, in the field", s: "Lesson kit · Grades 6–8 · Downloadable", a: 2 },
-    { id: "layers", n: "Virtual field trip: canyon layers", s: "Video and worksheet · Grades 5–9", a: 4 }
+    { id: "dunesgeo", kind: "trip", g: [6, 8], n: "Geology of the Dunes: field trip guide", s: "Grades 6–8 · Indiana Dunes National Park · 1 day", a: 0, kw: "geology earth science dunes sand indiana field trip",
+      facts: [["Grades", "6–8"], ["Length", "Half or full day"], ["Group size", "Up to 40 students"], ["Cost", "Free for school groups"]],
+      does: ["Read the dunes like a geologist: wind, water and time.", "Collect and sort sand samples.", "Meet a ranger and log observations in a field journal."],
+      how: ["How to book", ["Pick two or three preferred dates.", "Send the request; a ranger confirms within a week.", "Download the pre-visit lesson for your class."]], cta: ["book", "Request a date"] },
+    { id: "rockcycle", kind: "lesson", g: [6, 8], n: "The rock cycle, in the field", s: "Lesson kit · Grades 6–8 · Downloadable", a: 2, kw: "geology earth science rocks rock cycle minerals lesson plan",
+      facts: [["Grades", "6–8"], ["Format", "Downloadable lesson kit"], ["Time", "Two 45-minute lessons"], ["Cost", "Free"]],
+      does: ["Sort rock samples into igneous, sedimentary and metamorphic.", "Trace one rock through the cycle with a park example.", "Plan what to look for on a park visit."],
+      how: ["How to use it", ["Download the kit and print the student pages.", "Teach it before or after a park visit, or on its own."]], cta: ["soon", "Download the lesson kit (PDF)"] },
+    { id: "layers", kind: "virtual", g: [5, 9], n: "Virtual field trip: canyon layers", s: "Video and worksheet · Grades 5–9", a: 4, kw: "geology earth science canyon rock layers erosion virtual video",
+      facts: [["Grades", "5–9"], ["Format", "Video and worksheet"], ["Length", "40 minutes"], ["Cost", "Free"]],
+      does: ["Watch a ranger read the canyon walls, layer by layer.", "Match each layer to the time it formed.", "Answer the worksheet questions in pairs."],
+      how: ["How to use it", ["Play the video in class; no sign-up needed.", "Pause at each layer for the worksheet."]], cta: ["soon", "Watch the video"] }
   ];
+  function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[c]; }); }
+  /* Teacher search: a grade, a kind of material, or a topic word */
+  function findRes(q) {
+    q = q.toLowerCase(); if (!q) return RES;
+    var gm = q.match(/grades?\s*(\d+)/), kind = /field trip/.test(q) ? "trip" : /lesson/.test(q) ? "lesson" : /virtual/.test(q) ? "virtual" : null;
+    var words = q.replace(/grades?\s*\d+([–-]\d+)?/g, " ").replace(/field trips?|lesson plans?|virtual visits?/g, " ").split(/[^a-z]+/).filter(function (w) { return w.length > 2; });
+    return RES.filter(function (r) {
+      if (gm && (+gm[1] < r.g[0] || +gm[1] > r.g[1])) return false;
+      if (kind && r.kind !== kind) return false;
+      return !words.length || words.some(function (w) { return r.kw.indexOf(w.replace(/s$/, "")) > -1; });
+    });
+  }
   var OPPS = [
     { id: "redwood", n: "Trail and habitat restoration", p: "Redwood National and State Parks, California", w: "Weekends, March to October", a: 3 },
     { id: "dunesvol", n: "Beach and dune clean-up", p: "Indiana Dunes National Park, Indiana", w: "Monthly, year-round", a: 0 },
@@ -286,19 +312,19 @@ button { cursor: pointer; }
       return '<section class="hero"><div class="art">' + art(0) + '</div><h1 class="h1">Find your next park</h1><p>Search 400+ parks by name, state or zip code.</p><form class="searchrow" data-form="hero"><label class="vh" for="hq">Park name, state or zip code</label><input id="hq" placeholder="Park, state or zip code" autocomplete="off"><button class="btn" type="submit">Search</button></form></section>' +
         '<div class="sechead"><h2 class="h2">Popular parks</h2><button class="link" data-go="parks">See all parks</button></div><div class="scroller">' + PARKS.slice(0, 4).map(function (p) { return '<button class="pc" data-go="park:' + p.id + '"><div class="art">' + art(p.a) + '</div><div class="t"><b>' + p.n.replace(" National Park", "") + '</b><span>' + p.st + '</span></div></button>'; }).join("") + '</div>' +
         '<div class="sechead"><h2 class="h2">Plan, teach or help</h2></div><div class="list">' +
-        [["parks", "Plan a visit", "Parks, events and passes", 3], ["teach", "Teaching & Education", "Field trips and lesson plans", 2], ["volunteer", "Volunteer", "Opportunities in parks near you", 1]].map(function (x) { return '<button class="row" data-go="' + x[0] + '"><div class="art">' + art(x[3]) + '</div><div><b>' + x[1] + '</b><span>' + x[2] + '</span></div></button>'; }).join("") + '</div>' +
+        [["parks", "Plan a visit", "Parks, events and passes", 3], ["teach", "Teaching & Education", "Field trips and lesson plans", 2], ["volunteer", "Volunteering", "Opportunities in parks near you", 1]].map(function (x) { return '<button class="row" data-go="' + x[0] + '"><div class="art">' + art(x[3]) + '</div><div><b>' + x[1] + '</b><span>' + x[2] + '</span></div></button>'; }).join("") + '</div>' +
         '<div class="sechead"><h2 class="h2">Featured stories</h2><button class="link" data-go="sec:stories">More stories</button></div><div class="scroller">' + [["Women of the early ranger service", 4], ["How dunes move", 0], ["The Civilian Conservation Corps", 2]].map(function (x) { return '<button class="pc" data-go="sec:stories"><div class="art">' + art(x[1]) + '</div><div class="t"><b>' + x[0] + '</b><span>American Stories</span></div></button>'; }).join("") + '</div>' + foot();
     },
     parks: function () {
       mark("parks");
       var list = PARKS.filter(function (p) { var q = S.q.trim().toLowerCase(); var okq = !q || /^\d{5}$/.test(q) || (p.n + " " + p.st).toLowerCase().indexOf(q) > -1; var okf = Object.keys(S.f).every(function (k) { return !S.f[k] || p.tags.indexOf(k) > -1; }); return okq && okf; });
-      var zip = /^\d{5}$/.test(S.q.trim());
-      if (zip) list = list.slice().sort(function (a, b) { return a.mi - b.mi; });
+      var zip = /^\d{5}$/.test(S.q.trim()), from = zip ? zipPoint(S.q.trim()) : null;
+      if (zip) list = list.map(function (p) { return Object.assign({}, p, { mi: milesTo(from, p) }); }).sort(function (a, b) { return a.mi - b.mi; });
       return '<div class="pad">' + crumb("Visitor’s Guide", "Parks") + '<h1 class="h1">Find a park</h1><form class="searchrow" data-form="parks" style="margin-top:14px"><label class="vh" for="pq">Park name, state or zip code</label><input id="pq" value="' + S.q.replace(/"/g, "") + '" placeholder="Name, state or zip code" autocomplete="off"><button class="btn" type="submit">Search</button></form>' +
         '<div class="chips" role="group" aria-label="Filters">' + [["camping", "Camping"], ["family", "Family-friendly"], ["access", "Accessible trails"]].map(function (c) { return '<button class="chip" data-f="' + c[0] + '" aria-pressed="' + !!S.f[c[0]] + '">' + c[1] + '</button>'; }).join("") + '</div></div>' +
         '<div class="tools"><span style="font-size:13px;color:var(--muted)">' + list.length + ' parks' + (zip ? ' · nearest to ' + S.q.trim() : '') + '</span><div class="seg" role="group" aria-label="View"><button data-v="list" aria-pressed="' + (S.view === "list") + '">List</button><button data-v="map" aria-pressed="' + (S.view === "map") + '">Map</button></div></div>' +
-        (S.view === "map" ? '<div style="margin:0 20px 24px;height:300px;border-radius:14px;background:#DCE6DD;position:relative;overflow:hidden">' + art(5) + list.map(function (p, i) { return '<button class="chip" data-go="park:' + p.id + '" style="position:absolute;left:' + (12 + (i * 37) % 60) + '%;top:' + (18 + (i * 23) % 60) + '%">' + p.n.replace(" National Park", "") + '</button>'; }).join("") + '</div>'
-          : '<div class="list">' + (list.length ? list.map(function (p) { return '<button class="row" data-go="park:' + p.id + '"><div class="art">' + art(p.a) + '</div><div><b>' + p.n + '</b><span>' + p.st + (zip ? ' · about ' + p.mi + ' miles' : '') + '</span>' + (p.tags.indexOf("camping") > -1 ? '<span class="tag">Campgrounds</span>' : '') + '</div></button>'; }).join("") : '<p style="font-size:14px;color:var(--muted)">No parks match. Try removing a filter.</p>') + '</div>') + foot();
+        (S.view === "map" ? '<div style="margin:0 20px 24px;height:300px;border-radius:14px;background:#DCE6DD;position:relative;overflow:hidden">' + art(5) + list.map(function (p, i) { return '<button class="chip" data-go="park:' + p.id + '" style="position:absolute;transform:translate(-50%,-50%);white-space:nowrap;left:' + Math.min(86, Math.max(14, (p.lon + 125) / 59 * 100)) + '%;top:' + Math.min(88, Math.max(10, (49.5 - p.lat) / 25 * 100)) + '%">' + p.n.replace(" National Park", "") + '</button>'; }).join("") + '</div>'
+          : '<div class="list">' + (list.length ? list.map(function (p) { return '<button class="row" data-go="park:' + p.id + '"><div class="art">' + art(p.a) + '</div><div><b>' + p.n + '</b><span>' + p.st + (zip ? ' · about ' + p.mi.toLocaleString() + ' miles' : '') + '</span>' + (p.tags.indexOf("camping") > -1 ? '<span class="tag">Campgrounds</span>' : '') + '</div></button>'; }).join("") : '<p style="font-size:14px;color:var(--muted)">No parks match. Try removing a filter.</p>') + '</div>') + foot();
     },
     park: function (id) {
       mark("park");
@@ -317,15 +343,18 @@ button { cursor: pointer; }
     },
     results: function () {
       mark("results");
-      return '<div class="pad">' + crumb("Teaching & Education", "Search") + '<h1 class="h1">Results for “' + (S.tq || "geology") + '”</h1><p class="lead">3 field trips and materials</p><div class="chips"><button class="chip" aria-pressed="true">Grades 6–8</button><button class="chip">Field trips</button><button class="chip">Downloadable</button></div></div><div class="res">' + RES.map(function (r) { return '<button class="ri" data-go="trip:' + r.id + '"><div class="art">' + art(r.a) + '</div><div class="t"><b>' + r.n + '</b><span>' + r.s + '</span></div></button>'; }).join("") + '</div>' + foot();
+      var q = (S.tq || "").trim(), list = findRes(q), none = !list.length;
+      if (none) list = RES;
+      return '<div class="pad">' + crumb("Teaching & Education", "Search") + '<h1 class="h1">' + (q ? 'Results for “' + esc(q) + '”' : 'All field trips and materials') + '</h1><p class="lead">' + (none ? 'No exact matches. Try “geology”, “rocks” or a grade. Here is everything we have:' : list.length + (list.length === 1 ? ' result' : ' results')) + '</p></div><div class="res">' + list.map(function (r) { return '<button class="ri" data-go="trip:' + r.id + '"><div class="art">' + art(r.a) + '</div><div class="t"><b>' + r.n + '</b><span>' + r.s + '</span></div></button>'; }).join("") + '</div>' + foot();
     },
     trip: function (id) {
       mark("trip");
       var r = RES.find(function (x) { return x.id === id; }) || RES[0];
-      return '<section class="hero" style="height:200px"><div class="art">' + art(r.a) + '</div><p class="crumb" style="color:#fff;opacity:.85;margin:0 0 4px">Teaching & Education › Field trips</p><h1 class="h1" style="font-size:24px">' + r.n + '</h1></section><div class="pad"><dl class="facts" style="margin-top:0"><div><dt>Grades</dt><dd>6–8</dd></div><div><dt>Length</dt><dd>Half or full day</dd></div><div><dt>Group size</dt><dd>Up to 40 students</dd></div><div><dt>Cost</dt><dd>Free for school groups</dd></div></dl>' +
-        '<div class="block"><h3>What students do</h3><ul><li>Read the dunes like a geologist: wind, water and time.</li><li>Collect and sort sand samples.</li><li>Meet a ranger and log observations in a field journal.</li></ul></div>' +
-        '<div class="block"><h3>How to book</h3><ol><li>Pick two or three preferred dates.</li><li>Send the request; a ranger confirms within a week.</li><li>Download the pre-visit lesson for your class.</li></ol></div>' +
-        '<button class="btn full" style="margin-top:16px" data-act="book">Request a date</button><button class="btn ghost full" style="margin-top:8px" data-act="soon">Download teacher guide (PDF)</button></div>' + foot();
+      var sec = { trip: "Field trips", lesson: "Lesson plans", virtual: "Virtual visits" }[r.kind];
+      return '<section class="hero" style="height:200px"><div class="art">' + art(r.a) + '</div><p class="crumb" style="color:#fff;opacity:.85;margin:0 0 4px">Teaching & Education › ' + sec + '</p><h1 class="h1" style="font-size:24px">' + r.n + '</h1></section><div class="pad"><dl class="facts" style="margin-top:0">' + r.facts.map(function (f) { return '<div><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>'; }).join("") + '</dl>' +
+        '<div class="block"><h3>What students do</h3><ul>' + r.does.map(function (x) { return '<li>' + x + '</li>'; }).join("") + '</ul></div>' +
+        '<div class="block"><h3>' + r.how[0] + '</h3><ol>' + r.how[1].map(function (x) { return '<li>' + x + '</li>'; }).join("") + '</ol></div>' +
+        '<button class="btn full" style="margin-top:16px" data-act="' + r.cta[0] + '">' + r.cta[1] + '</button>' + (r.kind === "trip" ? '<button class="btn ghost full" style="margin-top:8px" data-act="soon">Download teacher guide (PDF)</button>' : '') + '</div>' + foot();
     },
     volunteer: function () {
       mark("volunteer");
@@ -386,7 +415,7 @@ button { cursor: pointer; }
     if (b.dataset.go) { go(b.dataset.go); return; }
     if (b.dataset.f) { S.f[b.dataset.f] = !S.f[b.dataset.f]; mark("filter"); render(); var c = $("view").querySelector('[data-f="' + b.dataset.f + '"]'); if (c) c.focus(); return; }
     if (b.dataset.v) { S.view = b.dataset.v; render(); return; }
-    if (b.dataset.teach) { S.tq = b.dataset.teach.toLowerCase(); go("results"); return; }
+    if (b.dataset.teach) { S.tq = b.dataset.teach; go("results"); return; }
     if (b.dataset.task) { S.task = b.dataset.task; S.done = {}; S.stack = ["home"]; S.f = {}; S.q = ""; S.applied = false; S.open = null; closeMenu(); render(); tasks(); if (window.innerWidth <= 960) document.querySelector(".device").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }); $("view").focus({ preventScroll: true }); return; }
     var act = b.dataset.act;
     if (act === "reserve") toast("Campsite booking would open here, on the same site.");
@@ -397,7 +426,7 @@ button { cursor: pointer; }
     var f = e.target.closest("form"); if (!f) return; e.preventDefault();
     var k = f.dataset.form, inp = f.querySelector("input");
     if (k === "hero" || k === "parks") { S.q = inp.value; mark("filter"); if (k === "hero") go("parks"); else render(); }
-    else if (k === "teach") { S.tq = (inp.value || "geology").toLowerCase(); go("results"); }
+    else if (k === "teach") { S.tq = inp.value.trim(); go("results"); }
     else if (k === "site") { var q = inp.value.toLowerCase(); go(/volunt/.test(q) ? "volunteer" : /trip|teach|geo|lesson/.test(q) ? "teach" : "parks"); }
     else if (k === "apply") { S.applied = cur().split(":")[1]; if (S.applied === "redwood") mark("apply"); render(); }
   });

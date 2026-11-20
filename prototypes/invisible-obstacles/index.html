@@ -278,7 +278,7 @@ fieldset.has-error .choice { border-color: var(--error); }
   var MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   var STATES = ["Alabama","Alaska","American Samoa","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","District of Columbia","Florida","Georgia","Guam","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Northern Mariana Islands","Ohio","Oklahoma","Oregon","Pennsylvania","Puerto Rico","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","U.S. Virgin Islands","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
   var YEARS = ["1", "2", "3", "4", "5 or more"];
-  var SCHED = ["Full-time", "Part-time, less than 30 hours", "Part-time, less than 20 hours", "No evenings", "No weekends", "No holidays"];
+  var SCHED = ["Evenings", "Weekends", "Holidays", "Overtime"];
   var NOW = new Date(), THIS_YEAR = NOW.getFullYear();
   var JOBKEYS = ["employer", "address", "start-m", "start-y", "end-m", "end-y", "current", "salary", "position", "reason"];
 
@@ -393,7 +393,7 @@ fieldset.has-error .choice { border-color: var(--error); }
     return '<section class="refcard" aria-labelledby="' + p + '-h"><h3 id="' + p + '-h">Reference ' + n + (req ? '' : ' <span class="opt">(optional)</span>') + '</h3>' +
       '<div class="row2">' + text(p + "name", "Full name", { optional: !req }) + text(p + "phone", "Phone number", { type: "tel", optional: !req, hint: "For example, 312 555 0147" }) + '</div>' +
       text(p + "address", "Address", { optional: true }) +
-      '<div class="row2">' + text(p + "business", "Business", { optional: true, hint: "Where they work, or their occupation" }) + text(p + "years", "Years you've known them", { optional: true, mode: "numeric", max: 2, cls: "w-4" }) + '</div></section>';
+      '<div class="row2">' + text(p + "business", "Business", { optional: true, hint: "Where they work, or their occupation" }) + text(p + "years", "Years you’ve known them", { optional: true, mode: "numeric", max: 2, cls: "w-4" }) + '</div></section>';
   }
 
   /* ---------- steps ---------- */
@@ -445,6 +445,8 @@ fieldset.has-error .choice { border-color: var(--error); }
         reveal("milwrap", g("veteran") === "Yes", text("military", "Military service", { optional: true, hint: "Branch and dates, for example Army, 2008 to 2012" })) + '</div>';
     },
     4: function () {
+      /* Step 2 already asked "Are you employed now?", so don't make people say it twice */
+      if (g("employed") === "Yes" && !data.curPrefilled) { data.curPrefilled = true; var j0 = data.jobs[0]; if (!JOBKEYS.some(function (x) { return x !== "current" && j0[x]; })) j0.current = true; }
       return progress() + head(TITLES[4], "Start with your current or most recent job. Paid and volunteer work both count.") +
         section(I.case, "Employers") + '<div class="fields">' +
         data.jobs.map(jobBlock).join("") +
@@ -460,11 +462,11 @@ fieldset.has-error .choice { border-color: var(--error); }
         section(I.people, "Your references") + '<div class="fields">' + ref(1) + ref(2) + ref(3) + '</div>';
     },
     6: function () {
-      return progress() + head(TITLES[6], "Tell us which schedules work for you.") +
+      return progress() + head(TITLES[6], "You already told us how many hours a week you want. This page is only about when you can work.") +
         section(I.clock, "Your schedule") + '<div class="fields">' +
-        radios("flexible", "Are you willing to work a flexible schedule, including evenings, weekends, holidays and overtime when asked?", ["Yes", "No"]) +
-        '<fieldset id="sched-wrap" data-finding="2" aria-describedby="sched-hint sched-err"><legend>What type of schedule are you interested in?</legend><p class="hint" id="sched-hint" data-finding="3">Select all that apply.</p>' + errP("sched") +
-        '<div class="choices stack1">' + SCHED.map(function (d, i) { return '<div class="choice"><input type="checkbox" id="sched-' + i + '" name="sched" value="' + d + '"' + (data.sched.indexOf(d) > -1 ? ' checked' : '') + '><label for="sched-' + i + '">' + d + '</label></div>'; }).join("") + '</div></fieldset></div>';
+        radios("flexible", "Are you willing to work a flexible schedule, including evenings, weekends, holidays and overtime when asked?", ["Yes", "No"], { reveal: { id: "schedwrap", when: "No" } }) +
+        reveal("schedwrap", g("flexible") === "No", '<fieldset id="sched-wrap" data-finding="2" aria-describedby="sched-hint sched-err"><legend>Which of these can’t you work?</legend><p class="hint" id="sched-hint" data-finding="3">Select all that apply.</p>' + errP("sched") +
+        '<div class="choices stack1">' + SCHED.map(function (d, i) { return '<div class="choice"><input type="checkbox" id="sched-' + i + '" name="sched" value="' + d + '"' + (data.sched.indexOf(d) > -1 ? ' checked' : '') + '><label for="sched-' + i + '">' + d + '</label></div>'; }).join("") + '</div></fieldset>') + '</div>';
     },
     7: function () {
       return progress() + head(TITLES[7], "Answering yes does not automatically rule you out.") +
@@ -479,27 +481,27 @@ fieldset.has-error .choice { border-color: var(--error); }
         return '<section class="rsec" data-finding="3" aria-labelledby="rs' + s + '"><div class="rsec-head"><h3 id="rs' + s + '">' + title + '</h3><button type="button" class="linkbtn" data-step="' + s + '">Change<span class="vh"> ' + title.toLowerCase() + '</span></button></div><dl class="review">' +
           rows.filter(function (r) { return r[2] !== false; }).map(function (r) { return '<div><dt>' + r[0] + '</dt><dd>' + (r[1] ? esc(r[1]) : '<span class="opt">Not answered</span>') + '</dd></div>'; }).join("") + '</dl></section>';
       }
-      function schoolRow(p, name) { return [name, [g(p + "name"), g(p + "loc"), g(p + "years") ? g(p + "years") + " years" : "", g(p + "grad") ? "Graduated: " + g(p + "grad") : ""].filter(Boolean).join(", ")]; }
+      function schoolRow(p, name) { return [name, [g(p + "name"), g(p + "loc"), g(p + "years") ? (g(p + "years") === "1" ? "1 year" : g(p + "years") + " years") : "", g(p + "grad") ? "Graduated: " + g(p + "grad") : ""].filter(Boolean).join(", ")]; }
       var addr = [g("addr1"), g("addr2"), g("city") ? g("city") + ", " + g("state") + " " + g("zip") : ""].filter(Boolean).join("\n");
       var jobs = data.jobs.map(function (j, i) {
-        return ["Employer " + (i + 1), [j.position && j.employer ? j.position + " at " + j.employer : j.employer || j.position, j["start-m"] ? my(j["start-m"], j["start-y"]) + " to " + (j.current ? "now" : my(j["end-m"], j["end-y"])) : "", j.reason ? "Left: " + j.reason : ""].filter(Boolean).join("\n")];
+        return ["Employer " + (i + 1), [j.position && j.employer ? j.position + " at " + j.employer : j.employer || j.position, j["start-m"] ? my(j["start-m"], j["start-y"]) + " to " + (j.current ? "now" : my(j["end-m"], j["end-y"])) : "", j.salary ? "Salary: " + j.salary : "", j.reason ? "Left: " + j.reason : ""].filter(Boolean).join("\n")];
       });
       var refs = [1, 2, 3].map(function (n) { var p = "r" + n; return ["Reference " + n, [g(p + "name"), g(p + "phone"), g(p + "business")].filter(Boolean).join("\n"), n === 1 || !!g(p + "name")]; });
       return progress() + head(TITLES[8], "Choose Change to edit a section. You will come straight back here.") +
         section(I.list, "Your answers") + '<div class="fields">' +
         rsec("Personal contact information", 1, [["Application date", (function () { var d = new Date(); return MONTHS[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear() + " (added automatically)"; })()], ["Name", [g("first"), g("middle") ? g("middle") + "." : "", g("last")].filter(Boolean).join(" ")], ["Address", addr], ["Phone number", g("phone")], ["Email address", g("email")]]) +
-        rsec("Eligibility, position and salary", 2, [["18 or older", g("adult")], ["Authorized to work in the US", g("auth")], ["Position", g("position")], ["Hours a week", g("hours")], ["Start immediately", g("immediate")], ["Could start", mdy("start"), g("immediate") === "No"], ["Desired salary", g("salary")], ["Employed now", g("employed")], ["May contact present employer", g("inquire"), g("employed") === "Yes"], ["Applied before", g("appliedbefore")], ["Referred by", g("referred")]]) +
-        rsec("Education, training and military service", 3, [schoolRow("hs", "High school"), schoolRow("col", "College"), schoolRow("grad", "Graduate school"), ["Special skills", g("skills")], ["Veteran", g("veteran")], ["Military service", g("military"), g("veteran") === "Yes"]]) +
-        rsec("Employment history", 4, jobs.concat([["Liked best", g("likedbest")], ["Dismissed or forced to resign", g("dismissed")]])) +
+        rsec("Eligibility, position and salary", 2, [["18 or older", g("adult")], ["Authorized to work in the US", g("auth")], ["Position", g("position")], ["Hours a week", g("hours")], ["Start immediately", g("immediate")], ["Could start", mdy("start"), g("immediate") === "No"], ["Desired salary", g("salary")], ["Employed now", g("employed")], ["May contact present employer", g("inquire"), g("employed") === "Yes"], ["Applied before", g("appliedbefore")], ["Applied", [g("appliedwhen-m") ? my(g("appliedwhen-m"), g("appliedwhen-y")) : "", g("appliedwhere")].filter(Boolean).join(", "), g("appliedbefore") === "Yes"], ["Referred by", g("referred")]]) +
+        rsec("Education, training and military service", 3, [schoolRow("hs", "High school"), schoolRow("col", "College"), schoolRow("grad", "Graduate school"), ["Subjects of special study", g("special")], ["Special skills", g("skills")], ["Activities", g("activities")], ["Veteran", g("veteran")], ["Military service", g("military"), g("veteran") === "Yes"]]) +
+        rsec("Employment history", 4, jobs.concat([["Liked best", g("likedbest")], ["What you liked most", g("likedmost")], ["Dismissed or forced to resign", g("dismissed")], ["Explanation", g("dismissexplain"), g("dismissed") === "Yes"]])) +
         rsec("References", 5, refs) +
-        rsec("Schedule preferences", 6, [["Flexible schedule", g("flexible")], ["Schedule type", data.sched.join(", ")]]) +
-        rsec("Criminal history", 7, [["Convicted in the last 5 years", g("convicted")]]) + '</div>';
+        rsec("Schedule preferences", 6, [["Flexible schedule", g("flexible")], ["Can’t work", data.sched.join(", "), g("flexible") === "No"]]) +
+        rsec("Criminal history", 7, [["Convicted in the last 5 years", g("convicted")], ["Explanation", g("convexplain"), g("convicted") === "Yes"]]) + '</div>';
     },
     9: function () {
       return '<div class="done"><span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="draw" d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>' +
         '<div class="titleblock" data-finding="1"><h1 tabindex="-1" id="h1">Application complete</h1><p class="desc">You answered every section of this practice application. Nothing has been sent or saved.</p></div>' +
         '<div class="section" data-finding="3"><h2>' + I.list + 'What happens next</h2></div>' +
-        '<ol class="next"><li>Use your answers as a reference when you fill in a real application.</li><li>Gather anything you left blank, such as dates or reference phone numbers, before you apply.</li><li>Real applications may also ask for a resume and a signature.</li></ol></div>';
+        '<ol class="next"><li>Use your answers as a reference when you fill in a real application.</li><li>Gather anything you left blank, such as school details or extra references, before you apply.</li><li>Real applications may also ask for a resume and a signature.</li></ol></div>';
     }
   };
 
@@ -635,7 +637,7 @@ fieldset.has-error .choice { border-color: var(--error); }
         if (!j.employer) e.push([k + "-employer", "Enter the employer name" + n]);
         if (!j.position) e.push([k + "-position", "Enter your position" + n]);
         var s = checkMY(e, k + "-start", "start date" + n, j["start-m"], j["start-y"], true);
-        if (!j.current) { var en = checkMY(e, k + "-end", "end date" + n, j["end-m"], j["end-y"], true); if (s != null && en != null && en < s) e.push([k + "-end", "End date" + n + " must be after the start date", k + "-end-m", [k + "-end-m", k + "-end-y"]]); }
+        if (!j.current) { var en = checkMY(e, k + "-end", "end date" + n, j["end-m"], j["end-y"], true); if (s != null && en != null && en < s) e.push([k + "-end", "End date" + n + " can’t be before the start date", k + "-end-m", [k + "-end-m", k + "-end-y"]]); }
       });
       if (!g("dismissed")) e.push(["dismissed", "Select yes if you have been dismissed or forced to resign", "dismissed-0"]);
       else if (g("dismissed") === "Yes" && !g("dismissexplain")) e.push(["dismissexplain", "Explain why you were dismissed or forced to resign"]);
@@ -651,7 +653,7 @@ fieldset.has-error .choice { border-color: var(--error); }
     }
     if (step === 6) {
       if (!g("flexible")) e.push(["flexible", "Select yes if you are willing to work a flexible schedule", "flexible-0"]);
-      if (!data.sched.length) e.push(["sched", "Select at least one type of schedule", "sched-0"]);
+      else if (g("flexible") === "No" && !data.sched.length) e.push(["sched", "Select the times you can’t work", "sched-0"]);
     }
     if (step === 7) {
       if (!g("convicted")) e.push(["convicted", "Select yes or no for convictions in the last 5 years", "convicted-0"]);

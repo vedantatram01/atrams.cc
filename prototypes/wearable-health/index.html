@@ -212,44 +212,49 @@ button { font: inherit; color: inherit; cursor: pointer; }
     pause: '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/></svg>'
   };
   var SC = {
-    morning: { n: 1, tab: "Morning", title: "Morning check-in", desc: "Sleep comes first, and the day's plan adapts to how you slept, so a bad night doesn't turn into a failed day.",
-      tr: "On the watch, tap through the morning check-in and choose whether to ease today's goals.",
+    morning: { n: 1, tab: "Morning", title: "Morning check-in", desc: "Sleep comes first, and the day’s plan adapts to how you slept, so a bad night doesn’t turn into a failed day.",
+      tr: "On the watch, tap through the morning check-in and choose whether to ease today’s goals.",
       why: [
-        { f: "Finding 1 · Sleep is the daily anchor", h: "Sleep is the first thing you see, on the watch and the phone.", p: "In both studies, people opened sleep data first and adjusted their day around it. Tend leads with it instead of burying it under rings.", q: "I check my sleep score in the morning.", qs: "Interview participant" },
-        { f: "Finding 2 · Rings motivate and pressure", h: "After a short night, Tend offers a lighter goal, and keeping it doesn't break your streak.", p: "Missing goals made people feel guilty. Adjusting the goal to the day keeps the motivation without the pressure." }
+        { f: "Finding · Sleep is the daily anchor", h: "Sleep is the first thing you see, on the watch and the phone.", p: "In both studies, people opened sleep data first and adjusted their day around it. Tend leads with it instead of burying it under rings.", q: "I check my sleep score in the morning.", qs: "Interview participant" },
+        { f: "Finding · Rings motivate and pressure", h: "After a short night, Tend offers a lighter goal, and keeping it doesn’t break your streak.", p: "Missing goals made people feel guilty. Adjusting the goal to the day keeps the motivation without the pressure." }
       ] },
-    midday: { n: 2, tab: "Midday", title: "A nudge at the right time", desc: "Reminders wait until you're free, and a breathing break is offered when your body suggests you need one.",
+    midday: { n: 2, tab: "Midday", title: "A nudge at the right time", desc: "Reminders wait until you’re free, and a breathing break is offered when your body suggests you need one.",
       tr: "Skip ahead to the end of class, then choose how to respond to the nudge.",
       why: [
         { f: "Finding · Notifications arrive at the wrong time", h: "Nudges are held during calendar events and delivered together afterwards.", p: "Many reminders were dismissed because of poor timing, in class, at work or in the middle of something else.", q: "Reminders during focus work annoyed me.", qs: "Observation note" },
-        { f: "Finding 4 · Mindfulness is used under stress", h: "A breather is suggested when your heart rate stays high, not on a fixed timer.", p: "People used breathing tools during acute stress, but nothing prompted them at the right moment. Every nudge can be snoozed or turned off right on the watch." }
+        { f: "Finding · Mindfulness is used under stress", h: "A breather is suggested when your heart rate stays high, not on a fixed timer.", p: "People used breathing tools during acute stress, but nothing prompted them at the right moment. Every nudge can be snoozed or turned off right on the watch." }
       ] },
     workout: { n: 3, tab: "Workout", title: "Workout feedback you can read mid-run", desc: "One big number at a time, music controls on the same screen, and calories shown honestly as an estimate.",
       tr: "Start the detected run, cycle the metric, play or pause music, then end the workout.",
       why: [
-        { f: "Finding 3 · Workout features have gaps", h: "Music controls sit on the workout screen, so you never leave it.", p: "Participants struggled switching between workout and media screens mid-session." },
-        { f: "Priority matrix · Auto workout detection", h: "Tend notices you're running and asks if you want to track it.", p: "People wanted the watch to start tracking without a manual start." },
-        { f: "Persona · Sky distrusts calories", h: "Calories appear as a range, labelled as an estimate.", p: "Several people ignored calorie numbers because they didn't trust them. A range is more honest and easier to trust." }
+        { f: "Finding · Workout features have gaps", h: "Music controls sit on the workout screen, so you never leave it.", p: "Participants struggled switching between workout and media screens mid-session." },
+        { f: "Priority matrix · Auto workout detection", h: "Tend notices you’re running and asks if you want to track it.", p: "People wanted the watch to start tracking without a manual start." },
+        { f: "Persona · Sky distrusts calories", h: "Calories appear as a range, labelled as an estimate.", p: "Several people ignored calorie numbers because they didn’t trust them. A range is more honest and easier to trust." }
       ] },
     evening: { n: 4, tab: "Evening", title: "Ending the day without guilt", desc: "Missing a goal gets a kind response and a choice, and progress is counted across the week, not judged day by day.",
       tr: "Your move goal is nearly done. Choose a short walk or call it a rest day.",
       why: [
-        { f: "Finding 2 · Rings motivate and pressure", h: "Rest days protect your streak, so one off day doesn't erase a good week.", p: "Some participants avoided the app on days they hadn't moved. Pausing streaks without guilt was a high-value, low-effort fix in our priority matrix.", q: "Some days I feel like I'm being judged.", qs: "Interview participant" },
+        { f: "Finding · Rings motivate and pressure", h: "Rest days protect your streak, so one off day doesn’t erase a good week.", p: "Some participants avoided the app on days they hadn’t moved. Pausing streaks without guilt was a high-value, low-effort fix in our priority matrix.", q: "Some days I feel like I’m being judged.", qs: "Interview participant" },
         { f: "Design implication · Emotional reinforcement", h: "The language encourages; it never scolds.", p: "Users felt proud when they met goals and disengaged when they fell short. Supportive messages help them come back the next day." }
       ] },
     settings: { n: 5, tab: "Make it yours", title: "As much detail as you want", desc: "Casual users can keep it to sleep and steps; fitness users can turn everything on. The watch updates as you choose.",
       tr: "On the phone, switch between Simple, Balanced and Detailed and watch the watch face change.",
       why: [
-        { f: "Finding 5 · Casual users stay passive", h: "Simple mode shows only sleep and steps.", p: "Casual users valued simplicity and avoided complex features. A simpler UI mode was another high-value, low-effort fix in the matrix." },
+        { f: "Finding · Casual users stay passive", h: "Simple mode shows only sleep and steps.", p: "Casual users valued simplicity and avoided complex features. A simpler UI mode was another high-value, low-effort fix in the matrix." },
         { f: "Design implication · Let people decide", h: "Rest days, pausing goals and nudges are all under your control.", p: "Engagement came from relevance, emotional payoff and simplicity. People turned off features that felt intrusive, so Tend lets them tune instead of quit." }
       ] }
   };
   var order = ["morning", "midday", "workout", "evening", "settings"];
   var $ = function (id) { return document.getElementById(id); };
+  /* Dates come from the current week, so the weekday and date always agree */
+  var DN = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], MN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  function wk(i) { var d = new Date(), x = new Date(d); x.setDate(d.getDate() - (d.getDay() + 6) % 7 + i); return x; }
+  function longDate(i) { var x = wk(i); return DN[i] + " " + x.getDate() + " " + MN[x.getMonth()]; }
+  function shortDate(i) { var x = wk(i); return DN[i].slice(0, 3) + " " + x.getDate() + " " + MN[x.getMonth()].slice(0, 3); }
   var times = { morning: "7:12", midday: "11:48", workout: "6:05", evening: "8:40", settings: "9:41" };
 
   function tabs() {
-    $("tabs").innerHTML = order.map(function (k) { var s = SC[k]; return '<button type="button" role="tab" id="tab-' + k + '" aria-selected="' + (S.sc === k) + '" data-sc="' + k + '"><b>' + s.n + '</b>' + s.tab + '</button>'; }).join("");
+    $("tabs").innerHTML = order.map(function (k) { var s = SC[k]; return '<button type="button" role="tab" id="tab-' + k + '" aria-selected="' + (S.sc === k) + '" data-sc="' + k + '">' + s.tab + '</button>'; }).join("");
   }
   function stagesBar() { var h = [60, 90, 40, 100, 70, 30, 85, 50, 95, 40, 25, 60, 35, 20]; return '<div class="stages" aria-hidden="true">' + h.map(function (x, i) { return '<i style="height:' + x + '%;opacity:' + (i > 9 ? .45 : 1) + '"></i>'; }).join("") + '</div>'; }
 
@@ -258,10 +263,10 @@ button { font: inherit; color: inherit; cursor: pointer; }
     var s = S.step, h = "";
     if (S.sc === "morning") {
       if (s === 0) h = '<div class="w-app">Sleep</div><p class="w-h">Good morning</p><div class="w-big" style="margin-top:8px">6h 10m</div><p class="w-p">Restless after 3 am. About an hour less than usual.</p>' + stagesBar() + '<div class="w-btns"><button class="w-btn sleep" data-act="next">See today’s plan</button></div>';
-      else if (s === 1) h = '<div class="w-app">Today</div><p class="w-h">Let’s go easier today</p><p class="w-p">You slept less than usual, so here’s a lighter plan.</p><div class="w-row"><span>Move</span><b><s>30</s>20 min</b></div><div class="w-row"><span>Stand nudges</span><b>After noon</b></div><div class="w-btns"><button class="w-btn pri" data-act="ease">Sounds good</button><button class="w-btn" data-act="keep">Keep my usual goals</button></div>';
-      else h = '<div class="w-center"><div class="check">' + ic.check + '</div><p class="w-h">' + (S.eased ? "Plan set" : "Usual goals kept") + '</p><p class="w-p">' + (S.eased ? "Your streak isn’t affected. Go gently today." : "We’ll still go easy on nudges this morning.") + '</p></div><div class="w-btns"><button class="w-btn" data-act="reset">Back to start</button></div>';
+      else if (s === 1) h = '<div class="w-app">Today</div><p class="w-h">Let’s go easier today</p><p class="w-p">You slept less than usual, so here’s a lighter plan.</p><div class="w-row"><span>Move</span><b><s>30</s>20 min</b></div><div class="w-row"><span>Stand nudges</span><b>Every 2 hours</b></div><div class="w-btns"><button class="w-btn pri" data-act="ease">Sounds good</button><button class="w-btn" data-act="keep">Keep my usual goals</button></div>';
+      else h = '<div class="w-center"><div class="check">' + ic.check + '</div><p class="w-h">' + (S.eased ? "Plan set" : "Usual goals kept") + '</p><p class="w-p">' + (S.eased ? "Your streak isn’t affected. Go gently today." : "You can ease them later from the phone app.") + '</p></div><div class="w-btns"><button class="w-btn" data-act="reset">Back to start</button></div>';
     } else if (S.sc === "midday") {
-      if (s === 0) h = '<div class="face"><div class="clock">11:48</div><div class="date">Tue 18 Nov</div><div style="margin-top:14px"><span class="w-chip"><i class="dot" style="background:var(--sleep)"></i>In class · 2 nudges held</span></div></div><div class="w-btns"><button class="w-btn" data-act="next">Skip to 12:31, after class</button></div>';
+      if (s === 0) h = '<div class="face"><div class="clock">11:48</div><div class="date">' + shortDate(1) + '</div><div style="margin-top:14px"><span class="w-chip"><i class="dot" style="background:var(--sleep)"></i>In class · 2 nudges held</span></div></div><div class="w-btns"><button class="w-btn" data-act="next">Skip to 12:31, after class</button></div>';
       else if (s === 1) h = S.breathOff
         ? '<div class="w-app">Tend</div><p class="w-h">Class is over</p><p class="w-p">While you were in class: stand up and drink some water.</p><div class="w-btns"><button class="w-btn pri" data-act="reset">Done</button></div>'
         : '<div class="w-app">Tend · after class</div><p class="w-h">Take a minute?</p><p class="w-p">Your heart rate has been higher than usual for 40 minutes. A short breather can help.</p><div class="w-btns"><button class="w-btn pri" data-act="breathe">Start 1-minute breather</button><button class="w-btn" data-act="later">After lunch</button><button class="w-btn" data-act="off">Don’t suggest this</button></div>';
@@ -274,7 +279,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
       else if (s === 1) {
         var m = [
           '<div class="w-app">Heart rate · Zone 3</div><div class="w-big" style="margin-top:6px">148<small>bpm</small></div><div class="zones" aria-label="Zone 3 of 5">' + [1, 2, 3, 4, 5].map(function (z) { return '<i class="' + (z === 3 ? "on" : "") + '"></i>'; }).join("") + '</div><p class="w-p">Steady. Hold this pace.</p>',
-          '<div class="w-app">Pace</div><div class="w-big" style="margin-top:6px">5:42<small>/km</small></div><p class="w-p">1.9 km · on target</p>',
+          '<div class="w-app">Pace</div><div class="w-big" style="margin-top:6px">5:42<small>/km</small></div><p class="w-p">2.5 km · on target</p>',
           '<div class="w-app">Time</div><div class="w-big" style="margin-top:6px">14:20</div><p class="w-p">Including the 8 minutes before you started tracking.</p>'
         ][S.metric];
         h = m + '<div class="media"><span>Run Mix</span><button type="button" data-act="track" aria-label="Previous song">' + ic.prev + '</button><button type="button" data-act="play" aria-label="' + (S.playing ? "Pause music" : "Play music") + '">' + (S.playing ? ic.pause : ic.play) + '</button><button type="button" data-act="track" aria-label="Next song">' + ic.next + '</button></div><div class="w-btns" style="grid-template-columns:1fr 1fr;margin-top:6px"><button class="w-btn" data-act="metric">Next</button><button class="w-btn move" data-act="end">End</button></div>';
@@ -282,7 +287,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
       else h = '<div class="w-center"><div class="check">' + ic.check + '</div><p class="w-h">OK, not tracking</p><p class="w-p">We’ll learn from this. Walks to the station won’t be flagged again.</p></div><div class="w-btns"><button class="w-btn" data-act="reset">Back to start</button></div>';
     } else if (S.sc === "evening") {
       if (s === 0) h = '<div class="w-app">Today</div><div class="ring" style="--p:90;--c:var(--move)"><div>18<small>of 20 min</small></div></div><p class="w-p w-center">So close. Every bit of movement counts.</p><div class="w-btns"><button class="w-btn move" data-act="walk">Take a 5-minute walk</button><button class="w-btn" data-act="rest">Call it a rest day</button></div>';
-      else if (S.evening === "walk") h = '<div class="w-app">Walk</div><div class="w-big" style="margin-top:8px">3:12</div><p class="w-p">2 more minutes and today’s goal is done.</p><div class="w-btns"><button class="w-btn" data-act="reset">Back to start</button></div>';
+      else if (S.evening === "walk") h = '<div class="w-app">Walk</div><div class="w-big" style="margin-top:8px">1:10</div><p class="w-p">One more minute and today’s goal is done.</p><div class="w-btns"><button class="w-btn" data-act="reset">Back to start</button></div>';
       else h = '<div class="w-center"><div class="check" style="background:var(--sleep);color:#15103A">' + ic.check + '</div><p class="w-h">Rest day logged</p><p class="w-p">3 active days and a rest day. Your week is still on track.</p></div><div class="w-btns"><button class="w-btn" data-act="reset">Back to start</button></div>';
     } else {
       var mode = S.mode;
@@ -300,11 +305,11 @@ button { font: inherit; color: inherit; cursor: pointer; }
     $("p-time").textContent = S.sc === "midday" && s > 0 ? "12:31" : times[S.sc];
     if (S.sc === "morning") {
       var planned = s >= 2;
-      h = '<p class="p-h">Today</p><p class="p-sub">Tuesday 18 November</p>' +
+      h = '<p class="p-h">Today</p><p class="p-sub">' + longDate(1) + '</p>' +
         '<div class="p-card"><h3><i class="dot" style="background:var(--sleep)"></i>Last night’s sleep</h3><div class="p-big">6h 10m<small>usually 7h 05m</small></div><p>Restless after 3 am. Two short wake-ups.</p>' + stagesBar().replace('class="stages"', 'class="stages" style="height:34px"') + '</div>' +
         '<div class="p-card' + (planned ? ' p-hl' : '') + '"><h3>Today’s plan</h3>' +
-        (planned ? (S.eased ? '<p>Adjusted to your sleep. Lighter goal today, and your streak is safe.</p><div class="kv"><span>Move</span><b>20 min</b></div><div class="kv"><span>Stand nudges</span><b>After noon</b></div><span class="p-tag">Eased for today</span>' : '<p>You kept your usual goals. Nudges stay quiet until noon.</p><div class="kv"><span>Move</span><b>30 min</b></div><div class="kv"><span>Stand nudges</span><b>After noon</b></div>')
-          : '<p>Waiting for your check-in on the watch.</p><div class="kv"><span>Move</span><b>30 min</b></div><div class="kv"><span>Stand nudges</span><b>All day</b></div>') + '</div>' +
+        (planned ? (S.eased ? '<p>Adjusted to your sleep. Lighter goal today, and your streak is safe.</p><div class="kv"><span>Move</span><b>20 min</b></div><div class="kv"><span>Stand nudges</span><b>Every 2 hours</b></div><span class="p-tag">Eased for today</span>' : '<p>You kept your usual goals.</p><div class="kv"><span>Move</span><b>30 min</b></div><div class="kv"><span>Stand nudges</span><b>Every hour</b></div>')
+          : '<p>Waiting for your check-in on the watch.</p><div class="kv"><span>Move</span><b>30 min</b></div><div class="kv"><span>Stand nudges</span><b>Every hour</b></div>') + '</div>' +
         '<div class="p-card"><h3><i class="dot" style="background:var(--move)"></i>Move</h3><div class="bar"><i style="width:4%;background:var(--move)"></i></div><p>1 of ' + (planned && S.eased ? 20 : 30) + ' minutes so far</p></div>';
     } else if (S.sc === "midday") {
       var out = s === 0 ? "Held until class ends" : s === 1 ? "Suggested at 12:31" : s === 2 ? "Breathing now" : s === 3 ? "Done · 96 → 84 bpm" : s === 4 ? "Moved to 1:15 pm" : "Turned off";
@@ -314,12 +319,12 @@ button { font: inherit; color: inherit; cursor: pointer; }
         '<div class="p-card"><h3>Breather suggestions</h3><p>Offered when your heart rate stays high and your calendar is free.</p><button type="button" class="p-btn" data-act="togglebreath" style="background:' + (S.breathOff ? "var(--brand)" : "#ECE9E2") + ';color:' + (S.breathOff ? "#fff" : "var(--ink)") + '">' + (S.breathOff ? "Turn breather suggestions on" : "Turn breather suggestions off") + '</button></div>';
     } else if (S.sc === "workout") {
       if (s < 2 || s === 3) h = '<p class="p-h">Workouts</p><p class="p-sub">This week</p><div class="p-card"><h3><i class="dot" style="background:var(--move)"></i>' + (s === 1 ? "Run in progress" : "No workout in progress") + '</h3><p>' + (s === 1 ? "Live on your watch. Music, metrics and controls stay on one screen." : "Start moving and Tend will ask if you want to track it.") + '</p></div><div class="p-card"><h3>Auto-detect</h3>' + '<div class="kv"><span>Running</span><b>On</b></div><div class="kv"><span>Strength</span><b>Ask first</b></div><div class="kv"><span>Walking to places</span><b>' + (s === 3 ? "Ignored now" : "Ask first") + '</b></div></div>';
-      else h = '<p class="p-h">Run</p><p class="p-sub">Today, 6:05 am · 32 min · 5.6 km</p><div class="p-card"><h3>Time in each zone</h3><div class="zbars">' + [[8, 1], [22, 2], [64, 3], [18, 4], [4, 5]].map(function (z) { return '<div><i class="' + (z[1] === 3 ? "on" : "") + '" style="height:' + z[0] + 'px"></i>Z' + z[1] + '</div>'; }).join("") + '</div><p>Mostly Zone 3, a steady aerobic run.</p></div><div class="p-card"><h3>Calories</h3><div class="p-big">310–360<small>kcal</small></div><p>Wrist sensors estimate calories, so Tend shows a range instead of one exact number.</p></div><div class="p-card"><div class="kv"><span>Average pace</span><b>5:43 /km</b></div><div class="kv"><span>Average heart rate</span><b>146 bpm</b></div></div>';
+      else h = '<p class="p-h">Run</p><p class="p-sub">Wednesday, 6:05 am · 32 min · 5.6 km</p><div class="p-card"><h3>Time in each zone</h3><div class="zbars">' + [[8, 1], [22, 2], [64, 3], [18, 4], [4, 5]].map(function (z) { return '<div><i class="' + (z[1] === 3 ? "on" : "") + '" style="height:' + z[0] + 'px"></i>Z' + z[1] + '</div>'; }).join("") + '</div><p>Mostly Zone 3, a steady aerobic run.</p></div><div class="p-card"><h3>Calories</h3><div class="p-big">310–360<small>kcal</small></div><p>Wrist sensors estimate calories, so Tend shows a range instead of one exact number.</p></div><div class="p-card"><div class="kv"><span>Average pace</span><b>5:43 /km</b></div><div class="kv"><span>Average heart rate</span><b>146 bpm</b></div></div>';
     } else if (S.sc === "evening") {
       var rest = s > 0 && S.evening === "rest";
       h = '<p class="p-h">This week</p><p class="p-sub">Consistency over perfection</p><div class="p-card"><h3>Active days</h3><div class="p-big">' + (s > 0 && S.evening === "walk" ? 4 : 3) + '<small>of 5 planned</small></div><div class="week">' + ["M", "T", "W", "T", "F", "S", "S"].map(function (d, i) { var c = i < 3 ? "a" : i === 3 ? (rest ? "r" : s > 0 && S.evening === "walk" ? "a" : "t") : ""; return '<div>' + d + '<i class="' + c + '"></i></div>'; }).join("") + '</div><p>' + (rest ? "Rest day logged. Rest days protect your streak." : "Thursday is today.") + '</p>' + (S.restDays ? '<span class="p-tag">2 rest days a week</span>' : '') + '</div><div class="p-card"><h3><i class="dot" style="background:var(--sleep)"></i>Sleep and movement</h3><p>On weeks you slept 7 hours or more, you moved about 20% more.</p></div><div class="p-card"><h3>Streak</h3><div class="p-big">3<small>weeks</small></div><p>Counted by week, so one quiet day never resets it.</p></div>';
     } else {
-      var d = { simple: "Sleep and steps only. No rings, no streaks.", balanced: "Sleep, move, mindful minutes and steps.", detailed: "Everything, including heart rate and calorie ranges." };
+      var d = { simple: "Sleep and steps only. No rings or goals on the watch.", balanced: "Sleep, move, mindful minutes and steps.", detailed: "Everything, including heart rate and calorie ranges." };
       h = '<p class="p-h">Make Tend yours</p><p class="p-sub">Change anything, anytime</p><div class="p-card"><h3>How much do you want to see?</h3><div class="seg" role="group" aria-label="Detail level">' + ["simple", "balanced", "detailed"].map(function (m) { return '<button type="button" data-mode="' + m + '" aria-pressed="' + (S.mode === m) + '">' + m.charAt(0).toUpperCase() + m.slice(1) + '</button>'; }).join("") + '</div><p>' + d[S.mode] + '</p></div>' +
         '<div class="p-card"><h3>Goals and streaks</h3>' + sw("restDays", "Rest days", "2 a week, without breaking your streak") + sw("pause", "Pause goals", "For travel, illness or a busy week") + '</div>' +
         '<div class="p-card"><h3>Tone</h3><div class="kv"><span>Messages</span><b>Encouraging</b></div><div class="kv"><span>Missed goals</span><b>Never shown as failures</b></div></div>';

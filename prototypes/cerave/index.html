@@ -710,13 +710,24 @@ body.has-tray main { padding-bottom: 96px; }
 }
 /* compare table on phones: narrower label column */
 @media (max-width: 640px) { .ct tbody th { width: 112px; min-width: 112px; padding-left: 12px; padding-right: 8px; font-size: 12px; } .ct td { min-width: 160px; } }
+/* Two products fit side by side on a phone; a third scrolls */
+@media (max-width: 640px) {
+  table.ct { min-width: 0; table-layout: fixed; }
+  table.ct:has(thead th:nth-child(4)) { min-width: 560px; }
+  .ct tbody th { width: 92px; min-width: 0; padding-left: 10px; padding-right: 6px; font-size: 11px; overflow-wrap: anywhere; }
+  .ct th, .ct td { padding: 12px 10px; font-size: 14px; }
+  .ct td { min-width: 0; }
+  .ct .ph .art { width: 72px; }
+  .ct td .btn { white-space: normal; padding-left: 10px; padding-right: 10px; }
+}
+@media (max-width: 360px) { .ct tbody th { width: 76px; padding-left: 8px; } .ct th, .ct td { padding: 10px 8px; font-size: 13px; overflow-wrap: anywhere; } .ct ul { padding-left: 14px; } }
 
 /* stores page */
 .stores-p { max-width: none; display: grid; gap: 16px; justify-items: start; padding-bottom: 48px; border-bottom: 1px solid var(--line); }
 .stores-p .lede { max-width: 640px; margin: 0; }
 .zip { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; }
 .zip label { display: grid; gap: 8px; font-weight: 600; font-size: 14px; }
-.zip input { height: 44px; width: 200px; border: 1px solid var(--field); padding: 0 12px; font: inherit; }
+.zip input { height: 44px; min-height: 44px; width: 200px; border: 1px solid var(--field); padding: 0 12px; font: inherit; }
 #zipr { width: 100%; display: grid; gap: 12px; }
 #zipr:empty { display: none; }
 .scards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
@@ -788,11 +799,11 @@ var R = { target: "Target", walmart: "Walmart", cvs: "CVS", amazon: "Amazon", ul
 var DOM = { target: "target.com", walmart: "walmart.com", cvs: "cvs.com", amazon: "amazon.com", ulta: "ulta.com", walgreens: "walgreens.com" };
 /* Sample data for the prototype. Prices are illustrative. */
 var P = {
-  "hydrating-cleanser": { name: "Hydrating Facial Cleanser", cat: "cleansers", color: "#1179B6", shape: "pump", type: "Normal to dry", texture: "Creamy lotion, non-foaming", ings: ["Ceramides", "Hyaluronic acid"], does: "Cleans without stripping moisture and helps restore the skin barrier.", use: "Massage onto damp skin, then rinse. Morning and night.", sizes: { "8 oz": 13.99, "12 oz": 16.99, "16 oz": 18.99 }, concerns: ["dryness"], skin: ["normal", "dry", "sensitive"], step: "cleanse" },
+  "hydrating-cleanser": { name: "Hydrating Facial Cleanser", cat: "cleansers", color: "#1179B6", shape: "pump", type: "Normal to dry", texture: "Creamy lotion, non-foaming", ings: ["Ceramides", "Hyaluronic acid"], does: "Cleans without stripping moisture and helps restore the skin barrier.", use: "Massage onto damp skin, then rinse. Morning and night.", sizes: { "8 oz": 13.99, "12 oz": 16.99, "16 oz": 18.99 }, concerns: ["dryness", "sensitive"], skin: ["normal", "dry", "sensitive"], step: "cleanse" },
   "foaming-cleanser": { name: "Foaming Facial Cleanser", cat: "cleansers", color: "#1179B6", shape: "pump", type: "Normal to oily", texture: "Gel that foams", ings: ["Ceramides", "Niacinamide", "Hyaluronic acid"], does: "Removes excess oil and dirt without disrupting the skin barrier.", use: "Lather onto damp skin, then rinse. Morning and night.", sizes: { "8 oz": 13.99, "12 oz": 16.99, "16 oz": 18.99 }, concerns: ["oil", "breakouts"], skin: ["normal", "oily", "combination"], step: "cleanse" },
   "acne-cleanser": { name: "Acne Control Cleanser", cat: "cleansers", color: "#00A3AD", shape: "pump", type: "Oily, acne-prone", texture: "Gel cleanser", ings: ["2% salicylic acid", "Ceramides", "Niacinamide"], does: "Clears breakouts and helps prevent new ones.", use: "Use once a day to start, then up to twice a day.", sizes: { "8 oz": 14.99 }, concerns: ["breakouts"], skin: ["oily", "combination"], step: "cleanse" },
-  "daily-lotion": { name: "Daily Moisturizing Lotion", cat: "moisturizers", color: "#1179B6", shape: "pump", type: "Normal to dry", texture: "Lightweight lotion", ings: ["Ceramides", "Hyaluronic acid"], does: "Hydrates for 24 hours and helps restore the skin barrier.", use: "Apply to face and body as often as needed.", sizes: { "3 oz": 7.99, "12 oz": 15.99, "19 oz": 19.99 }, concerns: ["dryness"], skin: ["normal", "dry", "sensitive", "combination"], step: "moisturize" },
-  "moisturizing-cream": { name: "Moisturizing Cream", cat: "moisturizers", color: "#1179B6", shape: "jar", type: "Dry to very dry", texture: "Rich cream", ings: ["Ceramides", "Hyaluronic acid", "Petrolatum"], does: "Deep, long-lasting moisture for very dry skin.", use: "Apply liberally as often as needed.", sizes: { "8 oz": 12.99, "16 oz": 18.99 }, concerns: ["dryness"], skin: ["dry", "sensitive"], step: "moisturize" },
+  "daily-lotion": { name: "Daily Moisturizing Lotion", cat: "moisturizers", color: "#1179B6", shape: "pump", type: "Normal to dry", texture: "Lightweight lotion", ings: ["Ceramides", "Hyaluronic acid"], does: "Hydrates for 24 hours and helps restore the skin barrier.", use: "Apply to face and body as often as needed.", sizes: { "3 oz": 7.99, "12 oz": 15.99, "19 oz": 19.99 }, concerns: ["dryness", "sensitive"], skin: ["normal", "dry", "sensitive", "combination"], step: "moisturize" },
+  "moisturizing-cream": { name: "Moisturizing Cream", cat: "moisturizers", color: "#1179B6", shape: "jar", type: "Dry to very dry", texture: "Rich cream", ings: ["Ceramides", "Hyaluronic acid", "Petrolatum"], does: "Deep, long-lasting moisture for very dry skin.", use: "Apply liberally as often as needed.", sizes: { "8 oz": 12.99, "16 oz": 18.99 }, concerns: ["dryness", "sensitive"], skin: ["dry", "sensitive"], step: "moisturize" },
   "pm-lotion": { name: "PM Facial Moisturizing Lotion", cat: "moisturizers", color: "#1B4F8C", shape: "flip", type: "All skin types", texture: "Light, oil-free lotion", ings: ["Niacinamide", "Ceramides", "Hyaluronic acid"], does: "Overnight hydration that is light enough for oily skin.", use: "Apply at night after cleansing.", sizes: { "3 oz": 15.99 }, concerns: ["oil", "breakouts", "dryness"], skin: ["normal", "oily", "combination", "dry", "sensitive"], step: "moisturize" },
   "am-spf": { name: "AM Facial Moisturizing Lotion SPF 30", cat: "moisturizers", color: "#E07B39", shape: "flip", type: "All skin types", texture: "Light lotion with sunscreen", ings: ["Broad spectrum SPF 30", "Ceramides", "Niacinamide"], does: "Daytime moisture with sun protection.", use: "Apply in the morning, 15 minutes before sun.", sizes: { "3 oz": 16.99 }, concerns: ["sun"], skin: ["normal", "oily", "combination", "dry", "sensitive"], step: "protect" },
   "eye-repair": { name: "Eye Repair Cream", cat: "eye", color: "#1179B6", shape: "tube", type: "All skin types", texture: "Light cream", ings: ["Ceramides", "Hyaluronic acid", "Niacinamide"], does: "Targets the look of dark circles and puffiness under the eyes.", use: "Pat gently under the eyes, morning and night.", sizes: { "0.5 oz": 14.99 }, concerns: ["eyes"], skin: ["normal", "oily", "combination", "dry", "sensitive"], step: "treat" },
@@ -842,7 +853,7 @@ function skinT(p) { return p.type + (/skin/i.test(p.type) ? "" : " skin"); }
 function card(id) {
   var p = P[id], on = sel.indexOf(id) > -1;
   return '<li class="card" data-id="' + id + '" data-skin="' + p.skin.join(" ") + '" data-con="' + p.concerns.join(" ") + '" data-price="' + minPrice(id) + '" data-rate="' + (RATE[id] || "4.5") + '">' +
-    (BADGE[id] ? '<span class="badge">' + BADGE[id] + '</span>' : '') + art(id) + '<p class="chip">For ' + esc(p.type) + ' skin</p><h2><a href="#/p/' + id + '">' + esc(p.name) + '</a></h2><p class="meta">' + esc(p.texture) + '</p>' + stars(RATE[id] || "4.5") + '<p class="price">From ' + money(minPrice(id)) + '</p>' +
+    (BADGE[id] ? '<span class="badge">' + BADGE[id] + '</span>' : '') + art(id) + '<p class="chip">For ' + esc(skinT(p).toLowerCase()) + '</p><h2><a href="#/p/' + id + '">' + esc(p.name) + '</a></h2><p class="meta">' + esc(p.texture) + '</p>' + stars(RATE[id] || "4.5") + '<p class="price">From ' + money(minPrice(id)) + '</p>' +
     '<label class="cmp" data-finding="3" data-rec="10"><input type="checkbox" data-cmp="' + id + '"' + (on ? " checked" : "") + '> Compare</label></li>';
 }
 /* ---------- Photography (banners) ---------- */
@@ -852,7 +863,7 @@ function scene(kind, crop, pos) { return '<img class="scene" src="img/b-' + BAN[
 var SLIDES = [
   { k: "routine", kick: "New · Skincare Solution Finder", t: "Find your routine in 4 questions", d: "Pick up to two concerns. Get a routine with a reason for every product.", cta: ["Find my routine", "#/finder"] },
   { k: "prices", kick: "Shop with confidence", t: "See prices before you leave", d: "Compare retailer prices and stock for every size, right on the product page.", cta: ["See how it works", "#/p/daily-lotion"], light: 1 },
-  { k: "compare", kick: "Compare products", t: "Compare up to 3, side by side", d: "Tick Compare on any product. We highlight what's different.", cta: ["Compare cleansers", "#/c/cleansers"] }
+  { k: "compare", kick: "Compare products", t: "Compare up to 3, side by side", d: "Tick Compare on any product. We highlight what’s different.", cta: ["Compare cleansers", "#/c/cleansers"] }
 ];
 function vHome() {
   document.title = "CeraVe · Skincare developed with dermatologists";
@@ -867,10 +878,10 @@ function vHome() {
   var bestS = '<section class="hsec wrap" aria-labelledby="h-best"><div class="shead"><h2 class="sechead" id="h-best">Best sellers</h2><a class="more" href="#/c/moisturizers">Shop all <span aria-hidden="true">›</span></a></div><ul class="grid g4" role="list">' + best.map(card).join("") + '</ul></section>';
   var finder = '<section class="fbanner" aria-labelledby="h-fb">' + scene("finder") + '<div class="wrap"><div class="fbcopy"><h2 id="h-fb">Skincare Solution Finder</h2><p>Not sure where to start? Answer 4 quick questions and get a routine built around your skin, with a reason for every product.</p><a class="btn btn-w" href="#/finder">Find my routine</a></div></div></section>';
   var tips = '<section class="hsec wrap" aria-labelledby="h-tips"><h2 class="sechead" id="h-tips">Skincare tips &amp; advice</h2><ul class="tips" role="list">' +
-    [["moisturizers", "Routines", "How to build a routine for dry skin", "Start with the finder and pick “Dryness”. We'll match a cleanser and moisturizer.", "#/finder?c=dryness"],
-     ["compare", "Products", "Gel, cream or lotion? How the textures compare", "See our three best-selling cleansers side by side, with the differences highlighted.", "#/compare?ids=hydrating-cleanser,foaming-cleanser,acne-cleanser"],
+    [["moisturizers", "Routines", "How to build a routine for dry skin", "Start with the finder and pick “Dryness”. We’ll match a cleanser and moisturizer.", "#/finder?c=dryness"],
+     ["compare", "Products", "Gel, cream or lotion? How the textures compare", "See three of our cleansers side by side, with the differences highlighted.", "#/compare?ids=hydrating-cleanser,foaming-cleanser,acne-cleanser"],
      ["prices", "Shopping", "Where to buy CeraVe at the best price", "Every product page now lists retailer prices and stock before you leave the site.", "#/p/hydrating-cleanser"]].map(function (t) { return '<li><a href="' + t[4] + '"><span class="timg">' + scene(t[0], 1, "82% 55%") + '</span><span class="tkick">' + t[1] + '</span><span class="ttl">' + t[2] + '</span><span class="tds">' + t[3] + '</span></a></li>'; }).join("") + '</ul></section>';
-  var band = '<section class="band" aria-labelledby="h-band"><div class="wrap"><h2 id="h-band">Developed with dermatologists</h2><p>Every formula contains three essential ceramides to help restore and maintain the skin\'s natural barrier.</p><ul role="list">' +
+  var band = '<section class="band" aria-labelledby="h-band"><div class="wrap"><h2 id="h-band">Developed with dermatologists</h2><p>Every formula contains three essential ceramides to help restore and maintain the skin’s natural barrier.</p><ul role="list">' +
     [["Ceramides", "Help restore the protective skin barrier."], ["Hyaluronic acid", "Draws in moisture and holds it in the skin."], ["Niacinamide", "Calms the skin and helps balance oil."]].map(function (x, i) { return '<li><span class="ic" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.5"/>' + ['<circle cx="14" cy="16" r="4" fill="currentColor"/><circle cx="26" cy="16" r="4" fill="currentColor"/><circle cx="20" cy="26" r="4" fill="currentColor"/>', '<path d="M20 9c5 7 8 11 8 15a8 8 0 0 1-16 0c0-4 3-8 8-15z" fill="currentColor"/>', '<path d="M12 26l8-14 8 14z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>'][i] + '</svg></span><b>' + x[0] + '</b><span>' + x[1] + '</span></li>'; }).join("") + '</ul></div></section>';
   return '<h1 class="vh">CeraVe skincare</h1>' + hero + cats + bestS + finder + tips + band;
 }
@@ -940,14 +951,14 @@ function vProduct(id) {
   '<fieldset data-finding="1" data-rec="2"><legend>Size</legend><div class="sizes">' + sizes.map(function (s) { return '<label class="size"><input type="radio" name="size" value="' + s + '"' + (s === def ? " checked" : "") + '><span>' + s + '<small>from ' + money(minAt(id, s)) + '</small></span></label>'; }).join("") + '</div></fieldset>' +
   '<div class="fromprice" data-finding="1" data-rec="1" aria-live="polite" id="fp"></div>' +
   '<div class="acts"><button class="btn btn-p" type="button" id="buybtn" data-finding="1" data-rec="1">Compare retailer prices</button><a class="btn btn-s" href="#/stores">Find nearby stores</a></div>' +
-  '<p class="note" data-finding="1"><svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 8v5M9 5.5v.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>CeraVe sells through retailers. You\'ll pick one here and check out on their website.</span></p>' +
+  '<p class="note" data-finding="1"><svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 8v5M9 5.5v.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>CeraVe sells through retailers. You’ll pick one here and check out on their website.</span></p>' +
   '</div></section></div>' +
   '<nav class="subnav" aria-label="On this page" data-finding="3" data-rec="12"><div class="wrap"><b>On this page</b><a href="#ings">Ingredients</a><a href="#how">How to use</a><a href="#similar">Compare with similar</a></div></nav>' +
   '<div class="wrap"><section class="psec" id="ings" aria-labelledby="h-ings"><h2 id="h-ings">Key ingredients</h2><div class="ings">' + p.ings.map(function (i) { return '<div class="ing"><b>' + esc(i) + '</b><p>' + esc(INGD[i] || "") + '</p></div>'; }).join("") + '</div></section>' +
-  '<section class="psec" id="how" aria-labelledby="h-how"><h2 id="h-how">How to use</h2><ol class="steps"><li>' + esc(p.use) + '</li><li>Follow with the next step in your routine.</li></ol></section>' +
+  '<section class="psec" id="how" aria-labelledby="h-how"><h2 id="h-how">How to use</h2><ol class="steps"><li>' + esc(p.use) + '</li><li>' + ({ cleanse: "Follow with a moisturizer.", treat: "Follow with your moisturizer.", protect: "Use it as the last step of your morning routine.", moisturize: /^(pm-lotion|night-cream)$/.test(id) ? "Use it as the last step of your night routine." : "In the morning, follow with sunscreen." })[p.step] + '</li></ol></section>' +
   '<section class="psec" id="similar" aria-labelledby="h-sim" data-finding="3" data-rec="10"><h2 id="h-sim">Compare with similar products</h2><p class="lede" style="margin-bottom:16px">See how this one differs from others in ' + CAT[p.cat].toLowerCase() + '.</p><a class="btn btn-s" href="#/compare?ids=' + [id].concat(Object.keys(P).filter(function (k) { return P[k].cat === p.cat && k !== id; }).slice(0, 1)).join(",") + '">Compare ' + esc(p.name) + '</a></section></div>';
 }
-var INGD = { "Ceramides": "Help restore and maintain the skin's protective barrier.", "Hyaluronic acid": "Draws in and holds moisture.", "Niacinamide": "Calms the skin and helps balance oil.", "2% salicylic acid": "Clears pores and treats breakouts.", "Petrolatum": "Seals in moisture for very dry skin.", "Broad spectrum SPF 30": "Protects against UVA and UVB rays.", "Salicylic acid": "Exfoliates to smooth rough, bumpy texture.", "Retinol": "Helps renew the skin surface and smooth fine lines." };
+var INGD = { "Ceramides": "Help restore and maintain the skin’s protective barrier.", "Hyaluronic acid": "Draws in and holds moisture.", "Niacinamide": "Calms the skin and helps balance oil.", "2% salicylic acid": "Clears pores and treats breakouts.", "Petrolatum": "Seals in moisture for very dry skin.", "Broad spectrum SPF 30": "Protects against UVA and UVB rays.", "Salicylic acid": "Exfoliates to smooth rough, bumpy texture.", "Retinol": "Helps renew the skin surface and smooth fine lines." };
 function minAt(id, s) { var m = Infinity; Object.keys(R).forEach(function (r) { if (stock(id, s, r)) m = Math.min(m, priceAt(id, s, r)); }); return m === Infinity ? P[id].sizes[s] : m; }
 function fromPrice(id) {
   var s = ($('input[name="size"]:checked') || {}).value, n = Object.keys(R).filter(function (r) { return stock(id, s, r); }).length;
@@ -981,12 +992,12 @@ var A = {};
 function vFinderIntro(pre) {
   document.title = "Find my routine · CeraVe";
   if (pre) { A = { concerns: [pre] }; }
-  return '<div class="wrap"><div class="finder"><div><h1 class="pt" data-finding="2" data-rec="6">Find my routine</h1><p class="lede">Tell us about your skin and we\'ll suggest products for it.</p></div>' +
+  return '<div class="wrap"><div class="finder"><div><h1 class="pt" data-finding="2" data-rec="6">Find my routine</h1><p class="lede">Tell us about your skin and we’ll suggest products for it.</p></div>' +
   '<ul class="intro-points" data-finding="2" data-rec="6">' +
   '<li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span><b>4 questions, about 1 minute.</b> No account or email needed.</span></li>' +
   '<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4 10-10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Every pick comes with a reason,</b> tied to your answers.</span></li>' +
   '<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h11l-3-3M17 17H6l3 3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Swap or compare any product</b> in your results.</span></li></ul>' +
-  (pre ? '<p class="note"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>We\'ve already selected <b>' + esc(Q[0].o.filter(function (o) { return o[0] === pre; })[0][1]) + '</b> from the menu. You can change it.</span></p>' : '') +
+  (pre ? '<p class="note"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>We’ve already selected <b>' + esc(Q[0].o.filter(function (o) { return o[0] === pre; })[0][1]) + '</b> from the menu. You can change it.</span></p>' : '') +
   '<div><a class="btn btn-p" href="#/finder/1">Start</a></div></div></div>';
 }
 function vFinderQ(n) {
@@ -1014,16 +1025,21 @@ function pick(step, a) {
   var c = a.concerns || [], skin = a.skin;
   var cands = Object.keys(P).filter(function (k) { return P[k].step === step && P[k].skin.indexOf(skin) > -1; });
   cands.sort(function (x, y) { return score(y) - score(x); });
-  function score(k) { return P[k].concerns.filter(function (z) { return c.indexOf(z) > -1; }).length * 2 + (P[k].skin[0] === skin ? 1 : 0); }
+  function score(k) {
+    var hit = P[k].concerns.filter(function (z) { return c.indexOf(z) > -1; }).length;
+    /* Strong actives (salicylic acid, retinol) only when a chosen concern calls for them, and never for sensitive skin */
+    var active = /salicylic|retinol/i.test(P[k].ings.join(" ")), harsh = active && (!hit || c.indexOf("sensitive") > -1 || skin === "sensitive") ? 3 : 0;
+    return hit * 2 + (P[k].skin[0] === skin ? 1 : 0) - harsh;
+  }
   return { main: cands[0], alts: cands.slice(1) };
 }
 function reasons(id, a) {
   var p = P[id], out = [], lab = {}; Q[0].o.forEach(function (o) { lab[o[0]] = o[1].toLowerCase(); });
   var hit = p.concerns.filter(function (z) { return (a.concerns || []).indexOf(z) > -1; });
   if (hit.length) out.push("Targets " + hit.map(function (h) { return lab[h]; }).join(" and ") + ", which you chose.");
-  if (p.step === "protect") out.push("You said you don't use a daily sunscreen yet.");
-  out.push("Suits " + a.skin + " skin: " + p.type.toLowerCase() + ", " + p.texture.toLowerCase() + ".");
-  out.push("Key ingredients: " + p.ings.slice(0, 2).join(" and ") + ".");
+  if (p.step === "protect") out.push("You said you don’t use a daily sunscreen yet.");
+  out.push("Suits " + a.skin + " skin. Texture: " + p.texture.toLowerCase() + ".");
+  out.push("Key ingredients: " + p.ings.slice(0, 2).map(function (i) { return i.charAt(0).toLowerCase() + i.slice(1); }).join(" and ") + ".");
   return out;
 }
 var RES = {};
@@ -1036,8 +1052,8 @@ function vResults() {
   else { if (eyes) steps.push(["treat", "For dark circles and puffiness"]); var other = A.concerns.filter(function (c) { return c !== "eyes"; }); if (other.length || !eyes) steps.push([other.indexOf("breakouts") > -1 || other.indexOf("oil") > -1 ? "cleanse" : "moisturize", "For " + (other.length ? Q[0].o.filter(function (o) { return o[0] === other[0]; })[0][1].toLowerCase() : "your skin")]); if (A.spf === "no") steps.push(["protect", "Daily sunscreen"]); }
   var lab = {}; Q.forEach(function (q) { q.o.forEach(function (o) { lab[o[0]] = o[1]; }); });
   return '<div class="wrap"><div class="res">' + crumbs([["Home", "#/"], ["Find my routine", "#/finder"], ["Your routine"]]) +
-  '<div><h1 class="pt">Your ' + (A.scope === "routine" ? "routine" : "picks") + '</h1><p class="lede">Based on your answers. Each product says why it\'s here, and you can swap any of them.</p></div>' +
-  '<div class="answers"><span>Your answers:</span>' + [].concat(A.concerns.map(function (c) { return lab[c]; }), [lab[A.skin] + " skin", lab[A.scope], A.spf === "yes" ? "Already use sunscreen" : "No sunscreen yet"]).map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join("") + '<a href="#/finder/1">Change answers</a></div>' +
+  '<div><h1 class="pt">Your ' + (A.scope === "routine" ? "routine" : "picks") + '</h1><p class="lede">Based on your answers. Each product says why it’s here, and you can swap any of them.</p></div>' +
+  '<div class="answers"><span>Your answers:</span>' + [].concat(A.concerns.map(function (c) { return Q[0].o.filter(function (o) { return o[0] === c; })[0][1]; }), [lab[A.skin] + " skin", lab[A.scope], A.spf === "yes" ? "Already use sunscreen" : "No sunscreen yet"]).map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join("") + '<a href="#/finder/1">Change answers</a></div>' +
   '<ol class="routine">' + steps.map(function (s, i) {
     var pk = pick(s[0], A); RES[s[0]] = RES[s[0]] && (pk.main === RES[s[0]] || pk.alts.indexOf(RES[s[0]]) > -1) ? RES[s[0]] : pk.main;
     var id = RES[s[0]], all = [pk.main].concat(pk.alts);
@@ -1063,7 +1079,7 @@ function vCompare(ids) {
   return head + '<div class="cmpbar"><div class="l">' + adder() + '</div><label class="switch"><input type="checkbox" id="onlydiff" role="switch"> Show only differences</label></div>' +
   '<div class="tblwrap" data-finding="3" data-rec="11"><table class="ct"><caption class="vh">Comparison of ' + ids.map(function (k) { return P[k].name; }).join(", ") + '</caption><thead><tr><td></td>' + ids.map(function (k) { return '<th scope="col"><div class="ph">' + art(k) + '<a href="#/p/' + k + '">' + esc(P[k].name) + '</a><button class="rm" type="button" data-rm="' + k + '">Remove<span class="vh"> ' + esc(P[k].name) + '</span></button></div></th>'; }).join("") + '</tr></thead><tbody>' +
   rows.map(function (r) { var vals = ids.map(function (k) { return r[1](P[k], k); }); var diff = vals.some(function (v) { return v !== vals[0]; }); return '<tr data-diff="' + (diff ? 1 : 0) + '"><th scope="row">' + r[0] + '</th>' + vals.map(function (v) { return '<td' + (diff ? ' class="diff"' : '') + '>' + v + '</td>'; }).join("") + '</tr>'; }).join("") +
-  '<tr data-diff="1"><th scope="row">Buy</th>' + ids.map(function (k) { return '<td><a class="btn btn-s btn-sm" href="#/p/' + k + '">See retailer prices</a></td>'; }).join("") + '</tr></tbody></table></div></div>';
+  '<tr data-diff="1"><th scope="row">Buy</th>' + ids.map(function (k) { return '<td><a class="btn btn-s btn-sm" href="#/p/' + k + '">See prices</a></td>'; }).join("") + '</tr></tbody></table></div></div>';
 }
 
 var STORES = [["CVS Pharmacy", "0.4 mi", "2633 N Clark St", "Open until 10 pm", 9], ["Walgreens", "0.8 mi", "2410 N Lincoln Ave", "Open 24 hours", 8], ["Target", "1.2 mi", "2656 N Elston Ave", "Open until 10 pm", 10]];
