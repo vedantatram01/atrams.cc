@@ -67,7 +67,16 @@ img { max-width: 100%; display: block; }
 
 /* Intro */
 .intro { padding-top: var(--s5); padding-bottom: var(--s4); }
-.hello { display: flex; align-items: center; gap: var(--s1); }
+.hello { display: flex; align-items: center; flex-wrap: wrap; gap: var(--s1) var(--s3); }
+.hello .otw { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px; border: 1px solid var(--line); border-radius: 999px; font-size: 14px; line-height: 20px; color: var(--text); font-weight: 500; }
+.otw .dot { position: relative; width: 8px; height: 8px; border-radius: 50%; background: #1FA25A; }
+.otw .dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: #1FA25A; animation: otw 2s ease-out infinite; }
+@keyframes otw { 0% { transform: scale(1); opacity: .6; } 100% { transform: scale(2.8); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .otw .dot::after { animation: none; display: none; } }
+.now { list-style: none; margin: var(--s2) 0 0; padding: 0; display: grid; gap: 6px; max-width: 640px; }
+.now li { position: relative; padding-left: 20px; font-size: 16px; line-height: 26px; color: var(--soft); }
+.now li::before { content: ""; position: absolute; left: 2px; top: 11px; width: 6px; height: 6px; border-radius: 50%; background: var(--muted); }
+.intro .links { display: flex; align-items: center; flex-wrap: wrap; gap: var(--s1) var(--s3); }
 .avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; background: var(--mat); box-shadow: 0 0 0 1px var(--line); flex: none; }
 .hello p { font-size: 16px; line-height: 24px; color: var(--muted); }
 .hello b { display: block; color: var(--text); font-weight: 500; }
@@ -477,6 +486,11 @@ img { max-width: 100%; display: block; }
 @media (prefers-reduced-motion: reduce) { .wk-win, .wk-ph { transition: none; } .wk:hover .wk-win, .wk:hover .wk-ph { transform: none; } }
 /* animated thumbnails */
 .wk-thumb { container-type: inline-size; text-decoration: none; color: var(--text); }
+.wk-prog { position: absolute; left: 0; right: 0; bottom: 0; z-index: 6; height: 3px; background: color-mix(in srgb, var(--text) 10%, transparent); opacity: 0; transition: opacity .2s; pointer-events: none; }
+.wk-prog i { display: block; height: 100%; background: var(--accent); transform-origin: left; transform: scaleX(0); }
+.wk-thumb.scrub .wk-prog { opacity: 1; }
+.wk-thumb { touch-action: pan-y; }
+
 .wk-thumb * { animation-play-state: paused; }
 .wk.live .wk-thumb * { animation-play-state: running; }
 .th-io { --u: 1cqw; --g: calc(1.6 * var(--u)); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: calc(2.4 * var(--u)); }
@@ -693,19 +707,24 @@ img { max-width: 100%; display: block; }
 <main id="main">
   <header class="intro wrap" id="top">
     <div class="hello rv">
-      <img class="avatar" src="assets/avatar.webp" width="96" height="96" alt="">
       <p><b>Vedant Atram</b>Product Designer at Intuit · Chicago</p>
+      <p class="otw"><span class="dot" aria-hidden="true"></span>Open to work</p>
     </div>
     <h1 class="rv">Product designer and UX researcher with 5+ years of experience. <span class="q">I turn research into simple, useful products for B2B and B2C teams.</span></h1>
+    <ul class="now rv">
+      <li>Designing core experiences for TurboTax and QuickBooks at Intuit</li>
+      <li>M.S. in Human-Computer Interaction, DePaul University, 2026</li>
+      <li>4 years designing web and mobile apps at Hexaware before that</li>
+    </ul>
     <div class="links rv">
       <a class="btn btn-primary" href="#contact">Get in touch</a>
+      <a class="xp-more" href="about.html">More about me <span aria-hidden="true">→</span></a>
     </div>
   </header>
 
   <section class="work wrap" id="work" aria-labelledby="h-work">
     <div class="head rv">
       <h2 id="h-work">Selected work</h2>
-      <p>4 case studies</p>
     </div>
 
     <div class="cases">
@@ -722,9 +741,9 @@ img { max-width: 100%; display: block; }
       </a>
       <div class="wk-body">
         <div class="wk-row"><h3 id="case-03"><a href="wearable-health.html">Wearable Health</a></h3><ul class="wk-tags" aria-label="Project type and year"><li>User research</li><li>Watch and phone</li><li>2025–26</li></ul></div>
-        <p class="wk-role">UX Researcher &amp; Designer · Team of 3 · Prototype by me</p>
+        <p class="wk-role">UX Researcher &amp; Designer · Team of 3</p>
         <p class="wk-sum">People buy a smartwatch for their health, then quietly stop using most of it. We watched and interviewed 14 wearable users to find out why, and I designed a watch and phone app around what they told us.</p>
-        <p class="go2"><a class="rd" href="wearable-health.html">Read case study<span class="vh">: Wearable Health</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="pt2" href="prototypes/wearable-health/" target="_blank" rel="noopener">Try the prototype<span class="vh"> for Wearable Health (opens in a new tab)</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a></p>
+        <p class="go2"><a class="rd" href="wearable-health.html">Read case study<span class="vh">: Wearable Health</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></p>
       </div>
     </article>
     <article class="wk rv t-np" aria-labelledby="case-04">
@@ -741,9 +760,9 @@ img { max-width: 100%; display: block; }
       </a>
       <div class="wk-body">
         <div class="wk-row"><h3 id="case-04"><a href="national-parks.html">NPS.gov</a></h3><ul class="wk-tags" aria-label="Project type and year"><li>Information architecture</li><li>Mobile</li><li>2025–26</li></ul></div>
-        <p class="wk-role">UX Designer · Team of 3 · Wireframes and prototype by me</p>
+        <p class="wk-role">UX Designer · Team of 3</p>
         <p class="wk-sum">We restructured the National Park Service website with a content audit, three card sorts and three tree tests. People agreed on the new labels but still struggled with real tasks, and that shaped my wireframes.</p>
-        <p class="go2"><a class="rd" href="national-parks.html">Read case study<span class="vh">: NPS.gov</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="pt2" href="prototypes/national-parks/" target="_blank" rel="noopener">Try the prototype<span class="vh"> for NPS.gov (opens in a new tab)</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a></p>
+        <p class="go2"><a class="rd" href="national-parks.html">Read case study<span class="vh">: NPS.gov</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></p>
       </div>
     </article>
     <article class="wk rv t-io" aria-labelledby="case-01">
@@ -766,9 +785,9 @@ img { max-width: 100%; display: block; }
         <div class="sr-cap"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6v4h2.5l3.5 3V3L5 6z"/><path d="M11 5.5a3.5 3.5 0 010 5M12.8 3.8a6 6 0 010 8.4"/></svg><span class="cs"><span class="c c1">“When could you start? group. Month, 1 of 3”</span><span class="c c2">“Day, 2 of 3”</span><span class="c c3">“Year, 3 of 3”</span><span class="c c4">“Date entered. Next: desired salary”</span></span></div>
       </a>
       <div class="wk-row"><h3 id="case-01"><a href="invisible-obstacles.html">Invisible Obstacles</a></h3><ul class="wk-tags" aria-label="Project type and year"><li>Accessibility</li><li>Form design</li><li>2025</li></ul></div>
-      <p class="wk-role">UX Researcher &amp; Designer · Team of 4 · Redesign by me</p>
+      <p class="wk-role">UX Researcher &amp; Designer · Team of 4</p>
       <p class="wk-sum">We watched four blind screen-reader users fill in a job application. None of them got past the date field. I redesigned the form so they can finish it.</p>
-      <p class="go2"><a class="rd" href="invisible-obstacles.html">Read case study<span class="vh">: Invisible Obstacles</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="pt2" href="prototypes/invisible-obstacles/" target="_blank" rel="noopener">Try the prototype<span class="vh"> for Invisible Obstacles (opens in a new tab)</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a></p>
+      <p class="go2"><a class="rd" href="invisible-obstacles.html">Read case study<span class="vh">: Invisible Obstacles</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></p>
     </article>
     <article class="wk rv t-cv" aria-labelledby="case-02">
       <a class="wk-thumb th-cv" href="cerave.html" tabindex="-1" aria-hidden="true">
@@ -779,21 +798,11 @@ img { max-width: 100%; display: block; }
         </div>
       </a>
       <div class="wk-row"><h3 id="case-02"><a href="cerave.html">CeraVe</a></h3><ul class="wk-tags" aria-label="Project type and year"><li>Usability testing</li><li>E-commerce</li><li>2025–26</li></ul></div>
-      <p class="wk-role">UX Researcher · Team of 4 · Redesign by me</p>
+      <p class="wk-role">UX Researcher · Team of 4</p>
       <p class="wk-sum">CeraVe’s website sends shoppers to other stores to buy, so its real job is helping them choose. I tested it with five shoppers, then redesigned how they find, compare and buy.</p>
-      <p class="go2"><a class="rd" href="cerave.html">Read case study<span class="vh">: CeraVe</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="pt2" href="prototypes/cerave/" target="_blank" rel="noopener">Try the prototype<span class="vh"> for CeraVe (opens in a new tab)</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a></p>
+      <p class="go2"><a class="rd" href="cerave.html">Read case study<span class="vh">: CeraVe</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></p>
     </article></div>
   </section>
-
-  <section class="xp wrap" id="experience" aria-labelledby="h-xp">
-    <div class="head rv"><h2 id="h-xp">Experience</h2><p><a class="xp-more" href="about.html">More about me <span aria-hidden="true">→</span></a></p></div>
-    <ul class="xp-list">
-      <li class="rv"><span class="xp-org">Intuit</span><span class="xp-role">Product Designer</span><span class="xp-what">Core experiences across TurboTax and QuickBooks</span><span class="xp-when">2026 – present</span></li>
-      <li class="rv"><span class="xp-org">Hexaware Technologies</span><span class="xp-role">UI/UX Designer</span><span class="xp-what">Client web and mobile apps in health, education and marketplaces</span><span class="xp-when">2020 – 2024</span></li>
-      <li class="rv"><span class="xp-org">DePaul University</span><span class="xp-role">M.S. Human-Computer Interaction</span><span class="xp-what">Accessibility, usability research and interaction design</span><span class="xp-when">2024 – 2026</span></li>
-    </ul>
-  </section>
-
   <section class="contact wrap" id="contact" aria-labelledby="h-contact">
     <h2 id="h-contact" class="rv">Hiring a product designer or UX researcher? Let’s talk.</h2>
     <div class="mailrow rv">
@@ -881,9 +890,42 @@ img { max-width: 100%; display: block; }
 })();
 </script>
 <script>
-(function () { var cards = document.querySelectorAll(".wk"); if (!("IntersectionObserver" in window)) { cards.forEach(function (c) { c.classList.add("live"); }); return; }
-  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { e.target.classList.toggle("live", e.isIntersecting); }); }, { threshold: 0.2 });
-  cards.forEach(function (c) { io.observe(c); }); })();
+/* Thumbnails: play while on screen, scroll moves them along (scroll up rewinds), and moving the pointer across scrubs them */
+(function () {
+  var cards = [].slice.call(document.querySelectorAll(".wk"));
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce || !document.body.getAnimations) { cards.forEach(function (c) { c.classList.add("live"); }); return; }
+  var CFG = { "th-io": [10000, 1.5], "th-wh": [12000, 1.7], "th-np": [12000, 1.7], "th-cv": [18000, 2.2] };
+  var st = cards.map(function (c) {
+    var th = c.querySelector(".wk-thumb"), k = Object.keys(CFG).filter(function (x) { return th.classList.contains(x); })[0] || "th-io";
+    var bar = document.createElement("span"); bar.className = "wk-prog"; bar.setAttribute("aria-hidden", "true"); bar.innerHTML = "<i></i>"; th.appendChild(bar);
+    return { c: c, th: th, cyc: CFG[k][0], sp: CFG[k][1], t: 100 * CFG[k][0], target: null, base: 0, on: false, anims: [], bar: bar.firstChild };
+  });
+  function grab(s) { s.anims = s.th.getAnimations({ subtree: true }).filter(function (a) { return a.animationName; }); s.anims.forEach(function (a) { a.pause(); }); }
+  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { var s = st[cards.indexOf(e.target)]; s.on = e.isIntersecting; e.target.classList.toggle("live", s.on); if (s.on) { grab(s); if (!s.seen) { s.seen = true; s.t = 100 * s.cyc + s.cyc * .02; } } }); }, { threshold: 0.15 });
+  cards.forEach(function (c) { io.observe(c); });
+  st.forEach(function (s) {
+    function frac(e) { var r = s.th.getBoundingClientRect(); return Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)); }
+    s.th.addEventListener("pointerenter", function (e) { s.base = s.t - frac(e) * s.cyc; s.target = s.t; s.th.classList.add("scrub"); });
+    s.th.addEventListener("pointermove", function (e) { if (s.target !== null) s.target = s.base + frac(e) * s.cyc; });
+    function off() { s.target = null; s.th.classList.remove("scrub"); }
+    s.th.addEventListener("pointerleave", off); s.th.addEventListener("pointercancel", off);
+  });
+  var lastY = scrollY, last = performance.now();
+  function tick(now) {
+    var dt = Math.min(64, now - last), dy = scrollY - lastY; last = now; lastY = scrollY;
+    st.forEach(function (s) {
+      if (!s.on) return;
+      if (s.target !== null) s.t += (s.target - s.t) * .18;
+      else s.t += dt * s.sp + dy * s.cyc / 1400;
+      if (s.t < s.cyc * 10) s.t += s.cyc * 50;
+      for (var i = 0; i < s.anims.length; i++) s.anims[i].currentTime = s.t;
+      s.bar.style.transform = "scaleX(" + ((s.t % s.cyc) / s.cyc).toFixed(4) + ")";
+    });
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
 </script>
 </body>
 </html>
