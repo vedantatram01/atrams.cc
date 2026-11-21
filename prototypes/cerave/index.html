@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CeraVe prototype · Vedant Atram</title>
 <meta name="description" content="Unofficial redesign concept of CeraVe.com by Vedant Atram, based on a usability study. Not affiliated with CeraVe.">
@@ -831,6 +833,8 @@ function art(id, big) { return '<div class="art">' + photo(id) + '</div>'; }
 /* ---------- Compare selection (persists across views) ---------- */
 var sel = [];
 try { sel = JSON.parse(sessionStorage.getItem("cv-cmp") || "[]"); } catch (e) {}
+if (!Array.isArray(sel)) sel = [];
+sel = sel.filter(function (k) { return typeof k === "string" && Object.prototype.hasOwnProperty.call(P, k); }).slice(0, 3);
 function saveSel() { try { sessionStorage.setItem("cv-cmp", JSON.stringify(sel)); } catch (e) {} tray(); }
 function tray() {
   var t = $("#tray"), go = $("#traygo"), n = sel.length, onCompare = location.hash.indexOf("#/compare") === 0;
@@ -991,6 +995,7 @@ var Q = [
 var A = {};
 function vFinderIntro(pre) {
   document.title = "Find my routine · CeraVe";
+  if (pre && !Q[0].o.some(function (o) { return o[0] === pre; })) pre = null;
   if (pre) { A = { concerns: [pre] }; }
   return '<div class="wrap"><div class="finder"><div><h1 class="pt" data-finding="2" data-rec="6">Find my routine</h1><p class="lede">Tell us about your skin and we’ll suggest products for it.</p></div>' +
   '<ul class="intro-points" data-finding="2" data-rec="6">' +
