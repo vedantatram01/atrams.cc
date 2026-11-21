@@ -57,3 +57,21 @@
 .before figcaption, .before figcaption b, .low p, .mid p, .ok p { line-height: 24px; }
 .iat-l b { font-size: 16px; line-height: 24px; }
 .iat-l span, td .sub, th .sub { font-size: 14px; line-height: 20px; }
+
+/* ---------- case study: reading time ---------- */
+.title .rt { margin: var(--s1) auto 0; max-width: none; text-align: center; font-size: 14px; line-height: 20px; color: var(--muted); }
+
+/* ---------- case study: next case study ---------- */
+.nextcs { max-width: calc(1088px + 2 * var(--s2)); margin: var(--s5) auto 0; padding: 0 var(--s2); display: grid; gap: var(--s1); }
+.nx { position: relative; display: grid; gap: var(--s0); padding: var(--s3) calc(var(--s2) + 56px) var(--s3) var(--s2); border: 1px solid var(--line); border-radius: var(--r-m); background: var(--surface); color: var(--soft); text-decoration: none; transition: border-color .25s, transform .25s; }
+.nx:hover, .nx:focus-visible { border-color: var(--text); transform: translateY(-2px); }
+.nx-k { font-size: 14px; line-height: 20px; color: var(--muted); }
+.nx-t { font-family: var(--display); font-size: clamp(24px, 3vw, 32px); line-height: 40px; font-weight: 500; letter-spacing: -.015em; color: var(--text); }
+.nx-d { font-size: 16px; line-height: 24px; max-width: 640px; }
+.nx-a { position: absolute; right: var(--s2); top: 50%; width: 40px; height: 40px; margin-top: -20px; display: grid; place-items: center; border-radius: var(--r-s); background: var(--text); color: var(--bg); transition: transform .25s; }
+.nx-a svg { width: 18px; height: 18px; }
+.nx:hover .nx-a { transform: translateX(4px); }
+.nx-all { justify-self: start; font-size: 14px; line-height: 20px; font-weight: 500; color: var(--accent); text-decoration: none; padding: var(--s0) 0; }
+.nx-all:hover { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 640px) { .nextcs { padding: 0 var(--s1); margin-top: var(--s4); } .nx { padding: var(--s2) var(--s1) calc(var(--s2) + 48px); } .nx-t { line-height: 32px; } .nx-a { top: auto; bottom: var(--s1); right: var(--s1); margin: 0; } }
+@media (prefers-reduced-motion: reduce) { .nx, .nx-a { transition: none; } .nx:hover, .nx:hover .nx-a { transform: none; } }
