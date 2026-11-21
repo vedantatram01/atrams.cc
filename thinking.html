@@ -275,33 +275,14 @@ img { max-width: 100%; display: block; }
 .frame { border-radius: 5px !important; }
 @media (min-width: 641px) { .menu { padding: 3px; } .menu .pill { border-radius: 3px !important; } }
 
-/* ---------- writing: filters, cards, covers ---------- */
+/* ---------- writing: cards and covers ---------- */
 .t-ds { --tc: #1A3DFF; --tb: #EEF1FF; } .t-att { --tc: #C2410C; --tb: #FFF2EA; } .t-res { --tc: #0F7A55; --tb: #E9F7F0; } .t-craft { --tc: #B4235A; --tb: #FDEEF3; }
 :root[data-mode="dark"] .t-ds { --tc: #8FA2FF; --tb: #1B2140; } :root[data-mode="dark"] .t-att { --tc: #FB9B62; --tb: #33221A; } :root[data-mode="dark"] .t-res { --tc: #5FD3A6; --tb: #15302A; } :root[data-mode="dark"] .t-craft { --tc: #F28AB2; --tb: #36202A; }
 .writing { padding-bottom: 0; }
-.bar { display: flex; justify-content: space-between; align-items: center; gap: var(--s1); flex-wrap: wrap; margin-bottom: var(--s2); }
-.chips { display: flex; flex-wrap: wrap; gap: var(--s0); }
-.chip, .dice { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; font: inherit; font-size: 14px; line-height: 20px; font-weight: 500; color: var(--soft); background: var(--surface); border: 1px solid var(--line); border-radius: 4px; cursor: pointer; transition: background .2s, color .2s, border-color .2s, transform .15s; }
-.chip span { color: var(--muted); font-variant-numeric: tabular-nums; }
-.chip:hover, .dice:hover { border-color: var(--text); color: var(--text); }
-.chip:active, .dice:active { transform: scale(.97); }
-.chip[aria-pressed="true"] { background: var(--text); color: var(--bg); border-color: var(--text); }
-.chip[aria-pressed="true"] span { color: color-mix(in srgb, var(--bg) 70%, transparent); }
-.sw { width: 10px; height: 10px; border-radius: 2px; background: var(--tc); }
-.sw-ds { --tc: #1A3DFF; } .sw-att { --tc: #C2410C; } .sw-res { --tc: #0F7A55; } .sw-craft { --tc: #B4235A; }
-:root[data-mode="dark"] .sw-ds { --tc: #8FA2FF; } :root[data-mode="dark"] .sw-att { --tc: #FB9B62; } :root[data-mode="dark"] .sw-res { --tc: #5FD3A6; } :root[data-mode="dark"] .sw-craft { --tc: #F28AB2; }
-.dice svg { width: 18px; height: 18px; transition: transform .5s cubic-bezier(.3,1.6,.5,1); }
-.dice:hover svg { transform: rotate(90deg); }
-.dice.rolling svg { animation: roll .5s linear infinite; }
-@keyframes roll { to { transform: rotate(360deg); } }
+.writing .cards { margin-top: 0; }
 .cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2) var(--s2); }
-.card { transition: opacity .35s, transform .35s cubic-bezier(.2,.8,.2,1); }
-.card.out { display: none; }
-.card.pop { animation: pop .45s cubic-bezier(.2,.8,.2,1) both; }
-@keyframes pop { from { opacity: 0; transform: translateY(12px) scale(.98); } }
 .card a { display: flex; flex-direction: column; height: 100%; text-decoration: none; color: var(--soft); border: 1px solid var(--line); border-radius: 5px; background: var(--surface); overflow: hidden; transition: transform .3s cubic-bezier(.2,.8,.2,1), border-color .3s, box-shadow .3s; }
-.card a:hover, .card a:focus-visible, .card.lit a { transform: translateY(-4px); border-color: var(--tc); box-shadow: 0 24px 48px -32px color-mix(in srgb, var(--tc) 60%, transparent); }
-.card.lit a { box-shadow: 0 0 0 2px var(--tc), 0 24px 48px -28px color-mix(in srgb, var(--tc) 70%, transparent); }
+.card a:hover, .card a:focus-visible { transform: translateY(-4px); border-color: var(--tc); box-shadow: 0 24px 48px -32px color-mix(in srgb, var(--tc) 60%, transparent); }
 .art { position: relative; aspect-ratio: 16 / 9; background: var(--tb); overflow: hidden; }
 .art svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .art g { transition: transform .5s cubic-bezier(.2,.8,.2,1); }
@@ -318,8 +299,8 @@ img { max-width: 100%; display: block; }
 .card-f .ct { font-size: clamp(24px, 2.6vw, 32px); line-height: 1.2; letter-spacing: -.02em; }
 .card-f .cb { flex: none; padding: var(--s2); }
 @media (max-width: 960px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } .card-f { grid-row: auto; } .card-f .art { min-height: 0; aspect-ratio: 16 / 9; flex: none; } }
-@media (max-width: 640px) { .cards { grid-template-columns: minmax(0, 1fr); gap: var(--s1); } .card:not(.card-f) .art { aspect-ratio: 5 / 2; } .card-f { grid-column: auto; } .card-f .cb { padding: var(--s1) var(--s1) var(--s2); } .bar { margin-bottom: var(--s1); } .chips { flex-wrap: nowrap; overflow-x: auto; margin: 0 -16px; padding: 2px 16px; scrollbar-width: none; max-width: calc(100% + 32px); } .chip { flex: none; } }
-@media (prefers-reduced-motion: reduce) { .card, .card a, .art .s, .dice svg, .card .ar { transition: none !important; animation: none !important; } .card.pop { animation: none; } }
+@media (max-width: 640px) { .cards { grid-template-columns: minmax(0, 1fr); gap: var(--s1); } .card:not(.card-f) .art { aspect-ratio: 5 / 2; } .card-f { grid-column: auto; } .card-f .cb { padding: var(--s1) var(--s1) var(--s2); } }
+@media (prefers-reduced-motion: reduce) { .card a, .art .s, .card .ar { transition: none !important; } }
 
 /* glass navigation: light frost, hairline edge once the page scrolls */
 .nav { background: color-mix(in srgb, var(--bg) 60%, transparent); -webkit-backdrop-filter: blur(20px) saturate(170%); backdrop-filter: blur(20px) saturate(170%); transition: box-shadow .3s, background-color .3s; }
@@ -354,31 +335,19 @@ img { max-width: 100%; display: block; }
 <main id="main">
   <header class="intro wrap" id="top">
     <h1 class="rv">I write about design systems, attention and research.</h1>
-    <p class="lede rv">13 articles on Medium since 2025. Pick a topic, or let the page pick one for you.</p>
+    <p class="lede rv">A few favourites from Medium.</p>
     <div class="links rv"><a class="btn btn-primary" href="https://medium.com/@Atrams">Follow on Medium</a></div>
   </header>
 
   <section class="wrap writing" aria-labelledby="h-arts">
     <h2 id="h-arts" class="vh">Articles</h2>
-    <div class="bar rv">
-      <div class="chips" role="group" aria-label="Filter by topic"><button type="button" class="chip" data-t="all" aria-pressed="true">All <span>13</span></button><button type="button" class="chip" data-t="ds" aria-pressed="false" data-l="Design systems and AI"><i class="sw sw-ds" aria-hidden="true"></i>Design systems and AI <span>4</span></button><button type="button" class="chip" data-t="att" aria-pressed="false" data-l="Attention"><i class="sw sw-att" aria-hidden="true"></i>Attention <span>3</span></button><button type="button" class="chip" data-t="res" aria-pressed="false" data-l="Research"><i class="sw sw-res" aria-hidden="true"></i>Research <span>4</span></button><button type="button" class="chip" data-t="craft" aria-pressed="false" data-l="Craft and industry"><i class="sw sw-craft" aria-hidden="true"></i>Craft and industry <span>2</span></button></div>
-      <button type="button" class="dice" id="dice"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="2.5" width="15" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="7" cy="7" r="1.4" fill="currentColor"/><circle cx="13" cy="13" r="1.4" fill="currentColor"/><circle cx="10" cy="10" r="1.4" fill="currentColor"/></svg>Surprise me</button>
-    </div>
-    <p class="vh" id="live" aria-live="polite"></p>
     <ol class="cards" id="cards">
-      <li class="card card-f t-ds" data-t="ds"><a href="https://medium.com/design-systems-collective/your-design-system-has-a-week-to-live-a0bc8a18af67"><div class="art" data-t="ds" data-seed="3" aria-hidden="true"></div><div class="cb"><p class="cm">Featured · May 2026 · Design Systems Collective · Design systems and AI</p><h3 class="ct">Your Design System Has a Week to Live</h3><p class="cd">AI can generate 50 screens before lunch. Keeping them from looking like 50 products is the job now.</p><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
-      <li class="card t-ds" data-t="ds"><a href="https://medium.com/@Atrams/design-in-tech-report-2026-gave-the-shift-a-name-ax-03ae7abb8fd3"><div class="art" data-t="ds" data-seed="4" aria-hidden="true"></div><div class="cb"><p class="cm">Sep 2026 · Design systems and AI</p><h3 class="ct">Design in Tech Report 2026 gave the shift a name: AX.</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
-      <li class="card t-ds" data-t="ds"><a href="https://medium.com/design-systems-collective/how-to-read-study-and-understand-any-design-system-eb21914de736"><div class="art" data-t="ds" data-seed="5" aria-hidden="true"></div><div class="cb"><p class="cm">Mar 2026 · Design Systems Collective · Design systems and AI</p><h3 class="ct">How to Read, Study, and Understand Any Design System</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
-      <li class="card t-ds" data-t="ds"><a href="https://medium.com/@Atrams/figma-slots-what-it-is-why-it-exists-and-what-it-teaches-you-about-design-8f7f6dd2288d"><div class="art" data-t="ds" data-seed="6" aria-hidden="true"></div><div class="cb"><p class="cm">Mar 2026 · Design systems and AI</p><h3 class="ct">Figma Slots: What It Is, Why It Exists, and What It Teaches You About Design</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
-      <li class="card t-craft" data-t="craft"><a href="https://medium.com/@Atrams/apples-iwork-going-freemium-is-a-ux-case-study-in-disguise-12c542058147"><div class="art" data-t="craft" data-seed="7" aria-hidden="true"></div><div class="cb"><p class="cm">Jan 2026 · Craft and industry</p><h3 class="ct">Apple’s iWork Going Freemium Is a UX Case Study in Disguise</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
-      <li class="card t-craft" data-t="craft"><a href="https://medium.com/@Atrams/ux-is-not-a-course-its-a-school-740dd24368ab"><div class="art" data-t="craft" data-seed="8" aria-hidden="true"></div><div class="cb"><p class="cm">Jan 2026 · Craft and industry</p><h3 class="ct">UX Is Not a Course, It’s a School</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
-      <li class="card t-res" data-t="res"><a href="https://medium.com/@Atrams/designing-to-win-how-ux-researchers-can-run-competitive-analysis-that-actually-shifts-the-roadmap-70d14a5c71ef"><div class="art" data-t="res" data-seed="9" aria-hidden="true"></div><div class="cb"><p class="cm">Dec 2025 · Research</p><h3 class="ct">Designing to Win: How UX Researchers Can Run Competitive Analysis That Shifts the Roadmap</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
-      <li class="card t-res" data-t="res"><a href="https://medium.com/@Atrams/scrum-ux-and-ai-a-simple-evidence-based-guide-for-modern-teams-411cb27da399"><div class="art" data-t="res" data-seed="10" aria-hidden="true"></div><div class="cb"><p class="cm">Dec 2025 · Research</p><h3 class="ct">Scrum, UX, and AI: A Simple, Evidence-Based Guide for Modern Teams</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
-      <li class="card t-att" data-t="att"><a href="https://medium.com/@Atrams/habituation-in-psychology-ux-the-invisible-architecture-of-behavior-and-why-it-matters-now-170178d99a2c"><div class="art" data-t="att" data-seed="11" aria-hidden="true"></div><div class="cb"><p class="cm">Nov 2025 · Attention</p><h3 class="ct">Habituation in Psychology &amp; UX: The Invisible Architecture of Behavior</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
-      <li class="card t-att" data-t="att"><a href="https://medium.com/@Atrams/the-hidden-science-of-attention-how-users-really-interact-with-products-20f8dde85ffb"><div class="art" data-t="att" data-seed="12" aria-hidden="true"></div><div class="cb"><p class="cm">Oct 2025 · Attention</p><h3 class="ct">The Hidden Science of Attention: How Users Really Interact With Products</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
-      <li class="card t-res" data-t="res"><a href="https://medium.com/@Atrams/usability-testing-mastery-a-deep-universal-journey-from-theory-to-application-4a6e84b72e25"><div class="art" data-t="res" data-seed="13" aria-hidden="true"></div><div class="cb"><p class="cm">Oct 2025 · Research</p><h3 class="ct">Usability Testing Mastery: From Theory to Application</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
-      <li class="card t-att" data-t="att"><a href="https://medium.com/@Atrams/designing-for-the-8-second-mind-cognitive-ux-strategy-in-the-age-of-digital-overload-99fecd1db7a2"><div class="art" data-t="att" data-seed="14" aria-hidden="true"></div><div class="cb"><p class="cm">Jul 2025 · Attention</p><h3 class="ct">Designing for the 8-Second Mind: Cognitive UX Strategy in the Age of Digital Overload</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
-      <li class="card t-res" data-t="res"><a href="https://medium.com/@Atrams/how-to-choose-a-ux-problem-even-before-research-d7a285229739"><div class="art" data-t="res" data-seed="15" aria-hidden="true"></div><div class="cb"><p class="cm">Jun 2025 · Research</p><h3 class="ct">How to Choose a UX Problem (Even Before Research)</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
+      <li class="card card-f t-ds" data-t="ds"><a href="https://medium.com/design-systems-collective/your-design-system-has-a-week-to-live-a0bc8a18af67"><div class="art" data-t="ds" data-seed="3" aria-hidden="true"></div><div class="cb"><p class="cm">Featured · May 2026 · Design Systems Collective</p><h3 class="ct">Your Design System Has a Week to Live</h3><p class="cd">AI can generate 50 screens before lunch. Keeping them from looking like 50 products is the job now.</p><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
+      <li class="card t-ds" data-t="ds"><a href="https://medium.com/@Atrams/design-in-tech-report-2026-gave-the-shift-a-name-ax-03ae7abb8fd3"><div class="art" data-t="ds" data-seed="4" aria-hidden="true"></div><div class="cb"><p class="cm">Sep 2026</p><h3 class="ct">Design in Tech Report 2026 gave the shift a name: AX.</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
+      <li class="card t-ds" data-t="ds"><a href="https://medium.com/design-systems-collective/how-to-read-study-and-understand-any-design-system-eb21914de736"><div class="art" data-t="ds" data-seed="5" aria-hidden="true"></div><div class="cb"><p class="cm">Mar 2026 · Design Systems Collective</p><h3 class="ct">How to Read, Study, and Understand Any Design System</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
+      <li class="card t-ds" data-t="ds"><a href="https://medium.com/@Atrams/figma-slots-what-it-is-why-it-exists-and-what-it-teaches-you-about-design-8f7f6dd2288d"><div class="art" data-t="ds" data-seed="6" aria-hidden="true"></div><div class="cb"><p class="cm">Mar 2026</p><h3 class="ct">Figma Slots: What It Is, Why It Exists, and What It Teaches You About Design</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
+      <li class="card t-res" data-t="res"><a href="https://medium.com/@Atrams/designing-to-win-how-ux-researchers-can-run-competitive-analysis-that-actually-shifts-the-roadmap-70d14a5c71ef"><div class="art" data-t="res" data-seed="9" aria-hidden="true"></div><div class="cb"><p class="cm">Dec 2025</p><h3 class="ct">Designing to Win: How UX Researchers Can Run Competitive Analysis That Shifts the Roadmap</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
+      <li class="card t-att" data-t="att"><a href="https://medium.com/@Atrams/the-hidden-science-of-attention-how-users-really-interact-with-products-20f8dde85ffb"><div class="art" data-t="att" data-seed="12" aria-hidden="true"></div><div class="cb"><p class="cm">Oct 2025</p><h3 class="ct">The Hidden Science of Attention: How Users Really Interact With Products</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
     </ol>
   </section>
 
@@ -446,7 +415,7 @@ img { max-width: 100%; display: block; }
 })();
 </script>
 <script>
-/* Writing page: topic filters, playful covers, "Surprise me" */
+/* Writing page: a small drawn cover per article that moves on hover */
 (function () {
   var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches, NS = "http://www.w3.org/2000/svg";
   function rnd(seed) { return function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }; }
@@ -484,31 +453,9 @@ img { max-width: 100%; display: block; }
   var cards = [].slice.call(document.querySelectorAll(".card"));
   if (!reduce) cards.forEach(function (c) {
     var a = c.querySelector("a"), g = c.querySelector(".art g");
-    a.addEventListener("pointerenter", function () { play(c, true); }); a.addEventListener("pointerleave", function () { play(c, false); if (g) g.style.transform = ""; });
+    a.addEventListener("pointerenter", function () { play(c, true); }); a.addEventListener("pointerleave", function () { play(c, false); });
     a.addEventListener("focus", function () { play(c, true); }); a.addEventListener("blur", function () { play(c, false); });
-    a.addEventListener("pointermove", function (e) { if (!g) return; var r = a.getBoundingClientRect(); g.style.transform = "translate(" + ((e.clientX - r.left) / r.width - .5) * 12 + "px," + ((e.clientY - r.top) / r.height - .5) * 8 + "px)"; });
   });
-  /* filters */
-  var chips = [].slice.call(document.querySelectorAll(".chip")), live = document.getElementById("live");
-  chips.forEach(function (ch) { ch.addEventListener("click", function () {
-    var t = ch.dataset.t, n = 0;
-    chips.forEach(function (x) { x.setAttribute("aria-pressed", x === ch ? "true" : "false"); });
-    cards.forEach(function (c, i) { var show = t === "all" || c.dataset.t === t; c.classList.toggle("out", !show); c.classList.remove("pop", "lit");
-      if (show) { n++; if (!reduce) { void c.offsetWidth; c.style.animationDelay = (n - 1) * 45 + "ms"; c.classList.add("pop"); } } });
-    live.textContent = t === "all" ? "Showing all " + n + " articles" : "Showing " + n + " article" + (n > 1 ? "s" : "") + " about " + ch.dataset.l;
-  }); });
-  /* surprise me: a quick shuffle across the visible cards, then land on one */
-  var dice = document.getElementById("dice"), busy = false;
-  dice.addEventListener("click", function () {
-    if (busy) return; var vis = cards.filter(function (c) { return !c.classList.contains("out"); }); if (!vis.length) return;
-    var pick = vis[Math.floor(Math.random() * vis.length)];
-    cards.forEach(function (c) { c.classList.remove("lit"); });
-    function land() { pick.classList.add("lit"); if (!reduce) play(pick, true); pick.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" }); setTimeout(function () { pick.querySelector("a").focus({ preventScroll: true }); }, reduce ? 0 : 350); live.textContent = "Picked: " + pick.querySelector(".ct").textContent; busy = false; dice.classList.remove("rolling"); }
-    if (reduce || vis.length < 2) return land();
-    busy = true; dice.classList.add("rolling"); var k = 0, steps = 10 + Math.floor(Math.random() * 5);
-    (function hop() { vis.forEach(function (c) { c.classList.remove("lit"); }); if (k >= steps) return land(); vis[k % vis.length].classList.add("lit"); k++; setTimeout(hop, 60 + k * 9); })();
-  });
-  document.addEventListener("pointerdown", function (e) { if (!e.target.closest(".card, .dice")) cards.forEach(function (c) { if (c.classList.contains("lit")) { c.classList.remove("lit"); play(c, false); } }); });
 })();
 </script>
 </body>
