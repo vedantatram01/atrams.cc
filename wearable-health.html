@@ -563,13 +563,10 @@ td:first-child { width: 30%; }
 <section class="sec col" id="research" aria-labelledby="h-research">
   <h2 id="h-research">How we studied it</h2>
   <p>We used two methods so we could see both what people do and why. Observation showed behaviour in the moment; interviews explained the motivations and feelings behind it. All participants already used a smartwatch, mostly Apple Watch, with some Fitbit, Garmin and Samsung users.</p>
-  <div class="table" style="margin-top:var(--s2)"><table>
-    <thead><tr><th scope="col">Method</th><th scope="col">Who</th><th scope="col">What they did</th></tr></thead>
-    <tbody>
-      <tr><td>Observation</td><td>6 people, aged 23 to 28. 4 in person, 2 on Zoom</td><td>Used their own watch in three scenarios: an end-of-day check-in, a midday nudge while busy, and live feedback during a workout. Each scenario ended with reflection questions.</td></tr>
-      <tr><td>Interviews</td><td>8 different people, aged 23 to 35. 2 in person, 6 on Zoom</td><td>30-minute semi-structured interviews on long-term use, motivation, goals, and how health feedback made them feel.</td></tr>
-    </tbody>
-  </table></div>
+  <div class="mcards">
+    <div><b>6 <small>people</small></b><p class="nm">Observation</p><p class="who">Aged 23 to 28 · 4 in person, 2 on Zoom</p><p>Used their own watch in three scenarios: an end-of-day check-in, a midday nudge while busy, and live feedback during a workout. Each ended with reflection questions.</p></div>
+    <div><b>8 <small>people</small></b><p class="nm">Interviews</p><p class="who">Different people, aged 23 to 35 · 2 in person, 6 on Zoom</p><p>30-minute semi-structured interviews on long-term use, motivation, goals, and how health feedback made them feel.</p></div>
+  </div>
   <p>To analyse the observations, we mapped an activity sequence for each scenario and grouped what we saw into an affinity diagram. For the interviews, each of us coded our own transcripts in Atlas.ti. We then agreed one shared codebook and counted how often each theme came up.</p>
   <figure class="shot wide full"><div class="frame"><div class="fr-in" style="aspect-ratio:1600/835"><img src="assets/wh-affinity.webp" width="1600" height="835" alt="Affinity diagram from the observation sessions, with sticky notes grouped into six themes: notification management and relevance, overreliance and autonomy, device and phone interplay, emotional engagement and motivation, interpretability of health data, and contextual awareness and personalisation." loading="lazy"></div></div><figcaption><p>The observation affinity diagram: six themes, from notification relevance to whether people could make sense of their data.</p><ul class="quiet-list"><li>Notes like “Reminders during focus work annoyed me” and “Felt guilty skipping a suggested workout” became the findings below.</li><li>Each note is a researcher’s summary of something we saw or heard, not a direct quote.</li></ul></figcaption></figure>
   <figure class="shot wide full"><div class="frame"><div class="fr-in" style="aspect-ratio:1600/589"><img src="assets/wh-sequence.webp" width="1600" height="589" alt="Activity sequence for the three observation scenarios. From a start point, the flow splits into a morning check-in (wake the watch, answer a mood prompt, rate sleep, submit), a midday nudge (the watch buzzes, the person views it, then either follows the prompt or snoozes and gets the same alert again), and a workout (choose a type, start, watch live stats and cues, end, then view the summary and sync)." loading="lazy"></div></div><figcaption><p>The observation activity sequence: all three scenarios, step by step. <a href="assets/wh-sequence-full.webp">Open full size</a></p><ul class="quiet-list"><li>Snoozing a nudge brings the same alert back later.</li><li>A workout runs from picking a type to syncing with the phone, with live cues in between.</li></ul></figcaption></figure>
@@ -579,7 +576,13 @@ td:first-child { width: 30%; }
 <section class="sec col" id="findings" aria-labelledby="h-findings">
   <h2 id="h-findings">What we found</h2>
   <p>Five patterns came up across both methods. Underneath all of them: people kept using features that felt relevant, rewarding and simple, and quietly dropped the ones that felt intrusive or took too much effort.</p>
-  <div class="gap"><p class="kick">Sleep</p><h3>Sleep is the first thing people check</h3><div class="vs"><div class="got"><small>What we saw</small><p>Nearly everyone opened sleep data first, in both studies. Several adjusted their plans for the day based on how they slept.</p></div><div class="exp"><small>What it means for design</small><p>Lead with sleep, and let it shape the rest of the day.</p></div></div><p class="cap" style="margin-top:var(--s1)">“I check my sleep score in the morning.” Interview participant</p></div><div class="gap"><p class="kick">Goals</p><h3>Goals motivate, until they’re missed</h3><div class="vs"><div class="got"><small>What we saw</small><p>Closing activity rings made people proud. Missing them made several feel frustrated or guilty, and some avoided opening the app on days they hadn’t moved.</p></div><div class="exp"><small>What it means for design</small><p>Count progress over the week, allow rest days, and speak kindly when a goal is missed.</p></div></div><p class="cap" style="margin-top:var(--s1)">“Some days I feel like I’m being judged.” Interview participant</p></div><div class="gap"><p class="kick">Workouts</p><h3>Workout feedback helps active users, with friction</h3><div class="vs"><div class="got"><small>What we saw</small><p>Fitness-focused participants paced themselves by heart rate zone and calories. They struggled with small, busy screens, switching between workout and music, and calorie numbers they didn’t trust. Some wanted workouts to start tracking automatically.</p></div><div class="exp"><small>What it means for design</small><p>One clear metric at a time, music on the same screen, honest estimates, and automatic detection.</p></div></div></div><div class="gap"><p class="kick">Mindfulness</p><h3>Mindfulness is used in the moment, not as a habit</h3><div class="vs"><div class="got"><small>What we saw</small><p>A few people used breathing exercises when stressed at work or in class, but almost no one used them regularly. Nothing prompted them at the right time.</p></div><div class="exp"><small>What it means for design</small><p>Offer a short breather when the body and the calendar suggest it, not on a timer.</p></div></div></div><div class="gap"><p class="kick">Casual use</p><h3>Casual users want the device to stay in the background</h3><div class="vs"><div class="got"><small>What we saw</small><p>Casual users tracked sleep and steps, ignored most notifications, and avoided anything complex. Many health reminders were dismissed simply because they arrived at a bad time.</p></div><div class="exp"><small>What it means for design</small><p>A simple mode, and nudges that wait until people are free.</p></div></div></div>
+  <div class="vt" data-tabs="Findings">
+    <div class="vt-p" data-tab="Sleep"><h3>Sleep is the first thing people check</h3><div class="vs"><div class="got"><small>What we saw</small><p>Nearly everyone opened sleep data first, in both studies. Several adjusted their plans for the day based on how they slept.</p></div><div class="exp"><small>What it means for design</small><p>Lead with sleep, and let it shape the rest of the day.</p></div></div><p class="cap" style="margin-top:var(--s1)">“I check my sleep score in the morning.” Interview participant</p></div>
+    <div class="vt-p" data-tab="Goals"><h3>Goals motivate, until they’re missed</h3><div class="vs"><div class="got"><small>What we saw</small><p>Closing activity rings made people proud. Missing them made several feel frustrated or guilty, and some avoided opening the app on days they hadn’t moved.</p></div><div class="exp"><small>What it means for design</small><p>Count progress over the week, allow rest days, and speak kindly when a goal is missed.</p></div></div><p class="cap" style="margin-top:var(--s1)">“Some days I feel like I’m being judged.” Interview participant</p></div>
+    <div class="vt-p" data-tab="Workouts"><h3>Workout feedback helps active users, with friction</h3><div class="vs"><div class="got"><small>What we saw</small><p>Fitness-focused participants paced themselves by heart rate zone and calories. They struggled with small, busy screens, switching between workout and music, and calorie numbers they didn’t trust. Some wanted workouts to start tracking automatically.</p></div><div class="exp"><small>What it means for design</small><p>One clear metric at a time, music on the same screen, honest estimates, and automatic detection.</p></div></div></div>
+    <div class="vt-p" data-tab="Mindfulness"><h3>Mindfulness is used in the moment, not as a habit</h3><div class="vs"><div class="got"><small>What we saw</small><p>A few people used breathing exercises when stressed at work or in class, but almost no one used them regularly. Nothing prompted them at the right time.</p></div><div class="exp"><small>What it means for design</small><p>Offer a short breather when the body and the calendar suggest it, not on a timer.</p></div></div></div>
+    <div class="vt-p" data-tab="Casual use"><h3>Casual users want the device to stay in the background</h3><div class="vs"><div class="got"><small>What we saw</small><p>Casual users tracked sleep and steps, ignored most notifications, and avoided anything complex. Many health reminders were dismissed simply because they arrived at a bad time.</p></div><div class="exp"><small>What it means for design</small><p>A simple mode, and nudges that wait until people are free.</p></div></div></div>
+  </div>
 </section>
 
 <section class="sec col" id="people" aria-labelledby="h-people">
@@ -610,23 +613,22 @@ td:first-child { width: 30%; }
 
 <section class="sec col" id="priorities" aria-labelledby="h-priorities">
   <h2 id="h-priorities">Deciding what to fix first</h2>
-  <p>We rated every improvement participants asked for by its value to users and the effort to build it. The low-effort, high-value items became the core of the prototype.</p>
-  <div class="table bleed" style="margin-top:var(--s2)"><table class="pm">
-    <colgroup><col style="width:30%"><col style="width:12%"><col style="width:10%"><col style="width:16%"><col style="width:32%"></colgroup>
-    <thead><tr><th scope="col">Improvement</th><th scope="col">User value</th><th scope="col">Effort</th><th scope="col">Our call</th><th scope="col">In the prototype</th></tr></thead>
-    <tbody>
-      <tr><td>Pause streaks without guilt</td><td>High</td><td>Low</td><td>Do next</td><td>Rest days and pausing goals</td></tr>
-      <tr><td>Simpler screens, less data overload</td><td>High</td><td>Low</td><td>Do next</td><td>One metric at a time during workouts</td></tr>
-      <tr><td>Simpler UI mode for casual users</td><td>Medium</td><td>Low</td><td>Do next</td><td>Simple mode: sleep and steps only</td></tr>
-      <tr><td>Better media controls during workouts</td><td>Medium</td><td>Low</td><td>Do next</td><td>Music controls on the workout screen</td></tr>
-      <tr><td>Water intake reminders</td><td>Medium</td><td>Low</td><td>Do next</td><td>Included, and held until you’re free</td></tr>
-      <tr><td>Automatic workout detection</td><td>High</td><td>Medium</td><td>Improve soon</td><td>Detects a run and asks before tracking</td></tr>
-      <tr><td>Trend-based insights</td><td>High</td><td>Medium</td><td>Improve soon</td><td>Weekly view on the phone</td></tr>
-      <tr><td>More accurate calorie and heart rate sensors</td><td>High</td><td>Medium</td><td>Improve soon</td><td>Hardware, so not designed. Calories shown as an honest range</td></tr>
-      <tr><td>Emotion recognition and context-aware insights</td><td>Very high</td><td>High</td><td>Plan strategically</td><td>Partly: nudges timed to calendar and heart rate</td></tr>
-      <tr><td>Mood tracking</td><td>Very high</td><td>High</td><td>Plan strategically</td><td>Not yet</td></tr>
-    </tbody>
-  </table></div>
+  <p>We rated every improvement participants asked for by its value to users and the effort to build it. The low-effort, high-value items became the core of the prototype. Select an item to see what we built.</p>
+  <div class="pmx" data-x="Low|Medium|High" data-y="Very high|High|Medium" data-zone-01="Do next" data-zone-02="Do next" data-zone-11="Improve soon" data-zone-20="Plan strategically">
+  <p class="pmx-ax" aria-hidden="true"><span>User value ↑</span><span>Effort →</span></p>
+  <ul class="pmx-src" role="list">
+<li data-x="Low" data-y="High" data-t="Pause streaks without guilt"><b>Pause streaks without guilt</b><p>Value high, effort low. Our call: do next.</p><p>In the prototype: Rest days and pausing goals</p></li>
+<li data-x="Low" data-y="High" data-t="Simpler screens, less data overload"><b>Simpler screens, less data overload</b><p>Value high, effort low. Our call: do next.</p><p>In the prototype: One metric at a time during workouts</p></li>
+<li data-x="Low" data-y="Medium" data-t="Simpler UI mode for casual users"><b>Simpler UI mode for casual users</b><p>Value medium, effort low. Our call: do next.</p><p>In the prototype: Simple mode: sleep and steps only</p></li>
+<li data-x="Low" data-y="Medium" data-t="Better media controls during workouts"><b>Better media controls during workouts</b><p>Value medium, effort low. Our call: do next.</p><p>In the prototype: Music controls on the workout screen</p></li>
+<li data-x="Low" data-y="Medium" data-t="Water intake reminders"><b>Water intake reminders</b><p>Value medium, effort low. Our call: do next.</p><p>In the prototype: Included, and held until you’re free</p></li>
+<li data-x="Medium" data-y="High" data-t="Automatic workout detection"><b>Automatic workout detection</b><p>Value high, effort medium. Our call: improve soon.</p><p>In the prototype: Detects a run and asks before tracking</p></li>
+<li data-x="Medium" data-y="High" data-t="Trend-based insights"><b>Trend-based insights</b><p>Value high, effort medium. Our call: improve soon.</p><p>In the prototype: Weekly view on the phone</p></li>
+<li data-x="Medium" data-y="High" data-t="More accurate calorie and heart rate sensors"><b>More accurate calorie and heart rate sensors</b><p>Value high, effort medium. Our call: improve soon.</p><p>In the prototype: Hardware, so not designed. Calories shown as an honest range</p></li>
+<li data-x="High" data-y="Very high" data-t="Emotion recognition and context-aware insights"><b>Emotion recognition and context-aware insights</b><p>Value very high, effort high. Our call: plan strategically.</p><p>In the prototype: Partly: nudges timed to calendar and heart rate</p></li>
+<li data-x="High" data-y="Very high" data-t="Mood tracking"><b>Mood tracking</b><p>Value very high, effort high. Our call: plan strategically.</p><p>In the prototype: Not yet</p></li>
+  </ul>
+  </div>
 </section>
 
 <section class="sec" id="design" aria-labelledby="h-design">
@@ -751,5 +753,6 @@ td:first-child { width: 30%; }
   });
 })();
 </script>
+<script src="assets/viz.js"></script>
 </body>
 </html>
