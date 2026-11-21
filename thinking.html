@@ -275,42 +275,23 @@ img { max-width: 100%; display: block; }
 .frame { border-radius: 5px !important; }
 @media (min-width: 641px) { .menu { padding: 3px; } .menu .pill { border-radius: 3px !important; } }
 
-/* ---------- writing: cards and covers ---------- */
-.t-ds { --tc: #1A3DFF; --tb: #EEF1FF; } .t-att { --tc: #C2410C; --tb: #FFF2EA; } .t-res { --tc: #0F7A55; --tb: #E9F7F0; } .t-craft { --tc: #B4235A; --tb: #FDEEF3; }
-:root[data-mode="dark"] .t-ds { --tc: #8FA2FF; --tb: #1B2140; } :root[data-mode="dark"] .t-att { --tc: #FB9B62; --tb: #33221A; } :root[data-mode="dark"] .t-res { --tc: #5FD3A6; --tb: #15302A; } :root[data-mode="dark"] .t-craft { --tc: #F28AB2; --tb: #36202A; }
+/* ---------- writing: simple cards ---------- */
 .writing { padding-bottom: 0; }
-.writing .cards { margin-top: 0; }
-.cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2) var(--s2); }
-.card a { display: flex; flex-direction: column; height: 100%; text-decoration: none; color: var(--soft); border: 1px solid var(--line); border-radius: 5px; background: var(--surface); overflow: hidden; transition: transform .3s cubic-bezier(.2,.8,.2,1), border-color .3s, box-shadow .3s; }
-.card a:hover, .card a:focus-visible { transform: translateY(-4px); border-color: var(--tc); box-shadow: 0 24px 48px -32px color-mix(in srgb, var(--tc) 60%, transparent); }
-.art { position: relative; aspect-ratio: 16 / 9; background: var(--tb); overflow: hidden; }
-.art svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.art g { transition: transform .5s cubic-bezier(.2,.8,.2,1); }
-.art .s { transition: transform .7s cubic-bezier(.3,1.4,.5,1), opacity .5s; transform-box: fill-box; transform-origin: center; }
-.cb { display: grid; gap: var(--s0); padding: var(--s1) var(--s1) var(--s2); flex: 1; align-content: start; }
+.cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s1); }
+.card a { display: flex; flex-direction: column; gap: var(--s0); height: 100%; padding: var(--s2); text-decoration: none; color: var(--soft); border: 1px solid var(--line); border-radius: 5px; background: var(--surface); transition: border-color .25s, transform .25s; }
+.card a:hover, .card a:focus-visible { border-color: var(--text); transform: translateY(-2px); }
+.cb { display: contents; }
 .cm { margin: 0; font-size: 13px; line-height: 20px; color: var(--muted); }
-.ct { margin: 0; font-family: var(--display); font-size: 18px; line-height: 26px; font-weight: 500; color: var(--text); letter-spacing: -.01em; }
-.cd { margin: 0; font-size: 15px; line-height: 24px; color: var(--soft); }
-.card .go { margin-top: auto; padding-top: var(--s0); display: inline-flex; align-items: center; gap: 6px; font-size: 14px; line-height: 20px; font-weight: 500; color: var(--tc); }
-.card .ar { width: 16px; height: 16px; transition: transform .3s; }
+.ct { margin: 0; font-family: var(--display); font-size: 20px; line-height: 28px; font-weight: 500; color: var(--text); letter-spacing: -.01em; }
+.cd { margin: 0; font-size: 16px; line-height: 26px; color: var(--soft); max-width: 640px; }
+.card .go { margin-top: auto; padding-top: var(--s1); display: inline-flex; align-items: center; gap: 6px; font-size: 14px; line-height: 20px; font-weight: 500; color: var(--accent); }
+.card .ar { width: 16px; height: 16px; transition: transform .25s; }
 .card a:hover .ar { transform: translate(3px, -3px); }
-.card-f { grid-column: span 2; grid-row: span 2; }
-.card-f .art { aspect-ratio: auto; flex: 1; min-height: 280px; }
-.card-f .ct { font-size: clamp(24px, 2.6vw, 32px); line-height: 1.2; letter-spacing: -.02em; }
-.card-f .cb { flex: none; padding: var(--s2); }
-@media (max-width: 960px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } .card-f { grid-row: auto; } .card-f .art { min-height: 0; aspect-ratio: 16 / 9; flex: none; } }
-@media (max-width: 640px) { .cards { grid-template-columns: minmax(0, 1fr); gap: var(--s1); } .card:not(.card-f) .art { aspect-ratio: 5 / 2; } .card-f { grid-column: auto; } .card-f .cb { padding: var(--s1) var(--s1) var(--s2); } }
-@media (prefers-reduced-motion: reduce) { .card a, .art .s, .card .ar { transition: none !important; } }
-
-/* glass navigation: light frost, hairline edge once the page scrolls */
-.nav { background: color-mix(in srgb, var(--bg) 60%, transparent); -webkit-backdrop-filter: blur(20px) saturate(170%); backdrop-filter: blur(20px) saturate(170%); transition: box-shadow .3s, background-color .3s; }
-.nav.scrolled { box-shadow: 0 1px 0 color-mix(in srgb, var(--text) 8%, transparent), 0 10px 30px -24px rgba(0, 0, 0, .25); }
-@media (min-width: 641px) {
-  .menu, .nav-r > .mode { background: color-mix(in srgb, var(--surface) 55%, transparent); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6); }
-  :root[data-mode="dark"] .menu, :root[data-mode="dark"] .nav-r > .mode { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06); }
-}
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .nav { background: color-mix(in srgb, var(--bg) 94%, transparent); } }
-@media (max-width: 640px) { body.menu-open .nav { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--bg); box-shadow: none; } }
+.card-f, .card:not(.card-f):last-child:nth-child(even) { grid-column: 1 / -1; }
+.card-f a { padding: var(--s3) var(--s2); }
+.card-f .ct { font-size: clamp(26px, 3vw, 36px); line-height: 1.2; letter-spacing: -.02em; }
+@media (max-width: 640px) { .cards { grid-template-columns: minmax(0, 1fr); } .card a, .card-f a { padding: var(--s1) var(--s1) var(--s2); } }
+@media (prefers-reduced-motion: reduce) { .card a, .card .ar { transition: none; } .card a:hover { transform: none; } }
 </style>
 </head>
 <body>
@@ -342,12 +323,12 @@ img { max-width: 100%; display: block; }
   <section class="wrap writing" aria-labelledby="h-arts">
     <h2 id="h-arts" class="vh">Articles</h2>
     <ol class="cards" id="cards">
-      <li class="card card-f t-ds" data-t="ds"><a href="https://medium.com/design-systems-collective/your-design-system-has-a-week-to-live-a0bc8a18af67"><div class="art" data-t="ds" data-seed="3" aria-hidden="true"></div><div class="cb"><p class="cm">Featured · May 2026 · Design Systems Collective</p><h3 class="ct">Your Design System Has a Week to Live</h3><p class="cd">AI can generate 50 screens before lunch. Keeping them from looking like 50 products is the job now.</p><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
-      <li class="card t-ds" data-t="ds"><a href="https://medium.com/@Atrams/design-in-tech-report-2026-gave-the-shift-a-name-ax-03ae7abb8fd3"><div class="art" data-t="ds" data-seed="4" aria-hidden="true"></div><div class="cb"><p class="cm">Sep 2026</p><h3 class="ct">Design in Tech Report 2026 gave the shift a name: AX.</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
-      <li class="card t-ds" data-t="ds"><a href="https://medium.com/design-systems-collective/how-to-read-study-and-understand-any-design-system-eb21914de736"><div class="art" data-t="ds" data-seed="5" aria-hidden="true"></div><div class="cb"><p class="cm">Mar 2026 · Design Systems Collective</p><h3 class="ct">How to Read, Study, and Understand Any Design System</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
-      <li class="card t-ds" data-t="ds"><a href="https://medium.com/@Atrams/figma-slots-what-it-is-why-it-exists-and-what-it-teaches-you-about-design-8f7f6dd2288d"><div class="art" data-t="ds" data-seed="6" aria-hidden="true"></div><div class="cb"><p class="cm">Mar 2026</p><h3 class="ct">Figma Slots: What It Is, Why It Exists, and What It Teaches You About Design</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
-      <li class="card t-res" data-t="res"><a href="https://medium.com/@Atrams/designing-to-win-how-ux-researchers-can-run-competitive-analysis-that-actually-shifts-the-roadmap-70d14a5c71ef"><div class="art" data-t="res" data-seed="9" aria-hidden="true"></div><div class="cb"><p class="cm">Dec 2025</p><h3 class="ct">Designing to Win: How UX Researchers Can Run Competitive Analysis That Shifts the Roadmap</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
-      <li class="card t-att" data-t="att"><a href="https://medium.com/@Atrams/the-hidden-science-of-attention-how-users-really-interact-with-products-20f8dde85ffb"><div class="art" data-t="att" data-seed="12" aria-hidden="true"></div><div class="cb"><p class="cm">Oct 2025</p><h3 class="ct">The Hidden Science of Attention: How Users Really Interact With Products</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
+      <li class="card card-f"><a href="https://medium.com/design-systems-collective/your-design-system-has-a-week-to-live-a0bc8a18af67"><div class="cb"><p class="cm">Featured · May 2026 · Design Systems Collective</p><h3 class="ct">Your Design System Has a Week to Live</h3><p class="cd">AI can generate 50 screens before lunch. Keeping them from looking like 50 products is the job now.</p><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
+      <li class="card"><a href="https://medium.com/@Atrams/design-in-tech-report-2026-gave-the-shift-a-name-ax-03ae7abb8fd3"><div class="cb"><p class="cm">Sep 2026</p><h3 class="ct">Design in Tech Report 2026 gave the shift a name: AX.</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
+      <li class="card"><a href="https://medium.com/design-systems-collective/how-to-read-study-and-understand-any-design-system-eb21914de736"><div class="cb"><p class="cm">Mar 2026 · Design Systems Collective</p><h3 class="ct">How to Read, Study, and Understand Any Design System</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
+      <li class="card"><a href="https://medium.com/@Atrams/figma-slots-what-it-is-why-it-exists-and-what-it-teaches-you-about-design-8f7f6dd2288d"><div class="cb"><p class="cm">Mar 2026</p><h3 class="ct">Figma Slots: What It Is, Why It Exists, and What It Teaches You About Design</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
+      <li class="card"><a href="https://medium.com/@Atrams/designing-to-win-how-ux-researchers-can-run-competitive-analysis-that-actually-shifts-the-roadmap-70d14a5c71ef"><div class="cb"><p class="cm">Dec 2025</p><h3 class="ct">Designing to Win: How UX Researchers Can Run Competitive Analysis That Shifts the Roadmap</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
+      <li class="card"><a href="https://medium.com/@Atrams/the-hidden-science-of-attention-how-users-really-interact-with-products-20f8dde85ffb"><div class="cb"><p class="cm">Oct 2025</p><h3 class="ct">The Hidden Science of Attention: How Users Really Interact With Products</h3><span class="go">Read on Medium <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></span></div></a></li>
     </ol>
   </section>
 
@@ -412,50 +393,6 @@ img { max-width: 100%; display: block; }
   m.addEventListener("click", function (e) { if (e.target.closest("a")) set(false); });
   function sync() { if (!mq.matches) set(false); m.toggleAttribute("inert", mq.matches && !m.classList.contains("open")); }
   b.addEventListener("click", sync); mq.addEventListener ? mq.addEventListener("change", sync) : mq.addListener(sync); sync();
-})();
-</script>
-<script>
-/* Writing page: a small drawn cover per article that moves on hover */
-(function () {
-  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches, NS = "http://www.w3.org/2000/svg";
-  function rnd(seed) { return function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }; }
-  function el(n, a) { var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); return e; }
-  /* each topic has its own motif; every article gets its own arrangement */
-  var draw = {
-    ds: function (g, r) { /* components snapping into a grid */
-      for (var y = 0; y < 4; y++) for (var x = 0; x < 7; x++) { var on = r() < .32, w = 28, gx = 44 + x * 36, gy = 34 + y * 36;
-        var e = el("rect", { x: gx, y: gy, width: w, height: w, rx: 3, fill: on ? "var(--tc)" : "none", stroke: "var(--tc)", "stroke-width": on ? 0 : 1.5, opacity: on ? 1 : .35, "class": "s" });
-        e.dataset.dx = ((r() - .5) * 60).toFixed(0); e.dataset.dy = ((r() - .5) * 40).toFixed(0); e.dataset.rot = ((r() - .5) * 90).toFixed(0); g.appendChild(e); } },
-    att: function (g, r) { /* rings that tighten into focus */
-      var cx = 90 + r() * 140, cy = 70 + r() * 40;
-      for (var i = 5; i >= 1; i--) { var e = el("circle", { cx: cx, cy: cy, r: i * 18, fill: i === 1 ? "var(--tc)" : "none", stroke: "var(--tc)", "stroke-width": 1.5, opacity: i === 1 ? 1 : .2 + (5 - i) * .14, "class": "s" }); e.dataset.sc = (1 + i * .09).toFixed(2); g.appendChild(e); }
-      for (var j = 0; j < 9; j++) { var d = el("circle", { cx: 20 + r() * 280, cy: 15 + r() * 150, r: 3, fill: "var(--tc)", opacity: .45, "class": "s" }); d.dataset.dx = ((cx - +d.getAttribute("cx")) * .7).toFixed(0); d.dataset.dy = ((cy - +d.getAttribute("cy")) * .7).toFixed(0); g.appendChild(d); } },
-    res: function (g, r) { /* scattered notes that cluster */
-      var C = [[90, 70], [200, 60], [150, 130]];
-      for (var i = 0; i < 18; i++) { var c = C[i % 3], x = 20 + r() * 280, y = 15 + r() * 150, big = r() < .25;
-        var e = el("rect", { x: x - 9, y: y - 9, width: 18, height: 18, rx: 2, fill: "var(--tc)", opacity: big ? 1 : .35 + r() * .3, "class": "s" });
-        e.dataset.dx = (c[0] + (r() - .5) * 34 - x).toFixed(0); e.dataset.dy = (c[1] + (r() - .5) * 30 - y).toFixed(0); e.dataset.rot = ((r() - .5) * 30).toFixed(0); g.appendChild(e); } },
-    craft: function (g, r) { /* layers sliding into a stack */
-      for (var i = 0; i < 7; i++) { var w = 80 + r() * 150, y = 26 + i * 20;
-        var e = el("rect", { x: 40 + r() * (240 - w), y: y, width: w, height: 12, rx: 3, fill: "var(--tc)", opacity: .3 + i * .1, "class": "s" });
-        e.dataset.dx = (160 - w / 2 - +e.getAttribute("x")).toFixed(0); g.appendChild(e); } }
-  };
-  [].forEach.call(document.querySelectorAll(".art"), function (a) {
-    var svg = el("svg", { viewBox: "0 0 320 180", preserveAspectRatio: "xMidYMid meet", focusable: "false" }), g = el("g", {});
-    draw[a.dataset.t](g, rnd(+a.dataset.seed * 97)); svg.appendChild(g); a.appendChild(svg);
-  });
-  function play(card, on) {
-    [].forEach.call(card.querySelectorAll(".s"), function (e, i) {
-      var t = on ? "translate(" + (e.dataset.dx || 0) + "px," + (e.dataset.dy || 0) + "px) rotate(" + (e.dataset.rot || 0) + "deg) scale(" + (e.dataset.sc || 1) + ")" : "";
-      e.style.transitionDelay = on ? (i % 9) * 18 + "ms" : "0ms"; e.style.transform = t;
-    });
-  }
-  var cards = [].slice.call(document.querySelectorAll(".card"));
-  if (!reduce) cards.forEach(function (c) {
-    var a = c.querySelector("a"), g = c.querySelector(".art g");
-    a.addEventListener("pointerenter", function () { play(c, true); }); a.addEventListener("pointerleave", function () { play(c, false); });
-    a.addEventListener("focus", function () { play(c, true); }); a.addEventListener("blur", function () { play(c, false); });
-  });
 })();
 </script>
 </body>
