@@ -312,18 +312,24 @@ td:first-child { width: 30%; }
 @media (max-width: 1000px) { .opts { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .opts { grid-template-columns: 1fr; } }
 
-.clips { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3) var(--s2); }
+.clips-wrap { margin-top: var(--s3); }
+.clips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s4) var(--s3); }
 .clip { margin: 0; }
-.clip video { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: top; border-radius: var(--r-s); background: #fff; box-shadow: 0 0 0 1px var(--line); }
-.clip figcaption { margin-top: var(--s1); display: grid; gap: var(--s0); }
-.clip h3 { font-size: 16px; line-height: 24px; }
-.clip p { font-size: 14px; line-height: 24px; }
-.hears { font-style: italic; color: var(--soft) !important; }
-.hears span { display: block; font-style: normal; font-size: 12px; line-height: 16px; color: var(--accent); font-weight: 500; margin-bottom: var(--s-1); }
+.clip .frame { position: relative; }
+.clip video { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; border-radius: var(--r-s); background: #fff; box-shadow: 0 0 0 1px var(--line), 0 12px 32px -20px rgba(0,0,0,.25); }
+.clip figcaption { margin-top: var(--s1); display: grid; gap: 4px; max-width: 460px; }
+.clip h3 { font-size: 18px; line-height: 26px; margin: 0; }
+.clip p { font-size: 15px; line-height: 24px; color: var(--soft); margin: 0; }
+.clip.on video { box-shadow: 0 0 0 1px var(--accent), 0 12px 32px -20px rgba(0,0,0,.25); }
+.cplay { position: absolute; right: 12px; bottom: 12px; width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); color: var(--text); cursor: pointer; opacity: .92; }
+.cplay:hover { border-color: var(--accent); color: var(--accent); opacity: 1; }
+.cplay span { width: 0; height: 0; border-left: 10px solid currentColor; border-top: 6px solid transparent; border-bottom: 6px solid transparent; margin-left: 3px; }
+.clip.on .cplay span { width: 10px; height: 12px; border: 0; margin: 0; border-left: 3px solid currentColor; border-right: 3px solid currentColor; }
 .clip-bar { display: flex; justify-content: space-between; align-items: center; gap: var(--s1); flex-wrap: wrap; margin-bottom: var(--s2); color: var(--muted); font-size: 14px; line-height: 24px; }
-.mt { font: inherit; font-size: 14px; line-height: 16px; background: var(--surface); color: var(--text); border: 1px solid var(--line); border-radius: 999px; padding: var(--s0) var(--s1); cursor: pointer; }
+.mt { font: inherit; font-size: 14px; line-height: 16px; background: var(--surface); color: var(--text); border: 1px solid var(--line); border-radius: 4px; padding: var(--s0) var(--s1); cursor: pointer; }
 .mt:hover { border-color: var(--accent); color: var(--accent); }
-@media (max-width: 760px) { .clips { grid-template-columns: 1fr; gap: var(--s2); } }
+@media (max-width: 900px) { .clips { gap: var(--s3) var(--s2); } }
+@media (max-width: 640px) { .clips { grid-template-columns: minmax(0, 1fr); gap: var(--s3); } .clip h3 { font-size: 16px; line-height: 24px; } }
 
 .foot { margin-top: var(--s6); }
 .next { display: flex; justify-content: space-between; align-items: center; gap: var(--s1); flex-wrap: wrap; border: 1px solid var(--line); border-radius: var(--r-l); padding: var(--s2); background: var(--surface); }
@@ -401,7 +407,7 @@ td:first-child { width: 30%; }
   </div>
 </header>
 
-<nav class="toc" id="toc" aria-label="Sections"><ol><li><a href="#overview">Overview</a></li><li><a href="#research">Research</a></li><li><a href="#findings">Findings</a></li><li><a href="#before-after">Before &amp; after</a></li><li><a href="#date-field">Date field</a></li><li><a href="#redesign">Redesign</a></li><li><a href="#decisions">Decisions</a></li><li><a href="#motion">Motion</a></li><li><a href="#validation">Validation</a></li><li><a href="#limitations">Limitations</a></li></ol></nav>
+<nav class="toc" id="toc" aria-label="Sections"><ol><li><a href="#overview">Overview</a></li><li><a href="#research">Research</a></li><li><a href="#findings">Findings</a></li><li><a href="#before-after">Before &amp; after</a></li><li><a href="#date-field">Date field</a></li><li><a href="#redesign">Redesign</a></li><li><a href="#decisions">Decisions</a></li><li><a href="#motion">In action</a></li><li><a href="#validation">Validation</a></li><li><a href="#limitations">Limitations</a></li></ol></nav>
 
 <main id="main" tabindex="-1">
 
@@ -511,26 +517,26 @@ td:first-child { width: 30%; }
 </section>
 
 <section class="sec" id="motion" aria-labelledby="h-motion">
-  <div class="col"><h2 id="h-motion">Motion</h2><p>Animation marks changes a sighted or low-vision user could otherwise miss. A screen-reader user gets the same information from focus or a spoken announcement. No animation moves focus, none repeats, and all of them turn off when reduced motion is on.</p></div>
-  <div class="wide" style="margin-top:var(--s2)">
-    <div class="clip-bar"><span>Recorded from the prototype</span><button type="button" class="mt" id="mt">Pause clips</button></div>
+  <div class="col"><h2 id="h-motion">The Redesign in Action</h2><p>A closer look at the redesigned application, highlighting how key interactions, form states, and navigation work together throughout the experience.</p></div>
+  <div class="wide clips-wrap">
+    <div class="clip-bar"><span>Recorded from the working prototype. Clips play one at a time.</span><button type="button" class="mt" id="mt" aria-pressed="false">Pause clips</button></div>
     <div class="clips">
-      <figure class="clip">
-  <div class="frame"><video class="tm-l" src="vid/errors.mp4" poster="vid/errors-poster.jpg" muted loop playsinline preload="metadata" aria-label="Errors, at the top and at each field: screen recording of the prototype"></video><video class="tm-d" src="vid/errors-d.mp4" poster="vid/errors-d-poster.jpg" muted loop playsinline preload="metadata" aria-label="Errors, at the top and at each field: screen recording of the prototype"></video></div>
-  <figcaption><h3 class="h4">Errors, at the top and at each field</h3><p>A summary drops in, then the same message appears beside every field it belongs to.</p><p class="hears"><span>Screen reader</span>“There are 8 problems. Enter your first name, link…”</p></figcaption>
-</figure>
-      <figure class="clip">
-  <div class="frame"><video class="tm-l" src="vid/reveal.mp4" poster="vid/reveal-poster.jpg" muted loop playsinline preload="metadata" aria-label="A follow-up appears: screen recording of the prototype"></video><video class="tm-d" src="vid/reveal-d.mp4" poster="vid/reveal-d-poster.jpg" muted loop playsinline preload="metadata" aria-label="A follow-up appears: screen recording of the prototype"></video></div>
-  <figcaption><h3 class="h4">A follow-up appears</h3><p>Choosing No unfolds the question that depends on it, directly below.</p><p class="hears"><span>Screen reader</span>“No, radio button, checked, 2 of 2.” The new question is next in reading order.</p></figcaption>
-</figure>
-      <figure class="clip">
-  <div class="frame"><video class="tm-l" src="vid/addjob.mp4" poster="vid/addjob-poster.jpg" muted loop playsinline preload="metadata" aria-label="An employer is added: screen recording of the prototype"></video><video class="tm-d" src="vid/addjob-d.mp4" poster="vid/addjob-d-poster.jpg" muted loop playsinline preload="metadata" aria-label="An employer is added: screen recording of the prototype"></video></div>
-  <figcaption><h3 class="h4">An employer is added</h3><p>The new entry rises in with a brief ring around it.</p><p class="hears"><span>Screen reader</span>“Employer 2, heading level 3.” Then: “Employer 2 added.”</p></figcaption>
-</figure>
-      <figure class="clip">
-  <div class="frame"><video class="tm-l" src="vid/step.mp4" poster="vid/step-poster.jpg" muted loop playsinline preload="metadata" aria-label="Moving to the next step: screen recording of the prototype"></video><video class="tm-d" src="vid/step-d.mp4" poster="vid/step-d-poster.jpg" muted loop playsinline preload="metadata" aria-label="Moving to the next step: screen recording of the prototype"></video></div>
-  <figcaption><h3 class="h4">Moving to the next step</h3><p>New content rises in and the current step in the progress bar moves forward.</p><p class="hears"><span>Screen reader</span>“Step 2 of 8: Eligibility, position and salary, heading level 1.”</p></figcaption>
-</figure>
+      <figure class="clip" aria-labelledby="c-errors">
+        <div class="frame"><video class="tm-l" src="vid/errors.mp4" poster="vid/errors-poster.jpg" width="960" height="720" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video><video class="tm-d" src="vid/errors-d.mp4" poster="vid/errors-d-poster.jpg" width="960" height="720" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video><button type="button" class="cplay" aria-label="Play: Clear feedback"><span aria-hidden="true"></span></button></div>
+        <figcaption><h3 class="h4" id="c-errors">Clear feedback</h3><p>Error messages appear when a field needs attention.</p><p class="vh">Submitting a step with empty fields shows a list of problems at the top and a message beside each field.</p></figcaption>
+      </figure>
+      <figure class="clip" aria-labelledby="c-reveal">
+        <div class="frame"><video class="tm-l" src="vid/reveal.mp4" poster="vid/reveal-poster.jpg" width="960" height="720" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video><video class="tm-d" src="vid/reveal-d.mp4" poster="vid/reveal-d-poster.jpg" width="960" height="720" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video><button type="button" class="cplay" aria-label="Play: Relevant questions"><span aria-hidden="true"></span></button></div>
+        <figcaption><h3 class="h4" id="c-reveal">Relevant questions</h3><p>Additional fields appear based on the user’s selections.</p><p class="vh">Choosing No to a question opens a follow-up question directly below it.</p></figcaption>
+      </figure>
+      <figure class="clip" aria-labelledby="c-addjob">
+        <div class="frame"><video class="tm-l" src="vid/addjob.mp4" poster="vid/addjob-poster.jpg" width="960" height="720" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video><video class="tm-d" src="vid/addjob-d.mp4" poster="vid/addjob-d-poster.jpg" width="960" height="720" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video><button type="button" class="cplay" aria-label="Play: Flexible information entry"><span aria-hidden="true"></span></button></div>
+        <figcaption><h3 class="h4" id="c-addjob">Flexible information entry</h3><p>Users can add and manage employment details.</p><p class="vh">Selecting Add another employer adds a new employer section to the form.</p></figcaption>
+      </figure>
+      <figure class="clip" aria-labelledby="c-step">
+        <div class="frame"><video class="tm-l" src="vid/step.mp4" poster="vid/step-poster.jpg" width="960" height="720" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video><video class="tm-d" src="vid/step-d.mp4" poster="vid/step-d-poster.jpg" width="960" height="720" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video><button type="button" class="cplay" aria-label="Play: Step-by-step navigation"><span aria-hidden="true"></span></button></div>
+        <figcaption><h3 class="h4" id="c-step">Step-by-step navigation</h3><p>Users move through the application one step at a time.</p><p class="vh">Continuing to the next step loads the next page of questions and moves the progress bar forward.</p></figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -596,11 +602,32 @@ td:first-child { width: 30%; }
     function off() { box && box.classList.remove("on"); pin && pin.classList.remove("on"); li.classList.remove("on"); }
     li.addEventListener("mouseenter", on); li.addEventListener("mouseleave", off); li.addEventListener("focus", on); li.addEventListener("blur", off);
   });
-  var vids = Array.prototype.slice.call(document.querySelectorAll(".clip video")), mt = document.getElementById("mt"), playing = !reduce;
-  function sync() { mt.textContent = playing ? "Pause clips" : "Play clips"; vids.forEach(function (v) { if (playing && v.dataset.vis === "1") { var p = v.play(); if (p && p.catch) p.catch(function () {}); } else v.pause(); }); }
-  if ("IntersectionObserver" in window) { var io = new IntersectionObserver(function (es) { es.forEach(function (e) { e.target.dataset.vis = e.isIntersecting ? "1" : "0"; }); sync(); }, { threshold: .4 }); vids.forEach(function (v) { io.observe(v); }); } else vids.forEach(function (v) { v.dataset.vis = "1"; });
-  mt.addEventListener("click", function () { playing = !playing; sync(); });
-  sync();
+  /* Clips play in turn, one at a time, choosing ones that are on screen. Reduced motion: nothing plays until asked. */
+  var clips = [].slice.call(document.querySelectorAll(".clip")), mt = document.getElementById("mt"), auto = !reduce, cur = -1, vis = clips.map(function () { return false; });
+  function vid(c) { return [].filter.call(c.querySelectorAll("video"), function (v) { return v.offsetParent !== null; })[0]; }
+  function playingIdx() { for (var i = 0; i < clips.length; i++) if (clips[i].classList.contains("on")) return i; return -1; }
+  function stop() { clips.forEach(function (c) { var v = vid(c); if (v) v.pause(); c.classList.remove("on"); c.querySelector(".cplay").setAttribute("aria-label", "Play: " + c.querySelector("h3").textContent); }); }
+  function play(i) {
+    stop(); cur = i; var c = clips[i], v = vid(c); if (!v) return;
+    v.preload = "auto"; v.currentTime = 0; var p = v.play(); if (p && p.catch) p.catch(function () {});
+    c.classList.add("on"); c.querySelector(".cplay").setAttribute("aria-label", "Pause: " + c.querySelector("h3").textContent);
+  }
+  function nextVisible(from) { for (var k = 1; k <= clips.length; k++) { var j = (from + k + clips.length) % clips.length; if (vis[j]) return j; } return -1; }
+  function kick() { if (!auto || playingIdx() > -1) return; var j = nextVisible(cur); if (j > -1) play(j); }
+  clips.forEach(function (c, i) {
+    c.querySelectorAll("video").forEach(function (v) { v.addEventListener("ended", function () { if (cur !== i) return; stop(); kick(); }); });
+    c.querySelector(".cplay").addEventListener("click", function () { if (c.classList.contains("on")) stop(); else play(i); });
+  });
+  function setAuto(on) { auto = on; mt.textContent = on ? "Pause clips" : "Play clips"; mt.setAttribute("aria-pressed", on ? "false" : "true"); if (!on) stop(); else kick(); }
+  mt.addEventListener("click", function () { setAuto(!auto); });
+  if ("IntersectionObserver" in window) {
+    var io2 = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { var i = clips.indexOf(e.target); vis[i] = e.intersectionRatio >= .6; if (!vis[i] && clips[i].classList.contains("on")) { var v = vid(clips[i]); if (v) v.pause(); clips[i].classList.remove("on"); } });
+      kick();
+    }, { threshold: [0, .6] });
+    clips.forEach(function (c) { io2.observe(c); });
+  }
+  setAuto(auto);
 })();
 </script>
 <script>
