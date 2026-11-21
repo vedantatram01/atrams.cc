@@ -355,15 +355,6 @@ td:first-child { width: 30%; }
 }
 @media (min-width: 641px) and (max-width: 720px) { .nav { padding: 0 var(--s1); } .menu .pill { padding: 8px 12px; } }
 
-/* glass navigation: light frost, hairline edge once the page scrolls */
-.nav { background: color-mix(in srgb, var(--bg) 60%, transparent); -webkit-backdrop-filter: blur(20px) saturate(170%); backdrop-filter: blur(20px) saturate(170%); transition: box-shadow .3s, background-color .3s; }
-.nav.scrolled { box-shadow: 0 1px 0 color-mix(in srgb, var(--text) 8%, transparent), 0 10px 30px -24px rgba(0, 0, 0, .25); }
-@media (min-width: 641px) {
-  .menu, .nav-r > .mode { background: color-mix(in srgb, var(--surface) 55%, transparent); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6); }
-  :root[data-mode="dark"] .menu, :root[data-mode="dark"] .nav-r > .mode { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06); }
-}
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .nav { background: color-mix(in srgb, var(--bg) 94%, transparent); } }
-@media (max-width: 640px) { body.menu-open .nav { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--bg); box-shadow: none; } }
 </style>
 <style>
 .chap { margin-top: var(--s5); }
@@ -452,6 +443,7 @@ td:first-child { width: 30%; }
 .frame { border-radius: 5px !important; }
 @media (min-width: 641px) { .menu { padding: 3px; } .menu .pill { border-radius: 3px !important; } }
 </style>
+<link rel="stylesheet" href="assets/system.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the case study</a>

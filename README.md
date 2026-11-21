@@ -43,3 +43,7 @@ DNS at your domain registrar:
 | CNAME | www         | YOUR-GITHUB-USERNAME.github.io |
 
 Remove any other A, AAAA or CNAME records for `@` and `www` (for example, ones from your previous site builder).
+
+## Design system
+
+`assets/system.css` holds the shared tokens (colour, type, spacing, corners) and the shared components (header, logo, buttons). Every page links it last, so change those values there, not in a page's own styles.
