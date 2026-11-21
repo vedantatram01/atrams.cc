@@ -72,7 +72,12 @@
     var below = d.s.map(function () { return []; });
     d.x.forEach(function (_, i) {
       var pts = d.s.map(function (s, si) { return { si: si, v: s.v[i] }; }).sort(function (a, b) { return b.v - a.v; });
-      for (var k = 1; k < pts.length; k++) if (pts[k - 1].v - pts[k].v < 10) below[pts[k].si][i] = true;
+      var stack = 0;
+      for (var k = 1; k < pts.length; k++) {
+        if (pts[k - 1].v - pts[k].v >= 10) { stack = 0; continue; }
+        /* At the first point lines fan out below, so stack the label above instead */
+        if (i === 0) { stack++; below[pts[k].si][i] = -stack; } else below[pts[k].si][i] = true;
+      }
     });
     /* Spread end-of-line names so they never touch */
     var last = d.x.length - 1, ends = d.s.map(function (s, si) { return { si: si, y: Y(s.v[last]) + 4 }; }).sort(function (a, b) { return a.y - b.y; });
@@ -83,7 +88,7 @@
       el("polyline", { points: s.v.map(function (v, i) { return X(i) + "," + Y(v); }).join(" "), class: "lc-l" }, g);
       s.v.forEach(function (v, i) {
         el("circle", { cx: X(i), cy: Y(v), r: 5, class: "lc-p" }, g);
-        var dn = below[si][i], lab = el("text", { x: X(i) + (i === last ? -10 : 0), y: Y(v) + (dn ? 22 : -12), class: "lc-v", "text-anchor": i === last ? "end" : "middle" }, g);
+        var dn = below[si][i], lab = el("text", { x: X(i) + (i === last ? -10 : i === 0 ? 10 : 0), y: Y(v) + (dn === true ? 22 : dn < 0 ? -12 + dn * 15 : -12), class: "lc-v", "text-anchor": i === last ? "end" : i === 0 ? "start" : "middle" }, g);
         lab.textContent = v + "%";
       });
       if (!sm) el("text", { x: X(last) + 14, y: endY[si], class: "lc-n" }, g).textContent = s.n;

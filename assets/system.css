@@ -112,7 +112,7 @@
 
 /* Tabs */
 .vt { margin-top: var(--s2); }
-.vt-list { display: flex; gap: var(--s2); border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
+.vt-list { display: flex; flex-wrap: wrap; gap: 0 var(--s2); border-bottom: 1px solid var(--line); }
 .vt-tab { flex: none; display: grid; gap: 2px; padding: 10px 0 12px; margin-bottom: -1px; border: 0; border-bottom: 2px solid transparent; background: none; color: var(--muted); font: inherit; font-size: 15px; line-height: 20px; font-weight: 500; text-align: left; cursor: pointer; }
 .vt-tab small { font-size: 13px; line-height: 18px; font-weight: 400; color: var(--muted); }
 .vt-tab:hover { color: var(--text); }
@@ -226,7 +226,7 @@
 .pmx-c { position: relative; min-height: 96px; padding: 8px; border-radius: 4px; background: var(--mat); display: flex; flex-wrap: wrap; align-content: flex-start; gap: 4px; }
 .pmx-c[data-z]::before { content: attr(data-z); flex: 0 0 100%; font-size: 12px; line-height: 16px; color: var(--muted); }
 .pmx-c[data-z="Do next"] { background: color-mix(in srgb, var(--good) 14%, var(--bg)); }
-.pmx-b { padding: 4px 8px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); color: var(--text); font: inherit; font-size: 13px; line-height: 18px; text-align: left; cursor: pointer; }
+.pmx-b { max-width: 100%; overflow-wrap: break-word; padding: 4px 8px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); color: var(--text); font: inherit; font-size: 13px; line-height: 18px; text-align: left; cursor: pointer; }
 .pmx-b:hover { border-color: var(--muted); }
 .pmx-b[aria-pressed="true"] { background: var(--text); color: var(--bg); border-color: var(--text); }
 .pmx-ax { display: flex; justify-content: space-between; margin-top: var(--s0); font-size: 13px; line-height: 18px; color: var(--muted); }
@@ -236,7 +236,7 @@
 .pmx-on .pmx-src { display: none; }
 .pmx-src { margin: 0; padding: 0; list-style: none; }
 .pmx-src li { padding: var(--s0) 0; border-bottom: 1px solid var(--line); }
-@media (max-width: 560px) { .pmx-grid { grid-template-columns: 52px repeat(var(--cols), minmax(0, 1fr)); } .pmx-c { min-height: 72px; padding: 4px; } .pmx-b { font-size: 12px; padding: 3px 6px; } }
+@media (max-width: 560px) { .pmx-grid { grid-template-columns: 50px repeat(var(--cols), minmax(0, 1fr)); gap: 3px; } .pmx-yl { font-size: 12px; padding-right: 4px; } .pmx-c { min-height: 64px; padding: 4px; gap: 3px; } .pmx-c[data-z]::before { font-size: 11px; } .pmx-b { font-size: 12px; line-height: 16px; padding: 3px 5px; } }
 
 /* Method cards */
 .mcards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s1); margin-top: var(--s2); }
@@ -249,3 +249,4 @@
 @media (prefers-reduced-motion: reduce) { .lc-s, .vf-list details > summary::after { transition: none; } }
 .mcards b small { font-family: var(--sans); font-size: 16px; font-weight: 400; color: var(--muted); }
 .mcards + p { margin-top: var(--s2) !important; }
+@media (max-width: 360px) { .pmx-grid { grid-template-columns: 44px repeat(var(--cols), minmax(0, 1fr)); gap: 2px; } .pmx-yl { font-size: 11px; padding-right: 2px; } .pmx-c { padding: 3px; } .pmx-b { font-size: 11px; line-height: 15px; padding: 3px 4px; } }
