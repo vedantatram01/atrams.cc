@@ -99,3 +99,9 @@
 /* NPS thumbnail: tree-test result as a quiet caption, not a floating badge */
 .np-task { padding: 0 !important; border-radius: 0 !important; background: none !important; color: var(--soft) !important; font-weight: 500 !important; }
 .np-task em { opacity: 1 !important; color: var(--muted); }
+/* Case-study facts: four short items in one row */
+.title .meta { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; gap: var(--s2) !important; }
+.title .meta dt { font-size: 14px; line-height: 20px; margin-bottom: 4px; }
+.title .meta dd { font-size: 15px; line-height: 22px; color: var(--soft); }
+@media (max-width: 900px) { .title .meta { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+@media (max-width: 480px) { .title .meta { grid-template-columns: 1fr !important; gap: var(--s1) !important; } }
