@@ -307,3 +307,14 @@ dialog.zv::backdrop { background: rgba(12,12,12,.94); }
 .th-np .npc-h { font-size: 1.9cqw; margin-bottom: 1cqw; }
 .th-np .npc-t span { font-size: 1.85cqw; padding: .5cqw 1.2cqw; }
 .th-np .npp { left: 10cqw; top: 5cqw; width: 27cqw; }
+
+/* ===== Type standards (Phase 3) =====
+   Display numbers: 40 / 32 / 24 tiers. Captions: 14px, measure capped.
+   Chart labels: 13px minimum. */
+.tv-src b { font-size: 24px !important; line-height: 30px !important; }
+.cap, .tv-pair .cap, .tv-hm .cap { font-size: 14px !important; line-height: 22px !important; }
+.cap { max-width: 640px; margin-left: auto !important; margin-right: auto !important; }
+.title .cap, .tv-stage .cap { max-width: 720px; }
+.lc-t, .lc-v { font-size: 13px !important; }
+.sb i span { font-size: 13px !important; text-overflow: ellipsis; }
+@media (max-width: 420px) { .sb i span { display: inline !important; font-size: 12px !important; } .sb i { padding: 0 5px; } }
