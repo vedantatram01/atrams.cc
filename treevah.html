@@ -7,12 +7,12 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Treevah · Vedant Atram</title>
-<meta name="description" content="Treevah: redesigning file navigation for an AI-powered web app during my 2026 UI/UX internship. Details are under NDA.">
+<meta name="description" content="Treevah: auditing 766 design system components, testing with new users and reading Microsoft Clarity data during my 2026 UI/UX internship.">
 <link rel="canonical" href="https://atrams.cc/treevah.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Vedant Atram">
 <meta property="og:title" content="Treevah · Vedant Atram">
-<meta property="og:description" content="Treevah: redesigning file navigation for an AI-powered web app during my 2026 UI/UX internship. Details are under NDA.">
+<meta property="og:description" content="Treevah: auditing 766 design system components, testing with new users and reading Microsoft Clarity data during my 2026 UI/UX internship.">
 <meta property="og:url" content="https://atrams.cc/treevah.html">
 <meta property="og:image" content="https://atrams.cc/assets/og-tv.jpg">
 <meta property="og:image:width" content="1200">
@@ -593,6 +593,64 @@ td:first-child { width: 30%; }
 .tv-resp li { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 16px; line-height: 24px; }
 @media (max-width: 560px) { .tv-resp { grid-template-columns: 1fr; } }
 .tv-cta { margin-top: var(--s2) !important; }
+/* v3 components */
+.tv-halves { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s1); margin-top: var(--s2); }
+.tv-halves > div { padding: var(--s2); border: 1px solid var(--line); border-radius: 5px; background: var(--surface); }
+.tv-halves .k { margin: 0 !important; font-size: 15px !important; font-weight: 600; color: var(--text); }
+.tv-halves .quiet-list { margin-top: var(--s0); }
+.tv-halves .quiet-list li { font-size: 15px; line-height: 22px; color: var(--soft); }
+.tv-chart { margin: var(--s2) 0 0; padding: var(--s2); border: 1px solid var(--line); border-radius: 5px; background: var(--surface); }
+.sb-row + .sb-row { margin-top: var(--s2); }
+.sb-l { margin: 0 0 var(--s0) !important; font-size: 15px !important; line-height: 22px !important; font-weight: 500; }
+.sb-l span { font-weight: 400; color: var(--muted); font-size: 13px; margin-left: 6px; }
+.sb { display: flex; height: 28px; border-radius: 4px; overflow: hidden; gap: 2px; }
+.sb i { flex: 0 0 var(--w); display: flex; align-items: center; padding: 0 8px; min-width: 0; }
+.sb i span { font-style: normal; font-size: 12px; line-height: 16px; font-weight: 600; white-space: nowrap; overflow: hidden; }
+.g1 { background: var(--good); color: #fff; } .g1b { background: color-mix(in srgb, var(--good) 55%, var(--bg)); }
+.g2 { background: color-mix(in srgb, var(--c2) 45%, var(--bg)); color: var(--text); } .g3 { background: var(--c2); color: #fff; } .g4 { background: var(--line); }
+:root[data-mode="dark"] .g1, :root[data-mode="dark"] .g3 { color: #111; }
+.sb-key { display: flex; flex-wrap: wrap; gap: 6px var(--s1); margin: var(--s1) 0 0 !important; font-size: 13px !important; line-height: 18px !important; color: var(--muted); }
+.sb-key span { display: inline-flex; align-items: center; gap: 6px; }
+.sb-key i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.tv-chart .cap { margin-bottom: 0; }
+.eb-h { margin: 0 0 var(--s1) !important; font-size: 15px !important; font-weight: 600; }
+.eb-h span { display: block; font-weight: 400; font-size: 13px; color: var(--muted); }
+.eb { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.eb li { display: grid; grid-template-columns: 190px minmax(0, 1fr) 40px; gap: var(--s1); align-items: center; font-size: 14px; line-height: 20px; }
+.eb i { height: 12px; border-radius: 3px; background: linear-gradient(90deg, var(--c1) var(--v), var(--mat) var(--v)); }
+.eb b { font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+.eb li:nth-child(n+5) i { background: linear-gradient(90deg, var(--c2) var(--v), var(--mat) var(--v)); }
+.tv-steps4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s0); margin: var(--s2) 0; padding: 0; list-style: none; counter-reset: st; }
+.tv-steps4 li { position: relative; padding: var(--s1); border: 1px solid var(--line); border-radius: 5px; background: var(--surface); }
+.tv-steps4 li + li::before { content: ""; position: absolute; left: -9px; top: 50%; width: 8px; border-top: 1px solid var(--muted); }
+.tv-steps4 b { display: block; font-size: 15px; line-height: 22px; font-weight: 600; margin-bottom: 4px; }
+.tv-steps4 span { font-size: 14px; line-height: 20px; color: var(--soft); }
+.tv-probs5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.tv-probs5 li:last-child { grid-column: 1 / -1; }
+.tv-clr { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: var(--s2); align-items: start; margin-top: var(--s2); }
+.tv-hm { margin: 0; }
+.tv-hm img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 5px; background: #fff; }
+.tv-hm .cap { font-size: 13px; line-height: 20px; }
+.tv-stats { display: grid; gap: var(--s1); margin: 0; padding: 0; list-style: none; }
+.tv-stats li { padding: var(--s1) 0; border-bottom: 1px solid var(--line); }
+.tv-stats li:first-child { padding-top: 0; }
+.tv-stats b { display: block; font-family: var(--display); font-size: 32px; line-height: 40px; font-weight: 500; }
+.tv-stats span { font-size: 15px; line-height: 22px; color: var(--soft); }
+.tv-prio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s1); margin-top: var(--s2); }
+.tv-prio > div { padding: var(--s1); border: 1px solid var(--line); border-radius: 5px; }
+.tv-prio .sq { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: var(--s0); }
+.tv-prio .sq i { width: 14px; height: 14px; border-radius: 3px; background: var(--c2); }
+.tv-prio > div:nth-child(2) .sq i { background: color-mix(in srgb, var(--c2) 55%, var(--bg)); }
+.tv-prio > div:nth-child(3) .sq i { background: var(--line); }
+.tv-prio b { display: block; font-size: 16px; line-height: 24px; font-weight: 600; }
+.tv-prio small { font-size: 13px; line-height: 18px; color: var(--muted); }
+.tv-quote { margin: var(--s1) 0 var(--s2); padding: var(--s2); border-radius: 5px; background: var(--mat); }
+.tv-quote blockquote { margin: 0; padding: 0; border: 0; font-family: var(--display); font-size: 22px; line-height: 32px; font-weight: 500; color: var(--text); }
+.tv-quote figcaption { margin-top: var(--s0); font-size: 14px; line-height: 20px; color: var(--muted); }
+.tv-note { margin-top: var(--s2) !important; padding-top: var(--s1); border-top: 1px solid var(--line); font-size: 14px !important; line-height: 22px !important; color: var(--muted); }
+@media (max-width: 760px) { .tv-steps4 { grid-template-columns: 1fr 1fr; } .tv-steps4 li + li::before { content: none; } }
+@media (max-width: 640px) { .tv-halves, .tv-probs5, .tv-clr, .tv-prio { grid-template-columns: 1fr; } .tv-probs5 li:last-child { grid-column: auto; } .tv-hm { max-width: 240px; } .eb li { grid-template-columns: 1fr 40px; } .eb li span { grid-column: 1 / -1; } .tv-chart { padding: var(--s1); } .tv-halves > div { padding: var(--s1); } }
+@media (max-width: 420px) { .tv-steps4 { grid-template-columns: 1fr; } .sb i span { display: none; } }
 </style>
 </head>
 <body>
@@ -618,64 +676,130 @@ td:first-child { width: 30%; }
   </figure>
   <div class="col title">
     <h1>Treevah</h1>
-    <p>Treevah is an AI-powered web app for organizing and finding work files. I spent the summer as a UI/UX intern on the product team, redesigning how people move through folders and find files they can’t name.</p>
-    <p class="rt">3 min read</p>
+    <p>Treevah is an AI-powered web app that shows your folders as a visual tree. Over a summer internship I audited its design system, helped run a usability study with new users, and turned what we found into a priority list for the next release.</p>
+    <p class="rt">6 min read</p>
     <dl class="meta">
-      <div><dt>My role</dt><dd>UI/UX intern, designing with product designer Cici Zhong</dd></div>
-      <div><dt>Team</dt><dd>2 designers, 1 PM and 4 engineers</dd></div>
-      <div><dt>Platform</dt><dd>AI-powered web app</dd></div>
+      <div><dt>My role</dt><dd>UI/UX design intern</dd></div>
+      <div><dt>Team</dt><dd>UI/UX team of 5, reporting to the founder</dd></div>
+      <div><dt>Methods</dt><dd>Component audit, think-aloud testing, survey, Microsoft Clarity</dd></div>
       <div><dt>Timeline</dt><dd>May–Aug 2026</dd></div>
     </dl>
   </div>
 </header>
 
-<nav class="toc" id="toc" aria-label="Sections"><ol><li><a href="#problem">Problem</a></li><li><a href="#work">What I did</a></li><li><a href="#results">Results</a></li><li><a href="#overview">Overview</a></li><li><a href="#screens">Screens</a></li><li><a href="#nda">More detail</a></li></ol></nav>
+<nav class="toc" id="toc" aria-label="Sections"><ol><li><a href="#problem">Problem</a></li><li><a href="#summer">My summer</a></li><li><a href="#audit">Audit</a></li><li><a href="#study">Study</a></li><li><a href="#findings">Findings</a></li><li><a href="#clarity">Click data</a></li><li><a href="#priorities">Priorities</a></li><li><a href="#screens">Screens</a></li><li><a href="#learned">Learnings</a></li></ol></nav>
 <main id="main" tabindex="-1">
 
 <section class="sec col" id="problem" aria-labelledby="h-problem">
-  <h2 id="h-problem">The problem: organizing files breaks your flow</h2>
-  <p>Most file tools show one folder at a time. Getting from one folder to another means backing out level by level and climbing down again, and every click throws away the context you had. When people can’t remember a file’s exact name or where they saved it, search doesn’t help either.</p>
+  <h2 id="h-problem">The problem: a promising idea, shaky foundations</h2>
+  <p>Most file tools show one folder at a time. Treevah opens folders side by side, so you can see how everything fits together. By summer 2026 the product was in its eighth alpha, and two things were unclear: whether the screens being built still matched the design, and whether new users could make sense of it without help.</p>
 </section>
 
-<section class="sec col" id="work" aria-labelledby="h-work">
-  <h2 id="h-work">What I did</h2>
-  <ul class="tv-resp" role="list">
-    <li>User interviews</li>
-    <li>Personas and journey maps</li>
-    <li>Wireframes and user flows</li>
-    <li>Interaction design and prototyping in Figma</li>
-    <li>Usability testing and iteration</li>
-    <li>Design system and component upkeep</li>
+<section class="sec col" id="summer" aria-labelledby="h-summer">
+  <h2 id="h-summer">My summer, in two halves</h2>
+  <div class="tv-halves">
+    <div><p class="k">May–June · Design</p><ul class="quiet-list"><li>Audited every component in the web and mobile apps</li><li>Built and maintained design system components and standards</li><li>Joined feature brainstorms and pitched ideas</li><li>Prepared design handoffs for engineering</li></ul></div>
+    <div><p class="k">July–August · Research</p><ul class="quiet-list"><li>Recruited and ran think-aloud sessions with new users</li><li>Analyzed Microsoft Clarity recordings, heatmaps and click data</li><li>Helped synthesize findings into the Alpha 8 research report</li><li>Helped turn findings into priorities for Alpha 9</li></ul></div>
+  </div>
+</section>
+
+<section class="sec col" id="audit" aria-labelledby="h-audit">
+  <h2 id="h-audit">Auditing 766 components</h2>
+  <p>I went screen by screen through the web and mobile apps and logged every component: its level (atom, molecule, organism), its variants, whether it existed in the design system and in code, any accessibility problems, and whether it matched the handoff file engineers built from.</p>
+  <div class="kv tv-impact">
+    <div><b>766</b><span>components logged</span></div>
+    <div><b>84</b><span>screens, web and mobile</span></div>
+    <div><b>51%</b><span>of web components didn’t match handoff</span></div>
+  </div>
+  <figure class="tv-chart" aria-labelledby="tv-audit-cap">
+    <div class="sb-row"><p class="sb-l">In the design system <span>585 web components</span></p>
+      <div class="sb" role="img" aria-label="In the design system: yes 420, partly 101, no 55, unclear 9"><i class="g1" style="--w:71.8%"><span>420 yes</span></i><i class="g2" style="--w:17.3%"><span>101 partly</span></i><i class="g3" style="--w:9.4%"></i><i class="g4" style="--w:1.5%"></i></div></div>
+    <div class="sb-row"><p class="sb-l">Matches the handoff file <span>585 web components</span></p>
+      <div class="sb" role="img" aria-label="Matches the handoff file: yes 131, mostly 61, partly 91, no 298, unclear 4"><i class="g1" style="--w:22.4%"><span>131 yes</span></i><i class="g1b" style="--w:10.4%"></i><i class="g2" style="--w:15.6%"></i><i class="g3" style="--w:50.9%"><span>298 no</span></i><i class="g4" style="--w:0.7%"></i></div></div>
+    <div class="sb-row"><p class="sb-l">Accessibility, mobile <span>181 mobile components</span></p>
+      <div class="sb" role="img" aria-label="Mobile accessibility: 41 passed, 101 had issues or failed, 39 not checked"><i class="g1" style="--w:22.7%"><span>41 pass</span></i><i class="g3" style="--w:55.8%"><span>101 issues</span></i><i class="g4" style="--w:21.5%"></i></div></div>
+    <p class="sb-key" aria-hidden="true"><span><i class="g1"></i>Yes / pass</span><span><i class="g1b"></i>Mostly</span><span><i class="g2"></i>Partly</span><span><i class="g3"></i>No / issues</span><span><i class="g4"></i>Unclear or not checked</span></p>
+    <figcaption class="cap" id="tv-audit-cap">Most components lived in the design system, but half of them had drifted from the handoff files engineers were building from.</figcaption>
+  </figure>
+</section>
+
+<section class="sec col" id="study" aria-labelledby="h-study">
+  <h2 id="h-study">Watching new users start from nothing</h2>
+  <p>For the Alpha 8 study, every participant started in the same empty workspace and played one role: a college student starting a semester, or a job seeker in the middle of a search. Each intern on the team recruited and ran sessions with one of each, recording the screen, audio and think-aloud comments.</p>
+  <ol class="tv-steps4" aria-label="Study tasks">
+    <li><b>Build a workspace</b><span>From a blank page, with no hints about folders or depth</span></li>
+    <li><b>Organize real files</b><span>Upload about 20 realistic files and sort them</span></li>
+    <li><b>Find them again</b><span>Retrieve files, watching paths, search and wrong clicks</span></li>
+    <li><b>Arrange the workspace</b><span>Open folders, switch views, set it up for daily use</span></li>
+  </ol>
+  <div class="kv tv-impact">
+    <div><b>12</b><span>moderated sessions with new users</span></div>
+    <div><b>30</b><span>survey responses from existing users</span></div>
+    <div><b>871</b><span>sessions in Microsoft Clarity</span></div>
+  </div>
+</section>
+
+<section class="sec col" id="findings" aria-labelledby="h-findings">
+  <h2 id="h-findings">What we found</h2>
+  <p>People loved the idea. In the survey, 73% said that if Treevah disappeared, what they’d miss most is seeing several folders side by side on one canvas. The trouble was in the basics around it.</p>
+  <figure class="tv-chart" aria-labelledby="tv-ease-cap">
+    <p class="eb-h">How easy was it? <span>Average rating from 1 to 5, 30 existing users, mostly software engineers</span></p>
+    <ul class="eb" role="list">
+      <li><span>Creating folders</span><i style="--v:94%"></i><b>4.70</b></li>
+      <li><span>Creating files</span><i style="--v:87.4%"></i><b>4.37</b></li>
+      <li><span>Organizing documents</span><i style="--v:79.4%"></i><b>3.97</b></li>
+      <li><span>Managing larger projects</span><i style="--v:74%"></i><b>3.70</b></li>
+      <li><span>Finding things later</span><i style="--v:72.6%"></i><b>3.63</b></li>
+      <li><span>Returning to earlier work</span><i style="--v:70.6%"></i><b>3.53</b></li>
+    </ul>
+    <figcaption class="cap" id="tv-ease-cap">Quick tasks scored high. Anything that depended on remembering where you were scored lowest.</figcaption>
+  </figure>
+  <p>The moderated sessions added a twist: existing users rated creating folders the easiest task, yet new users kept creating folders in the wrong place. Five problems came up again and again:</p>
+  <ul class="tv-probs tv-probs5" role="list">
+    <li><b>Folders landed in the wrong place</b><p>New folders appeared under the parent instead of the folder people had selected.</p></li>
+    <li><b>People lost their place</b><p>As more panels opened, it got hard to tell where you were and how folders related.</p></li>
+    <li><b>The workspace got crowded</b><p>Toolbars, panels and popups competed with the files themselves.</p></li>
+    <li><b>Actions gave no feedback</b><p>After an upload or a move, people couldn’t tell if it worked, and there was no undo.</p></li>
+    <li><b>Useful features were hidden</b><p>Zoom, toolbar actions and view switching were hard to find or understand.</p></li>
   </ul>
 </section>
 
-<section class="sec col" id="results" aria-labelledby="h-results">
-  <h2 id="h-results">Results</h2>
-  <div class="kv tv-impact">
-    <div><b>30%</b><span>faster task completion</span></div>
-    <div><b>3×</b><span>faster file discovery</span></div>
-    <div><b>85%</b><span>user satisfaction</span></div>
+<section class="sec col" id="clarity" aria-labelledby="h-clarity">
+  <h2 id="h-clarity">What the click data showed</h2>
+  <p>In the second half of the summer I worked on connecting Microsoft Clarity data to what we saw in sessions. Clicks told a story that interviews alone missed.</p>
+  <div class="tv-clr">
+    <figure class="tv-hm"><img src="assets/tv-heatmap.webp" width="560" height="1310" loading="lazy" alt="A Microsoft Clarity click heatmap of Treevah’s left rail. Hot spots cluster on the New button, the view switches, navigation arrows and tabs. Names and shared folder titles are blurred."><figcaption class="cap">Click heatmap of the left rail. The large canvas to its right got almost no clicks. Names blurred.</figcaption></figure>
+    <ul class="tv-stats" role="list">
+      <li><b>9.5%</b><span>of all clicks went to right-click menus, more than any toolbar button.</span></li>
+      <li><b>6.1%</b><span>went to the rename dialog alone, a lot for a single modal.</span></li>
+      <li><b>6 clicks</b><span>on AI Summary, a feature people told us they were excited about.</span></li>
+      <li><b>61%</b><span>of sessions had at least one rage click, and 28% had a dead click.</span></li>
+    </ul>
   </div>
-  <p class="cap">Results the team reported after the redesign.</p>
+  <p class="cap">Click data covers a 30-day window; 47 of the 871 sessions were reviewed as recordings.</p>
 </section>
 
-<section class="sec col" id="overview" aria-labelledby="h-overview">
-  <h2 id="h-overview">Overview</h2>
-  <p>We started from interviews and from testing the existing version, and found two very different kinds of people: those who keep careful folder systems and navigate by hand, and those who keep things loose and search for everything. The redesign had to work for both.</p>
-  <div class="tv-feats">
-    <div><b>See where you are</b><p>The whole folder structure stays visible as a tree, so people always know where they are.</p></div>
-    <div><b>Work on a few folders at once</b><p>Pin only the folders you need into a workspace, without moving anything in the real structure.</p></div>
-    <div><b>Search the way you remember</b><p>AI search that understands plain language and looks inside files, not only at their names.</p></div>
+<section class="sec col" id="priorities" aria-labelledby="h-prio">
+  <h2 id="h-prio">From findings to Alpha 9 priorities</h2>
+  <p>We affinity-mapped the issues from founder notes and follow-up sessions, then sorted them by how badly they blocked people.</p>
+  <div class="tv-prio" role="img" aria-label="21 issues: 8 critical, 9 high priority, 4 future improvements">
+    <div><span class="sq"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>8 critical</b><small>Fix before Beta</small></div>
+    <div><span class="sq"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>9 high priority</b><small>Fix during Alpha 9</small></div>
+    <div><span class="sq"><i></i><i></i><i></i><i></i></span><b>4 future</b><small>After the critical fixes</small></div>
   </div>
-  <figure class="tv-fig">
-    <div class="tv-shot"><img src="assets/tv-site.webp" width="1470" height="800" loading="lazy" alt="Treevah’s public landing page. The headline reads Turn your ideas into an organized workspace. Below it, an Ask Treevah box invites people to describe the workspace they want, with a Generate Workspace button, example prompts such as Organize my college classes, and cards for an AI organization demo and workspace templates."></div>
-    <figcaption class="cap">Treevah’s public site today: describe the workspace you want, and the AI builds it.</figcaption>
-  </figure>
+  <h3 class="sub-h">What we recommended</h3>
+  <ul class="quiet-list">
+    <li>Create new folders where the user is, and show the path while they do it.</li>
+    <li>Keep people oriented with breadcrumbs and clearer lines between parent and child folders.</li>
+    <li>Confirm every upload, move and rename, and add undo.</li>
+    <li>Calm the workspace: fewer always-on toolbars and panels.</li>
+    <li>Replace the blank first screen with starter templates and short guidance.</li>
+  </ul>
 </section>
 
 <section class="sec col" id="screens" aria-labelledby="h-screens">
   <h2 id="h-screens">Inside Treevah</h2>
-  <p>A few screens from the product, shared with Treevah’s permission.</p>
+  <p>A few screens from the product, shared with Treevah’s permission. The job seeker templates show one way to fill the blank first screen.</p>
   <div class="vt" data-tabs="Treevah screens">
     <div class="vt-p" data-tab="Getting started">
       <figure class="tv-fig"><div class="tv-shot"><img src="assets/tv-start.webp" width="1950" height="1386" loading="lazy" alt="Treevah’s Start Here folder. The sidebar groups folders into Start Here, Features, Use Cases, Pricing and Resources. The Start Here panel lists files such as Welcome to Treevah.pdf and Quick Tour.mp4, each with a one-line description, and a preview panel explains what Treevah is and what makes it different."></div>
@@ -702,10 +826,13 @@ td:first-child { width: 30%; }
   </div>
 </section>
 
-<section class="sec col" id="nda" aria-labelledby="h-nda">
-  <h2 id="h-nda">The process is under NDA</h2>
-  <p>This project is covered by a non-disclosure agreement, so I can’t share the research, iterations or full set of screens here. I’m happy to walk through the process, decisions and final designs in a conversation.</p>
-  <p class="tv-cta"><a class="btn btn-primary" href="mailto:vedantatram157@gmail.com?subject=Treevah%20case%20study">Ask me about this project</a></p>
+<section class="sec col" id="learned" aria-labelledby="h-learn">
+  <h2 id="h-learn">What I learned</h2>
+  <figure class="tv-quote"><blockquote>“He has been dependable, eager to learn, and a pleasure to work with.”</blockquote><figcaption>Bryan Mulcrone, founder of Treevah, in my internship evaluation</figcaption></figure>
+  <p><b>A design system is only as good as its handoff.</b> Most components existed in the system, but half of them no longer matched what engineers were given. The audit gave design and engineering one list to work from.</p>
+  <p><b>What people say and what they click can disagree.</b> Participants were excited about AI Summary, but it got six clicks in a month. Pairing sessions with click data kept us honest about what people actually used.</p>
+  <p><b>Start studies from a blank page.</b> Asking people to build their own workspace showed where onboarding broke down, which a guided demo would have hidden.</p>
+  <p class="tv-note">Internal bug details and business data are left out. I’m happy to walk through the full study. <a href="mailto:vedantatram157@gmail.com?subject=Treevah%20case%20study">Email me</a></p>
 </section>
 
 </main>
