@@ -12,9 +12,9 @@
   dlg.innerHTML =
     '<div class="zv-bar"><p class="zv-cap" id="zv-cap"></p>' +
     '<button type="button" class="zv-x">Close<span class="vh"> enlarged image</span></button></div>' +
-    '<div class="zv-body"><img class="zv-img" alt=""></div>';
+    '<div class="zv-body"></div>';
   document.body.appendChild(dlg);
-  var big = dlg.querySelector(".zv-img"), cap = dlg.querySelector(".zv-cap"), opener = null;
+  var body = dlg.querySelector(".zv-body"), big = null, cap = dlg.querySelector(".zv-cap"), opener = null;
 
   function label(img) {
     var a = (img.getAttribute("alt") || "").split(/(?<=\.)\s/)[0];
@@ -22,11 +22,14 @@
   }
   function open(img, btn) {
     opener = btn;
+    big = document.createElement("img");
+    big.className = "zv-img";
     big.src = img.currentSrc || img.src;
     big.alt = img.alt;
     var nw = img.naturalWidth || parseInt(img.getAttribute("width"), 10) || 0;
     if (nw) big.style.setProperty("--zw", Math.round(nw * 0.62) + "px"); else big.style.removeProperty("--zw");
     var fc = img.closest("figure") && img.closest("figure").querySelector("figcaption");
+    body.appendChild(big);
     cap.textContent = fc ? fc.textContent.trim() : "";
     cap.hidden = false;
     document.documentElement.classList.add("zv-open");
@@ -36,7 +39,7 @@
   function close() { if (dlg.open) dlg.close(); }
   dlg.addEventListener("close", function () {
     document.documentElement.classList.remove("zv-open");
-    big.removeAttribute("src");
+    if (big) { big.remove(); big = null; }
     if (opener) opener.focus();
   });
   dlg.querySelector(".zv-x").addEventListener("click", close);
