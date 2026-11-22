@@ -461,6 +461,7 @@ td:first-child { width: 30%; }
 .tv-shot img { display: block; width: 100%; height: auto; }
 .tv-stage { max-width: 1088px !important; }
 .tv-fig { margin: var(--s2) 0 0; }
+.vt-p .tv-fig { margin-top: 0; }
 .tv-fig .cap { margin-top: var(--s1); }
 .tv-hero { padding-top: var(--s3); }
 .tv-stage { max-width: 880px; margin: 0 auto; padding: 0 var(--s2); }
@@ -615,7 +616,7 @@ td:first-child { width: 30%; }
   <div class="col title">
     <h1>Treevah</h1>
     <p>Treevah is an AI-powered web app for organizing and finding work files. I spent the summer as a UI/UX intern on the product team, redesigning how people move through folders and find files they can’t name.</p>
-    <p class="rt">2 min read</p>
+    <p class="rt">3 min read</p>
     <dl class="meta">
       <div><dt>My role</dt><dd>UI/UX intern, designing with product designer Cici Zhong</dd></div>
       <div><dt>Team</dt><dd>2 designers, 1 PM and 4 engineers</dd></div>
@@ -625,7 +626,7 @@ td:first-child { width: 30%; }
   </div>
 </header>
 
-<nav class="toc" id="toc" aria-label="Sections"><ol><li><a href="#problem">Problem</a></li><li><a href="#work">What I did</a></li><li><a href="#results">Results</a></li><li><a href="#overview">Overview</a></li><li><a href="#nda">More detail</a></li></ol></nav>
+<nav class="toc" id="toc" aria-label="Sections"><ol><li><a href="#problem">Problem</a></li><li><a href="#work">What I did</a></li><li><a href="#results">Results</a></li><li><a href="#overview">Overview</a></li><li><a href="#screens">Screens</a></li><li><a href="#nda">More detail</a></li></ol></nav>
 <main id="main" tabindex="-1">
 
 <section class="sec col" id="problem" aria-labelledby="h-problem">
@@ -667,6 +668,25 @@ td:first-child { width: 30%; }
     <div class="tv-shot"><img src="assets/tv-site.webp" width="1470" height="800" loading="lazy" alt="Treevah’s public landing page. The headline reads Turn your ideas into an organized workspace. Below it, an Ask Treevah box invites people to describe the workspace they want, with a Generate Workspace button, example prompts such as Organize my college classes, and cards for an AI organization demo and workspace templates."></div>
     <figcaption class="cap">Treevah’s public site today: describe the workspace you want, and the AI builds it.</figcaption>
   </figure>
+</section>
+
+<section class="sec col" id="screens" aria-labelledby="h-screens">
+  <h2 id="h-screens">Inside Treevah</h2>
+  <p>A few screens from the product, shared with Treevah’s permission.</p>
+  <div class="vt" data-tabs="Treevah screens">
+    <div class="vt-p" data-tab="Getting started">
+      <figure class="tv-fig"><div class="tv-shot"><img src="assets/tv-start.webp" width="1950" height="1386" loading="lazy" alt="Treevah’s Start Here folder. The sidebar groups folders into Start Here, Features, Use Cases, Pricing and Resources. The Start Here panel lists files such as Welcome to Treevah.pdf and Quick Tour.mp4, each with a one-line description, and a preview panel explains what Treevah is and what makes it different."></div>
+      <figcaption class="cap">New users start in a Start Here folder. Every file has a short description, and the preview explains it without opening anything.</figcaption></figure>
+    </div>
+    <div class="vt-p" data-tab="Folder depth">
+      <figure class="tv-fig"><div class="tv-shot"><img src="assets/tv-depth.webp" width="2000" height="1422" loading="lazy" alt="The Features folder in Treevah, listing features such as Infinite Folder Depth, File Descriptions, Deep Search and Preview Panel. The preview for Infinite Folder Depth shows a seven-level example tree, from Company down to Component, and compares Treevah with typical file tools."></div>
+      <figcaption class="cap">The Features folder explains Treevah through its own files. Here, infinite folder depth is shown as a tree from Company down to Component.</figcaption></figure>
+    </div>
+    <div class="vt-p" data-tab="Working across folders">
+      <figure class="tv-fig"><div class="tv-shot"><img src="assets/tv-dkb.webp" width="2000" height="1011" loading="lazy" alt="Hierarchy mode with a Design Knowledge Base. The sidebar shows its subfolders, from Accessibility to Wireframes. A bar across the top pins the path Design Knowledge Base, Design_System, Colors and Components, and those folders open side by side as panels."></div>
+      <figcaption class="cap">Hierarchy mode: open folders sit side by side, and the path to each one stays pinned across the top.</figcaption></figure>
+    </div>
+  </div>
 </section>
 
 <section class="sec col" id="nda" aria-labelledby="h-nda">
