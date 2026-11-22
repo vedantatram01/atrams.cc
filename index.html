@@ -699,38 +699,34 @@ img { max-width: 100%; display: block; }
 
 /* Treevah card: featured, full row on wide screens */
 @media (min-width: 901px) { .wk-feat { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--s3); align-items: center; } .wk-feat .wk-body { padding-top: 0 !important; margin-top: 0 !important; } }
-.t-tv { --t1: #ECEAE4; --t2: #ECEAE4; }
-:root[data-mode="dark"] .t-tv { --t1: #222; --t2: #222; }
+.t-tv { --t1: #E4ECE8; --t2: #E4ECE8; }
+:root[data-mode="dark"] .t-tv { --t1: #1E2422; --t2: #1E2422; }
 .th-tv { display: grid; place-items: center; }
-.tvx { width: 84%; border: 1px solid var(--line); border-radius: 1.2cqw; background: var(--surface); overflow: hidden; box-shadow: 0 3cqw 6cqw -4cqw rgba(0,0,0,.3); font-family: var(--sans); }
-.tvx-bar { display: flex; align-items: center; gap: .8cqw; padding: 1.4cqw 1.8cqw; background: var(--mat); border-bottom: 1px solid var(--line); }
-.tvx-bar > i { width: 1.2cqw; height: 1.2cqw; border-radius: 50%; background: var(--line); }
-.tvx-q { margin-left: 1.6cqw; width: 42%; padding: .7cqw 1.4cqw; border: 1px solid var(--line); border-radius: .6cqw; background: var(--surface); font-size: 1.6cqw; line-height: 2.2cqw; color: var(--muted); white-space: nowrap; overflow: hidden; }
-.tvx-q span { display: inline-block; overflow: hidden; vertical-align: top; animation: tvxType 12s steps(22) infinite; }
-.tvx-main { display: grid; grid-template-columns: 2fr 3fr; height: 36cqw; }
-.tvx-tree { display: flex; flex-direction: column; padding: 1.6cqw; border-right: 1px solid var(--line); }
-.tvx-r { position: relative; padding: .55cqw 1cqw .55cqw calc(2.6cqw + var(--lv, 0) * 2.2cqw); border-radius: .5cqw; font-size: 1.7cqw; line-height: 2.4cqw; color: var(--soft); }
-.tvx-r.o::before { content: ""; position: absolute; left: calc(1cqw + var(--lv, 0) * 2.2cqw); top: 1.1cqw; width: .7cqw; height: .7cqw; border-right: 1.5px solid var(--muted); border-bottom: 1.5px solid var(--muted); transform: rotate(45deg); }
-.tvx-r.l1 { --lv: 1; } .tvx-r.l2 { --lv: 2; }
-.tvx-r.k1 { animation: tvxK1 12s infinite; } .tvx-r.k2 { animation: tvxK2 12s infinite; }
-.tvx-ws { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-content: start; gap: 1.2cqw; padding: 1.6cqw; background: var(--bg); }
-.tvx-c { display: grid; gap: .5cqw; padding: 1.4cqw; border: 1px solid var(--line); border-radius: .8cqw; background: var(--surface); }
-.tvx-c b { font-size: 1.8cqw; line-height: 2.4cqw; font-weight: 600; color: var(--text); }
-.tvx-c small { font-size: 1.4cqw; line-height: 1.8cqw; color: var(--muted); }
-.tvx-c span { height: 1.2cqw; border-radius: .3cqw; background: var(--mat); }
-.tvx-c span + span { width: 70%; }
-.tvx-c.c1 { animation: tvxC1 12s infinite; } .tvx-c.c2 { animation: tvxC2 12s infinite; }
-.tvx-ghost { position: absolute; z-index: 2; padding: .6cqw 1.2cqw; border-radius: .6cqw; background: var(--text); color: var(--bg); font-size: 1.6cqw; line-height: 2.2cqw; font-weight: 500; opacity: 0; }
-.tvx-ghost.g1 { animation: tvxG1 12s infinite; } .tvx-ghost.g2 { animation: tvxG2 12s infinite; }
-@keyframes tvxType { 0%, 4% { width: 0; } 22%, 100% { width: 100%; } }
-@keyframes tvxK1 { 0%, 24% { background: transparent; color: var(--soft); font-weight: 400; } 28%, 100% { background: var(--accent-soft); color: var(--text); font-weight: 600; } }
-@keyframes tvxK2 { 0%, 56% { background: transparent; color: var(--soft); font-weight: 400; } 60%, 100% { background: var(--accent-soft); color: var(--text); font-weight: 600; } }
-@keyframes tvxG1 { 0%, 26% { opacity: 0; transform: translate(-30cqw, 7.2cqw); } 30% { opacity: 1; transform: translate(-30cqw, 7.2cqw); } 42% { opacity: 1; transform: translate(2cqw, 1cqw); } 45%, 100% { opacity: 0; transform: translate(2cqw, 1cqw); } }
-@keyframes tvxG2 { 0%, 58% { opacity: 0; transform: translate(-30cqw, 22.6cqw); } 62% { opacity: 1; transform: translate(-30cqw, 22.6cqw); } 74% { opacity: 1; transform: translate(22cqw, 1cqw); } 77%, 100% { opacity: 0; transform: translate(22cqw, 1cqw); } }
-@keyframes tvxC1 { 0%, 42% { opacity: 0; transform: scale(.96); } 46%, 96% { opacity: 1; transform: none; } 100% { opacity: 0; } }
-@keyframes tvxC2 { 0%, 74% { opacity: 0; transform: scale(.96); } 78%, 96% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+.tvs { width: 86%; border: 1px solid var(--line); border-radius: 1cqw; background: #fff; overflow: hidden; box-shadow: 0 3cqw 6cqw -4cqw rgba(0,0,0,.35); }
+.tvs-bar { display: flex; align-items: center; gap: .7cqw; padding: 1.1cqw 1.6cqw; background: var(--mat); border-bottom: 1px solid var(--line); }
+.tvs-bar i { width: 1cqw; height: 1cqw; border-radius: 50%; background: var(--line); }
+.tvs-bar span { margin-left: 1.4cqw; padding: .3cqw 1.4cqw; border-radius: .5cqw; background: var(--surface); font-size: 1.4cqw; line-height: 2cqw; color: var(--muted); }
+.tvs-vp { position: relative; aspect-ratio: 1470 / 795; overflow: hidden; background: #fff; }
+.tvs-vp img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top left; transform-origin: 0 0; }
+.tvs-a { animation: tvsA 12s infinite; }
+.tvs-b { opacity: 0; animation: tvsB 12s infinite; }
+/* App: whole screen → pinned folders → file preview → back out; then the landing page */
+@keyframes tvsA {
+  0%, 8% { transform: none; opacity: 1; }
+  24%, 30% { transform: translate(-14%, -9%) scale(1.7); opacity: 1; }
+  46%, 54% { transform: translate(-58%, -18%) scale(1.75); opacity: 1; }
+  64% { transform: none; opacity: 1; }
+  68%, 96% { transform: none; opacity: 0; }
+  100% { transform: none; opacity: 1; }
+}
+@keyframes tvsB {
+  0%, 64% { opacity: 0; transform: none; }
+  68% { opacity: 1; transform: none; }
+  92% { opacity: 1; transform: translate(-6%, -4%) scale(1.15); }
+  96%, 100% { opacity: 0; transform: none; }
+}
 .wk:not(.live) .th-tv * { animation-play-state: paused; }
-@media (prefers-reduced-motion: reduce) { .th-tv * { animation: none !important; } .tvx-ghost { display: none; } }
+@media (prefers-reduced-motion: reduce) { .th-tv * { animation: none !important; } .tvs-b { display: none; } }
 </style>
 <link rel="stylesheet" href="assets/system.css">
 </head>
@@ -772,25 +768,11 @@ img { max-width: 100%; display: block; }
     <div class="cases">
     <article class="wk rv t-tv wk-feat" aria-labelledby="case-05">
       <a class="wk-thumb th-tv" href="treevah.html" tabindex="-1" aria-hidden="true">
-        <div class="tvx">
-          <div class="tvx-bar"><i></i><i></i><i></i><span class="tvx-q"><span>Reports for Acme Corp</span></span></div>
-          <div class="tvx-main">
-            <div class="tvx-tree">
-              <span class="tvx-r l0 o">Clients</span>
-              <span class="tvx-r l1 o">Acme Corp</span>
-              <span class="tvx-r l2 k1">Reports</span>
-              <span class="tvx-r l2">Contracts</span>
-              <span class="tvx-r l1">Northwind</span>
-              <span class="tvx-r l0 o">Finance</span>
-              <span class="tvx-r l1 k2">Invoices</span>
-              <span class="tvx-r l1">Budgets</span>
-              <span class="tvx-r l0">Personal</span>
-            </div>
-            <div class="tvx-ws">
-              <span class="tvx-ghost g1">Reports</span><span class="tvx-ghost g2">Invoices</span>
-              <div class="tvx-c c1"><b>Reports</b><small>Clients › Acme Corp</small><span></span><span></span></div>
-              <div class="tvx-c c2"><b>Invoices</b><small>Finance</small><span></span><span></span></div>
-            </div>
+        <div class="tvs">
+          <div class="tvs-bar"><i></i><i></i><i></i><span>treevah.com</span></div>
+          <div class="tvs-vp">
+            <img class="tvs-a" src="assets/tv-app.webp" width="1470" height="795" alt="" loading="lazy">
+            <img class="tvs-b" src="assets/tv-site.webp" width="1470" height="800" alt="" loading="lazy">
           </div>
         </div>
       </a>
