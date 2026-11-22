@@ -457,6 +457,9 @@ td:first-child { width: 30%; }
 <link rel="stylesheet" href="assets/system.css">
 <style>
 /* ---- Treevah ---- */
+.tv-shot { border: 1px solid var(--line); border-radius: 5px; overflow: hidden; background: #fff; box-shadow: 0 24px 48px -32px rgba(0,0,0,.3); }
+.tv-shot img { display: block; width: 100%; height: auto; }
+.tv-stage { max-width: 1088px !important; }
 .tv-hero { padding-top: var(--s3); }
 .tv-stage { max-width: 880px; margin: 0 auto; padding: 0 var(--s2); }
 .tv-win { border: 1px solid var(--line); border-radius: var(--r-l); background: var(--surface); overflow: hidden; box-shadow: 0 24px 48px -32px rgba(0,0,0,.25); }
@@ -603,22 +606,9 @@ td:first-child { width: 30%; }
 </nav>
 
 <header class="hero tv-hero" id="top">
-  <figure class="tv-stage" aria-labelledby="tv-hero-cap">
-    <div class="tv-win" aria-hidden="true">
-      <div class="tv-bar"><i></i><i></i><i></i><span class="tv-q">Search: the resume I edited yesterday</span></div>
-      <div class="tv-split">
-        <div class="tv-tree">
-          <p class="tv-h">Hierarchy</p>
-          <span class="r l0 open">Clients</span><span class="r l1 open">Acme Corp</span><span class="r l2 pk">Reports</span><span class="r l2">Contracts</span><span class="r l1">Northwind</span><span class="r l0 open">Finance</span><span class="r l1 lf pk">Invoices</span><span class="r l1 lf">Budgets</span><span class="r l0">Personal</span>
-        </div>
-        <div class="tv-ws">
-          <p class="tv-h">Workstation</p>
-          <div class="tv-card"><b>Reports</b><small>Clients › Acme Corp</small><span>Q3 report.pdf</span><span>Q2 report.pdf</span></div>
-          <div class="tv-card"><b>Invoices</b><small>Finance</small><span>INV-1042.pdf</span><span>INV-1041.pdf</span></div>
-        </div>
-      </div>
-    </div>
-    <figcaption class="cap" id="tv-hero-cap">A diagram of the idea, not the product: the full folder tree on the left, and only the folders you’re working on pinned on the right.</figcaption>
+  <figure class="tv-stage">
+    <div class="tv-shot"><img src="assets/tv-app.webp" width="1470" height="795" alt="Treevah in Hierarchy mode. A sidebar lists sub folders. Class Resources and Research are pinned in a bar across the top, and open side by side as panels. A file panel on the right previews Citation Guide.docx, with Open and Download Template buttons."></div>
+    <figcaption class="cap">Treevah in Hierarchy mode: pinned folders open side by side, with a file preview on the right.</figcaption>
   </figure>
   <div class="col title">
     <h1>Treevah</h1>
@@ -674,8 +664,8 @@ td:first-child { width: 30%; }
 </section>
 
 <section class="sec col" id="nda" aria-labelledby="h-nda">
-  <h2 id="h-nda">The full story is under NDA</h2>
-  <p>This project is covered by a non-disclosure agreement, so I can’t share screens or research details here. I’m happy to walk through the process, decisions and final designs in a conversation.</p>
+  <h2 id="h-nda">The process is under NDA</h2>
+  <p>This project is covered by a non-disclosure agreement, so I can’t share the research, iterations or full set of screens here. I’m happy to walk through the process, decisions and final designs in a conversation.</p>
   <p class="tv-cta"><a class="btn btn-primary" href="mailto:vedantatram157@gmail.com?subject=Treevah%20case%20study">Ask me about this project</a></p>
 </section>
 
