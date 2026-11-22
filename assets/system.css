@@ -294,3 +294,16 @@ dialog.zv::backdrop { background: rgba(12,12,12,.94); }
   .zv-img { max-width: none; width: min(1100px, var(--zw, 1100px)); }
   .zv-cap::after { content: " Scroll sideways to explore the full image."; color: #a9a9a6; }
 }
+
+/* ===== Home covers: quiet, solid project tints (no gradients) ===== */
+.t-tv .wk-thumb { background: #E2E8E4 !important; } .t-cv .wk-thumb { background: #E1E6EC !important; }
+.t-wh .wk-thumb { background: #ECE6E0 !important; } .t-np .wk-thumb { background: #E6E5DC !important; }
+.t-io .wk-thumb { background: #E5E4EC !important; }
+:root[data-mode="dark"] .t-tv .wk-thumb { background: #1D2421 !important; } :root[data-mode="dark"] .t-cv .wk-thumb { background: #1C2027 !important; }
+:root[data-mode="dark"] .t-wh .wk-thumb { background: #25201C !important; } :root[data-mode="dark"] .t-np .wk-thumb { background: #22221C !important; }
+:root[data-mode="dark"] .t-io .wk-thumb { background: #1F1E26 !important; }
+/* NPS cover: larger, more legible sitemap card */
+.th-np .npc { left: 43cqw; top: 7cqw; width: 46cqw; padding: 2.4cqw 2.8cqw; }
+.th-np .npc-h { font-size: 1.9cqw; margin-bottom: 1cqw; }
+.th-np .npc-t span { font-size: 1.85cqw; padding: .5cqw 1.2cqw; }
+.th-np .npp { left: 10cqw; top: 5cqw; width: 27cqw; }

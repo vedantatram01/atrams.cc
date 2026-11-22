@@ -707,13 +707,11 @@ img { max-width: 100%; display: block; }
 .tvs-bar { display: flex; align-items: center; gap: .7cqw; padding: 1.1cqw 1.6cqw; background: var(--mat); border-bottom: 1px solid var(--line); }
 .tvs-bar i { width: 1cqw; height: 1cqw; border-radius: 50%; background: var(--line); }
 .tvs-bar span { margin-left: 1.4cqw; padding: .3cqw 1.4cqw; border-radius: .5cqw; background: var(--surface); font-size: 1.4cqw; line-height: 2cqw; color: var(--muted); }
-.tvs-vp { position: relative; aspect-ratio: 16 / 9.6; overflow: hidden; background: #fff; }
+.tvs-vp { position: relative; aspect-ratio: 1120 / 636; overflow: hidden; background: #fff; }
 .tvs-vp img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 0 0; transform-origin: 0 0; }
-.tvs-a { animation: tvsA 14s ease-in-out infinite; }
-.tvs-b { opacity: 0; animation: tvsB 14s ease-in-out infinite; }
-@keyframes tvsA { 0%, 6% { transform: scale(1); opacity: 1; } 22%, 30% { transform: scale(1.55) translate(-2%, -4%); opacity: 1; } 42%, 46% { transform: scale(1.55) translate(-34%, -6%); opacity: 1; } 52% { opacity: 0; transform: scale(1.4) translate(-30%, -6%); } 53%, 91% { opacity: 0; transform: scale(1); } 97%, 100% { opacity: 1; transform: scale(1); } }
-@keyframes tvsB { 0%, 47% { opacity: 0; transform: scale(1); } 53%, 60% { opacity: 1; transform: scale(1); } 76%, 84% { opacity: 1; transform: scale(1.5) translate(-32%, -10%); } 92% { opacity: 1; transform: scale(1); } 98%, 100% { opacity: 0; transform: scale(1); } }
-@media (prefers-reduced-motion: reduce) { .tvs-a, .tvs-b { animation: none !important; } .tvs-b { display: none; } }
+.tvs-vp img.tvs-c { object-position: 0 0; animation: tvsC 16s ease-in-out infinite alternate; }
+@keyframes tvsC { from { transform: scale(1); } to { transform: scale(1.06) translate(-3%, -1%); } }
+@media (prefers-reduced-motion: reduce) { .tvs-c { animation: none !important; } }
 .wk:not(.live) .th-tv * { animation-play-state: paused; }
 
 </style>
@@ -760,15 +758,14 @@ img { max-width: 100%; display: block; }
         <div class="tvs">
           <div class="tvs-bar"><i></i><i></i><i></i><span>treevah.com</span></div>
           <div class="tvs-vp">
-            <img class="tvs-a" src="assets/tv-depth.webp" width="2000" height="1422" alt="" loading="lazy">
-            <img class="tvs-b" src="assets/tv-js-prompt.webp" width="1440" height="1025" alt="" loading="lazy">
+            <img class="tvs-c" src="assets/tv-cover.webp" width="1120" height="636" alt="" loading="lazy">
           </div>
         </div>
       </a>
       <div class="wk-body">
         <div class="wk-row"><h3 id="case-05"><a href="treevah.html">Treevah</a></h3></div>
         <p class="wk-role">2026 · UI/UX Designer, team of 5</p>
-        <p class="wk-sum">An AI file manager that shows folders as a visual tree. I designed its interface and components with the team, audited 766 components on my own, and ran the new-user study plan and Microsoft Clarity analysis that shaped the next release.</p>
+        <p class="wk-sum">An AI file manager that shows folders as a visual tree. I designed with the team, audited 766 components on my own, and planned the study and Clarity analysis behind the next release’s priorities.</p>
         <p class="go2"><a class="rd" href="treevah.html">Read case study<span class="vh">: Treevah</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></p>
       </div>
     </article>
@@ -800,7 +797,6 @@ img { max-width: 100%; display: block; }
           <li><span>Photos &amp; Multimedia</span></li><li><span>About Us</span></li>
           <li><span class="kc">Supporting NPS</span><ul><li><span class="kc">Volunteering</span></li></ul></li>
         </ul></div>
-        <span class="np-task ta">Tree test, “Plan a camping trip”: <em>80% found it</em></span><span class="np-task tb">Tree test, “Find a field trip”: <em>40% found it</em></span><span class="np-task tc">Tree test, “Volunteer at Redwood”: <em>50% found it</em></span>
       </a>
       <div class="wk-body">
         <div class="wk-row"><h3 id="case-04"><a href="national-parks.html">NPS.gov</a></h3></div>
@@ -935,14 +931,14 @@ img { max-width: 100%; display: block; }
   var cards = [].slice.call(document.querySelectorAll(".wk"));
   var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduce || !document.body.getAnimations) { cards.forEach(function (c) { c.classList.add("live"); }); return; }
-  var CFG = { "th-tv": [14000, 1.7], "th-io": [10000, 1.5], "th-wh": [12000, 1.7], "th-np": [12000, 1.7], "th-cv": [18000, 2.2] };
+  var CFG = { "th-tv": [16000, 1.2], "th-io": [10000, 1.5], "th-wh": [12000, 1.7], "th-np": [12000, 1.7], "th-cv": [18000, 2.2] };
   var st = cards.map(function (c) {
     var th = c.querySelector(".wk-thumb"), k = Object.keys(CFG).filter(function (x) { return th.classList.contains(x); })[0] || "th-io";
     var bar = document.createElement("span"); bar.className = "wk-prog"; bar.setAttribute("aria-hidden", "true"); bar.innerHTML = "<i></i>"; th.appendChild(bar);
     return { c: c, th: th, cyc: CFG[k][0], sp: CFG[k][1], t: 100 * CFG[k][0], target: null, base: 0, on: false, anims: [], bar: bar.firstChild };
   });
   function grab(s) { s.anims = s.th.getAnimations({ subtree: true }).filter(function (a) { return a.animationName; }); s.anims.forEach(function (a) { a.pause(); }); }
-  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { var s = st[cards.indexOf(e.target)]; s.on = e.isIntersecting; e.target.classList.toggle("live", s.on); if (s.on) { grab(s); if (!s.seen) { s.seen = true; s.t = 100 * s.cyc + s.cyc * .02; } } }); }, { threshold: 0.15 });
+  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { var s = st[cards.indexOf(e.target)]; s.on = e.isIntersecting; e.target.classList.toggle("live", s.on); if (s.on) { grab(s); if (!s.seen) { s.seen = true; s.t = 100 * s.cyc + s.cyc * .02; } } }); wake(); }, { threshold: 0.15 });
   cards.forEach(function (c) { io.observe(c); });
   st.forEach(function (s) {
     function frac(e) { var r = s.th.getBoundingClientRect(); return Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)); }
@@ -952,7 +948,10 @@ img { max-width: 100%; display: block; }
     s.th.addEventListener("pointerleave", off); s.th.addEventListener("pointercancel", off);
   });
   var lastY = scrollY, last = performance.now();
+  var running = false;
+  function wake() { if (!running && st.some(function (s) { return s.on; })) { running = true; last = performance.now(); lastY = scrollY; requestAnimationFrame(tick); } }
   function tick(now) {
+    if (!st.some(function (s) { return s.on; })) { running = false; return; }
     var dt = Math.min(64, now - last), dy = scrollY - lastY; last = now; lastY = scrollY;
     st.forEach(function (s) {
       if (!s.on) return;
@@ -964,7 +963,7 @@ img { max-width: 100%; display: block; }
     });
     requestAnimationFrame(tick);
   }
-  requestAnimationFrame(tick);
+  wake();
 })();
 </script>
 </body>
