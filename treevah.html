@@ -651,6 +651,36 @@ td:first-child { width: 30%; }
 @media (max-width: 760px) { .tv-steps4 { grid-template-columns: 1fr 1fr; } .tv-steps4 li + li::before { content: none; } }
 @media (max-width: 640px) { .tv-halves, .tv-probs5, .tv-clr, .tv-prio { grid-template-columns: 1fr; } .tv-probs5 li:last-child { grid-column: auto; } .tv-hm { max-width: 240px; } .eb li { grid-template-columns: 1fr 40px; } .eb li span { grid-column: 1 / -1; } .tv-chart { padding: var(--s1); } .tv-halves > div { padding: var(--s1); } }
 @media (max-width: 420px) { .tv-steps4 { grid-template-columns: 1fr; } .sb i span { display: none; } }
+
+.tv-src { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--s0); margin: var(--s1) 0 0; padding: 0; list-style: none; }
+.tv-src li { padding: var(--s1); border: 1px solid var(--line); border-radius: 5px; background: var(--surface); }
+.tv-src b { display: block; font-family: var(--display); font-size: 22px; line-height: 28px; font-weight: 500; margin-bottom: 4px; }
+.tv-src span { font-size: 13px; line-height: 18px; color: var(--soft); }
+.tv-good li { border-top-color: var(--good) !important; }
+.tv-good { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 0 !important; }
+.tv-shift { margin-top: var(--s2) !important; font-size: 16px; line-height: 24px; color: var(--soft); }
+.tv-chart-in { margin-top: 0; }
+.sb-lg { height: 40px; }
+.sb-lg i span { font-size: 13px; }
+.v1 { background: var(--c1); color: #fff; } .v2 { background: var(--c3); color: #fff; } .v3 { background: var(--c2); color: #fff; }
+:root[data-mode="dark"] .v1, :root[data-mode="dark"] .v2, :root[data-mode="dark"] .v3 { color: #111; }
+.tv-views { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s1); margin: var(--s1) 0 0; padding: 0; list-style: none; }
+.tv-views b { display: block; font-size: 14px; line-height: 20px; font-weight: 600; padding-left: 14px; position: relative; }
+.tv-views b::before { content: ""; position: absolute; left: 0; top: 5px; width: 8px; height: 8px; border-radius: 2px; }
+.tv-views li:nth-child(1) b::before { background: var(--c1); } .tv-views li:nth-child(2) b::before { background: var(--c3); } .tv-views li:nth-child(3) b::before { background: var(--c2); }
+.tv-views span { font-size: 13px; line-height: 19px; color: var(--soft); }
+.tv-vs { margin-top: 0; }
+.tv-vs p:not(.k) { margin: var(--s0) 0 0 !important; font-size: 15px !important; line-height: 22px !important; color: var(--soft); }
+.tv-beta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s0); margin: var(--s2) 0; padding: 0; list-style: none; }
+.tv-beta li { display: grid; gap: 2px; padding: 12px var(--s1); border-radius: 5px; border-left: 4px solid; background: var(--surface); border-top: 1px solid var(--line); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.tv-beta span { font-size: 14px; line-height: 20px; }
+.tv-beta b { font-size: 13px; line-height: 18px; font-weight: 600; }
+.tv-beta .r { border-left-color: var(--good); } .tv-beta .r b { color: var(--good); }
+.tv-beta .p { border-left-color: color-mix(in srgb, var(--c2) 50%, var(--bg)); } .tv-beta .p b { color: var(--muted); }
+.tv-beta .n { border-left-color: var(--c2); } .tv-beta .n b { color: var(--c2); }
+@media (max-width: 760px) { .tv-src { grid-template-columns: repeat(2, minmax(0, 1fr)); } .tv-src li:last-child { grid-column: 1 / -1; } .tv-beta { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px) { .tv-good, .tv-views { grid-template-columns: 1fr; } }
+@media (max-width: 420px) { .tv-beta { grid-template-columns: 1fr; } .sb-lg i span { display: inline; font-size: 11px; } }
 </style>
 </head>
 <body>
@@ -676,8 +706,8 @@ td:first-child { width: 30%; }
   </figure>
   <div class="col title">
     <h1>Treevah</h1>
-    <p>Treevah is an AI-powered web app that shows your folders as a visual tree. Over the summer of 2026 I worked as a UI/UX Designer on the team: designing the interface and its components, auditing the design system on my own, writing the plan for a usability study with new users, and running the Microsoft Clarity analysis behind the next release’s priorities.</p>
-    <p class="rt">7 min read</p>
+    <p>Treevah is an AI-powered web app that shows your folders as a visual tree. Over the summer of 2026 I worked as a UI/UX Designer on the team: designing the interface and its components, auditing the design system on my own, writing the plan for a usability study with new users, running the Microsoft Clarity analysis, and turning it all into 18 recommendations for the next release.</p>
+    <p class="rt">9 min read</p>
     <dl class="meta">
       <div><dt>My role</dt><dd>UI/UX Designer</dd></div>
       <div><dt>Team</dt><dd>UI/UX team of 5, reporting to the founder</dd></div>
@@ -687,7 +717,7 @@ td:first-child { width: 30%; }
   </div>
 </header>
 
-<nav class="toc" id="toc" aria-label="Sections"><ol><li><a href="#problem">Problem</a></li><li><a href="#summer">My summer</a></li><li><a href="#screens">Design</a></li><li><a href="#audit">Audit</a></li><li><a href="#study">Study</a></li><li><a href="#findings">Findings</a></li><li><a href="#clarity">Click data</a></li><li><a href="#priorities">Priorities</a></li><li><a href="#learned">Learnings</a></li></ol></nav>
+<nav class="toc" id="toc" aria-label="Sections"><ol><li><a href="#problem">Problem</a></li><li><a href="#summer">My summer</a></li><li><a href="#screens">Design</a></li><li><a href="#audit">Audit</a></li><li><a href="#study">Study</a></li><li><a href="#findings">Findings</a></li><li><a href="#clarity">Click data</a></li><li><a href="#synthesis">Synthesis</a></li><li><a href="#priorities">Recommendations</a></li><li><a href="#beta">Beta</a></li><li><a href="#learned">Learnings</a></li></ol></nav>
 <main id="main" tabindex="-1">
 
 <section class="sec col" id="problem" aria-labelledby="h-problem">
@@ -699,7 +729,7 @@ td:first-child { width: 30%; }
   <h2 id="h-summer">My summer, in two halves</h2>
   <div class="tv-halves">
     <div><p class="k">May–June · Design</p><ul class="quiet-list"><li>Designed interface concepts, wireframes and user flows with the team</li><li>Built and maintained design system components and standards</li><li>Audited every component in the web and mobile apps, on my own</li><li>Joined feature brainstorms and pitched ideas</li><li>Prepared design handoffs for engineering</li></ul></div>
-    <div><p class="k">July–August · Research</p><ul class="quiet-list"><li>Wrote the plan for the Alpha 8 study</li><li>Recruited and ran think-aloud sessions with new users</li><li>Set up Microsoft Clarity and analyzed its recordings, heatmaps and click data</li><li>Helped synthesize findings into the Alpha 8 research report</li><li>Helped turn findings into priorities for Alpha 9</li></ul></div>
+    <div><p class="k">July–August · Research</p><ul class="quiet-list"><li>Wrote the plan for the Alpha 8 study</li><li>Recruited and ran think-aloud sessions with new users</li><li>Set up Microsoft Clarity and analyzed its recordings, heatmaps and click data</li><li>Synthesized all five sources in FigJam into the Alpha 8 research report</li><li>Wrote 18 recommendations for Alpha 9 and a Beta readiness assessment</li></ul></div>
   </div>
 </section>
 
@@ -753,44 +783,81 @@ td:first-child { width: 30%; }
 </section>
 
 <section class="sec col" id="study" aria-labelledby="h-study">
-  <h2 id="h-study">Watching new users start from nothing</h2>
-  <p>I wrote the plan for the Alpha 8 study: the scenarios, the four tasks, what observers should record, and the research setup in Microsoft Clarity and FigJam. Every participant started in the same empty workspace and played one role: a college student starting a semester, or a job seeker in the middle of a search. Each designer on the team recruited and ran sessions with one of each, recording the screen, audio and think-aloud comments.</p>
+  <h2 id="h-study">Planning the Alpha 8 study</h2>
+  <p>I wrote the plan for the Alpha 8 study. Its goal was to see how first-time users naturally organize information, and whether Treevah’s workspace, panels and navigation match that mental model. Every participant started in the same empty workspace and played one role: a college student starting a semester, or a job seeker in the middle of a search.</p>
   <ol class="tv-steps4" aria-label="Study tasks">
     <li><b>Build a workspace</b><span>From a blank page, with no hints about folders or depth</span></li>
     <li><b>Organize real files</b><span>Upload about 20 realistic files and sort them</span></li>
     <li><b>Find them again</b><span>Retrieve files, watching paths, search and wrong clicks</span></li>
     <li><b>Arrange the workspace</b><span>Open folders, switch views, set it up for daily use</span></li>
   </ol>
-  <div class="kv tv-impact">
-    <div><b>12</b><span>moderated sessions with new users</span></div>
-    <div><b>30</b><span>survey responses from existing users</span></div>
-    <div><b>871</b><span>sessions in Microsoft Clarity</span></div>
-  </div>
+  <p>Each designer on the team recruited and ran sessions with one college student and one job seeker, recording screen, audio and think-aloud comments. I then pulled five sources of evidence together:</p>
+  <ul class="tv-src" role="list">
+    <li><b>12</b><span>Moderated think-aloud sessions with new users</span></li>
+    <li><b>30</b><span>Survey responses from existing users</span></li>
+    <li><b>871</b><span>Microsoft Clarity sessions, 47 reviewed as recordings</span></li>
+    <li><b>Founder notes</b><span>From months of real, everyday use</span></li>
+    <li><b>Audits</b><span>Heuristic review and the component audit</span></li>
+  </ul>
 </section>
 
 <section class="sec col" id="findings" aria-labelledby="h-findings">
   <h2 id="h-findings">What we found</h2>
-  <p>People loved the idea. In the survey, 73% said that if Treevah disappeared, what they’d miss most is seeing several folders side by side on one canvas. The trouble was in the basics around it.</p>
-  <figure class="tv-chart" aria-labelledby="tv-ease-cap">
-    <p class="eb-h">How easy was it? <span>Average rating from 1 to 5, 30 existing users, mostly software engineers</span></p>
-    <ul class="eb" role="list">
-      <li><span>Creating folders</span><i style="--v:94%"></i><b>4.70</b></li>
-      <li><span>Creating files</span><i style="--v:87.4%"></i><b>4.37</b></li>
-      <li><span>Organizing documents</span><i style="--v:79.4%"></i><b>3.97</b></li>
-      <li><span>Managing larger projects</span><i style="--v:74%"></i><b>3.70</b></li>
-      <li><span>Finding things later</span><i style="--v:72.6%"></i><b>3.63</b></li>
-      <li><span>Returning to earlier work</span><i style="--v:70.6%"></i><b>3.53</b></li>
-    </ul>
-    <figcaption class="cap" id="tv-ease-cap">Quick tasks scored high. Anything that depended on remembering where you were scored lowest.</figcaption>
-  </figure>
-  <p>The moderated sessions added a twist: existing users rated creating folders the easiest task, yet new users kept creating folders in the wrong place. Five problems came up again and again:</p>
-  <ul class="tv-probs tv-probs5" role="list">
-    <li><b>Folders landed in the wrong place</b><p>New folders appeared under the parent instead of the folder people had selected.</p></li>
-    <li><b>People lost their place</b><p>As more panels opened, it got hard to tell where you were and how folders related.</p></li>
-    <li><b>The workspace got crowded</b><p>Toolbars, panels and popups competed with the files themselves.</p></li>
-    <li><b>Actions gave no feedback</b><p>After an upload or a move, people couldn’t tell if it worked, and there was no undo.</p></li>
-    <li><b>Useful features were hidden</b><p>Zoom, toolbar actions and view switching were hard to find or understand.</p></li>
-  </ul>
+  <p>The idea landed. In the survey, 73% said that if Treevah disappeared, what they’d miss most is managing several folders side by side on one canvas. The trouble was in the basics around it.</p>
+  <div class="vt" data-tabs="Findings">
+    <div class="vt-p" data-tab="What worked">
+      <ul class="tv-probs tv-good" role="list">
+        <li><b>One canvas, many folders</b><p>Seeing folders and subfolders in one window made cross-folder tasks faster than in single-pane tools.</p></li>
+        <li><b>The preview panel</b><p>The top-rated feature (4.31 of 5): people could check a file without losing their place.</p></li>
+        <li><b>Search that shows location</b><p>Results with name, date, size and location, and a click that jumps straight to the folder.</p></li>
+        <li><b>Color-coded folders</b><p>Colors gave people quick visual boundaries across a big tree.</p></li>
+      </ul>
+      <p class="tv-shift">People changed as they got comfortable. They started with search, single-pane browsing and local folders, like any file manager, then moved on to zooming, side-by-side folders, multi-item drag and drop, and jumping to locations from search.</p>
+    </div>
+    <div class="vt-p" data-tab="How easy it felt">
+      <figure class="tv-chart tv-chart-in" aria-labelledby="tv-ease-cap">
+        <p class="eb-h">How easy was it? <span>Average rating from 1 to 5, 30 existing users, mostly software engineers</span></p>
+        <ul class="eb" role="list">
+          <li><span>Creating folders</span><i style="--v:94%"></i><b>4.70</b></li>
+          <li><span>Creating files</span><i style="--v:87.4%"></i><b>4.37</b></li>
+          <li><span>Organizing documents</span><i style="--v:79.4%"></i><b>3.97</b></li>
+          <li><span>Managing larger projects</span><i style="--v:74%"></i><b>3.70</b></li>
+          <li><span>Finding things later</span><i style="--v:72.6%"></i><b>3.63</b></li>
+          <li><span>Returning to earlier work</span><i style="--v:70.6%"></i><b>3.53</b></li>
+        </ul>
+        <figcaption class="cap" id="tv-ease-cap">Quick tasks scored high. Anything that depended on remembering where you were scored lowest.</figcaption>
+      </figure>
+    </div>
+    <div class="vt-p" data-tab="Favorite views">
+      <figure class="tv-chart tv-chart-in" aria-labelledby="tv-views-cap">
+        <p class="eb-h">If Treevah had one main view, which should it be? <span>30 existing users</span></p>
+        <div class="sb sb-lg" role="img" aria-label="Workstation 43%, Horizontal Hierarchy 33%, Vertical Hierarchy 23%"><i class="v1" style="--w:43.3%"><span>Workstation 43%</span></i><i class="v2" style="--w:33.3%"><span>Horizontal 33%</span></i><i class="v3" style="--w:23.3%"><span>Vertical 23%</span></i></div>
+        <ul class="tv-views" role="list">
+          <li><b>Workstation</b><span>Chosen most for organizing information, side by side like Finder or File Explorer.</span></li>
+          <li><b>Horizontal Hierarchy</b><span>Chosen most for finding information quickly.</span></li>
+          <li><b>Vertical Hierarchy</b><span>Chosen most for understanding a project’s structure.</span></li>
+        </ul>
+        <figcaption class="cap" id="tv-views-cap">No single view won. Each one was best at a different job, so the views needed clearer explanations, not removal.</figcaption>
+      </figure>
+    </div>
+    <div class="vt-p" data-tab="Students vs job seekers">
+      <div class="tv-halves tv-vs">
+        <div><p class="k">College students</p><p>Explored more and treated Treevah as a home for coursework, notes and projects. Basic navigation worked, but they leaned on trial and error and weren’t sure what the Workstation was for.</p></div>
+        <div><p class="k">Job seekers</p><p>Wanted speed and predictability: fast uploads and quick access to resumes and cover letters. They were less forgiving of unclear navigation, failed uploads and slow retrieval.</p></div>
+      </div>
+      <p class="tv-shift">Both groups organized their materials once they got going, and both struggled to create folders in the right place and to use drag and drop with confidence.</p>
+    </div>
+    <div class="vt-p" data-tab="What broke">
+      <p class="tv-shift" style="margin-top:0">Existing users rated creating folders the easiest task, yet new users kept creating folders in the wrong place. Five problems came up again and again:</p>
+      <ul class="tv-probs tv-probs5" role="list">
+        <li><b>Folders landed in the wrong place</b><p>New folders appeared under the parent instead of the folder people had selected.</p></li>
+        <li><b>People lost their place</b><p>As more panels opened, it got hard to tell where you were and how folders related.</p></li>
+        <li><b>The workspace got crowded</b><p>Toolbars, panels and popups competed with the files themselves.</p></li>
+        <li><b>Actions gave no feedback</b><p>After an upload or a move, people couldn’t tell if it worked, and there was no undo.</p></li>
+        <li><b>Useful features were hidden</b><p>Zoom, toolbar actions and view switching were hard to find or understand.</p></li>
+      </ul>
+    </div>
+  </div>
 </section>
 
 <section class="sec col" id="clarity" aria-labelledby="h-clarity">
@@ -805,25 +872,54 @@ td:first-child { width: 30%; }
       <li><b>61%</b><span>of sessions had at least one rage click, and 28% had a dead click.</span></li>
     </ul>
   </div>
-  <p class="cap">Click data covers a 30-day window; 47 of the 871 sessions were reviewed as recordings.</p>
+  <figure class="tv-fig"><div class="tv-shot"><img src="assets/tv-clarity-start.webp" width="1299" height="741" loading="lazy" alt="A Clarity click map over Treevah’s Start Here folder, showing the share of clicks on each element: 4.68% on the user menu, 4.41% on the logo area, 2.75% on the Start Here preview header, and under 2% on each file and AI quick command."></div>
+  <figcaption class="cap">Click share on the Start Here folder. Each file and AI quick command drew under 2% of clicks; the AI assistant’s commands drew under 0.6% each.</figcaption></figure>
+  <p class="cap">Click data covers a 30-day window, desktop only; 47 of the 871 sessions were reviewed as recordings.</p>
+</section>
+
+<section class="sec col" id="synthesis" aria-labelledby="h-synth">
+  <h2 id="h-synth">Making sense of it in FigJam</h2>
+  <p>I brought sticky notes from every session, survey answer and Clarity insight into one FigJam board. I separated UI problems from bugs, kept a wall of what worked, and affinity-mapped the issues into three priority levels.</p>
+  <div class="vt" data-tabs="FigJam boards">
+    <div class="vt-p" data-tab="Pain points"><figure class="tv-fig"><div class="tv-shot"><img src="assets/tv-fj-pain.webp" width="1299" height="841" loading="lazy" alt="FigJam board titled Filtered pain points, with sticky notes grouped under UI Problem and Bugs, in clusters such as navigation confusion, controls and icons, subfolder management, file visibility and upload behavior."></div><figcaption class="cap">UI problems grouped by theme, kept apart from bugs.</figcaption></figure></div>
+    <div class="vt-p" data-tab="What worked"><figure class="tv-fig"><div class="tv-shot"><img src="assets/tv-fj-worked.webp" width="1400" height="774" loading="lazy" alt="FigJam board titled What Worked Well, with sticky notes such as search results show name, date, size and location, liked grid view, creating folders was easy, and preferred Workstation."></div><figcaption class="cap">What to protect while fixing the rest.</figcaption></figure></div>
+    <div class="vt-p" data-tab="Critical"><figure class="tv-fig"><div class="tv-shot"><img src="assets/tv-fj-p0.webp" width="1299" height="814" loading="lazy" alt="FigJam board titled P0 Critical, with sticky notes on side panel reordering, horizontal hierarchy lines, Workstation panels piling up, failed folder creation, preview, subfolders created at the root, drag and drop, and upload behavior."></div><figcaption class="cap">Critical issues: they block a core task or confuse most people.</figcaption></figure></div>
+    <div class="vt-p" data-tab="High"><figure class="tv-fig"><div class="tv-shot"><img src="assets/tv-fj-p1.webp" width="1299" height="810" loading="lazy" alt="FigJam board titled P1 High Priority, with sticky notes on the folder panel arrow, toolbar icons, folder rename, multi-select, sorting, trash, search scope, zoom and drag-and-drop guidance."></div><figcaption class="cap">High-priority issues: they slow important work down.</figcaption></figure></div>
+    <div class="vt-p" data-tab="Future"><figure class="tv-fig"><div class="tv-shot"><img src="assets/tv-fj-p2.webp" width="1299" height="812" loading="lazy" alt="FigJam board titled P2 Future Improvement, with sticky notes on search running only on Enter, list view visibility, preferring templates, onboarding and wanting ready-made templates."></div><figcaption class="cap">Future improvements: polish, or issues that affect fewer people.</figcaption></figure></div>
+  </div>
 </section>
 
 <section class="sec col" id="priorities" aria-labelledby="h-prio">
-  <h2 id="h-prio">From findings to Alpha 9 priorities</h2>
-  <p>We affinity-mapped the issues from founder notes and follow-up sessions, then sorted them by how badly they blocked people.</p>
-  <div class="tv-prio" role="img" aria-label="21 issues: 8 critical, 9 high priority, 4 future improvements">
-    <div><span class="sq"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>8 critical</b><small>Fix before Beta</small></div>
-    <div><span class="sq"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>9 high priority</b><small>Fix during Alpha 9</small></div>
-    <div><span class="sq"><i></i><i></i><i></i><i></i></span><b>4 future</b><small>After the critical fixes</small></div>
-  </div>
-  <h3 class="sub-h">What we recommended</h3>
-  <ul class="quiet-list">
-    <li>Create new folders where the user is, and show the path while they do it.</li>
-    <li>Keep people oriented with breadcrumbs and clearer lines between parent and child folders.</li>
-    <li>Confirm every upload, move and rename, and add undo.</li>
-    <li>Calm the workspace: fewer always-on toolbars and panels.</li>
-    <li>Replace the blank first screen with starter templates and short guidance.</li>
-  </ul>
+  <h2 id="h-prio">18 recommendations for Alpha 9</h2>
+  <p>Each recommendation names the problem, what to change, and a measurable target for the next round of testing, so the team could tell whether a fix actually worked.</p>
+  <div class="vf" data-filter="Filter recommendations by priority" data-opts="p0:Critical|p1:High|p2:Future">
+<ul class="vf-list" role="list">
+<li data-k="p0"><details><summary><span>Fix folder creation reliability</span><span class="tagl">Critical</span></summary><div class="bd"><p><b>Problem:</b> Participants were unable to create folders successfully on repeated attempts, and failures did not provide clear feedback.</p><p><b>What I proposed:</b> Fix the underlying folder creation bug and add clear success and error states after every attempt to create a folder.</p><p class="src"><b>How we’d know it worked:</b> ≥95% successful folder creation on the first attempt and zero silent failures during usability testing.</p></div></details></li>
+<li data-k="p0"><details><summary><span>Make subfolder creation context-aware</span><span class="tagl">Critical</span></summary><div class="bd"><p><b>Problem:</b> New subfolders were created at the root instead of inside the currently selected folder.</p><p><b>What I proposed:</b> Create folders within the currently selected location by default. Display the current folder path during creation and provide a dedicated New Subfolder action or context-aware + New button.</p><p class="src"><b>How we’d know it worked:</b> ≥90% of participants create subfolders in the intended location on their first attempt.</p></div></details></li>
+<li data-k="p0"><details><summary><span>Fix upload reliability and improve upload location feedback</span><span class="tagl">Critical</span></summary><div class="bd"><p><b>Problem:</b> Folder and file uploads were unreliable, and users could not easily determine where uploaded content was located.</p><p><b>What I proposed:</b> Fix upload reliability, clearly display the upload destination, automatically highlight newly uploaded content, and provide clear success/error messages with the exact upload location.</p><p class="src"><b>How we’d know it worked:</b> 100% successful folder/file uploads in testing and users able to locate uploaded content within 10 seconds.</p></div></details></li>
+<li data-k="p0"><details><summary><span>Make drag and drop reliable and reversible</span><span class="tagl">Critical</span></summary><div class="bd"><p><b>Problem:</b> Drag-and-drop file movement was inconsistent and did not clearly confirm whether an action succeeded or failed.</p><p><b>What I proposed:</b> Fix the drag-and-drop interaction, provide clear success/error feedback, and add an Undo option after file movement.</p><p class="src"><b>How we’d know it worked:</b> ≥95% successful drag-and-drop actions and ≥90% of users correctly understand the result of the action.</p></div></details></li>
+<li data-k="p0"><details><summary><span>Improve Workstation scalability</span><span class="tagl">Critical</span></summary><div class="bd"><p><b>Problem:</b> Workstation panels accumulate horizontally, causing users to lose their place when navigating larger folder structures.</p><p><b>What I proposed:</b> Improve panel management, scrolling, and zoom visibility. Add clearer location indicators and consider focus or collapse functionality for complex workspaces.</p><p class="src"><b>How we’d know it worked:</b> Users successfully navigate large folder structures without facilitator assistance and report reduced difficulty locating their current position.</p></div></details></li>
+<li data-k="p0"><details><summary><span>Improve Horizontal Hierarchy clarity</span><span class="tagl">Critical</span></summary><div class="bd"><p><b>Problem:</b> Horizontal hierarchy became difficult to understand when multiple subfolders were expanded.</p><p><b>What I proposed:</b> Improve connector lines, spacing, grouping, and visual hierarchy. Provide clear zoom and scrolling guidance for complex structures.</p><p class="src"><b>How we’d know it worked:</b> ≥90% accuracy when participants identify parent-child relationships in usability testing.</p></div></details></li>
+<li data-k="p0"><details><summary><span>Restore full preview functionality</span><span class="tagl">Critical</span></summary><div class="bd"><p><b>Problem:</b> Users expected a complete preview experience, but preview functionality was unreliable.</p><p><b>What I proposed:</b> Fix the underlying preview bug and ensure supported file types reliably display previews within Treevah.</p><p class="src"><b>How we’d know it worked:</b> ≥95% successful preview attempts for supported file types.</p></div></details></li>
+<li data-k="p0"><details><summary><span>Enable side panel folder reordering</span><span class="tagl">Critical</span></summary><div class="bd"><p><b>Problem:</b> Users could not reorder folders within the side panel.</p><p><b>What I proposed:</b> Add drag-and-drop folder reordering within the side panel.</p><p class="src"><b>How we’d know it worked:</b> ≥90% successful folder reordering without assistance</p></div></details></li>
+<li data-k="p1"><details><summary><span>Clarify folder panel expand and collapse controls</span><span class="tagl">High</span></summary><div class="bd"><p><b>Problem:</b> The folder panel arrow suggested the wrong action and was not intuitive.</p><p><b>What I proposed:</b> Align the arrow direction with standard UI conventions and add a tooltip explaining the resulting action.</p><p class="src"><b>How we’d know it worked:</b> ≥90% of participants correctly interpret the control during usability testing.</p></div></details></li>
+<li data-k="p1"><details><summary><span>Make folder rename and management more discoverable</span><span class="tagl">High</span></summary><div class="bd"><p><b>Problem:</b> Users could not easily locate folder rename and management actions.</p><p><b>What I proposed:</b> Provide consistent folder actions through hover controls, right- click/context menus, and inline rename. Maintain the same interaction pattern across the Side Panel, Workstation, and Hierarchy View.</p><p class="src"><b>How we’d know it worked:</b> ≥90% of users successfully rename a folder without assistance.</p></div></details></li>
+<li data-k="p1"><details><summary><span>Clarify multi-select behavior</span><span class="tagl">High</span></summary><div class="bd"><p><b>Problem:</b> Checkbox selection behavior was unclear, particularly when selected folders were opened.</p><p><b>What I proposed:</b> Make selection states more visually obvious and provide a persistent selection count and contextual action bar.</p><p class="src"><b>How we’d know it worked:</b> Zero critical selection errors during usability testing.</p></div></details></li>
+<li data-k="p1"><details><summary><span>Extend sorting to folders</span><span class="tagl">High</span></summary><div class="bd"><p><b>Problem:</b> The Sort function applied to files but not folders.</p><p><b>What I proposed:</b> Extend sorting to folders and clearly communicate what content is being sorted in the left panel.</p><p class="src"><b>How we’d know it worked:</b> Users successfully sort both folders and files without confusion.</p></div></details></li>
+<li data-k="p1"><details><summary><span>Improve trash discovery and recovery</span><span class="tagl">High</span></summary><div class="bd"><p><b>Problem:</b> Users had difficulty finding deleted files in Trash.</p><p><b>What I proposed:</b> Display recently deleted items first, show their original location, and provide search/filtering within Trash.</p><p class="src"><b>How we’d know it worked:</b> Reduce the time required to locate deleted files by at least 50%.</p></div></details></li>
+<li data-k="p1"><details><summary><span>Make zoom easier to discover</span><span class="tagl">High</span></summary><div class="bd"><p><b>Problem:</b> Users took considerable time to discover the zoom functionality despite finding it useful.</p><p><b>What I proposed:</b> Make zoom a clearly visible Workstation control and support standard keyboard shortcuts. Consider contextual guidance during the first session.</p><p class="src"><b>How we’d know it worked:</b> ≥80% of users discover and use zoom without facilitator assistance.</p></div></details></li>
+<li data-k="p1"><details><summary><span>Strengthen drag and drop upload guidance</span><span class="tagl">High</span></summary><div class="bd"><p><b>Problem:</b> Participants expected drag-and-drop upload to be more prominent and easier to understand.</p><p><b>What I proposed:</b> Add a visible drop zone, show the destination during drag, and introduce drag-and-drop upload during onboarding.</p><p class="src"><b>How we’d know it worked:</b> ≥90% of participants successfully complete drag-and-drop upload without assistance.</p></div></details></li>
+<li data-k="p2"><details><summary><span>Add live search results</span><span class="tagl">Future</span></summary><div class="bd"><p><b>Problem:</b> Search only returned results after the user pressed Enter.</p><p><b>What I proposed:</b> Add live search suggestions/results while maintaining Enter as the option for a full results view.</p><p class="src"><b>How we’d know it worked:</b> Reduced average time required to locate a file.</p></div></details></li>
+<li data-k="p2"><details><summary><span>Standardize file opening across views</span><span class="tagl">Future</span></summary><div class="bd"><p><b>Problem:</b> Double-click behavior was inconsistent between views.</p><p><b>What I proposed:</b> Make double-click consistently open files wherever files are displayed, including Search, Grid, Workstation, and Hierarchy views.</p><p class="src"><b>How we’d know it worked:</b> ≥95% consistent file-opening behavior across views.</p></div></details></li>
+<li data-k="p2"><details><summary><span>Create a short first-time user onboarding</span><span class="tagl">Future</span></summary><div class="bd"><p><b>Problem:</b> Users required time and repeated interaction to understand Treevah’s organizational model.</p><p><b>What I proposed:</b> Create a short, skippable onboarding covering the core concepts: Roots and Branches, Workstation navigation, the three views, and zoom. Pair this with clearer empty states and a recommended first action.</p><p class="src"><b>How we’d know it worked:</b> Lower time to first successful action, higher first-session task completion, and fewer onboarding-related questions during usability testing.</p></div></details></li>
+</ul></div>
+</section>
+
+<section class="sec col" id="beta" aria-labelledby="h-beta">
+  <h2 id="h-beta">Is it ready for Beta?</h2>
+  <p>The last part of the report rated 13 areas against one question: can people understand Treevah, finish core tasks and recover from errors with confidence?</p>
+  <ul class="tv-beta" role="list"><li class="r"><span>Folder organization</span><b>Ready</b></li><li class="p"><span>Product clarity</span><b>Partly ready</b></li><li class="p"><span>Navigation</span><b>Partly ready</b></li><li class="p"><span>Authentication</span><b>Partly ready</b></li><li class="p"><span>Public features</span><b>Partly ready</b></li><li class="p"><span>Mobile experience</span><b>Partly ready</b></li><li class="p"><span>Accessibility</span><b>Partly ready</b></li><li class="p"><span>Performance perception</span><b>Partly ready</b></li><li class="p"><span>User confidence</span><b>Partly ready</b></li><li class="n"><span>Core file workflows</span><b>Not ready</b></li><li class="n"><span>Preview and download</span><b>Not ready</b></li><li class="n"><span>Error handling</span><b>Not ready</b></li><li class="n"><span>Usability blockers</span><b>Not ready</b></li></ul>
+  <p>The concept was ready; the basics weren’t. I recommended a controlled Beta: fix the critical file-management and recovery issues first, then widen the group while keeping an eye on onboarding, navigation, mobile and accessibility.</p>
 </section>
 
 <section class="sec col" id="learned" aria-labelledby="h-learn">
