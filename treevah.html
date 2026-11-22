@@ -462,6 +462,9 @@ td:first-child { width: 30%; }
 .tv-stage { max-width: 1088px !important; }
 .tv-fig { margin: var(--s2) 0 0; }
 .vt-p .tv-fig { margin-top: 0; }
+.tv-pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s1); margin-top: var(--s2); }
+.tv-pair .cap { font-size: 13px; line-height: 20px; }
+@media (max-width: 560px) { .tv-pair { grid-template-columns: 1fr; } }
 .tv-fig .cap { margin-top: var(--s1); }
 .tv-hero { padding-top: var(--s3); }
 .tv-stage { max-width: 880px; margin: 0 auto; padding: 0 var(--s2); }
@@ -685,6 +688,16 @@ td:first-child { width: 30%; }
     <div class="vt-p" data-tab="Working across folders">
       <figure class="tv-fig"><div class="tv-shot"><img src="assets/tv-dkb.webp" width="2000" height="1011" loading="lazy" alt="Hierarchy mode with a Design Knowledge Base. The sidebar shows its subfolders, from Accessibility to Wireframes. A bar across the top pins the path Design Knowledge Base, Design_System, Colors and Components, and those folders open side by side as panels."></div>
       <figcaption class="cap">Hierarchy mode: open folders sit side by side, and the path to each one stays pinned across the top.</figcaption></figure>
+    </div>
+    <div class="vt-p" data-tab="Job seeker templates">
+      <figure class="tv-fig"><div class="tv-shot"><img src="assets/tv-js-prompt.webp" width="1440" height="1025" loading="lazy" alt="The Job Seeker HQ workspace. The sidebar holds folders such as Templates, Career Resources, Videos and AI. The AI › Resume Feedback folder is pinned and lists three files. The preview shows AI_prompt_Resume_Feedback.pdf, a prompt to paste into an AI tool with a resume and job description, followed by a checklist."></div>
+      <figcaption class="cap">Job Seeker HQ: a ready-made workspace. The Resume Feedback folder holds an AI prompt template, previewed on the right.</figcaption></figure>
+      <div class="tv-pair">
+        <figure class="tv-fig"><div class="tv-shot"><img src="assets/tv-js-brag.webp" width="1440" height="1025" loading="lazy" alt="The same folder with Metrics_Brag_Sheet.pdf previewed: a template for logging wins with numbers, with a how-to list and a Quick Capture table."></div>
+        <figcaption class="cap">A metrics brag sheet for logging wins.</figcaption></figure>
+        <figure class="tv-fig"><div class="tv-shot"><img src="assets/tv-js-peer.webp" width="1440" height="1025" loading="lazy" alt="The same folder with Peer_Reviewed_Notes_for_Resume.pdf previewed: a template for collecting feedback from colleagues, with message templates for a manager and a peer."></div>
+        <figcaption class="cap">Peer-reviewed notes for collecting feedback.</figcaption></figure>
+      </div>
     </div>
   </div>
 </section>
