@@ -7,12 +7,12 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Treevah · Vedant Atram</title>
-<meta name="description" content="How we redesigned Treevah’s file navigation: a folder tree you can see at a glance, a workspace for the folders you need, and AI search for files you can’t name.">
+<meta name="description" content="Treevah: redesigning file navigation for an AI-powered web app during my 2026 UI/UX internship. Details are under NDA.">
 <link rel="canonical" href="https://atrams.cc/treevah.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Vedant Atram">
 <meta property="og:title" content="Treevah · Vedant Atram">
-<meta property="og:description" content="How we redesigned Treevah’s file navigation: a folder tree you can see at a glance, a workspace for the folders you need, and AI search for files you can’t name.">
+<meta property="og:description" content="Treevah: redesigning file navigation for an AI-powered web app during my 2026 UI/UX internship. Details are under NDA.">
 <meta property="og:url" content="https://atrams.cc/treevah.html">
 <meta property="og:image" content="https://atrams.cc/assets/og-tv.jpg">
 <meta property="og:image:width" content="1200">
@@ -580,6 +580,10 @@ td:first-child { width: 30%; }
 @media (max-width: 560px) { .tv-ba { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .tvw li, .tv-res li { animation: none; } .tvt .tg svg { transition: none; } }
 @media (max-width: 400px) { .tv-impact { gap: 8px; } .tv-impact div { padding: 10px; } .tv-impact b { font-size: 26px; line-height: 32px; } .tv-impact span { font-size: 12px; line-height: 16px; } }
+.tv-resp { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 var(--s2); margin: var(--s1) 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.tv-resp li { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 16px; line-height: 24px; }
+@media (max-width: 560px) { .tv-resp { grid-template-columns: 1fr; } }
+.tv-cta { margin-top: var(--s2) !important; }
 </style>
 </head>
 <body>
@@ -614,41 +618,43 @@ td:first-child { width: 30%; }
         </div>
       </div>
     </div>
-    <figcaption class="cap" id="tv-hero-cap">A diagram of the idea, not a screenshot: the full folder tree on the left, and only the folders you’re working on pinned on the right.</figcaption>
+    <figcaption class="cap" id="tv-hero-cap">A diagram of the idea, not the product: the full folder tree on the left, and only the folders you’re working on pinned on the right.</figcaption>
   </figure>
   <div class="col title">
     <h1>Treevah</h1>
-    <p>Treevah is an AI-powered web app for organizing and finding work files. Most file tools make you climb in and out of folders one level at a time. We redesigned it so people can see where they are, work across folders at once, and find a file even when they can’t remember its name.</p>
-    <p class="rt">6 min read</p>
+    <p>Treevah is an AI-powered web app for organizing and finding work files. I spent the summer as a UI/UX intern on the product team, redesigning how people move through folders and find files they can’t name.</p>
+    <p class="rt">2 min read</p>
     <dl class="meta">
       <div><dt>My role</dt><dd>UI/UX intern, designing with product designer Cici Zhong</dd></div>
       <div><dt>Team</dt><dd>2 designers, 1 PM and 4 engineers</dd></div>
-      <div><dt>Methods</dt><dd>15+ interviews, 2 rounds of usability testing</dd></div>
+      <div><dt>Platform</dt><dd>AI-powered web app</dd></div>
       <div><dt>Timeline</dt><dd>May–Aug 2026</dd></div>
     </dl>
   </div>
 </header>
 
-<nav class="toc" id="toc" aria-label="Sections"><ol><li><a href="#brief">Brief</a></li><li><a href="#alpha">The alpha</a></li><li><a href="#research">Research</a></li><li><a href="#design">Design</a></li><li><a href="#search">AI search</a></li><li><a href="#iteration">Iteration</a></li><li><a href="#learned">Learnings</a></li></ol></nav>
+<nav class="toc" id="toc" aria-label="Sections"><ol><li><a href="#problem">Problem</a></li><li><a href="#work">What I did</a></li><li><a href="#results">Results</a></li><li><a href="#overview">Overview</a></li><li><a href="#nda">More detail</a></li></ol></nav>
 <main id="main" tabindex="-1">
 
-<section class="sec col" id="brief" aria-labelledby="h-brief">
-  <h2 id="h-brief">The brief: stop losing your place</h2>
-  <p>In a typical file tool you see one folder at a time. To get from a client’s reports to last month’s invoices, you back out level by level and climb down again, and every click throws away the context you had.</p>
-  <div class="vt" data-tabs="How each tool works">
-    <div class="vt-p" data-tab="Typical file tools">
-      <div class="tv-mini" aria-hidden="true"><div class="tv-col"><span class="crumb">Clients › Acme Corp › Reports</span><span>Q3 report.pdf</span><span>Q2 report.pdf</span><span>Q1 report.pdf</span></div><ol class="tv-hops"><li>Back</li><li>Back</li><li>Back</li><li>Finance</li><li>Invoices</li></ol></div>
-      <p>One column, one level at a time. In this example, getting from Reports to Invoices takes five clicks, and Reports is gone once you arrive.</p>
-    </div>
-    <div class="vt-p" data-tab="Treevah’s alpha">
-      <div class="tv-mini" aria-hidden="true"><div class="tv-panels"><div><b>Clients</b><span>Acme Corp</span><span>Northwind</span></div><div><b>Acme Corp</b><span>Reports</span><span>Contracts</span></div><div><b>Reports</b><span>Q3 report.pdf</span><span>Q2 report.pdf</span></div><div><b>Finance</b><span>Invoices</span><span>Budgets</span></div><div><b>Invoices</b><span>INV-1042.pdf</span></div></div></div>
-      <p>Folders open side by side, which already beat the usual tools. But every step on the way opens another panel, and the screen fills up fast.</p>
-    </div>
-    <div class="vt-p" data-tab="The redesign">
-      <div class="tv-mini" aria-hidden="true"><div class="tv-split sm"><div class="tv-tree"><span class="r l0 open">Clients</span><span class="r l1 open">Acme Corp</span><span class="r l2 pk">Reports</span><span class="r l0 open">Finance</span><span class="r l1 lf pk">Invoices</span></div><div class="tv-ws"><div class="tv-card"><b>Reports</b><small>Clients › Acme Corp</small></div><div class="tv-card"><b>Invoices</b><small>Finance</small></div></div></div></div>
-      <p>The whole structure stays visible as a tree, and you pin only the folders you need. Nothing moves in the real file structure.</p>
-    </div>
-  </div>
+<section class="sec col" id="problem" aria-labelledby="h-problem">
+  <h2 id="h-problem">The problem: organizing files breaks your flow</h2>
+  <p>Most file tools show one folder at a time. Getting from one folder to another means backing out level by level and climbing down again, and every click throws away the context you had. When people can’t remember a file’s exact name or where they saved it, search doesn’t help either.</p>
+</section>
+
+<section class="sec col" id="work" aria-labelledby="h-work">
+  <h2 id="h-work">What I did</h2>
+  <ul class="tv-resp" role="list">
+    <li>User interviews</li>
+    <li>Personas and journey maps</li>
+    <li>Wireframes and user flows</li>
+    <li>Interaction design and prototyping in Figma</li>
+    <li>Usability testing and iteration</li>
+    <li>Design system and component upkeep</li>
+  </ul>
+</section>
+
+<section class="sec col" id="results" aria-labelledby="h-results">
+  <h2 id="h-results">Results</h2>
   <div class="kv tv-impact">
     <div><b>30%</b><span>faster task completion</span></div>
     <div><b>3×</b><span>faster file discovery</span></div>
@@ -657,102 +663,20 @@ td:first-child { width: 30%; }
   <p class="cap">Results the team reported after the redesign.</p>
 </section>
 
-<section class="sec col" id="alpha" aria-labelledby="h-alpha">
-  <h2 id="h-alpha">What testing the alpha showed</h2>
-  <p>Showing folders side by side was the right instinct, but it still didn’t match how people actually work. Testing the alpha turned up three problems.</p>
-  <ul class="tv-probs" role="list">
-    <li><b>Opening folders they didn’t need</b><p>To reach one folder, people had to open every folder above it, each in its own panel.</p></li>
-    <li><b>No sense of where they were</b><p>As panels piled up, the screen got noisy and the folder structure was hard to read at a glance.</p></li>
-    <li><b>Search that failed in practice</b><p>People rarely remembered exact file names or locations. Keyword search broke down, especially for badly named files or files saved in the wrong place.</p></li>
-  </ul>
-</section>
-
-<section class="sec col" id="research" aria-labelledby="h-research">
-  <h2 id="h-research">Two ways people find files</h2>
-  <p>We interviewed more than 15 knowledge workers, developers and creative professionals. Two patterns came up again and again, with very different mental models, and every design decision had to work for both.</p>
-  <div class="tv-pers">
-    <div>
-      <p class="nm">The Power Organizer</p>
-      <blockquote>“I have a system. Don’t touch it.”</blockquote>
-      <dl>
-        <div><dt>How they work</dt><dd>Build deep, detailed folder structures. Rarely search; go straight to a file they know.</dd></div>
-        <div><dt>What they need</dt><dd>Deep structure that stays easy to read, and control over anything automated.</dd></div>
-        <div><dt>What worries them</dt><dd>Losing control of their system.</dd></div>
-        <div><dt>What we designed</dt><dd>Hierarchy Mode, and a manual override for anything automatic.</dd></div>
-      </dl>
-    </div>
-    <div>
-      <p class="nm">The Search-First User</p>
-      <blockquote>“I’ll just search for it.”</blockquote>
-      <dl>
-        <div><dt>How they work</dt><dd>Keep shallow folders. Remember part of a name or something that was in the file.</dd></div>
-        <div><dt>What they need</dt><dd>A search that works from vague memory, not exact names.</dd></div>
-        <div><dt>What worries them</dt><dd>Hitting a wall when they can’t quite remember.</dd></div>
-        <div><dt>What we designed</dt><dd>AI search that reads file contents, not only file names.</dd></div>
-      </dl>
-    </div>
-  </div>
-  <p>We mapped a journey for each: the Organizer heading straight to a file they know, and the Search-First User searching when they don’t know where something is. Then we wireframed several flows against both journeys before choosing a direction.</p>
-</section>
-
-<section class="sec col" id="design" aria-labelledby="h-design">
-  <h2 id="h-design">The design: see everything, work on a few</h2>
-  <p>The redesign rests on three features. The first two work together. Try them below; the folders and files are samples.</p>
+<section class="sec col" id="overview" aria-labelledby="h-overview">
+  <h2 id="h-overview">Overview</h2>
+  <p>We started from interviews and from testing the existing version, and found two very different kinds of people: those who keep careful folder systems and navigate by hand, and those who keep things loose and search for everything. The redesign had to work for both.</p>
   <div class="tv-feats">
-    <div><b>Hierarchy Mode</b><p>A tree that shows where you are. Each folder opens and closes on its own, so you see only what you need.</p></div>
-    <div><b>Workstation</b><p>The tree on the left, your workspace on the right. Pin a folder to work on it; your real folders stay exactly where they are.</p></div>
-    <div><b>AI Search &amp; Summary</b><p>Search in plain words, and preview what’s inside a file without opening it.</p></div>
-  </div>
-  <div class="tv-demo" id="tv-demo">
-    <div class="tv-demo-tree">
-      <p class="tv-h" id="tv-tree-h">Hierarchy</p>
-      <ul class="tvt" aria-labelledby="tv-tree-h" role="list"></ul>
-    </div>
-    <div class="tv-demo-ws">
-      <p class="tv-h" id="tv-ws-h">Workstation</p>
-      <ul class="tvw" aria-labelledby="tv-ws-h" role="list"></ul>
-      <p class="tvw-empty">Pin a folder from the tree to work on it here.</p>
-      <p class="tvw-note" aria-live="polite"></p>
-    </div>
-  </div>
-  <p class="cap">A simplified demo with sample folders, not the product UI. Open folders with the arrows, and pin the ones you need.</p>
-</section>
-
-<section class="sec col" id="search" aria-labelledby="h-search">
-  <h2 id="h-search">Searching the way people remember</h2>
-  <p>Search-First Users don’t remember file names. They remember what a file was about, who it was for and roughly when they touched it. So the search reads the request for its meaning and looks at file contents and dates, not only names.</p>
-  <div class="tv-search">
-    <div class="tv-sq" role="group" aria-label="Example searches"></div>
-    <div class="tv-res" aria-live="polite"></div>
-  </div>
-  <p class="cap">Three example searches the team designed for. The files are samples.</p>
-</section>
-
-<section class="sec col" id="iteration" aria-labelledby="h-iter">
-  <h2 id="h-iter">What two rounds of testing changed</h2>
-  <p>We ran two rounds of usability testing with 8 participants. Both of the biggest fixes were in Hierarchy Mode.</p>
-  <div class="vt" data-tabs="Fixes from usability testing">
-    <div class="vt-p" data-tab="Seeing depth">
-      <div class="tv-ba">
-        <div><small>Before</small><div class="tv-flat" aria-hidden="true"><span>Clients</span><span>Acme Corp</span><span>Reports</span><span>Contracts</span><span>Finance</span><span>Invoices</span></div><p>Every level looked the same. With a few branches open, people lost track of where they were.</p></div>
-        <div class="aft"><small>After</small><div class="tv-tree tv-deep" aria-hidden="true"><span class="r l0 open">Clients</span><span class="r l1 open">Acme Corp</span><span class="r l2">Reports</span><span class="r l2">Contracts</span><span class="r l0 open">Finance</span><span class="r l1 lf">Invoices</span></div><p>Stronger cues for each level: indentation, connecting lines and a shift in contrast.</p></div>
-      </div>
-    </div>
-    <div class="vt-p" data-tab="Pinning a folder">
-      <div class="tv-ba">
-        <div><small>Before</small><p class="tv-big">3+ <span>clicks</span></p><p>“Click to isolate” took three or more clicks for a nested folder, and people thought dragging a folder would move it for good.</p></div>
-        <div class="aft"><small>After</small><p class="tv-big">1 <span>drag</span></p><p>One drag pins it, and the tree shows the folder still in its original place, so nothing feels at risk.</p></div>
-      </div>
-    </div>
+    <div><b>See where you are</b><p>The whole folder structure stays visible as a tree, so people always know where they are.</p></div>
+    <div><b>Work on a few folders at once</b><p>Pin only the folders you need into a workspace, without moving anything in the real structure.</p></div>
+    <div><b>Search the way you remember</b><p>AI search that understands plain language and looks inside files, not only at their names.</p></div>
   </div>
 </section>
 
-<section class="sec col" id="learned" aria-labelledby="h-learn">
-  <h2 id="h-learn">What I learned</h2>
-  <p><b>The hard part was deciding what not to build.</b> Shared folders, version history and permission controls all made sense on their own, but each would have watered down the main idea. We tested every feature with one question: does it help the Power Organizer or the Search-First User right now?</p>
-  <p><b>AI has to earn trust.</b> A smart result isn’t enough if people don’t believe it. Showing why a file matched, and letting people preview it, mattered as much as finding it.</p>
-  <h3 class="sub-h">What’s next</h3>
-  <ul class="quiet-list"><li>Tagging files automatically on upload, suggesting folders from a file’s contents, and flagging duplicates or misplaced files.</li><li>Connecting Treevah to Google Drive and Notion.</li></ul>
+<section class="sec col" id="nda" aria-labelledby="h-nda">
+  <h2 id="h-nda">The full story is under NDA</h2>
+  <p>This project is covered by a non-disclosure agreement, so I can’t share screens or research details here. I’m happy to walk through the process, decisions and final designs in a conversation.</p>
+  <p class="tv-cta"><a class="btn btn-primary" href="mailto:vedantatram157@gmail.com?subject=Treevah%20case%20study">Ask me about this project</a></p>
 </section>
 
 </main>
@@ -831,90 +755,6 @@ td:first-child { width: 30%; }
 })();
 </script>
 <script src="assets/viz.js"></script>
-<script>
-/* Treevah demos: a folder tree you can open and pin from, and example searches. Sample data only. */
-(function () {
-  var TREE = [
-    { n: "Clients", c: [ { n: "Acme Corp", c: [ { n: "Reports" }, { n: "Contracts" } ] }, { n: "Northwind", c: [ { n: "Reports" } ] } ] },
-    { n: "Finance", c: [ { n: "Invoices" }, { n: "Budgets" } ] },
-    { n: "Personal", c: [ { n: "Resumes" } ] }
-  ];
-  var tree = document.querySelector(".tvt"), ws = document.querySelector(".tvw"), empty = document.querySelector(".tvw-empty"), note = document.querySelector(".tvw-note");
-  if (tree) {
-    var chev = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>';
-    var items = [];
-    function build(list, ul, lvl, path) {
-      list.forEach(function (f) {
-        var li = document.createElement("li"), p = path.concat(f.n);
-        li.setAttribute("data-lv", lvl);
-        var row = document.createElement("div"); row.className = "row";
-        if (f.c) { var t = document.createElement("button"); t.type = "button"; t.className = "tg"; t.innerHTML = chev; t.setAttribute("aria-label", f.n + " folder"); row.appendChild(t); }
-        else { var s = document.createElement("span"); s.className = "sp"; row.appendChild(s); }
-        var nm = document.createElement("span"); nm.className = "nm"; nm.textContent = f.n; row.appendChild(nm);
-        var pn = document.createElement("button"); pn.type = "button"; pn.className = "pn"; pn.textContent = "Pin"; pn.setAttribute("aria-pressed", "false"); pn.setAttribute("aria-label", "Pin " + p.join(" › ") + " to the workstation"); row.appendChild(pn);
-        li.appendChild(row); ul.appendChild(li);
-        var it = { li: li, pn: pn, name: f.n, path: p };
-        items.push(it);
-        pn.addEventListener("click", function () { toggle(it); });
-        if (f.c) {
-          var sub = document.createElement("ul"); sub.id = "tvs" + items.length; t.setAttribute("aria-controls", sub.id); li.appendChild(sub);
-          build(f.c, sub, lvl + 1, p);
-          function setOpen(o) { t.setAttribute("aria-expanded", o ? "true" : "false"); sub.hidden = !o; }
-          t.addEventListener("click", function () { setOpen(t.getAttribute("aria-expanded") !== "true"); });
-          setOpen(f.n === "Clients" || f.n === "Acme Corp");
-        }
-      });
-    }
-    build(TREE, tree, 1, []);
-    function render() {
-      var pinned = items.filter(function (i) { return i.on; });
-      ws.innerHTML = "";
-      pinned.forEach(function (i) {
-        var li = document.createElement("li");
-        li.innerHTML = "<b></b><small></small><button type=\"button\">Unpin</button>";
-        li.querySelector("b").textContent = i.name;
-        li.querySelector("small").textContent = i.path.length > 1 ? "Still in " + i.path.slice(0, -1).join(" › ") : "Still at the top level";
-        var u = li.querySelector("button"); u.setAttribute("aria-label", "Unpin " + i.name);
-        u.addEventListener("click", function () { toggle(i); i.pn.focus(); });
-        ws.appendChild(li);
-      });
-      empty.hidden = pinned.length > 0;
-    }
-    function toggle(i) {
-      i.on = !i.on; i.pn.setAttribute("aria-pressed", i.on ? "true" : "false"); i.pn.textContent = i.on ? "Pinned" : "Pin"; i.li.classList.toggle("pinned", !!i.on);
-      note.textContent = i.on ? i.name + " pinned. It’s still in the same place in your folders." : i.name + " unpinned.";
-      render();
-    }
-    var start = items.filter(function (i) { return i.path.join("/") === "Clients/Acme Corp/Reports"; })[0];
-    start.on = true; start.pn.setAttribute("aria-pressed", "true"); start.pn.textContent = "Pinned"; start.li.classList.add("pinned");
-    render();
-  }
-
-  var Q = [
-    { q: "The resume I edited yesterday", why: "<b>Matched on what’s inside and when it changed.</b> The file is called “untitled”, so a name search would never find it.",
-      r: [ { t: "DOC", n: "untitled.docx", p: "Personal › Resumes · edited yesterday", s: "A one-page resume: experience, education and skills." } ] },
-    { q: "Reports for Acme Corp", why: "<b>Matched on meaning and place.</b> Report files inside the Acme Corp folders, whatever they’re called.",
-      r: [ { t: "PDF", n: "Q3 report.pdf", p: "Clients › Acme Corp › Reports", s: "Quarterly results summary for Acme Corp." }, { t: "PDF", n: "Q2 report.pdf", p: "Clients › Acme Corp › Reports", s: "Quarterly results summary for Acme Corp." } ] },
-    { q: "PDFs from last month", why: "<b>Matched on file type and date.</b> Every PDF changed in the last 30 days, from any folder.",
-      r: [ { t: "PDF", n: "INV-1042.pdf", p: "Finance › Invoices", s: "Invoice to Northwind." }, { t: "PDF", n: "Q3 report.pdf", p: "Clients › Acme Corp › Reports", s: "Quarterly results summary for Acme Corp." }, { t: "PDF", n: "Signed contract.pdf", p: "Clients › Acme Corp › Contracts", s: "Service agreement with Acme Corp." } ] }
-  ];
-  var bar = document.querySelector(".tv-sq"), res = document.querySelector(".tv-res");
-  if (bar) {
-    var ico = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg>';
-    var bs = Q.map(function (x, i) {
-      var b = document.createElement("button"); b.type = "button"; b.innerHTML = ico + "<span></span>"; b.lastChild.textContent = "“" + x.q + "”";
-      b.addEventListener("click", function () { show(i); }); bar.appendChild(b); return b;
-    });
-    function show(i) {
-      bs.forEach(function (b, j) { b.setAttribute("aria-pressed", i === j ? "true" : "false"); });
-      var x = Q[i], h = '<p class="why">' + x.why + "</p><ul role=\"list\">";
-      x.r.forEach(function (r) { h += '<li><span class="ic" aria-hidden="true">' + r.t + "</span><b>" + r.n + "</b><small>" + r.p + '</small><span class="sum">Preview: ' + r.s + "</span></li>"; });
-      res.innerHTML = h + "</ul>";
-    }
-    show(0);
-  }
-})();
-</script>
 
 </body>
 </html>
