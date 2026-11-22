@@ -750,7 +750,7 @@ td:first-child { width: 30%; }
     <h1>Treevah</h1>
     <p class="tv-sub">Designing an evolving visual workspace</p>
     <p>For about three months I worked as a UI/UX Designer on Treevah, a file-organization app that shows folders as a visual tree. As the product moved through its alpha releases, I designed and refined interfaces, audited the design system and its AI assistants, prepared handoffs, and helped run and analyze usability research. Design and evaluation happened at the same time.</p>
-    <p class="rt">8 min read</p>
+    <p class="rt">9 min read</p>
     <dl class="meta">
       <div><dt>Role</dt><dd>UI/UX Designer</dd></div>
       <div><dt>Duration</dt><dd>About 3 months, 2026</dd></div>
@@ -766,7 +766,7 @@ td:first-child { width: 30%; }
 <section class="sec col" id="challenge" aria-labelledby="h-challenge">
   <h2 id="h-challenge">Balancing a new idea with everyday basics</h2>
   <p>Most file tools show one folder at a time. Treevah lays folders out visually, so you can see how everything relates and work across several at once. But people still need the basics to feel familiar: creating a folder where they expect it, moving files, finding their way around a big workspace, and knowing whether an action worked.</p>
-  <p>The challenge wasn’t a single redesign. It was supporting a product that kept changing while making those fundamentals clearer.</p>
+  <p>By summer 2026 the product was in its eighth alpha, and two questions were open: did the screens being built still match the design, and could new users make sense of the product without help? The challenge wasn’t a single redesign. It was supporting a product that kept changing while making those fundamentals clearer.</p>
 </section>
 
 <section class="sec col" id="process" aria-labelledby="h-process">
@@ -788,7 +788,7 @@ td:first-child { width: 30%; }
     <div><p class="k">Product and interface design</p><p>With the team, I created and refined interface concepts, wireframes and user flows, and built and maintained design system components and standards. I also brought ideas to feature brainstorms.</p><p class="why">Why it mattered: new features had a consistent base to build on.</p></div>
     <div><p class="k">Design-to-development collaboration</p><p>I prepared handoffs for engineering and worked with developers and the founder to keep what was built close to what was designed.</p><p class="why">Why it mattered: fewer surprises between the design file and the product.</p></div>
     <div><p class="k">UI quality and consistency <span class="own">On my own</span></p><p>I audited 766 components across the web and mobile apps against the design system and the handoff files. I also audited the AI assistants for trust, control and UX.</p><p class="why">Why it mattered: design and engineering had one list of gaps to work from.</p></div>
-    <div><p class="k">Research and evaluation <span class="own">Plan and Clarity on my own</span></p><p>I wrote the plan for the Alpha 8 study, ran sessions, set up Microsoft Clarity and analyzed its recordings and click data. I contributed to the team’s synthesis and recommendations.</p><p class="why">Why it mattered: the team could rank fixes by evidence, not opinion.</p></div>
+    <div><p class="k">Research and evaluation <span class="own">Plan and Clarity on my own</span></p><p>I wrote the plan for the Alpha 8 study, recruited participants and ran sessions, set up Microsoft Clarity and analyzed its recordings and click data. I contributed to the team’s synthesis and recommendations.</p><p class="why">Why it mattered: the team could rank fixes by evidence, not opinion.</p></div>
   </div>
 </section>
 
@@ -823,7 +823,7 @@ td:first-child { width: 30%; }
 
 <section class="sec col" id="audit" aria-labelledby="h-audit">
   <h2 id="h-audit">From design intent to implementation</h2>
-  <p>I went screen by screen through the built product and logged every component: its level, its variants, whether it existed in the design system and in code, accessibility problems, and whether it matched the handoff file engineers worked from.</p>
+  <p>I went screen by screen through the built product and logged every component: its level (atom, molecule, organism), its variants, whether it existed in the design system and in code, accessibility problems, and whether it matched the handoff file engineers worked from.</p>
   <div class="kv tv-impact">
     <div><b>766</b><span>components logged, web and mobile</span></div>
     <div><b>84</b><span>screens reviewed</span></div>
@@ -887,7 +887,13 @@ td:first-child { width: 30%; }
 
 <section class="sec col" id="research" aria-labelledby="h-research">
   <h2 id="h-research">Understanding where the experience broke down</h2>
-  <p>The Alpha 8 study was a focused research period within the three months. I wrote its plan: every new user started in the same empty workspace, as either a college student or a job seeker, and built a workspace, organized about 20 real files, found them again, and arranged the views. Each designer on the team ran sessions; the team brought in other sources too.</p>
+  <p>The Alpha 8 study was a focused research period within the three months. I wrote its plan: every new user started in the same empty workspace, as either a college student or a job seeker, and worked through four tasks. Each designer on the team ran sessions, recording screen, audio and think-aloud comments; the team brought in other sources too.</p>
+  <ol class="tv-steps4" aria-label="Study tasks">
+    <li><b>Build a workspace</b><span>From a blank page, with no hints about folders or depth</span></li>
+    <li><b>Organize real files</b><span>Upload about 20 realistic files and sort them</span></li>
+    <li><b>Find them again</b><span>Retrieve files, watching paths, search and wrong clicks</span></li>
+    <li><b>Arrange the workspace</b><span>Open folders, switch views, set it up for daily use</span></li>
+  </ol>
   <ul class="tv-src" role="list">
     <li><b>12</b><span>Moderated sessions with new users</span></li>
     <li><b>30</b><span>Survey responses from existing users</span></li>
@@ -939,6 +945,21 @@ td:first-child { width: 30%; }
         <figcaption class="cap" id="tv-ease-cap">Quick tasks scored high. Anything that depended on remembering where you were scored lowest.</figcaption>
       </figure>
   </div>
+
+  <h3 class="sub-h">More from the study</h3>
+  <p class="tv-shift" style="margin-top:0">What worked, and worth protecting while fixing the rest:</p>
+  <ul class="tv-probs tv-good" role="list">
+    <li><b>One canvas, many folders</b><p>Seeing folders and subfolders in one window made cross-folder tasks faster than in single-pane tools.</p></li>
+    <li><b>The preview panel</b><p>The top-rated feature in the survey (4.31 of 5): people could check a file without losing their place.</p></li>
+    <li><b>Search that shows location</b><p>Results with name, date, size and location, and a click that jumps straight to the folder.</p></li>
+    <li><b>Color-coded folders</b><p>Colors gave people quick visual boundaries across a big tree.</p></li>
+  </ul>
+  <p class="tv-shift">People changed as they got comfortable. They started with search, single-pane browsing and local folders, like any file manager, then moved on to zooming, side-by-side folders, multi-item drag and drop, and jumping to locations from search.</p>
+  <div class="tv-halves tv-vs">
+    <div><p class="k">College students</p><p>Explored more and treated Treevah as a home for coursework, notes and projects. Basic navigation worked, but they leaned on trial and error and weren’t sure what the Workstation was for.</p></div>
+    <div><p class="k">Job seekers</p><p>Wanted speed and predictability: fast uploads and quick access to resumes and cover letters. They were less forgiving of unclear navigation, failed uploads and slow retrieval.</p></div>
+  </div>
+  <p class="tv-shift">Both groups organized their materials once they got going, and both struggled to create folders in the right place and to use drag and drop with confidence. The workspace also got crowded: toolbars, panels and popups competed with the files themselves.</p>
 </section>
 
 <section class="sec col" id="clarity" aria-labelledby="h-clarity">
@@ -961,7 +982,7 @@ td:first-child { width: 30%; }
 <section class="sec col" id="priorities" aria-labelledby="h-prio">
   <h2 id="h-prio">Turning evidence into priorities</h2>
   <p>The team brought every source into one FigJam board, separated UI problems from bugs, and sorted issues by how badly they blocked people. That became 18 recommendations for Alpha 9, each with a measurable target for the next round of testing.</p>
-  <div class="table tv-et"><table><thead><tr><th scope="col">Problem</th><th scope="col">Evidence</th><th scope="col">Priority</th><th scope="col">Proposed change</th></tr></thead><tbody><tr><td>New folders land in the wrong place</td><td>Sessions in both groups; a founder note on repeated failed creation</td><td><span class="pr c">Critical</span></td><td>Create folders where the user is, and show the path while they do it</td></tr><tr><td>Uploads fail or can’t be found</td><td>Sessions; survey requests; Clarity recordings</td><td><span class="pr c">Critical</span></td><td>Confirm each upload, open and highlight the destination folder</td></tr><tr><td>People lose their place</td><td>Sessions; survey ratings for returning to work (3.53 of 5)</td><td><span class="pr c">Critical</span></td><td>Clearer location cues, collapsible panels, easier-to-find zoom</td></tr><tr><td>Moves give no feedback</td><td>Sessions; Clarity dead and rage clicks</td><td><span class="pr c">Critical</span></td><td>Show success or error after every move, and add undo</td></tr><tr><td>Useful features are hidden</td><td>Sessions; Clarity click data</td><td><span class="pr h">High</span></td><td>Clearer toolbar icons, tooltips, and help finding zoom</td></tr><tr><td>Interactions behave unexpectedly</td><td>Sessions; survey comments on multi-select</td><td><span class="pr h">High</span></td><td>Align multi-select and file opening with familiar desktop patterns</td></tr></tbody></table></div>
+  <div class="table tv-et"><table><thead><tr><th scope="col">Problem</th><th scope="col">Evidence</th><th scope="col">Priority</th><th scope="col">Proposed change</th></tr></thead><tbody><tr><td>New folders land in the wrong place</td><td>Sessions in both groups; a founder note on repeated failed creation</td><td><span class="pr c">Critical</span></td><td>Create folders where the user is, and show the path while they do it</td></tr><tr><td>Uploads fail or can’t be found</td><td>Sessions; survey requests; Clarity recordings</td><td><span class="pr c">Critical</span></td><td>Confirm each upload, open and highlight the destination folder</td></tr><tr><td>People lose their place</td><td>Sessions; survey ratings for returning to work (3.53 of 5)</td><td><span class="pr c">Critical</span></td><td>Clearer location cues, collapsible panels, easier-to-find zoom</td></tr><tr><td>Moves give no feedback</td><td>Sessions; Clarity dead and rage clicks</td><td><span class="pr c">Critical</span></td><td>Show success or error after every move, and add undo</td></tr><tr><td>The workspace gets crowded</td><td>Sessions; survey ratings for larger projects (3.70 of 5, crowding with 5+ folders open)</td><td><span class="pr h">High</span></td><td>Fewer always-on toolbars, panels and popups, so files stay the focus</td></tr><tr><td>Useful features are hidden</td><td>Sessions; Clarity click data</td><td><span class="pr h">High</span></td><td>Clearer toolbar icons, tooltips, and help finding zoom</td></tr><tr><td>Interactions behave unexpectedly</td><td>Sessions; survey comments on multi-select</td><td><span class="pr h">High</span></td><td>Align multi-select and file opening with familiar desktop patterns</td></tr></tbody></table></div>
   <p class="tv-take">A distinctive feature is only valuable when people can reliably do the basic tasks around it.</p>
   <h3 class="sub-h">The synthesis boards</h3>
   <div class="vt" data-tabs="FigJam boards">
@@ -1013,6 +1034,7 @@ td:first-child { width: 30%; }
   <p><b>Design is continuous.</b> On a product that changes every release, decisions get revisited as builds and feedback reveal new limits.</p>
   <p><b>Execution matters as much as intent.</b> Half the web components no longer matched handoff. A well-designed screen can’t deliver if what ships drifts from it.</p>
   <p><b>Research helps a team choose.</b> People said they loved AI Summary, but it got six clicks in a month. Pairing sessions with click data showed what to fix first.</p>
+  <p><b>Start studies from a blank page.</b> Asking people to build their own workspace showed where onboarding broke down, which a guided demo would have hidden.</p>
   <p class="tv-note">Some internal details are left out under NDA. I’m happy to walk through the work. <a href="mailto:vedantatram157@gmail.com?subject=Treevah%20case%20study">Email me</a></p>
 </section>
 

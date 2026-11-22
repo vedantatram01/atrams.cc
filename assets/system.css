@@ -250,3 +250,15 @@
 .mcards b small { font-family: var(--sans); font-size: 16px; font-weight: 400; color: var(--muted); }
 .mcards + p { margin-top: var(--s2) !important; }
 @media (max-width: 360px) { .pmx-grid { grid-template-columns: 44px repeat(var(--cols), minmax(0, 1fr)); gap: 2px; } .pmx-yl { font-size: 11px; padding-right: 2px; } .pmx-c { padding: 3px; } .pmx-b { font-size: 11px; line-height: 15px; padding: 3px 4px; } }
+
+/* Case-study hero: at a glance */
+.title .glance { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s1); max-width: 1088px; margin: var(--s2) auto 0; padding: 0; text-align: left; }
+.title .glance > div { padding: var(--s1) var(--s1) var(--s1) 20px; border-left: 2px solid var(--line); }
+.title .glance > div:nth-child(2) { border-left-color: var(--text); }
+.title .glance dt { font-size: 14px; line-height: 20px; color: var(--muted); margin-bottom: 4px; }
+.title .glance dd { margin: 0; font-size: 15px; line-height: 22px; color: var(--soft); }
+@media (max-width: 760px) { .title .glance { grid-template-columns: 1fr; gap: var(--s0); } }
+@media (min-width: 761px) {
+  .title .meta, .title .glance { width: min(1024px, calc(100vw - 64px)); max-width: none !important; margin-left: 50% !important; transform: translateX(-50%); }
+  .title .meta { grid-template-columns: 1.6fr 1fr 1fr 1fr !important; }
+}
