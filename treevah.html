@@ -681,6 +681,9 @@ td:first-child { width: 30%; }
 @media (max-width: 760px) { .tv-src { grid-template-columns: repeat(2, minmax(0, 1fr)); } .tv-src li:last-child { grid-column: 1 / -1; } .tv-beta { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 640px) { .tv-good, .tv-views { grid-template-columns: 1fr; } }
 @media (max-width: 420px) { .tv-beta { grid-template-columns: 1fr; } .sb-lg i span { display: inline; font-size: 11px; } }
+.tv-ba .quiet-list { margin-top: 0; }
+.tv-ba .quiet-list li { font-size: 15px; line-height: 22px; color: var(--soft); }
+.tv-ba .quiet-list b { color: var(--text); font-weight: 600; }
 </style>
 </head>
 <body>
@@ -706,8 +709,8 @@ td:first-child { width: 30%; }
   </figure>
   <div class="col title">
     <h1>Treevah</h1>
-    <p>Treevah is an AI-powered web app that shows your folders as a visual tree. Over the summer of 2026 I worked as a UI/UX Designer on the team: designing the interface and its components, auditing the design system on my own, writing the plan for a usability study with new users, running the Microsoft Clarity analysis, and turning it all into 18 recommendations for the next release.</p>
-    <p class="rt">9 min read</p>
+    <p>Treevah is an AI-powered web app that shows your folders as a visual tree. Over the summer of 2026 I worked as a UI/UX Designer on the team: designing the interface and its components, auditing the design system and its AI assistants on my own, writing the plan for a usability study with new users, running the Microsoft Clarity analysis, and turning it all into 18 recommendations for the next release.</p>
+    <p class="rt">10 min read</p>
     <dl class="meta">
       <div><dt>My role</dt><dd>UI/UX Designer</dd></div>
       <div><dt>Team</dt><dd>UI/UX team of 5, reporting to the founder</dd></div>
@@ -717,7 +720,7 @@ td:first-child { width: 30%; }
   </div>
 </header>
 
-<nav class="toc" id="toc" aria-label="Sections"><ol><li><a href="#problem">Problem</a></li><li><a href="#summer">My summer</a></li><li><a href="#screens">Design</a></li><li><a href="#audit">Audit</a></li><li><a href="#study">Study</a></li><li><a href="#findings">Findings</a></li><li><a href="#clarity">Click data</a></li><li><a href="#synthesis">Synthesis</a></li><li><a href="#priorities">Recommendations</a></li><li><a href="#beta">Beta</a></li><li><a href="#learned">Learnings</a></li></ol></nav>
+<nav class="toc" id="toc" aria-label="Sections"><ol><li><a href="#problem">Problem</a></li><li><a href="#summer">My summer</a></li><li><a href="#screens">Design</a></li><li><a href="#audit">Audit</a></li><li><a href="#ai">AI audit</a></li><li><a href="#study">Study</a></li><li><a href="#findings">Findings</a></li><li><a href="#clarity">Click data</a></li><li><a href="#synthesis">Synthesis</a></li><li><a href="#priorities">Recommendations</a></li><li><a href="#beta">Beta</a></li><li><a href="#learned">Learnings</a></li></ol></nav>
 <main id="main" tabindex="-1">
 
 <section class="sec col" id="problem" aria-labelledby="h-problem">
@@ -728,7 +731,7 @@ td:first-child { width: 30%; }
 <section class="sec col" id="summer" aria-labelledby="h-summer">
   <h2 id="h-summer">My summer, in two halves</h2>
   <div class="tv-halves">
-    <div><p class="k">May–June · Design</p><ul class="quiet-list"><li>Designed interface concepts, wireframes and user flows with the team</li><li>Built and maintained design system components and standards</li><li>Audited every component in the web and mobile apps, on my own</li><li>Joined feature brainstorms and pitched ideas</li><li>Prepared design handoffs for engineering</li></ul></div>
+    <div><p class="k">May–June · Design</p><ul class="quiet-list"><li>Designed interface concepts, wireframes and user flows with the team</li><li>Built and maintained design system components and standards</li><li>Audited every component in the web and mobile apps, on my own</li><li>Audited the AI assistants for trust, control and UX</li><li>Joined feature brainstorms and pitched ideas</li><li>Prepared design handoffs for engineering</li></ul></div>
     <div><p class="k">July–August · Research</p><ul class="quiet-list"><li>Wrote the plan for the Alpha 8 study</li><li>Recruited and ran think-aloud sessions with new users</li><li>Set up Microsoft Clarity and analyzed its recordings, heatmaps and click data</li><li>Synthesized all five sources in FigJam into the Alpha 8 research report</li><li>Wrote 18 recommendations for Alpha 9 and a Beta readiness assessment</li></ul></div>
   </div>
 </section>
@@ -780,6 +783,41 @@ td:first-child { width: 30%; }
     <p class="sb-key" aria-hidden="true"><span><i class="g1"></i>Yes / pass</span><span><i class="g1b"></i>Mostly</span><span><i class="g2"></i>Partly</span><span><i class="g3"></i>No / issues</span><span><i class="g4"></i>Unclear or not checked</span></p>
     <figcaption class="cap" id="tv-audit-cap">Most components lived in the design system, but half of them had drifted from the handoff files engineers were building from.</figcaption>
   </figure>
+</section>
+
+<section class="sec col" id="ai" aria-labelledby="h-ai">
+  <h2 id="h-ai">Auditing the AI assistants</h2>
+  <p>Treevah’s AI can move and delete real files, so I audited it for trust and control, not just looks. I went through 31 checks across the file-organizing assistant, its interface, and a second Workspace Assistant that reads and summarizes. Each check got a simple read: good, a risk, or something to test.</p>
+  <figure class="tv-chart" aria-labelledby="tv-ai-cap">
+    <div class="sb-row"><p class="sb-l">Trust and control <span>12 checks</span></p><div class="sb" role="img" aria-label="Trust and control: 5 good, 3 risks, 4 to test"><i class="g1" style="--w:41.7%"><span>5 good</span></i><i class="g3" style="--w:25.0%"><span>3 risks</span></i><i class="g4" style="--w:33.3%"><span>4 to test</span></i></div></div>
+    <div class="sb-row"><p class="sb-l">Design and UX <span>11 checks</span></p><div class="sb" role="img" aria-label="Design and UX: 5 good, 4 risks, 2 to test"><i class="g1" style="--w:45.5%"><span>5 good</span></i><i class="g3" style="--w:36.4%"><span>4 risks</span></i><i class="g4" style="--w:18.2%"><span>2 to test</span></i></div></div>
+    <div class="sb-row"><p class="sb-l">Workspace Assistant <span>8 checks</span></p><div class="sb" role="img" aria-label="Workspace Assistant: 4 good, 2 risks, 2 to test"><i class="g1" style="--w:50.0%"><span>4 good</span></i><i class="g3" style="--w:25.0%"><span>2 risks</span></i><i class="g4" style="--w:25.0%"><span>2 to test</span></i></div></div>
+    <p class="sb-key" aria-hidden="true"><span><i class="g1"></i>Good</span><span><i class="g3"></i>Risk</span><span><i class="g4"></i>Needs a test to confirm</span></p>
+    <figcaption class="cap" id="tv-ai-cap">14 checks were good, 9 were risks, and 8 couldn’t be answered from screens, so I turned them into a test script.</figcaption>
+  </figure>
+  <div class="vt" data-tabs="AI audit areas">
+    <div class="vt-p" data-tab="Trust and control">
+      <div class="tv-ba">
+        <div class="aft"><small>Working well</small><ul class="quiet-list"><li>Asks permission before it runs, with Agree and Decline</li><li>Each ability has its own toggle, so people can allow moves but block deletes</li><li>Reports what it did: files scanned, moved and already sorted</li><li>Projects and Recents keep a history of past actions</li></ul></div>
+        <div><small>Risks and what I recommended</small><ul class="quiet-list"><li><b>It acts before you see the plan.</b> Add an approve-before-apply step, showing the moves first. Top priority.</li><li><b>It can delete folders.</b> Confirm first and send deleted items to Trash.</li><li><b>Model training is bundled into consent.</b> Make training its own opt-in.</li></ul></div>
+      </div>
+      <p class="tv-shift">Still to test: can a reorganize be undone, does it pick the exact file, does it ask when a request is vague, and does it decline off-topic asks cleanly?</p>
+    </div>
+    <div class="vt-p" data-tab="Design and UX">
+      <div class="tv-ba">
+        <div class="aft"><small>Working well</small><ul class="quiet-list"><li>A friendly empty state with example prompts, not a blank box</li><li>Projects group chats by goal, like Applications or Portfolio</li><li>Live loading steps make the wait feel active</li><li>Type, buttons and spacing match the rest of Treevah</li></ul></div>
+        <div><small>Risks and what I recommended</small><ul class="quiet-list"><li><b>Three AI features blur together.</b> Name and separate them clearly, or combine them.</li><li><b>A prompt chip shows raw brackets,</b> “move [file] to [folder]”. Use a real example.</li><li><b>Every chat is called “Organized Files”.</b> Auto-name chats by what they did and when.</li><li><b>No way to rate a reply.</b> Add a simple thumbs up or down.</li></ul></div>
+      </div>
+      <p class="tv-shift">Still to test: keyboard access, focus order and grey-text contrast, and whether mobile needs the assistant at all.</p>
+    </div>
+    <div class="vt-p" data-tab="Workspace Assistant">
+      <div class="tv-ba">
+        <div class="aft"><small>Working well</small><ul class="quiet-list"><li>Answers link to the real files, so people can check the claim</li><li>Shows its scope, like how many files it read</li><li>Clear share roles: owner, can edit, can view</li><li>Teammates can comment and react on answers</li></ul></div>
+        <div><small>Risks and what I recommended</small><ul class="quiet-list"><li><b>Two assistants, two names.</b> Make it obvious which one reads and which one moves files.</li><li><b>Shared summaries could leak access.</b> Check that a view-only teammate can’t see files they couldn’t open before.</li></ul></div>
+      </div>
+      <p class="tv-shift">Still to test: are the summaries accurate, and is it truly read-only? If it can act, it needs the same confirm and undo guards.</p>
+    </div>
+  </div>
 </section>
 
 <section class="sec col" id="study" aria-labelledby="h-study">
