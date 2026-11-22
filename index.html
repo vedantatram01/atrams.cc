@@ -696,6 +696,41 @@ img { max-width: 100%; display: block; }
 .sr-ans span.on { color: var(--text); font-weight: 500; }
 .sr-ans span.on::before { box-shadow: inset 0 0 0 calc(.55 * var(--u)) var(--accent); }
 
+
+/* Treevah card: featured, full row on wide screens */
+@media (min-width: 901px) { .wk-feat { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--s3); align-items: center; } .wk-feat .wk-body { padding-top: 0 !important; margin-top: 0 !important; } }
+.t-tv { --t1: #ECEAE4; --t2: #ECEAE4; }
+:root[data-mode="dark"] .t-tv { --t1: #222; --t2: #222; }
+.th-tv { display: grid; place-items: center; }
+.tvx { width: 84%; border: 1px solid var(--line); border-radius: 1.2cqw; background: var(--surface); overflow: hidden; box-shadow: 0 3cqw 6cqw -4cqw rgba(0,0,0,.3); font-family: var(--sans); }
+.tvx-bar { display: flex; align-items: center; gap: .8cqw; padding: 1.4cqw 1.8cqw; background: var(--mat); border-bottom: 1px solid var(--line); }
+.tvx-bar > i { width: 1.2cqw; height: 1.2cqw; border-radius: 50%; background: var(--line); }
+.tvx-q { margin-left: 1.6cqw; width: 42%; padding: .7cqw 1.4cqw; border: 1px solid var(--line); border-radius: .6cqw; background: var(--surface); font-size: 1.6cqw; line-height: 2.2cqw; color: var(--muted); white-space: nowrap; overflow: hidden; }
+.tvx-q span { display: inline-block; overflow: hidden; vertical-align: top; animation: tvxType 12s steps(22) infinite; }
+.tvx-main { display: grid; grid-template-columns: 2fr 3fr; height: 36cqw; }
+.tvx-tree { display: flex; flex-direction: column; padding: 1.6cqw; border-right: 1px solid var(--line); }
+.tvx-r { position: relative; padding: .55cqw 1cqw .55cqw calc(2.6cqw + var(--lv, 0) * 2.2cqw); border-radius: .5cqw; font-size: 1.7cqw; line-height: 2.4cqw; color: var(--soft); }
+.tvx-r.o::before { content: ""; position: absolute; left: calc(1cqw + var(--lv, 0) * 2.2cqw); top: 1.1cqw; width: .7cqw; height: .7cqw; border-right: 1.5px solid var(--muted); border-bottom: 1.5px solid var(--muted); transform: rotate(45deg); }
+.tvx-r.l1 { --lv: 1; } .tvx-r.l2 { --lv: 2; }
+.tvx-r.k1 { animation: tvxK1 12s infinite; } .tvx-r.k2 { animation: tvxK2 12s infinite; }
+.tvx-ws { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-content: start; gap: 1.2cqw; padding: 1.6cqw; background: var(--bg); }
+.tvx-c { display: grid; gap: .5cqw; padding: 1.4cqw; border: 1px solid var(--line); border-radius: .8cqw; background: var(--surface); }
+.tvx-c b { font-size: 1.8cqw; line-height: 2.4cqw; font-weight: 600; color: var(--text); }
+.tvx-c small { font-size: 1.4cqw; line-height: 1.8cqw; color: var(--muted); }
+.tvx-c span { height: 1.2cqw; border-radius: .3cqw; background: var(--mat); }
+.tvx-c span + span { width: 70%; }
+.tvx-c.c1 { animation: tvxC1 12s infinite; } .tvx-c.c2 { animation: tvxC2 12s infinite; }
+.tvx-ghost { position: absolute; z-index: 2; padding: .6cqw 1.2cqw; border-radius: .6cqw; background: var(--text); color: var(--bg); font-size: 1.6cqw; line-height: 2.2cqw; font-weight: 500; opacity: 0; }
+.tvx-ghost.g1 { animation: tvxG1 12s infinite; } .tvx-ghost.g2 { animation: tvxG2 12s infinite; }
+@keyframes tvxType { 0%, 4% { width: 0; } 22%, 100% { width: 100%; } }
+@keyframes tvxK1 { 0%, 24% { background: transparent; color: var(--soft); font-weight: 400; } 28%, 100% { background: var(--accent-soft); color: var(--text); font-weight: 600; } }
+@keyframes tvxK2 { 0%, 56% { background: transparent; color: var(--soft); font-weight: 400; } 60%, 100% { background: var(--accent-soft); color: var(--text); font-weight: 600; } }
+@keyframes tvxG1 { 0%, 26% { opacity: 0; transform: translate(-30cqw, 7.2cqw); } 30% { opacity: 1; transform: translate(-30cqw, 7.2cqw); } 42% { opacity: 1; transform: translate(2cqw, 1cqw); } 45%, 100% { opacity: 0; transform: translate(2cqw, 1cqw); } }
+@keyframes tvxG2 { 0%, 58% { opacity: 0; transform: translate(-30cqw, 22.6cqw); } 62% { opacity: 1; transform: translate(-30cqw, 22.6cqw); } 74% { opacity: 1; transform: translate(22cqw, 1cqw); } 77%, 100% { opacity: 0; transform: translate(22cqw, 1cqw); } }
+@keyframes tvxC1 { 0%, 42% { opacity: 0; transform: scale(.96); } 46%, 96% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes tvxC2 { 0%, 74% { opacity: 0; transform: scale(.96); } 78%, 96% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+.wk:not(.live) .th-tv * { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .th-tv * { animation: none !important; } .tvx-ghost { display: none; } }
 </style>
 <link rel="stylesheet" href="assets/system.css">
 </head>
@@ -735,6 +770,37 @@ img { max-width: 100%; display: block; }
     </div>
 
     <div class="cases">
+    <article class="wk rv t-tv wk-feat" aria-labelledby="case-05">
+      <a class="wk-thumb th-tv" href="treevah.html" tabindex="-1" aria-hidden="true">
+        <div class="tvx">
+          <div class="tvx-bar"><i></i><i></i><i></i><span class="tvx-q"><span>Reports for Acme Corp</span></span></div>
+          <div class="tvx-main">
+            <div class="tvx-tree">
+              <span class="tvx-r l0 o">Clients</span>
+              <span class="tvx-r l1 o">Acme Corp</span>
+              <span class="tvx-r l2 k1">Reports</span>
+              <span class="tvx-r l2">Contracts</span>
+              <span class="tvx-r l1">Northwind</span>
+              <span class="tvx-r l0 o">Finance</span>
+              <span class="tvx-r l1 k2">Invoices</span>
+              <span class="tvx-r l1">Budgets</span>
+              <span class="tvx-r l0">Personal</span>
+            </div>
+            <div class="tvx-ws">
+              <span class="tvx-ghost g1">Reports</span><span class="tvx-ghost g2">Invoices</span>
+              <div class="tvx-c c1"><b>Reports</b><small>Clients › Acme Corp</small><span></span><span></span></div>
+              <div class="tvx-c c2"><b>Invoices</b><small>Finance</small><span></span><span></span></div>
+            </div>
+          </div>
+        </div>
+      </a>
+      <div class="wk-body">
+        <div class="wk-row"><h3 id="case-05"><a href="treevah.html">Treevah</a></h3></div>
+        <p class="wk-role">2026 · UI/UX Intern, with product designer Cici Zhong</p>
+        <p class="wk-sum">An AI-powered file manager where people kept losing their place in folders and couldn’t find files they couldn’t name. We redesigned it around a folder tree you can see at a glance, a workspace for the folders you need, and search that reads what’s inside files.</p>
+        <p class="go2"><a class="rd" href="treevah.html">Read case study<span class="vh">: Treevah</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></p>
+      </div>
+    </article>
     <article class="wk rv t-wh" aria-labelledby="case-03">
       <a class="wk-thumb th-wh" href="wearable-health.html" tabindex="-1" aria-hidden="true">
         <div class="whs">
@@ -898,7 +964,7 @@ img { max-width: 100%; display: block; }
   var cards = [].slice.call(document.querySelectorAll(".wk"));
   var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduce || !document.body.getAnimations) { cards.forEach(function (c) { c.classList.add("live"); }); return; }
-  var CFG = { "th-io": [10000, 1.5], "th-wh": [12000, 1.7], "th-np": [12000, 1.7], "th-cv": [18000, 2.2] };
+  var CFG = { "th-tv": [12000, 1.7], "th-io": [10000, 1.5], "th-wh": [12000, 1.7], "th-np": [12000, 1.7], "th-cv": [18000, 2.2] };
   var st = cards.map(function (c) {
     var th = c.querySelector(".wk-thumb"), k = Object.keys(CFG).filter(function (x) { return th.classList.contains(x); })[0] || "th-io";
     var bar = document.createElement("span"); bar.className = "wk-prog"; bar.setAttribute("aria-hidden", "true"); bar.innerHTML = "<i></i>"; th.appendChild(bar);
