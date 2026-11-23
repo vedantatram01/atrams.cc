@@ -1,0 +1,168 @@
+/* atrams.cc visual layer, after Minimal UI (minimals.cc)
+   Public Sans for text, Barlow for headings, green primary, soft 16px cards
+   with a light shadow, tinted labels, and alternating neutral sections.
+   Loaded after system.css on every page. */
+
+:root {
+  --bg: #FFFFFF; --surface: #FFFFFF; --mat: #F4F6F8; --text: #1C252E; --soft: #454F5B; --muted: #637381; --line: rgba(145,158,171,.24);
+  --accent: #00A76F; --accent-ink: #FFFFFF; --accent-soft: rgba(0,167,111,.08);
+  --info: #00B8D9; --pos: #22C55E; --neg: #FF5630; --warn: #FFAB00; --pend: #8E33FF; --cat: #8E33FF;
+  --info-d: #006C9C; --pos-d: #118D57; --neg-d: #B71D18; --warn-d: #B76E00; --pend-d: #5119B7; --pri-d: #007867;
+  --c1: #00A76F; --c2: #FF5630; --c3: #00B8D9; --good: #22C55E;
+  --sans: "Public Sans", system-ui, sans-serif;
+  --display: "Barlow", "Public Sans", system-ui, sans-serif;
+  --mx-r: 16px; --mx-r-s: 8px; --r-s: 8px; --r-m: 16px; --r-l: 16px;
+  --mx-shadow: 0 0 2px 0 rgba(145,158,171,.2), 0 12px 24px -4px rgba(145,158,171,.12);
+  --mx-shadow-z8: 0 8px 16px 0 rgba(145,158,171,.16);
+}
+:root[data-mode="dark"] {
+  --bg: #141A21; --surface: #1C252E; --mat: #28323D; --text: #FFFFFF; --soft: #C4CDD5; --muted: #919EAB; --line: rgba(145,158,171,.16);
+  --accent: #5BE49B; --accent-ink: #141A21;
+  --info-d: #61F3F3; --pos-d: #77ED8B; --neg-d: #FFAC82; --warn-d: #FFD666; --pend-d: #C684FF; --pri-d: #5BE49B;
+  --mx-shadow: 0 0 2px 0 rgba(0,0,0,.2), 0 12px 24px -4px rgba(0,0,0,.12);
+}
+
+body { font-family: var(--sans); color: var(--text); background: var(--bg); }
+h1, h2, h3, .title h1 { font-family: var(--display) !important; font-weight: 700 !important; letter-spacing: 0 !important; }
+.title h1 { font-size: clamp(48px, 6vw, 72px) !important; line-height: 1.05 !important; font-weight: 800 !important; }
+.title h1 { background: linear-gradient(300deg, #00A76F 0%, #1C252E 55%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+:root[data-mode="dark"] .title h1 { background: linear-gradient(300deg, #5BE49B 0%, #FFFFFF 55%); -webkit-background-clip: text; background-clip: text; }
+.sec h2 { font-size: 40px !important; line-height: 48px !important; }
+main h3:not(.h4):not(.k) { font-size: 22px !important; line-height: 30px !important; font-weight: 700 !important; }
+
+/* section rhythm: every other section sits on a soft neutral band */
+.sec { border-top: 0 !important; }
+main > .sec:nth-of-type(even) { position: relative; }
+main > .sec:nth-of-type(even)::before {
+  content: ""; position: absolute; z-index: -1; top: 0; bottom: -96px; left: 50%; width: 100vw; transform: translateX(-50%); background: var(--mat);
+}
+html, body { overflow-x: clip; }
+
+/* cards */
+.tv-areas > div, .tv-out > div, .lanes, .study, .tv-chart, .rounds-2 > li, .mcards > div, .tv-insight, .beta3 > div, .tv-probs li, .tv-good li {
+  border: 0 !important; border-radius: var(--mx-r) !important; background: var(--surface) !important; background-image: none !important; box-shadow: var(--mx-shadow) !important;
+}
+
+/* soft labels */
+.own, .own.team, .pr, .pr.c, .pr.h {
+  display: inline-flex !important; align-items: center; height: 24px; padding: 0 8px !important; border-radius: 6px !important;
+  font-size: 12px !important; line-height: 24px !important; font-weight: 700 !important; box-shadow: none !important;
+}
+.own::before, .pr::before { content: none !important; }
+.own { background: rgba(34,197,94,.16) !important; color: var(--pos-d) !important; }
+.own.team { background: rgba(0,184,217,.16) !important; color: var(--info-d) !important; }
+.pr.c { background: rgba(255,86,48,.16) !important; color: var(--neg-d) !important; }
+.pr.h { background: rgba(255,171,0,.16) !important; color: var(--warn-d) !important; }
+
+/* contribution: four soft cards with a coloured label, title, body, footer */
+#contribution .tv-areas { gap: 24px !important; }
+#contribution .tv-areas > div { padding: 24px !important; border-top: 0 !important; }
+#contribution .tv-areas .own { order: 0 !important; margin: 0 0 16px !important; }
+#contribution .tv-areas h3.k { order: 1 !important; font-size: 20px !important; line-height: 28px !important; font-weight: 700 !important; }
+#contribution .tv-areas > div > .why { margin-top: 20px !important; padding-top: 16px !important; border-top: 1px dashed var(--line) !important; }
+#contribution .tv-areas .why span { display: block; font-size: 12px; font-weight: 700; color: var(--muted); }
+#contribution .tv-areas .why span::after { content: none; }
+#contribution .tv-areas > div > .why p { display: block; font-weight: 600; }
+
+/* lanes / study: card padding */
+.lanes, .study { padding: 0 !important; }
+.lanes { padding: 24px !important; }
+.st-part + .st-part, .study .cap { background: none !important; }
+.st-part + .st-part { border-top: 1px dashed var(--line) !important; }
+.trk li::before { box-shadow: none !important; background: rgba(0,167,111,.16) !important; border-radius: 50% !important; width: 14px; height: 14px; top: 5px; }
+.trk li:first-child::before { background: #00A76F !important; }
+.trk li::after { background: rgba(0,167,111,.24) !important; border-radius: 2px; }
+.srcs b { font-weight: 700; }
+.srcs li:nth-child(1) b, .srcs li:nth-child(2) b, .srcs li:nth-child(3) b { color: var(--accent); }
+.ln-bar i { box-shadow: none !important; border-radius: 6px !important; height: 14px !important; }
+.ln1 { --lc: #00A76F !important; } .ln2 { --lc: #00B8D9 !important; } .ln3 { --lc: #8E33FF !important; } .ln4 { --lc: #FFAB00 !important; }
+
+/* big moment: a green card with a gradient number */
+.moment.breakout { padding: 40px !important; border: 0 !important; border-radius: 24px !important; background: linear-gradient(135deg, rgba(91,228,155,.18), rgba(0,167,111,.10)) !important; }
+.moment .m-num { font-family: var(--display) !important; font-weight: 800 !important; background: linear-gradient(135deg, #5BE49B, #007867); -webkit-background-clip: text; background-clip: text; color: transparent !important; }
+
+/* observation / consequence / implication: three soft tinted tiles */
+.tv-insight { padding: 24px !important; }
+.tv-oci { gap: 16px !important; border-top: 0 !important; }
+.tv-oci > div, .tv-oci > div + div, .tv-oci > div:last-child { padding: 16px !important; border: 0 !important; border-radius: 12px !important; background: var(--mat) !important; margin: 0 !important; }
+.tv-oci > div:last-child { background: rgba(0,167,111,.10) !important; }
+.tv-oci > div:last-child dt { color: var(--pri-d) !important; font-weight: 700; }
+
+/* beta: three cards with coloured headers */
+.beta3 { gap: 24px !important; }
+.beta3 > div { padding: 20px 24px !important; }
+.b-h i { width: 10px !important; height: 10px !important; }
+.b-r .b-h i { background: #22C55E !important; } .b-p .b-h i { background: #FFAB00 !important; } .b-n .b-h i { background: #FF5630 !important; }
+.b-h span { display: inline-flex; align-items: center; height: 24px; padding: 0 8px; border-radius: 6px; font-weight: 700; font-size: 12px !important; background: var(--mat); color: var(--soft) !important; }
+.b-l li { border-bottom-style: dashed !important; }
+
+/* outcomes */
+.tv-out > div, .tv-out > div:nth-child(n) { padding: 24px !important; border-top: 0 !important; }
+
+/* tables: Minimal header row */
+.tv-et table { border-radius: var(--mx-r); overflow: hidden; box-shadow: var(--mx-shadow); background: var(--surface); }
+.tv-et thead th { background: var(--mat); color: var(--muted); font-weight: 600; }
+.tv-et td, .tv-et th { border-bottom: 1px dashed var(--line) !important; padding-left: 16px !important; padding-right: 16px !important; }
+
+/* images */
+.shot img, .tv-shot, .tv-fig img { border-radius: 12px !important; }
+.gal .tv-shot { box-shadow: var(--mx-shadow) !important; }
+
+/* buttons and tabs */
+.vt-tab[aria-selected="true"] { border-bottom-color: #00A76F !important; color: var(--text) !important; }
+.btn { border-radius: 8px !important; font-weight: 700; }
+
+@media (max-width: 640px) {
+  .sec h2 { font-size: 30px !important; line-height: 38px !important; }
+  #contribution .tv-areas > div { padding: 20px !important; }
+  .moment.breakout { padding: 24px !important; }
+}
+
+/* ---------- Homepage: project cards ---------- */
+.wk { border-radius: var(--mx-r) !important; background: var(--surface); box-shadow: var(--mx-shadow); overflow: hidden; transition: box-shadow .25s, transform .25s; }
+.wk:hover { box-shadow: 0 0 2px 0 rgba(145,158,171,.24), 0 24px 48px -8px rgba(145,158,171,.24); transform: translateY(-2px); }
+:root[data-mode="dark"] .wk:hover { box-shadow: 0 0 2px 0 rgba(0,0,0,.24), 0 24px 48px -8px rgba(0,0,0,.4); }
+.wk-thumb { border-radius: 0 !important; }
+.wk-body { padding: 24px 24px 28px !important; }
+.wk-feat .wk-body { padding: 32px !important; }
+.wk h3, .wk h3 a { font-family: var(--display) !important; font-weight: 700 !important; font-size: 24px !important; }
+.rd { font-weight: 700 !important; color: var(--pri-d) !important; }
+@media (prefers-reduced-motion: reduce) { .wk:hover { transform: none; } }
+
+/* ---------- Case study heads and meta ---------- */
+.meta, .glance { border-color: var(--line) !important; }
+.meta dt, .glance dt { font-size: 13px !important; font-weight: 600 !important; color: var(--muted) !important; }
+.title .rt { color: var(--muted); }
+
+/* ---------- Shared components on every case study ---------- */
+.kv div, .finding, .chap .col, .vt-p, .lc, .pmx, .tv-ba > div, .opt, .goal, .trio > div, .stat-row > div {
+  border-radius: var(--mx-r) !important;
+}
+.kv div { border: 0 !important; background: var(--surface); box-shadow: var(--mx-shadow); padding: 20px !important; }
+.lc, .pmx { border: 0 !important; background: var(--surface) !important; box-shadow: var(--mx-shadow) !important; padding: 24px !important; }
+.finding { border-top: 0 !important; padding: 24px !important; margin-top: 16px !important; background: var(--surface); box-shadow: var(--mx-shadow); }
+.flist > li { border: 0 !important; padding: 24px !important; margin-top: 16px; border-radius: var(--mx-r); background: var(--surface); box-shadow: var(--mx-shadow); }
+.rounds:not(.rounds-2) > li { border: 0 !important; padding: 20px 24px !important; margin-top: 16px; border-radius: var(--mx-r) !important; background: var(--surface) !important; box-shadow: var(--mx-shadow); }
+.fl-d > summary { color: var(--pri-d) !important; text-decoration: none !important; font-weight: 700 !important; }
+.fl-d > summary::after { color: var(--pri-d) !important; }
+.lc-keys button, .vf-b { border-radius: var(--mx-r-s) !important; font-weight: 600; }
+.vf-b[aria-pressed="true"], .lc-keys button[aria-pressed="true"] { background: var(--text) !important; color: var(--bg) !important; border-color: var(--text) !important; }
+.vt-list { border-bottom-color: var(--line) !important; }
+.vt-tab { font-weight: 600 !important; }
+.shot img, .frame, .clip img, .before img, figure.shot > div, .np-map img { border-radius: 12px !important; }
+.pull { border-left-color: #00A76F !important; font-family: var(--display) !important; font-weight: 600 !important; }
+.m-st .m-num, .moment .m-num { font-family: var(--display) !important; }
+.moment:not(.breakout) { padding: 32px !important; border: 0 !important; border-radius: 24px !important; background: linear-gradient(135deg, rgba(91,228,155,.18), rgba(0,167,111,.10)) !important; }
+.zoom-tag { border-radius: var(--mx-r-s) !important; }
+.toc a[aria-current], .toc a.on { color: var(--pri-d) !important; }
+.cap.col { margin-left: auto !important; margin-right: auto !important; }
+
+/* ---------- Contrast: Minimal's bright mains are for fills; text uses the darker steps ---------- */
+:root { --accent: #007867; --good: #007867; --pos-d: #065E49; --warn-d: #7A4100; --info-d: #003768; --neg-d: #7A0916; --pri-d: #007867; }
+:root[data-mode="dark"] { --accent: #5BE49B; --good: #5BE49B; --pos-d: #77ED8B; --warn-d: #FFD666; --info-d: #61F3F3; --neg-d: #FFAC82; --pri-d: #5BE49B; }
+.g1, .g3, .v1, .v2 { color: #1C252E !important; }
+.g1 { background: #22C55E !important; } .g3 { background: #FF5630 !important; }
+.v1 { background: #00A76F !important; } .v2 { background: #00B8D9 !important; } .v3 { background: #8E33FF !important; color: #FFFFFF !important; }
+.tv-views li:nth-child(1) b::before { background: #00A76F !important; } .tv-views li:nth-child(2) b::before { background: #00B8D9 !important; } .tv-views li:nth-child(3) b::before { background: #8E33FF !important; }
+:root[data-mode="dark"] .v3 { color: #FFFFFF !important; }
+.nx-all, .go, .rd { color: var(--accent) !important; }
