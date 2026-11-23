@@ -1,0 +1,53 @@
+/* atrams.cc motion styles. Paired with motion.js. All movement is off for reduced motion. */
+
+/* 1. Headline words: blur and rise, one after another */
+.tx-in .tx-w { display: inline-block; opacity: 0; filter: blur(8px); transform: translateY(12px); animation: txIn .7s cubic-bezier(.2,.7,.2,1) forwards; animation-delay: calc(var(--i) * 70ms + 120ms); }
+@keyframes txIn { to { opacity: 1; filter: blur(0); transform: none; } }
+
+/* 2. Text shimmer on the availability line */
+.otw { background: linear-gradient(100deg, var(--muted) 0%, var(--muted) 40%, var(--text) 50%, var(--muted) 60%, var(--muted) 100%); background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent !important; animation: shimmer 3.6s linear infinite; }
+.otw .dot { -webkit-text-fill-color: initial; }
+@keyframes shimmer { from { background-position: 100% 0; } to { background-position: -150% 0; } }
+
+/* 3. Spotlight on cards: a soft brand glow follows the cursor */
+.sp { position: relative; isolation: isolate; }
+.sp::after { content: ""; position: absolute; inset: 0; z-index: 2; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .3s;
+  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--brand) 12%, transparent), transparent 60%); }
+.sp:hover::after { opacity: 1; }
+/* tilt on the cover image */
+.sp .wk-thumb > * { transform: var(--tilt, none); transition: transform .35s cubic-bezier(.2,.7,.2,1); transform-origin: center; will-change: transform; }
+.sp .wk-thumb { perspective: 900px; }
+
+/* 4. Border trail on the featured card: a short line of light travels the edge */
+@property --bt { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.wk-feat { position: relative; }
+.wk-feat::before { content: ""; position: absolute; inset: 0; z-index: 3; border-radius: inherit; padding: 1.5px; pointer-events: none;
+  background: conic-gradient(from var(--bt), transparent 0deg, transparent 300deg, color-mix(in srgb, var(--brand) 70%, transparent) 340deg, var(--brand) 356deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+  animation: trail 7s linear infinite; }
+@keyframes trail { to { --bt: 360deg; } }
+
+/* 5. Animated tabs: one indicator slides between tabs */
+.vt-list.has-ind { position: relative; }
+.vt-list.has-ind .vt-tab { border-bottom-color: transparent !important; }
+.vt-ind { position: absolute; left: 0; bottom: -1px; height: 2px; border-radius: 2px; background: var(--brand); transition: transform .35s cubic-bezier(.2,.7,.2,1), width .35s cubic-bezier(.2,.7,.2,1); pointer-events: none; }
+
+/* 6. Reading progress */
+.rp { position: fixed; top: 0; left: 0; right: 0; z-index: 60; height: 3px; background: var(--brand); transform-origin: 0 50%; transform: scaleX(0); pointer-events: none; }
+
+/* 7. Buttons: a gentle lift and a sliding arrow */
+.btn { transition: transform .2s, box-shadow .2s, background-color .2s; }
+.btn:hover { transform: translateY(-1px); box-shadow: 0 8px 16px -8px rgba(28,37,46,.35); }
+.rd svg, .go svg, .rd .ar, .go .ar { transition: transform .25s cubic-bezier(.2,.7,.2,1); }
+.wk:hover .rd svg, .rd:hover svg, .card a:hover .go svg { transform: translateX(4px); }
+
+/* Reduced motion: everything still, everything visible */
+@media (prefers-reduced-motion: reduce) {
+  .tx-in .tx-w { opacity: 1; filter: none; transform: none; animation: none; }
+  .otw { animation: none; background: none; color: var(--muted) !important; -webkit-background-clip: border-box; background-clip: border-box; }
+  .wk-feat::before { animation: none; display: none; }
+  .vt-ind, .btn, .sp .wk-thumb > * { transition: none; }
+  .btn:hover { transform: none; }
+  .rp { display: none; }
+}
+.vh { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
