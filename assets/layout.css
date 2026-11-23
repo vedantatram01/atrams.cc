@@ -1,0 +1,68 @@
+/* atrams.cc layout, following Bootstrap 5's layout system
+   (no Bootstrap library is loaded; only its rules are followed).
+
+   Breakpoints  sm 576 · md 768 · lg 992 · xl 1200 · xxl 1400
+   Containers   100% · 540 · 720 · 960 · 1140 · 1320, with 12px side padding
+   Grid         12 columns, 24px gutters
+   Spacing      Bootstrap spacers 1–5: 4, 8, 16, 24, 48; sections use 2 × 48 = 96
+   Columns used
+     text column      col-lg-8 centred (col-xxl-7 on the widest screens)
+     wide figures     the full container
+     panels           col-lg-10 centred                                   */
+
+:root {
+  --gx: 24px;
+  --ctn: 100vw;
+  --s-1: 4px; --s0: 8px; --s1: 16px; --s2: 24px; --s3: 48px; --s4: 48px; --s5: 96px; --s6: 96px;
+}
+@media (min-width: 576px)  { :root { --ctn: 540px; } }
+@media (min-width: 768px)  { :root { --ctn: 720px; } }
+@media (min-width: 992px)  { :root { --ctn: 960px; } }
+@media (min-width: 1200px) { :root { --ctn: 1140px; } }
+@media (min-width: 1400px) { :root { --ctn: 1320px; } }
+
+/* derived widths (content box, gutters removed) */
+:root {
+  --w-full: calc(var(--ctn) - var(--gx));            /* col-12 */
+  --w-10:   calc(var(--ctn) * 10 / 12 - var(--gx));  /* col-10 */
+  --w-8:    calc(var(--ctn) * 8 / 12 - var(--gx));   /* col-8  */
+  --w-text: var(--w-full);
+}
+@media (max-width: 575.98px) { :root { --w-full: calc(100vw - var(--gx)); --w-10: var(--w-full); --w-8: var(--w-full); } }
+@media (min-width: 992px)  { :root { --w-text: var(--w-8); } }
+@media (min-width: 1400px) { :root { --w-text: calc(var(--ctn) * 7 / 12 - var(--gx)); } }
+
+/* containers */
+.wrap, .nav, .foot > div, footer .wrap { box-sizing: border-box; }
+.wrap { max-width: var(--ctn) !important; padding-left: calc(var(--gx) / 2) !important; padding-right: calc(var(--gx) / 2) !important; }
+.col { max-width: calc(var(--w-text) + var(--gx)) !important; padding-left: calc(var(--gx) / 2) !important; padding-right: calc(var(--gx) / 2) !important; }
+.nav { padding-left: max(calc(var(--gx) / 2), calc((100vw - var(--ctn)) / 2 + var(--gx) / 2)) !important; padding-right: max(calc(var(--gx) / 2), calc((100vw - var(--ctn)) / 2 + var(--gx) / 2)) !important; }
+
+/* wide figures: the full container */
+:root { --bw: var(--w-full) !important; }
+.table.bleed, .tv-stage { width: var(--w-full) !important; max-width: none !important; }
+
+/* panels: col-lg-10 */
+@media (min-width: 992px) {
+  .lanes, .study { --lw: var(--w-10) !important; --sw: var(--w-10) !important; }
+  #contribution .tv-areas, #outcomes .tv-out { --cw: var(--w-10) !important; width: var(--w-10) !important; margin-left: calc(50% - var(--w-10) / 2) !important; }
+  .title .meta, .title .glance { max-width: var(--w-10) !important; }
+}
+@media (max-width: 991.98px) {
+  .lanes, .study { --lw: var(--w-full) !important; --sw: var(--w-full) !important; }
+}
+
+/* 24px gutters in every grid of cards */
+.work .cases { column-gap: var(--gx) !important; row-gap: var(--s3) !important; }
+.tv-areas, .tv-out, .rounds, .mcards, .gal, .beta3, .kv, .trio, .tv-probs, .tv-oci, .flist, .srcs { column-gap: var(--gx) !important; }
+#contribution .tv-areas, .beta3, #outcomes .tv-out { row-gap: var(--gx) !important; }
+
+/* homepage cards follow the grid: 1 column below md, 2 from md, featured card 7/5 split from lg */
+@media (max-width: 767.98px) { .work .cases { grid-template-columns: minmax(0, 1fr) !important; } }
+@media (min-width: 768px) { .work .cases { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } .work .cases .wk-feat { grid-column: 1 / -1; } }
+@media (min-width: 992px) { .wk-feat.case { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr) !important; column-gap: var(--gx) !important; } }
+
+/* title block: meta and glance rows on col-lg-10, the hero image on the full container */
+@media (min-width: 992px) { .title .meta, .title .glance { width: var(--w-10) !important; } }
+@media (max-width: 991.98px) { .title .meta, .title .glance { width: var(--w-full) !important; } }
+.tv-stage { width: auto !important; max-width: calc(var(--w-full) + var(--gx)) !important; padding-left: calc(var(--gx) / 2) !important; padding-right: calc(var(--gx) / 2) !important; }

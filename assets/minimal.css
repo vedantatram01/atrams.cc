@@ -112,7 +112,7 @@ html, body { overflow-x: clip; }
 .vt-tab[aria-selected="true"] { border-bottom-color: #00A76F !important; color: var(--text) !important; }
 .btn { border-radius: 8px !important; font-weight: 700; }
 
-@media (max-width: 640px) {
+@media (max-width: 767.98px) {
   .sec h2 { font-size: 30px !important; line-height: 38px !important; }
   #contribution .tv-areas > div { padding: 20px !important; }
   .moment.breakout { padding: 24px !important; }
@@ -176,4 +176,4 @@ main h3:not(.h4):not(.k) { font-size: 20px !important; line-height: 28px !import
 .wk h3, .wk h3 a { font-size: 22px !important; }
 .srcs b { font-size: 40px; letter-spacing: -.02em; }
 .srcs .q b, .srcs li.q b { font-size: 18px; }
-@media (max-width: 640px) { .sec h2 { font-size: 28px !important; line-height: 36px !important; } }
+@media (max-width: 767.98px) { .sec h2 { font-size: 28px !important; line-height: 36px !important; } }
