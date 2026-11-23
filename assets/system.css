@@ -374,3 +374,32 @@ dialog.zv::backdrop { background: rgba(12,12,12,.94); }
 @media (max-width: 640px) { .rounds-2 > li { padding: var(--s1); } }
 .sb .sbw { font-weight: inherit; }
 @media (max-width: 420px) { .sb .sbw { display: none; } }
+
+/* ---------- Cards: one shared, structured language ---------- */
+.tv-areas { gap: var(--s1); }
+.tv-areas > div { display: flex; flex-direction: column; align-items: flex-start; padding: 28px 28px 0 !important; overflow: hidden; }
+.tv-areas .own { margin: 0 0 var(--s1); }
+.own.team { background: var(--mat); color: var(--soft); }
+.tv-areas h3.k, .tv-out .k, .mcards .nm, .rounds-2 h3 { font-family: var(--display); font-weight: 500 !important; letter-spacing: -.01em; }
+.tv-areas h3.k { margin: 0 0 var(--s0) !important; font-size: 20px !important; line-height: 28px !important; color: var(--text); }
+.tv-areas > div > p { margin: 0 0 var(--s2) !important; }
+.tv-areas .why { align-self: stretch; margin: auto -28px 0 !important; padding: var(--s1) 28px 20px; background: var(--mat); border-top: 1px solid var(--line); }
+.tv-areas .why span { display: block; font-size: 13px; line-height: 18px; color: var(--muted); }
+.tv-areas .why p { margin: 2px 0 0 !important; font-size: 15px !important; line-height: 22px !important; color: var(--text) !important; font-weight: 500; }
+.tv-out .k { font-size: 20px !important; line-height: 28px !important; }
+.tv-out .quiet-list li { position: relative; padding-left: 16px; list-style: none; }
+.tv-out .quiet-list { padding-left: 0; }
+.tv-out .quiet-list li::before { content: ""; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; border-radius: 2px; background: var(--muted); }
+.tv-out > div:nth-child(1) li::before { background: var(--good); } .tv-out > div:nth-child(2) li::before { background: var(--c1); } .tv-out > div:nth-child(3) li::before { background: var(--c2); }
+.mcards > div { background: var(--surface); }
+.mcards .nm { font-size: 20px !important; line-height: 28px !important; }
+@media (max-width: 640px) { .tv-areas > div { padding: 20px 20px 0 !important; } .tv-areas .why { margin: auto -20px 0 !important; padding: 14px 20px 16px; } }
+.nw { white-space: nowrap; }
+#contribution .tv-areas > div > .why { margin: auto -28px 0 !important; }
+#contribution .tv-areas > div > p:not(.k) { margin: 0 0 var(--s2) !important; color: var(--soft) !important; }
+#contribution .tv-areas > div > .why p { margin: 2px 0 0 !important; color: var(--text) !important; font-size: 15px !important; }
+@media (min-width: 1100px) {
+  #contribution .tv-areas, #outcomes .tv-out { --cw: min(960px, calc(100vw - 64px)); width: var(--cw); margin-left: calc(50% - var(--cw) / 2); }
+}
+@media (max-width: 640px) { #contribution .tv-areas > div > .why { margin: auto -20px 0 !important; } }
+#outcomes .tv-out + p { margin-top: var(--s2) !important; }
