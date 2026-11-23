@@ -66,3 +66,42 @@
 @media (min-width: 992px) { .title .meta, .title .glance { width: var(--w-10) !important; } }
 @media (max-width: 991.98px) { .title .meta, .title .glance { width: var(--w-full) !important; } }
 .tv-stage { width: auto !important; max-width: calc(var(--w-full) + var(--gx)) !important; padding-left: calc(var(--gx) / 2) !important; padding-right: calc(var(--gx) / 2) !important; }
+
+/* ---------- Design-review fixes ----------
+   Two widths only on case studies: the text column (col-8) and the wide column (col-10).
+   Everything wide (hero image, screenshots, tab sets, tables, galleries, panels,
+   title block, meta) shares the col-10 edges, so the page has two clean axes. */
+:root { --bw: var(--w-10) !important; }
+@media (max-width: 991.98px) { :root { --bw: var(--w-full) !important; } }
+.tv-stage, .table.bleed { max-width: calc(var(--bw) + var(--gx)) !important; width: auto !important; margin-left: auto !important; margin-right: auto !important; transform: none !important; }
+.table.bleed { width: var(--bw) !important; margin-left: 50% !important; transform: translateX(-50%) !important; max-width: none !important; }
+
+/* title block: left-aligned on the wide column, like the meta row under it */
+.title { text-align: left !important; max-width: calc(var(--bw) + var(--gx)) !important; margin-left: auto !important; margin-right: auto !important; padding-left: calc(var(--gx) / 2) !important; padding-right: calc(var(--gx) / 2) !important; }
+.title p, .title .rt { margin-left: 0 !important; margin-right: 0 !important; text-align: left !important; }
+.title p:not(.rt) { max-width: 720px !important; color: var(--soft) !important; font-size: 18px !important; line-height: 28px !important; }
+.title .meta, .title .glance { width: auto !important; max-width: none !important; margin-left: 0 !important; transform: none !important; }
+.title h1, :root[data-mode="dark"] .title h1 { background: none !important; -webkit-background-clip: border-box !important; background-clip: border-box !important; color: var(--text) !important; }
+.title .cap, .tv-stage .cap { margin-left: 0 !important; }
+
+/* homepage and about: section rules and footer on the container */
+.work, .about, .contact, .credit, .writing, .says { background-size: calc(100% - var(--gx)) 1px !important; }
+.sf-in { max-width: var(--ctn) !important; padding-left: calc(var(--gx) / 2) !important; padding-right: calc(var(--gx) / 2) !important; }
+
+/* no cards inside cards: findings are open blocks; the chart inside keeps its card */
+.tv-insight { padding: 0 !important; background: none !important; box-shadow: none !important; border-radius: 0 !important; margin-top: var(--s3) !important; }
+/* cards in a row size to their content */
+.beta3, #outcomes .tv-out, .tv-probs, .tv-good, .tv-halves { align-items: start !important; }
+/* small cards keep their inner padding and stay inside the text column */
+.tv-probs li, .tv-good li { padding: 16px 20px !important; }
+.tv-probs, .tv-good { width: auto !important; margin-left: 0 !important; margin-right: 0 !important; }
+/* captions under wide figures line up with the text column, not the image edge */
+@media (min-width: 992px) {
+  .col .breakout > figcaption, .col .breakout + .cap, .col figure.breakout .cap { padding-left: calc((var(--bw) - var(--w-text)) / 2) !important; padding-right: calc((var(--bw) - var(--w-text)) / 2) !important; max-width: none !important; }
+}
+/* grey bands end exactly where the gap to the next section ends, at every size */
+:root { --secgap: 96px; }
+@media (max-width: 767.98px) { :root { --secgap: 48px; } }
+main > .sec:nth-of-type(even)::before { bottom: calc(-1 * var(--secgap)) !important; }
+@media (max-width: 767.98px) { .title p:not(.rt) { font-size: 16px !important; line-height: 26px !important; } }
+@media (max-width: 767.98px) { .tv-et td:first-child, .tv-et td { width: auto !important; } .tv-et td:first-child { font-size: 16px; font-weight: 600; padding-top: 16px !important; } }
