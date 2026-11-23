@@ -772,13 +772,16 @@ td:first-child { width: 30%; }
 <section class="sec col" id="process" aria-labelledby="h-process">
   <h2 id="h-process">Designing while the product evolved</h2>
   <p>Our process ran in parallel, not in steps. While interfaces were being designed, the team was also preparing handoffs, checking what got built, testing with users and reading behavior data. Each stream fed the others.</p>
-  <ol class="tv-flow" aria-label="Four workstreams that ran in parallel and fed each other">
-    <li><b>Design and refine</b><span>Interfaces, components, interactions, visual consistency</span></li>
-    <li><b>Collaborate and review</b><span>Handoffs, checking builds against design, logging gaps</span></li>
-    <li><b>Research and evaluate</b><span>Usability testing, user feedback, behavior analytics</span></li>
-    <li><b>Synthesize and prioritize</b><span>Recurring patterns, severity, recommendations for the next release</span></li>
-  </ol>
-  <p class="cap">The four streams overlapped and fed back into each other throughout the three months.</p>
+  <figure class="lanes" aria-labelledby="lanes-cap">
+    <div class="ln-axis" aria-hidden="true"><span></span><div class="ln-m"><span>Month 1</span><span>Month 2</span><span>Month 3</span></div></div>
+    <ol class="ln-list" aria-label="Four workstreams that ran in parallel and fed each other">
+      <li class="ln1"><div class="ln-t"><b>Design and refine</b><span>Interfaces, components, interactions, visual consistency</span></div><div class="ln-bar" aria-hidden="true"><i></i></div></li>
+      <li class="ln2"><div class="ln-t"><b>Collaborate and review</b><span>Handoffs, checking builds against design, logging gaps</span></div><div class="ln-bar" aria-hidden="true"><i></i></div></li>
+      <li class="ln3"><div class="ln-t"><b>Research and evaluate</b><span>Usability testing, user feedback, behavior analytics</span></div><div class="ln-bar" aria-hidden="true"><i></i></div></li>
+      <li class="ln4"><div class="ln-t"><b>Synthesize and prioritize</b><span>Recurring patterns, severity, recommendations for the next release</span></div><div class="ln-bar" aria-hidden="true"><i></i></div></li>
+    </ol>
+    <figcaption class="cap" id="lanes-cap">The four streams ran side by side for the whole three months, and each fed back into the others.</figcaption>
+  </figure>
 </section>
 
 <section class="sec col" id="contribution" aria-labelledby="h-contrib">
