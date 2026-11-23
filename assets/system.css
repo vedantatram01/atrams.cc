@@ -330,3 +330,45 @@ dialog.zv::backdrop { background: rgba(12,12,12,.94); }
 .m-pre { margin-top: var(--s2) !important; color: var(--soft); }
 .pull { margin: var(--s2) 0 !important; padding-left: var(--s2); border-left: 2px solid var(--text); font-family: var(--display); font-size: clamp(20px, 2.1vw, 24px) !important; line-height: 1.4 !important; font-weight: 500; color: var(--text) !important; text-wrap: pretty; }
 @media (max-width: 760px) { .moment, .moment.breakout { grid-template-columns: 1fr; padding: var(--s2) 0 !important; } }
+
+/* ---------- Phase 5: research visible while scrolling ---------- */
+.flist, .rounds, .gal { list-style: none; margin: var(--s2) 0 0; padding: 0; }
+.flist > li { display: grid; grid-template-columns: 32px minmax(0,1fr); gap: var(--s1); padding: var(--s2) 0; border-top: 1px solid var(--line); }
+.flist > li:last-child { border-bottom: 1px solid var(--line); }
+.fl-n { font: 500 15px/24px var(--sans); color: var(--muted); font-variant-numeric: tabular-nums; }
+.fl-k, .rd-k { margin: 0; font-size: 14px; line-height: 20px; color: var(--muted); }
+.flist h3, .rounds h3 { margin: 2px 0 0; }
+.fl-m, .rd-c { margin: var(--s0) 0 0; color: var(--soft); }
+.fl-m b, .rd-c b { font-weight: 500; color: var(--text); }
+.fl-q { margin: var(--s1) 0 0; padding-left: var(--s1); border-left: 2px solid var(--line); font-style: italic; color: var(--soft); }
+.fl-d { margin-top: var(--s1); }
+.fl-d > summary { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 14px; line-height: 20px; font-weight: 500; color: var(--text); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 4px; list-style: none; }
+.fl-d > summary::-webkit-details-marker { display: none; }
+.fl-d > summary::after { content: "+"; font-weight: 400; color: var(--muted); }
+.fl-d[open] > summary::after { content: "−"; }
+.fl-d > summary:hover { text-decoration-color: currentColor; }
+.fl-d > p { margin: var(--s0) 0 0; color: var(--soft); }
+.rounds { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--s1); }
+.rounds-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.rounds > li { padding: var(--s2); border: 1px solid var(--line); border-radius: var(--r-m); background: var(--surface); }
+.rd-f { margin: 2px 0 0; font-size: 15px; line-height: 22px; font-weight: 500; color: var(--text); }
+.gal { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--s2); }
+.gal > li { min-width: 0; }
+.gal .gal-i { margin: 0; }
+.gal .gal-i img { width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; object-position: top left; }
+.gal .gal-i .cap { margin: var(--s0) 0 0; max-width: none; text-align: left; }
+.gal .gal-i .cap b { font-weight: 500; color: var(--text); }
+@media (max-width: 900px) { .rounds, .rounds-2 { grid-template-columns: minmax(0,1fr); } .gal { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 560px) { .gal { grid-template-columns: minmax(0,1fr); } .flist > li { grid-template-columns: 24px minmax(0,1fr); } }
+.rounds:not(.rounds-2) { grid-template-columns: minmax(0,1fr); gap: 0; }
+.rounds:not(.rounds-2) > li { display: grid; grid-template-columns: 180px minmax(0,1fr); column-gap: var(--s2); padding: var(--s1) 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: none; }
+.rounds:not(.rounds-2) > li:last-child { border-bottom: 1px solid var(--line); }
+.rounds:not(.rounds-2) .rd-k, .rounds:not(.rounds-2) .rd-f { grid-column: 1; }
+.rounds:not(.rounds-2) .rd-c, .rounds:not(.rounds-2) .fl-d { grid-column: 2; grid-row: 1 / span 3; }
+.rounds:not(.rounds-2) .fl-d { grid-row: auto; }
+.rounds:not(.rounds-2) .rd-c { margin: 0; grid-row: 1 / span 2; }
+.rounds:not(.rounds-2) .rd-f { font-size: 14px; line-height: 20px; }
+@media (max-width: 640px) { .rounds:not(.rounds-2) > li { display: block; } .rounds:not(.rounds-2) .rd-c { margin-top: var(--s0); } }
+.rounds-2 { grid-template-columns: minmax(0,1fr); }
+.rounds-2 > li { padding: var(--s2); }
+@media (max-width: 640px) { .rounds-2 > li { padding: var(--s1); } }

@@ -566,20 +566,14 @@ td .sub, th .sub { font-size: 13px; line-height: 18px; color: var(--muted); font
     <li><span class="sq" aria-hidden="true"><i class="k"></i><i class="k"></i><i class="k"></i><i class="k"></i><i class="k"></i><i class="k"></i><i></i><i></i><i></i></span><b>6 groups</b><span>After round 1</span></li>
     <li><span class="sq" aria-hidden="true"><i class="k"></i><i class="k"></i><i class="k"></i><i class="k"></i><i class="k"></i><i></i><i></i><i></i><i></i></span><b>5 groups</b><span>Final, after round 2</span></li>
   </ol>
-  <div class="vt" data-tabs="Card sort rounds">
-    <div class="vt-p" data-tab="Pilot" data-note="5 people">
-      <div class="kv"><div><b>5</b><span>people</span></div><div><b>9</b><span>groups</span></div><div><b>20</b><span>cards</span></div></div>
-      <div class="vs"><div class="got"><small>What we saw</small><p>Parks, Events and Passes grouped together. “American Stories” and “Preservation” were confused.</p></div><div class="exp"><small>What we changed</small><p>“Visiting the Parks” became “Visitor’s Guide”. Preservation became “Historical Preservation”. “Science &amp; Research” became “Science &amp; Discovery”.</p></div></div>
-    </div>
-    <div class="vt-p" data-tab="Round 1" data-note="5 people">
-      <div class="kv"><div><b>5</b><span>people</span></div><div><b>9</b><span>groups</span></div><div><b>19</b><span>cards</span></div></div>
-      <div class="vs"><div class="got"><small>What we saw</small><p>Heritage Sites sorted cleanly. Education &amp; Training reached 100% agreement. Scholarly Publications still scattered.</p></div><div class="exp"><small>What we changed</small><p>Cut from 9 groups to 6, removing About Us, Educators and Photos &amp; Multimedia.</p></div></div>
-    </div>
-    <div class="vt-p" data-tab="Round 2" data-note="5 people">
-      <div class="kv"><div><b>5</b><span>people</span></div><div><b>80–100%</b><span>agreement on most cards</span></div><div><b>19</b><span>cards</span></div></div>
-      <div class="vs"><div class="got"><small>What we saw</small><p>Two outliers: Education &amp; Training spread across 5 groups, and 60% of people put Scholarly Publications in “I don’t know”.</p></div><div class="exp"><small>What we changed</small><p>We stopped here, with 5 groups: Visitor’s Guide, History, Science &amp; Nature, Kids, and Supporting NPS.</p></div></div>
-    </div>
-  </div>
+  <ol class="rounds" role="list" aria-label="Card sort rounds">
+    <li><p class="rd-k">Pilot</p><p class="rd-f">5 people · 9 groups · 20 cards</p><p class="rd-c"><b>What we changed:</b> “Visiting the Parks” became “Visitor’s Guide”. Preservation became “Historical Preservation”. “Science &amp; Research” became “Science &amp; Discovery”.</p>
+      <details class="fl-d"><summary>What we saw</summary><p>Parks, Events and Passes grouped together. “American Stories” and “Preservation” were confused.</p></details></li>
+    <li><p class="rd-k">Round 1</p><p class="rd-f">5 people · 9 groups · 19 cards</p><p class="rd-c"><b>What we changed:</b> Cut from 9 groups to 6, removing About Us, Educators and Photos &amp; Multimedia.</p>
+      <details class="fl-d"><summary>What we saw</summary><p>Heritage Sites sorted cleanly. Education &amp; Training reached 100% agreement. Scholarly Publications still scattered.</p></details></li>
+    <li><p class="rd-k">Round 2</p><p class="rd-f">5 people · 80–100% agreement on most cards · 19 cards</p><p class="rd-c"><b>What we changed:</b> We stopped here, with 5 groups: Visitor’s Guide, History, Science &amp; Nature, Kids, and Supporting NPS.</p>
+      <details class="fl-d"><summary>What we saw</summary><p>Two outliers: Education &amp; Training spread across 5 groups, and 60% of people put Scholarly Publications in “I don’t know”.</p></details></li>
+  </ol>
   <p class="cap">Participants for every card sort and tree test came from DePaul’s research participant pool, mostly students, with a different group each round. We didn’t screen for NPS visitors, teachers or volunteers, which limits how far the results reach.</p>
 </section>
 
@@ -601,10 +595,12 @@ td .sub, th .sub { font-size: 13px; line-height: 18px; color: var(--muted); font
   </table></div>
     <figcaption class="cap">Success rate: the share of participants who chose the correct destination. Number of participants in brackets.</figcaption>
   </figure>
-  <div class="vt" data-tabs="What each round told us">
-    <div class="vt-p" data-tab="After the pilot"><h3>The same test, much worse results</h3><div class="vs"><div class="got"><small>What happened</small><p>The pilot went well, so we ran round 1 with the same tasks and menu. Success fell, to 22% for field trips. With small, different groups, the pilot had flattered us.</p></div><div class="exp"><small>What we changed</small><p>We rewrote tasks that leaked the answer or misled: “geology” sent people to Science &amp; Nature, and “family” to Kids. “Educators” became “Teaching &amp; Education”.</p></div></div></div>
-    <div class="vt-p" data-tab="After round 2"><h3>One clear win, two open problems</h3><div class="vs"><div class="got"><small>What happened</small><p>Camping rose to 80%. Field trips reached 40%, with answers split between Visitor’s Guide, Science &amp; Nature and Kids. Volunteering fell to 50%: people looked in Visitor’s Guide, not Supporting NPS.</p></div><div class="exp"><small>What it told us</small><p>People understood our labels but couldn’t use them to reach a goal. We believe that’s partly content strategy and partly our guesses about NPS users’ goals, made without time for user or stakeholder interviews.</p></div></div></div>
-  </div>
+  <ol class="rounds rounds-2" role="list" aria-label="What each round told us">
+    <li><p class="rd-k">After the pilot</p><h3>The same test, much worse results</h3><p class="rd-c"><b>What we changed:</b> We rewrote tasks that leaked the answer or misled: “geology” sent people to Science &amp; Nature, and “family” to Kids. “Educators” became “Teaching &amp; Education”.</p>
+      <details class="fl-d"><summary>What happened in the test</summary><p>The pilot went well, so we ran round 1 with the same tasks and menu. Success fell, to 22% for field trips. With small, different groups, the pilot had flattered us.</p></details></li>
+    <li><p class="rd-k">After round 2</p><h3>One clear win, two open problems</h3><p class="rd-c"><b>What it told us:</b> People understood our labels but couldn’t use them to reach a goal. We believe that’s partly content strategy and partly our guesses about NPS users’ goals, made without time for user or stakeholder interviews.</p>
+      <details class="fl-d"><summary>What happened in the test</summary><p>Camping rose to 80%. Field trips reached 40%, with answers split between Visitor’s Guide, Science &amp; Nature and Kids. Volunteering fell to 50%: people looked in Visitor’s Guide, not Supporting NPS.</p></details></li>
+  </ol>
   <h3 class="sub-h">Where the wrong answers went</h3>
   <p>Success rates hide the more useful question: where did people look instead? In round 2, these were the sections people chose when they missed.</p>
   <div class="paths">
