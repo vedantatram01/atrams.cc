@@ -568,3 +568,83 @@ dialog.zv::backdrop { background: rgba(12,12,12,.94); }
 :root { --cat: #B8337D; } :root[data-mode="dark"] { --cat: #F08BC4; }
 .lc-s1 { color: var(--cat) !important; } .lc-keys button:nth-child(2) i { color: var(--cat) !important; }
 .ln3 { --lc: color-mix(in srgb, var(--cat) 45%, var(--surface)); }
+
+/* ---------- Visual hierarchy: one scale, one alignment axis, proximity ----------
+   Level 1  h2       32/40 display      the section's claim
+   Level 2  h3       20/28 display      a sub-point inside it
+   Level 3  label    14/20 medium muted names what follows, sits tight above it
+   Body     16/24                       the explanation
+   Note     14/22 muted, left-aligned   captions, sources, caveats
+   Spacing  a heading is always closer to its own content than to what came before. */
+main h3:not(.h4):not(.k) { line-height: 28px !important; }
+.fl-k, .rd-k, .st-k, .chap .k, .finding .k, .tv-insight .n {
+  font-size: 14px !important; line-height: 20px !important; font-weight: 500 !important; font-style: normal !important; color: var(--muted) !important; letter-spacing: 0;
+}
+.sub-h { margin-top: var(--s3) !important; margin-bottom: 0 !important; }
+.sub-h + * { margin-top: var(--s1) !important; }
+.sec h2 + :not(p) { margin-top: 24px !important; }
+.tv-shift + * { margin-top: var(--s1) !important; }
+.cap { text-align: left !important; font-style: normal !important; color: var(--muted) !important; margin-left: 0 !important; margin-right: 0 !important; }
+.lanes .cap, .study .cap { max-width: none; }
+.moment .m-src, .m-src { color: var(--muted); }
+.flist > li { grid-template-columns: minmax(0, 1fr) !important; }
+.tv-insight h3 { margin-top: 0 !important; }
+
+/* ---------- Plainer, hand-set components (no stock AI card patterns) ----------
+   Flat surfaces, hairlines and type do the work. No drop shadows, sheens,
+   pill tags, tinted triplets or coloured edge stripes. Glass stays only on
+   things that float over content, like the navigation. */
+.study, .lanes, .tv-areas > div, .tv-out > div, .rounds-2 > li, .mcards > div, .tv-chart, .gal .tv-shot {
+  background-image: none !important; box-shadow: none !important;
+}
+.own { box-shadow: none; }
+
+/* contribution: two columns of plain entries under a hairline */
+#contribution .tv-areas { gap: 0 var(--s3); }
+#contribution .tv-areas > div { padding: 20px 0 var(--s2) !important; border: 0 !important; border-top: 1px solid var(--text) !important; border-radius: 0 !important; background: none !important; overflow: visible; }
+#contribution .tv-areas .own { order: 2; margin: 0 0 var(--s0); padding: 0; background: none; font-size: 13px; line-height: 18px; font-weight: 500; color: var(--muted); }
+#contribution .tv-areas .own:not(.team) { color: color-mix(in srgb, var(--pos) 85%, var(--text)); }
+#contribution .tv-areas .own:not(.team)::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 6px; border-radius: 50%; background: var(--pos); vertical-align: 1px; }
+#contribution .tv-areas h3.k { order: 1; margin-bottom: 4px !important; }
+#contribution .tv-areas > div > p:not(.k) { order: 3; margin: 0 !important; }
+#contribution .tv-areas > div > .why { order: 4; margin: var(--s1) 0 0 !important; padding: 0 !important; background: none !important; border: 0 !important; }
+#contribution .tv-areas .why span { display: inline; font-size: 15px; color: var(--muted); }
+#contribution .tv-areas .why span::after { content: ": "; }
+#contribution .tv-areas > div > .why p { display: inline; }
+@media (max-width: 640px) { #contribution .tv-areas > div { padding: var(--s1) 0 20px !important; } }
+
+/* observation → consequence → implication: one row of text, no tinted boxes */
+.tv-oci { gap: 0 !important; border-top: 1px solid var(--line); }
+.tv-oci > div, .tv-oci > div:last-child { padding: 12px var(--s1) 0 0 !important; background: none !important; border-radius: 0 !important; }
+.tv-oci > div + div { padding-left: var(--s1) !important; border-left: 1px solid var(--line); }
+.tv-oci dt { color: var(--muted) !important; }
+.tv-oci > div:last-child dd { font-weight: 500; color: var(--text); }
+@media (max-width: 760px) { .tv-oci > div + div { padding-left: 0 !important; border-left: 0; border-top: 1px solid var(--line); margin-top: 12px; } }
+
+/* outcomes and problem lists: hairline above, no boxes or coloured top edges */
+.tv-out > div, .tv-out > div:nth-child(n) { padding: var(--s1) 0 0 !important; border: 0 !important; border-top: 1px solid var(--text) !important; border-radius: 0 !important; background: none !important; }
+#outcomes .tv-out { gap: var(--s3); }
+.tv-probs li, .tv-good li { padding: 12px 0 0 !important; border: 0 !important; border-top: 1px solid var(--line) !important; border-radius: 0 !important; background: none !important; }
+
+/* priority: a dot and a word, not a pill */
+.pr, .pr.c, .pr.h { padding: 0 !important; background: none !important; font-weight: 500 !important; }
+.pr::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 6px; border-radius: 50%; vertical-align: 1px; }
+.pr.c::before { background: var(--neg); } .pr.h::before { background: var(--warn); }
+.pr.c { color: color-mix(in srgb, var(--neg) 85%, var(--text)) !important; } .pr.h { color: color-mix(in srgb, var(--warn) 85%, var(--text)) !important; }
+
+/* Beta readiness: three short lists instead of 13 striped cards */
+.beta3 { display: grid; grid-template-columns: 1fr 1.3fr 1.3fr; gap: var(--s3); margin: var(--s2) 0 0; }
+.beta3 > div { border-top: 1px solid var(--text); padding-top: 12px; }
+.b-h { display: flex; align-items: baseline; gap: 8px; margin: 0 0 var(--s0); font-family: var(--display); font-size: 17px; line-height: 24px; font-weight: 500; }
+.b-h i { flex: none; width: 8px; height: 8px; border-radius: 50%; align-self: center; }
+.b-h span { margin-left: auto; font-family: var(--sans); font-size: 14px; font-weight: 400; color: var(--muted); font-variant-numeric: tabular-nums; }
+.b-r .b-h i { background: var(--pos); } .b-p .b-h i { background: var(--warn); } .b-n .b-h i { background: var(--neg); }
+.b-l { list-style: none; margin: 0; padding: 0; }
+.b-l li { padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 15px; line-height: 22px; color: var(--soft); }
+.b-l li:last-child { border-bottom: 0; }
+@media (max-width: 760px) { .beta3 { grid-template-columns: minmax(0, 1fr); gap: var(--s2); } }
+
+/* the view chart compares options, so it uses category colours, not good/bad */
+.v2 { background: var(--cat) !important; } .v3 { background: var(--pend) !important; }
+.tv-views li:nth-child(2) b::before { background: var(--cat) !important; } .tv-views li:nth-child(3) b::before { background: var(--pend) !important; }
+.tv-good li, .tv-probs li { border-top-color: var(--line) !important; }
