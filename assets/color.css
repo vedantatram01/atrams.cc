@@ -113,3 +113,13 @@
 .sk-cal span, .sk-cal i { color: var(--muted) !important; }
 .sk-cal b { background: var(--brand-d) !important; color: #FFFFFF !important; }
 :root[data-mode="dark"] .sk-cal b { color: var(--g900) !important; }
+
+/* ---------- Employer logos: monochrome, in the neutral ink ---------- */
+.cos { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 32px; margin: var(--s2) 0 0; padding: 0; list-style: none; }
+.cos li { display: flex; align-items: center; gap: 12px; }
+.co-k { font-size: 13px; line-height: 18px; color: var(--muted); }
+.co-logo { display: block; height: 18px; width: auto; color: var(--soft); }
+.co-txt { font-family: var(--display); font-weight: 700; font-size: 17px; line-height: 18px; letter-spacing: -.01em; color: var(--soft); }
+.co-b { display: flex !important; align-items: center; min-height: 24px; margin-bottom: 4px; }
+.co-b .co-logo { height: 20px; color: var(--text); }
+.co-b .co-txt { font-size: 18px; color: var(--text); }
