@@ -1,0 +1,115 @@
+/* atrams.cc colour system. One file, one job per colour. Loaded last.
+
+   Neutrals  Minimal's blue-grey scale: every text colour, line and surface.
+   Brand     green. Links, actions, selected states, big numbers, and anything
+             "good": ready, kept, on my own, implication.
+   Risk      coral. Risk, critical, not ready, severity.
+   Caution   amber. High priority, partly ready.
+   Unknown   grey. To test, still to validate, shared team work.
+   Compare   cyan, purple, slate. Only for charts that compare options or
+             tasks; never for a status, so no chart line reads as good or bad.
+
+   Fills use the main step; text on white uses the dark step (4.5:1 or more);
+   soft fills are the main step at 16%. Dark mode swaps in the light steps. */
+
+:root {
+  /* neutrals (Minimal grey) */
+  --g0: #FFFFFF; --g50: #FCFDFD; --g100: #F9FAFB; --g200: #F4F6F8; --g300: #DFE3E8; --g400: #C4CDD5;
+  --g500: #919EAB; --g600: #637381; --g700: #454F5B; --g800: #1C252E; --g900: #141A21;
+
+  --brand: #00A76F; --brand-d: #007867; --brand-dd: #004B50; --brand-soft: rgba(0,167,111,.12); --brand-l: #5BE49B;
+  --risk: #FF5630;  --risk-d: #B71D18;  --risk-dd: #7A0916;  --risk-soft: rgba(255,86,48,.14);
+  --warn: #FFAB00;  --warn-d: #B76E00;  --warn-dd: #7A4100;  --warn-soft: rgba(255,171,0,.16);
+  --unk: #919EAB;   --unk-d: #637381;   --unk-dd: #454F5B;   --unk-soft: rgba(145,158,171,.16);
+  --cmp1: #00B8D9; --cmp2: #8E33FF; --cmp3: #637381;
+
+  /* every older name now points at these roles */
+  --text: var(--g800); --soft: var(--g700); --muted: var(--g600); --line: rgba(145,158,171,.24);
+  --bg: var(--g0); --surface: var(--g0); --mat: var(--g200);
+  --accent: var(--brand-d); --accent-ink: #FFFFFF; --accent-soft: var(--brand-soft);
+  --good: var(--brand-d); --pos: var(--brand); --pos-d: var(--brand-dd); --c3: var(--brand);
+  --neg: var(--risk); --neg-d: var(--risk-dd); --c2: var(--risk);
+  --warn-d: var(--warn-dd);
+  --pend: var(--unk); --pend-d: var(--unk-dd); --info: var(--unk); --info-d: var(--unk-dd);
+  --c1: var(--cmp1); --cat: var(--cmp2); --pri-d: var(--brand-d);
+}
+:root[data-mode="dark"] {
+  --brand: #5BE49B; --brand-d: #5BE49B; --brand-dd: #C8FAD6; --brand-soft: rgba(91,228,155,.14); --brand-l: #5BE49B;
+  --risk: #FF8A6A;  --risk-d: #FFAC82;  --risk-dd: #FFD3C2;  --risk-soft: rgba(255,86,48,.2);
+  --warn: #FFC94D;  --warn-d: #FFD666;  --warn-dd: #FFE9A6;  --warn-soft: rgba(255,171,0,.2);
+  --unk: #919EAB;   --unk-d: #C4CDD5;   --unk-dd: #DFE3E8;   --unk-soft: rgba(145,158,171,.2);
+  --cmp1: #61F3F3; --cmp2: #C684FF; --cmp3: #919EAB;
+  --text: #FFFFFF; --soft: var(--g400); --muted: var(--g500); --line: rgba(145,158,171,.16);
+  --bg: var(--g900); --surface: var(--g800); --mat: #28323D;
+  --accent: var(--brand); --accent-ink: var(--g900);
+}
+
+/* ---------- Brand ---------- */
+.otw .dot, .otw .dot::after { background: var(--brand) !important; }
+.moment.breakout, .moment:not(.breakout) { background: var(--brand-soft) !important; }
+.moment .m-num { background: none !important; -webkit-background-clip: border-box !important; background-clip: border-box !important; color: var(--brand-d) !important; }
+.pull { border-left-color: var(--brand) !important; }
+.srcs li:nth-child(-n+3) b { color: var(--brand-d) !important; }
+.trk li::before { background: var(--brand-soft) !important; } .trk li:first-child::before { background: var(--brand) !important; } .trk li::after { background: var(--brand-soft) !important; }
+.vt-tab[aria-selected="true"] { border-bottom-color: var(--brand) !important; }
+.tv-oci > div:last-child { background: var(--brand-soft) !important; } .tv-oci > div:last-child dt { color: var(--brand-d) !important; }
+.pmx-c[data-z="Do next"] { background: var(--brand-soft) !important; }
+.tv-ba > .aft { border-color: var(--brand) !important; } .tv-ba .aft small { color: var(--brand-d) !important; }
+
+/* workstream lanes all ran at once, so they share one colour */
+.ln1, .ln2, .ln3, .ln4 { --lc: var(--brand) !important; }
+.ln2 .ln-bar i { opacity: .8; } .ln3 .ln-bar i { opacity: .65; } .ln4 .ln-bar i { opacity: .5; }
+
+/* ---------- Status: good / risk / caution / unknown ---------- */
+.g1 { background: var(--brand) !important; color: var(--g800) !important; }
+.g1b { background: color-mix(in srgb, var(--brand) 45%, var(--surface)) !important; }
+.g3 { background: var(--risk) !important; color: var(--g800) !important; }
+.g2 { background: var(--warn-soft) !important; color: var(--text) !important; }
+.g4 { background: var(--unk-soft) !important; color: var(--unk-dd) !important; box-shadow: inset 0 0 0 1px var(--line) !important; }
+:root[data-mode="dark"] .g1 { color: var(--g900) !important; }
+.sb-key .g1 { background: var(--brand) !important; } .sb-key .g3 { background: var(--risk) !important; } .sb-key .g4 { background: var(--unk-soft) !important; }
+
+.own { background: var(--brand-soft) !important; color: var(--brand-dd) !important; }
+.own.team { background: var(--unk-soft) !important; color: var(--unk-dd) !important; }
+.pr.c { background: var(--risk-soft) !important; color: var(--risk-dd) !important; }
+.pr.h { background: var(--warn-soft) !important; color: var(--warn-dd) !important; }
+
+.b-r .b-h i { background: var(--brand) !important; } .b-p .b-h i { background: var(--warn) !important; } .b-n .b-h i { background: var(--risk) !important; }
+.tv-out > div:nth-child(1) li::before { background: var(--brand) !important; }
+.tv-out > div:nth-child(2) li::before { background: var(--g500) !important; }
+.tv-out > div:nth-child(3) li::before { background: var(--unk) !important; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--g600); background: transparent !important; }
+.tg-rows .r .to { color: var(--brand-d) !important; }
+.sev i.on { background: var(--risk) !important; }
+.eb i { background: linear-gradient(90deg, var(--brand) var(--v), var(--mat) var(--v)) !important; }
+.eb li:nth-child(n+5) i { background: linear-gradient(90deg, var(--risk) var(--v), var(--mat) var(--v)) !important; }
+
+/* ---------- Compare (charts of options, never status) ---------- */
+.lc-s0 { color: var(--cmp1) !important; } .lc-s1 { color: var(--cmp2) !important; } .lc-s2 { color: var(--cmp3) !important; }
+.lc-keys button:nth-child(1) i { color: var(--cmp1) !important; } .lc-keys button:nth-child(2) i { color: var(--cmp2) !important; } .lc-keys button:nth-child(3) i { color: var(--cmp3) !important; }
+.v1 { background: var(--cmp1) !important; color: var(--g800) !important; }
+.v2 { background: var(--cmp2) !important; color: #FFFFFF !important; }
+.v3 { background: var(--cmp3) !important; color: #FFFFFF !important; }
+:root[data-mode="dark"] .v1, :root[data-mode="dark"] .v2, :root[data-mode="dark"] .v3 { color: var(--g900) !important; }
+.tv-views li:nth-child(1) b::before { background: var(--cmp1) !important; } .tv-views li:nth-child(2) b::before { background: var(--cmp2) !important; } .tv-views li:nth-child(3) b::before { background: var(--cmp3) !important; }
+
+/* ---------- Neutrals: no stray greys or blacks ---------- */
+.sk-f { border-color: var(--g300) !important; background: var(--surface) !important; color: var(--g600) !important; }
+.sk-row .sk-f { color: var(--text) !important; }
+
+/* homepage covers: one family of soft tints drawn from the same palette */
+.t-tv .wk-thumb { background: #E6F6EE !important; }
+.t-wh .wk-thumb { background: #F1E9FB !important; }
+.t-np .wk-thumb { background: #FBF3E0 !important; }
+.t-io .wk-thumb { background: #EEF1F4 !important; }
+.t-cv .wk-thumb { background: #E3F5F8 !important; }
+:root[data-mode="dark"] .t-tv .wk-thumb { background: #18302A !important; }
+:root[data-mode="dark"] .t-wh .wk-thumb { background: #261F33 !important; }
+:root[data-mode="dark"] .t-np .wk-thumb { background: #2E2818 !important; }
+:root[data-mode="dark"] .t-io .wk-thumb { background: #222B35 !important; }
+:root[data-mode="dark"] .t-cv .wk-thumb { background: #16303A !important; }
+.moment .m-src, .moment .m-pre { color: var(--soft) !important; }
+.sk-f { color: var(--muted) !important; } .sk-f.sk-on { color: var(--text) !important; }
+.sk-cal { border-color: var(--g300) !important; background: var(--surface) !important; color: var(--muted) !important; }
+.sk-cal span, .sk-cal i { color: var(--muted) !important; }
+.sk-cal b { background: var(--brand-d) !important; color: #FFFFFF !important; }
+:root[data-mode="dark"] .sk-cal b { color: var(--g900) !important; }
