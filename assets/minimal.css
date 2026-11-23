@@ -1,5 +1,5 @@
 /* atrams.cc visual layer, after Minimal UI (minimals.cc)
-   Public Sans for text, Barlow for headings, green primary, soft 16px cards
+   Public Sans for text, Montserrat for headings, green primary, soft 16px cards
    with a light shadow, tinted labels, and alternating neutral sections.
    Loaded after system.css on every page. */
 
@@ -166,3 +166,14 @@ html, body { overflow-x: clip; }
 .tv-views li:nth-child(1) b::before { background: #00A76F !important; } .tv-views li:nth-child(2) b::before { background: #00B8D9 !important; } .tv-views li:nth-child(3) b::before { background: #8E33FF !important; }
 :root[data-mode="dark"] .v3 { color: #FFFFFF !important; }
 .nx-all, .go, .rd { color: var(--accent) !important; }
+
+/* ---------- Headings in Montserrat (body stays Public Sans) ---------- */
+:root { --display: "Montserrat", "Public Sans", system-ui, sans-serif; }
+h1, h2, h3, .title h1 { letter-spacing: -.01em !important; }
+.title h1 { font-size: clamp(44px, 5.4vw, 64px) !important; }
+.sec h2 { font-size: 36px !important; line-height: 44px !important; }
+main h3:not(.h4):not(.k) { font-size: 20px !important; line-height: 28px !important; }
+.wk h3, .wk h3 a { font-size: 22px !important; }
+.srcs b { font-size: 40px; letter-spacing: -.02em; }
+.srcs .q b, .srcs li.q b { font-size: 18px; }
+@media (max-width: 640px) { .sec h2 { font-size: 28px !important; line-height: 36px !important; } }
