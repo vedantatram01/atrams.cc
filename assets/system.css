@@ -372,3 +372,5 @@ dialog.zv::backdrop { background: rgba(12,12,12,.94); }
 .rounds-2 { grid-template-columns: minmax(0,1fr); }
 .rounds-2 > li { padding: var(--s2); }
 @media (max-width: 640px) { .rounds-2 > li { padding: var(--s1); } }
+.sb .sbw { font-weight: inherit; }
+@media (max-width: 420px) { .sb .sbw { display: none; } }
