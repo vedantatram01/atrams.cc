@@ -6,20 +6,21 @@
              Sizes: 12, 14, 16, 20, 24, 32, 48, 64.  Line heights: 16, 20, 24, 28, 32, 40, 56, 72.
    Spacing   4, 8, 16, 32, 48, 64, 96, 128.
    Corners   4px for controls, 5px for cards and frames. Nothing rounder.
-   Colour    Neutral ground, ink and surfaces, one blue accent. */
+   Colour    Neutral ground, ink and surfaces, one blue accent, and five semantic roles
+             (info, pos, neg, warn, pend) plus one category colour for comparison charts. */
 
 :root {
   --s-1: 4px; --s0: 8px; --s1: 16px; --s2: 32px; --s3: 48px; --s4: 64px; --s5: 96px; --s6: 128px;
   --r-s: 4px; --r-m: 5px; --r-l: 5px;
   --bg: #FAFAF9; --surface: #FFFFFF; --mat: #F1F1EF; --text: #111111; --soft: #3D3D3D; --muted: #6B6B6B; --line: #E4E4E1;
-  --accent: #2747B8; --accent-ink: #FFFFFF; --accent-soft: rgba(39,71,184,.08);
+  --accent: #2F57E0; --accent-ink: #FFFFFF; --accent-soft: rgba(47,87,224,.08);
   --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --display: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
   color-scheme: light;
 }
 :root[data-mode="dark"] {
   --bg: #141414; --surface: #1C1C1C; --mat: #222222; --text: #F2F2F0; --soft: #CACAC7; --muted: #9A9A97; --line: #2D2D2D;
-  --accent: #A3B3F0; --accent-ink: #111111; --accent-soft: rgba(163,179,240,.12);
+  --accent: #8FA7FF; --accent-ink: #111111; --accent-soft: rgba(143,167,255,.12);
   color-scheme: dark;
 }
 
@@ -107,8 +108,18 @@
 @media (max-width: 480px) { .title .meta { grid-template-columns: 1fr !important; gap: var(--s1) !important; } }
 
 /* ===== Case-study data views (assets/viz.js) ===== */
-:root { --c1: #2747B8; --c2: #B4561F; --c3: #2F7A55; --good: #2F7A55; }
-:root[data-mode="dark"] { --c1: #A3B3F0; --c2: #E9A070; --c3: #7CC7A0; --good: #7CC7A0; }
+/* Semantic colours. Roles, not decoration:
+   info = blue (neutral data, links), pos = green (good, done, kept),
+   neg = coral (risk, critical, broken), warn = amber (high, partial),
+   pend = violet (not yet known, needs a test). Each has a -soft fill. */
+:root {
+  --info: #2F57E0; --pos: #0B7D57; --neg: #C83A21; --warn: #A86200; --pend: #6B4FD6;
+  --c1: var(--info); --c2: var(--neg); --c3: var(--pos); --good: var(--pos);
+}
+:root[data-mode="dark"] {
+  --info: #8FA7FF; --pos: #4CCB9A; --neg: #FF8A72; --warn: #F2B24E; --pend: #B4A2FF;
+}
+:root { --info-soft: color-mix(in srgb, var(--info) 12%, var(--surface)); --pos-soft: color-mix(in srgb, var(--pos) 12%, var(--surface)); --neg-soft: color-mix(in srgb, var(--neg) 12%, var(--surface)); --warn-soft: color-mix(in srgb, var(--warn) 14%, var(--surface)); --pend-soft: color-mix(in srgb, var(--pend) 14%, var(--surface)); }
 
 /* Tabs */
 .vt { margin-top: var(--s2); }
@@ -536,3 +547,24 @@ dialog.zv::backdrop { background: rgba(12,12,12,.94); }
 @media (max-width: 1471px) {
   body .toc { background: color-mix(in srgb, var(--bg) 62%, transparent); -webkit-backdrop-filter: blur(20px) saturate(170%); backdrop-filter: blur(20px) saturate(170%); box-shadow: inset 0 1px 0 var(--gl-hi); }
 }
+
+/* ---------- Semantic colour roles applied ---------- */
+.g4 { background: var(--pend-soft) !important; color: color-mix(in srgb, var(--pend) 75%, var(--text)) !important; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--pend) 30%, transparent); }
+.sb-key .g4 { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--pend) 45%, transparent); }
+.g2 { background: var(--warn-soft) !important; }
+.own { background: var(--pos-soft); color: color-mix(in srgb, var(--pos) 80%, var(--text)); }
+.own.team { background: var(--info-soft); color: color-mix(in srgb, var(--info) 75%, var(--text)); }
+.pr.c { background: var(--neg-soft) !important; color: color-mix(in srgb, var(--neg) 80%, var(--text)) !important; }
+.pr.h { background: var(--warn-soft) !important; color: color-mix(in srgb, var(--warn) 80%, var(--text)) !important; }
+.tv-prio > div:nth-child(2) .sq i { background: var(--warn) !important; }
+.tv-beta .p { border-left-color: var(--warn) !important; } .tv-beta .p b { color: color-mix(in srgb, var(--warn) 85%, var(--text)) !important; }
+.tv-out > div:nth-child(3) { border-top-color: var(--pend) !important; } .tv-out > div:nth-child(3) li::before { background: var(--pend); }
+.ln4 { --lc: color-mix(in srgb, var(--pend) 50%, var(--surface)); }
+.ln1 { --lc: color-mix(in srgb, var(--info) 55%, var(--surface)); } .ln2 { --lc: color-mix(in srgb, var(--pos) 55%, var(--surface)); } .ln3 { --lc: color-mix(in srgb, var(--neg) 50%, var(--surface)); }
+.pmx-c[data-z="Do next"] { background: var(--pos-soft); }
+.tv-oci > div:last-child { background: var(--pos-soft) !important; }
+/* Charts that compare categories use non-judgement colours */
+.lc-s1 { color: var(--pend) !important; } .lc-keys button:nth-child(2) i { color: var(--pend) !important; }
+:root { --cat: #B8337D; } :root[data-mode="dark"] { --cat: #F08BC4; }
+.lc-s1 { color: var(--cat) !important; } .lc-keys button:nth-child(2) i { color: var(--cat) !important; }
+.ln3 { --lc: color-mix(in srgb, var(--cat) 45%, var(--surface)); }
