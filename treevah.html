@@ -454,7 +454,7 @@ td:first-child { width: 30%; }
 .frame { border-radius: 5px !important; }
 @media (min-width: 641px) { .menu { padding: 3px; } .menu .pill { border-radius: 3px !important; } }
 </style>
-<link rel="stylesheet" href="assets/system.css?v=202611230556">
+<link rel="stylesheet" href="assets/system.css?v=202611230559">
 <style>
 /* ---- Treevah ---- */
 .tv-shot { border: 1px solid var(--line); border-radius: 5px; overflow: hidden; background: #fff; box-shadow: 0 24px 48px -32px rgba(0,0,0,.3); }
@@ -888,20 +888,28 @@ td:first-child { width: 30%; }
 <section class="sec col" id="research" aria-labelledby="h-research">
   <h2 id="h-research">Understanding where the experience broke down</h2>
   <p>The Alpha 8 study was a focused research period within the three months. I wrote its plan: every new user started in the same empty workspace, as either a college student or a job seeker, and worked through four tasks. Each designer on the team ran sessions, recording screen, audio and think-aloud comments; the team brought in other sources too.</p>
-  <ol class="tv-steps4" aria-label="Study tasks">
-    <li><b>Build a workspace</b><span>From a blank page, with no hints about folders or depth</span></li>
-    <li><b>Organize real files</b><span>Upload about 20 realistic files and sort them</span></li>
-    <li><b>Find them again</b><span>Retrieve files, watching paths, search and wrong clicks</span></li>
-    <li><b>Arrange the workspace</b><span>Open folders, switch views, set it up for daily use</span></li>
-  </ol>
-  <ul class="tv-src" role="list">
-    <li><b>12</b><span>Moderated sessions with new users</span></li>
-    <li><b>30</b><span>Survey responses from existing users</span></li>
-    <li><b>871</b><span>Sessions in the Clarity data; 47 watched as recordings</span></li>
-    <li><b>Founder notes</b><span>From months of everyday use</span></li>
-    <li><b>Audits</b><span>Heuristic and component reviews</span></li>
-  </ul>
-  <p class="cap">Figures come from different methods and groups, so they aren’t added together as unique people.</p>
+  <figure class="study" aria-labelledby="study-cap">
+    <div class="st-part">
+      <p class="st-k">Each new user worked through four tasks</p>
+      <ol class="trk" aria-label="Study tasks">
+        <li><b>Build a workspace</b><span>From a blank page, with no hints about folders or depth</span></li>
+        <li><b>Organize real files</b><span>Upload about 20 realistic files and sort them</span></li>
+        <li><b>Find them again</b><span>Retrieve files, watching paths, search and wrong clicks</span></li>
+        <li><b>Arrange the workspace</b><span>Open folders, switch views, set it up for daily use</span></li>
+      </ol>
+    </div>
+    <div class="st-part">
+      <p class="st-k">What the findings drew on</p>
+      <ul class="srcs" role="list">
+        <li><b>12</b><span>Moderated sessions with new users</span></li>
+        <li><b>30</b><span>Survey responses from existing users</span></li>
+        <li><b>871</b><span>Sessions in the Clarity data; 47 watched as recordings</span></li>
+        <li class="q"><b>Founder notes</b><span>From months of everyday use</span></li>
+        <li class="q"><b>Audits</b><span>Heuristic and component reviews</span></li>
+      </ul>
+    </div>
+    <figcaption class="cap" id="study-cap">Figures come from different methods and groups, so they aren’t added together as unique people.</figcaption>
+  </figure>
 
   <div class="tv-insight">
     <p class="n">Finding 1</p>
@@ -1113,8 +1121,8 @@ td:first-child { width: 30%; }
   b.addEventListener("click", sync); mq.addEventListener ? mq.addEventListener("change", sync) : mq.addListener(sync); sync();
 })();
 </script>
-<script src="assets/viz.js?v=202611230556"></script>
+<script src="assets/viz.js?v=202611230559"></script>
 
-<script src="assets/zoom.js?v=202611230556"></script>
+<script src="assets/zoom.js?v=202611230559"></script>
 </body>
 </html>

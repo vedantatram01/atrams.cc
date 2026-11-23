@@ -443,3 +443,52 @@ dialog.zv::backdrop { background: rgba(12,12,12,.94); }
 .ln-list > li:last-child { padding-bottom: var(--s0); }
 @media (max-width: 760px) { .ln-axis { grid-template-columns: minmax(0, 1fr); } .ln-axis > span:first-child { display: none; } .ln-m span:first-child { padding-left: 0; } }
 @media (max-width: 760px) { .ln-axis .ln-m span:first-child { display: block; padding-left: 0; } .ln-axis .ln-m span:nth-child(2) { padding-left: 8px; border-left: 1px solid var(--line); } }
+
+/* ---------- Treevah study: task track + sources strip ---------- */
+.study { --sw: min(960px, calc(100vw - 64px)); width: var(--sw); margin: var(--s3) 0 0 calc(50% - var(--sw) / 2); border: 1px solid var(--line); border-radius: var(--r-m); background: var(--surface); overflow: hidden; }
+.st-part { padding: var(--s2); }
+.st-part + .st-part { border-top: 1px solid var(--line); background: color-mix(in srgb, var(--mat) 55%, var(--surface)); }
+.st-k { margin: 0 0 var(--s2) !important; font-size: 14px !important; line-height: 20px !important; color: var(--muted); }
+.trk { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s2); margin: 0; padding: 0; list-style: none; }
+.trk li { position: relative; padding-top: 32px; }
+.trk li::before { content: ""; position: absolute; left: 0; top: 6px; width: 12px; height: 12px; border-radius: 4px; background: var(--surface); box-shadow: inset 0 0 0 2px var(--text); }
+.trk li::after { content: ""; position: absolute; left: 20px; right: calc(-1 * var(--s2) + 8px); top: 11px; height: 2px; border-radius: 1px; background: var(--line); }
+.trk li:first-child::before { background: var(--text); }
+.trk li:last-child::after { content: none; }
+.trk b { display: block; font-family: var(--display); font-size: 19px; line-height: 26px; font-weight: 500; letter-spacing: -.01em; color: var(--text); }
+.trk span { display: block; margin-top: 4px; font-size: 14px; line-height: 21px; color: var(--soft); }
+.srcs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) repeat(2, minmax(0, .85fr)); margin: 0; padding: 0; list-style: none; }
+.srcs li { padding: 0 var(--s1); border-left: 1px solid var(--line); }
+.srcs li:first-child { padding-left: 0; border-left: 0; }
+.srcs b { display: block; font-family: var(--display); font-size: 44px; line-height: 52px; font-weight: 500; letter-spacing: -.02em; color: var(--text); font-variant-numeric: tabular-nums; }
+.srcs .q b { font-size: 20px; line-height: 52px; letter-spacing: -.01em; }
+.srcs span { display: block; margin-top: 4px; font-size: 14px; line-height: 20px; color: var(--soft); }
+.study .cap { margin: 0 auto; padding: var(--s1) var(--s2) var(--s2); background: color-mix(in srgb, var(--mat) 55%, var(--surface)); max-width: none; }
+@media (max-width: 860px) {
+  .study { --sw: calc(100vw - 32px); }
+  .st-part { padding: var(--s2) 20px; }
+  .trk { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .trk li { padding: 0 0 var(--s2) 32px; }
+  .trk li:last-child { padding-bottom: 0; }
+  .trk li::before { top: 7px; }
+  .trk li::after { left: 5px; right: auto; top: 25px; bottom: 6px; width: 2px; height: auto; }
+  .srcs { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: var(--s2); }
+  .srcs li:nth-child(4) { padding-left: 0; border-left: 0; }
+  .srcs .q { grid-column: span 1; }
+  .srcs li.q b { line-height: 28px; }
+  .study .cap { padding: var(--s1) 20px 20px; }
+}
+@media (max-width: 480px) {
+  .srcs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .srcs li:nth-child(3) { padding-left: 0; border-left: 0; }
+  .srcs li:nth-child(4) { padding-left: var(--s1); border-left: 1px solid var(--line); }
+  .srcs li:nth-child(5) { padding-left: 0; border-left: 0; }
+  .srcs b { font-size: 36px; line-height: 44px; }
+}
+.srcs .q b, .srcs li.q b { font-size: 20px; line-height: 26px; padding-top: 18px; }
+@media (max-width: 860px) { .srcs li.q b { padding-top: 0; } }
+@media (max-width: 480px) {
+  .srcs { column-gap: var(--s1); }
+  .srcs li, .srcs li:nth-child(n) { padding: var(--s1) 0 0 !important; border-left: 0 !important; border-top: 1px solid var(--line); }
+  .srcs li:nth-child(-n+2) { padding-top: 0 !important; border-top: 0; }
+}
