@@ -72,3 +72,9 @@
   .reel .rdev-s > img { transition: none; transform: none; }
 }
 .reel.hold .reel-nav i::after { animation: none !important; transform: scaleX(1); }
+
+/* ---------- Home hero 3D graphic ---------- */
+.iso { position: relative; width: 100%; aspect-ratio: 1 / .86; margin-top: 32px; }
+.iso-c { display: block; width: 100%; height: 100%; }
+@media (min-width: 992px) { .iso { margin-top: 0; } }
+@media (prefers-reduced-motion: no-preference) { @supports (animation-timeline: view()) { .iso { animation: heroDrift linear both; animation-timeline: scroll(root); animation-range: 0 600px; } } }
