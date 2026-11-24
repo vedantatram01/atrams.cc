@@ -1001,7 +1001,7 @@ img { max-width: 100%; display: block; }
   var cards = [].slice.call(document.querySelectorAll(".wk"));
   var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduce || !document.body.getAnimations) { cards.forEach(function (c) { c.classList.add("live"); }); return; }
-  var CFG = { "th-tv": [15000, 1], "th-io": [10000, 1.5], "th-wh": [12000, 1.7], "th-np": [12000, 1.7], "th-cv": [18000, 2.2] };
+  var CFG = { "th-tv": [15000, 1.3], "th-io": [10000, 1.5], "th-wh": [12000, 1.7], "th-np": [12000, 1.7], "th-cv": [18000, 2.2] };
   var st = cards.map(function (c) {
     var th = c.querySelector(".wk-thumb"), k = Object.keys(CFG).filter(function (x) { return th.classList.contains(x); })[0] || "th-io";
     var bar = document.createElement("span"); bar.className = "wk-prog"; bar.setAttribute("aria-hidden", "true"); bar.innerHTML = "<i></i>"; th.appendChild(bar);
@@ -1026,7 +1026,7 @@ img { max-width: 100%; display: block; }
     st.forEach(function (s) {
       if (!s.on) return;
       if (s.target !== null) s.t += (s.target - s.t) * .18;
-      else s.t += dt * s.sp + Math.abs(dy) * s.cyc / 2800;
+      else s.t += dt * s.sp * 1.4 + Math.min(Math.abs(dy), 120) * s.cyc / 900;
       if (s.t < s.cyc * 10) s.t += s.cyc * 50;
       for (var i = 0; i < s.anims.length; i++) s.anims[i].currentTime = s.t;
       s.bar.style.transform = "scaleX(" + ((s.t % s.cyc) / s.cyc).toFixed(4) + ")";
