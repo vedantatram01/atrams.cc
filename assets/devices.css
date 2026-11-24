@@ -51,7 +51,7 @@
 .work .wk h3, .work .wk h3 a { font-size: 20px !important; line-height: 28px !important; }
 .work .wk-role { margin-top: 0 !important; font-size: 14px !important; color: var(--muted) !important; }
 .work .wk-sum { margin-top: 8px !important; max-width: 620px; color: var(--soft) !important; }
-.work .go2 { margin-top: 12px !important; }
+.work .go2 { margin-top: 16px !important; }
 .work .wk-feat .wk-sum { max-width: 720px; }
 .work .cases { row-gap: 56px !important; }
 @media (min-width: 768px) { .work .wk-body { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 24px; } .work .wk-body .wk-row { grid-column: 1; } .work .wk-body .wk-role { grid-column: 2; grid-row: 1; align-self: center; text-align: right; } .work .wk-body .wk-sum, .work .wk-body .go2 { grid-column: 1 / -1; } }

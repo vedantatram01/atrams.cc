@@ -93,7 +93,7 @@
 /* cards in a row size to their content */
 .beta3, #outcomes .tv-out, .tv-probs, .tv-good, .tv-halves { align-items: start !important; }
 /* small cards keep their inner padding and stay inside the text column */
-.tv-probs li, .tv-good li { padding: 16px 20px !important; }
+.tv-probs li, .tv-good li { padding: 16px 24px !important; }
 .tv-probs, .tv-good { width: auto !important; margin-left: 0 !important; margin-right: 0 !important; }
 /* captions under wide figures line up with the text column, not the image edge */
 @media (min-width: 992px) {

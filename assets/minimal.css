@@ -59,7 +59,7 @@ html, body { overflow-x: clip; }
 #contribution .tv-areas > div { padding: 24px !important; border-top: 0 !important; }
 #contribution .tv-areas .own { order: 0 !important; margin: 0 0 16px !important; }
 #contribution .tv-areas h3.k { order: 1 !important; font-size: 20px !important; line-height: 28px !important; font-weight: 700 !important; }
-#contribution .tv-areas > div > .why { margin-top: 20px !important; padding-top: 16px !important; border-top: 1px dashed var(--line) !important; }
+#contribution .tv-areas > div > .why { margin-top: 24px !important; padding-top: 16px !important; border-top: 1px dashed var(--line) !important; }
 #contribution .tv-areas .why span { display: block; font-size: 12px; font-weight: 700; color: var(--muted); }
 #contribution .tv-areas .why span::after { content: none; }
 #contribution .tv-areas > div > .why p { display: block; font-weight: 600; }
@@ -90,7 +90,7 @@ html, body { overflow-x: clip; }
 
 /* beta: three cards with coloured headers */
 .beta3 { gap: 24px !important; }
-.beta3 > div { padding: 20px 24px !important; }
+.beta3 > div { padding: 24px 24px !important; }
 .b-h i { width: 10px !important; height: 10px !important; }
 .b-r .b-h i { background: #22C55E !important; } .b-p .b-h i { background: #FFAB00 !important; } .b-n .b-h i { background: #FF5630 !important; }
 .b-h span { display: inline-flex; align-items: center; height: 24px; padding: 0 8px; border-radius: 6px; font-weight: 700; font-size: 12px !important; background: var(--mat); color: var(--soft) !important; }
@@ -114,7 +114,7 @@ html, body { overflow-x: clip; }
 
 @media (max-width: 767.98px) {
   .sec h2 { font-size: 30px !important; line-height: 38px !important; }
-  #contribution .tv-areas > div { padding: 20px !important; }
+  #contribution .tv-areas > div { padding: 24px !important; }
   .moment.breakout { padding: 24px !important; }
 }
 
@@ -123,7 +123,7 @@ html, body { overflow-x: clip; }
 .wk:hover { box-shadow: 0 0 2px 0 rgba(145,158,171,.24), 0 24px 48px -8px rgba(145,158,171,.24); transform: translateY(-2px); }
 :root[data-mode="dark"] .wk:hover { box-shadow: 0 0 2px 0 rgba(0,0,0,.24), 0 24px 48px -8px rgba(0,0,0,.4); }
 .wk-thumb { border-radius: 0 !important; }
-.wk-body { padding: 24px 24px 28px !important; }
+.wk-body { padding: 24px 24px 32px !important; }
 .wk-feat .wk-body { padding: 32px !important; }
 .wk h3, .wk h3 a { font-family: var(--display) !important; font-weight: 700 !important; font-size: 24px !important; }
 .rd { font-weight: 700 !important; color: var(--pri-d) !important; }
@@ -138,11 +138,11 @@ html, body { overflow-x: clip; }
 .kv div, .finding, .chap .col, .vt-p, .lc, .pmx, .tv-ba > div, .opt, .goal, .trio > div, .stat-row > div {
   border-radius: var(--mx-r) !important;
 }
-.kv div { border: 0 !important; background: var(--surface); box-shadow: var(--mx-shadow); padding: 20px !important; }
+.kv div { border: 0 !important; background: var(--surface); box-shadow: var(--mx-shadow); padding: 24px !important; }
 .lc, .pmx { border: 0 !important; background: var(--surface) !important; box-shadow: var(--mx-shadow) !important; padding: 24px !important; }
 .finding { border-top: 0 !important; padding: 24px !important; margin-top: 16px !important; background: var(--surface); box-shadow: var(--mx-shadow); }
 .flist > li { border: 0 !important; padding: 24px !important; margin-top: 16px; border-radius: var(--mx-r); background: var(--surface); box-shadow: var(--mx-shadow); }
-.rounds:not(.rounds-2) > li { border: 0 !important; padding: 20px 24px !important; margin-top: 16px; border-radius: var(--mx-r) !important; background: var(--surface) !important; box-shadow: var(--mx-shadow); }
+.rounds:not(.rounds-2) > li { border: 0 !important; padding: 24px 24px !important; margin-top: 16px; border-radius: var(--mx-r) !important; background: var(--surface) !important; box-shadow: var(--mx-shadow); }
 .fl-d > summary { color: var(--pri-d) !important; text-decoration: none !important; font-weight: 700 !important; }
 .fl-d > summary::after { color: var(--pri-d) !important; }
 .lc-keys button, .vf-b { border-radius: var(--mx-r-s) !important; font-weight: 600; }

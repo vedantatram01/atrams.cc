@@ -1,0 +1,159 @@
+/* atrams.cc brand: 60-30-10 colour and a 16px grid. Loaded last; these rules win.
+
+   60  Snow     #FFFBFC  page, surfaces, white space
+   30  Black    #010400  text, headings, dark covers and stages, buttons, footer
+   10  Scarlet  #DE1A1A  the one accent: links, focus, active tab, big figures,
+                         "on my own", risk and critical. Text in scarlet uses the
+                         deeper #B8141A so it passes 4.5:1 on Snow.
+   Neutrals are Black mixed into Snow, so every grey belongs to the same family.
+   Data charts keep two quiet helpers only where a third state is needed:
+   grey for unknown, a muted amber for caution.
+
+   Grid      16px. Spacing steps: 8 (half step), 16, 32, 48, 64, 96.
+             Gutters 32. Sections 96 apart (48 on phones). */
+
+:root {
+  --snow: #FFFBFC; --black: #010400; --scarlet: #DE1A1A; --scarlet-d: #B8141A;
+  --bg: var(--snow); --surface: var(--snow); --mat: #F5F1F2;
+  --text: var(--black); --soft: #3A3838; --muted: #666464; --line: rgba(1,4,0,.12);
+  --g800: var(--black); --g700: #3A3838; --g600: #666464; --g500: #8A8787; --g300: #DCD8D9; --g200: #F5F1F2; --g0: var(--snow);
+  --brand: var(--scarlet); --brand-d: var(--scarlet-d); --brand-dd: var(--scarlet-d); --brand-soft: rgba(222,26,26,.08); --brand-l: var(--scarlet);
+  --accent: var(--scarlet-d); --accent-ink: #FFFFFF; --accent-soft: rgba(222,26,26,.08); --pri-d: var(--scarlet-d);
+  --risk: var(--scarlet); --risk-d: var(--scarlet-d); --risk-dd: var(--scarlet-d); --risk-soft: rgba(222,26,26,.10);
+  --warn: #C98A1B; --warn-d: #8A5A00; --warn-dd: #6B4500; --warn-soft: rgba(201,138,27,.14);
+  --unk: #8A8787; --unk-d: #666464; --unk-dd: #3A3838; --unk-soft: rgba(1,4,0,.06);
+  --good: var(--black); --pos: var(--black); --pos-d: var(--black); --neg: var(--scarlet); --neg-d: var(--scarlet-d);
+  --cmp1: var(--black); --cmp2: var(--scarlet); --cmp3: #8A8787; --c1: var(--black); --c2: var(--scarlet); --c3: var(--black); --cat: var(--scarlet);
+  --cover: var(--black);
+}
+:root[data-mode="dark"] {
+  --bg: var(--black); --surface: #0F100F; --mat: #141514;
+  --text: var(--snow); --soft: #D6D2D3; --muted: #A8A6A6; --line: rgba(255,251,252,.14);
+  --g800: var(--snow); --g700: #D6D2D3; --g600: #A8A6A6; --g500: #7C7A7A; --g300: #2A2B2A; --g200: #141514; --g0: var(--black);
+  --brand: #FF5A55; --brand-d: #FF5A55; --brand-dd: #FF8A86; --brand-soft: rgba(255,90,85,.12); --brand-l: #FF5A55;
+  --accent: #FF5A55; --accent-ink: var(--black); --accent-soft: rgba(255,90,85,.12); --pri-d: #FF5A55;
+  --risk: #FF5A55; --risk-d: #FF5A55; --risk-dd: #FF8A86; --risk-soft: rgba(255,90,85,.16);
+  --warn: #E0A640; --warn-d: #F0C070; --warn-dd: #F6D79E; --warn-soft: rgba(224,166,64,.18);
+  --unk: #7C7A7A; --unk-d: #A8A6A6; --unk-dd: #D6D2D3; --unk-soft: rgba(255,251,252,.08);
+  --good: var(--snow); --pos: var(--snow); --pos-d: var(--snow);
+  --cmp1: var(--snow); --cmp2: #FF5A55; --cmp3: #7C7A7A; --c1: var(--snow); --c2: #FF5A55; --c3: var(--snow); --cat: #FF5A55;
+  --cover: #0F100F;
+}
+html, body { background: var(--bg) !important; color: var(--text); }
+::selection { background: var(--scarlet); color: #FFFFFF; }
+:focus-visible { outline-color: var(--brand) !important; }
+
+/* ---------- 30: Black ---------- */
+.btn, .btn-p, a.btn:not(.btn-s) { background: var(--text) !important; color: var(--bg) !important; border-color: var(--text) !important; }
+.work .wk .wk-thumb, .t-tv .wk-thumb, .t-wh .wk-thumb, .t-np .wk-thumb, .t-io .wk-thumb, .t-cv .wk-thumb,
+.t-tv .wk-thumb.th-tv { background: var(--cover) !important; }
+.hero > .stage:not(.dev), .tvh .tvh-stage { background: var(--cover) !important; }
+.site-foot { border-top-color: var(--line) !important; }
+
+/* ---------- 10: Scarlet ---------- */
+a:not(.btn):not(.pill):not(.logo):not(.wk-thumb):hover { color: var(--brand-d); }
+.rd, .go, .nx-all, .fl-d > summary, .fl-d > summary::after { color: var(--brand-d) !important; }
+.otw .dot, .otw .dot::after { background: var(--brand) !important; }
+.pill[aria-current="page"], .nav a[aria-current="page"] { text-decoration-color: var(--brand) !important; }
+.vt-ind, .rp, .vt-tab[aria-selected="true"] { background-color: var(--brand); border-bottom-color: var(--brand) !important; }
+.vt-tab[aria-selected="true"] { background-color: transparent; }
+.moment, .moment.breakout, .moment:not(.breakout) { background: var(--brand-soft) !important; }
+.moment .m-num, .srcs li:nth-child(-n+3) b, .tv-stats li b, .tv-src li b { color: var(--brand-d) !important; }
+.pull { border-left-color: var(--brand) !important; }
+.own, .own:not(.team) { background: var(--brand-soft) !important; color: var(--brand-d) !important; }
+.own.team { background: var(--unk-soft) !important; color: var(--soft) !important; }
+.trk li::before { background: var(--mat) !important; box-shadow: inset 0 0 0 2px var(--text) !important; }
+.trk li:first-child::before { background: var(--brand) !important; box-shadow: none !important; }
+.trk li::after { background: var(--line) !important; }
+.ln1, .ln2, .ln3, .ln4 { --lc: var(--text) !important; }
+.tv-oci > div:last-child { background: var(--brand-soft) !important; } .tv-oci > div:last-child dt { color: var(--brand-d) !important; }
+
+/* ---------- Status in the same palette ---------- */
+.g1 { background: var(--text) !important; color: var(--bg) !important; }
+.g3 { background: var(--scarlet) !important; color: #FFFFFF !important; }
+:root[data-mode="dark"] .g3 { background: #FF5A55 !important; color: var(--black) !important; }
+.g2 { background: var(--warn-soft) !important; color: var(--text) !important; }
+.g4 { background: var(--unk-soft) !important; color: var(--soft) !important; box-shadow: inset 0 0 0 1px var(--line) !important; }
+.sb-key .g1 { background: var(--text) !important; } .sb-key .g3 { background: var(--scarlet) !important; }
+.b-r .b-h i { background: var(--text) !important; } .b-p .b-h i { background: var(--warn) !important; } .b-n .b-h i { background: var(--scarlet) !important; }
+.pr.c { background: var(--risk-soft) !important; color: var(--brand-d) !important; }
+.tv-out > div:nth-child(1) li::before { background: var(--text) !important; }
+.v1 { background: var(--text) !important; color: var(--bg) !important; }
+.v2 { background: var(--scarlet) !important; color: #FFFFFF !important; }
+.v3 { background: #8A8787 !important; color: #FFFFFF !important; }
+:root[data-mode="dark"] .v2 { color: var(--black) !important; background: #FF5A55 !important; } :root[data-mode="dark"] .v3 { color: var(--black) !important; }
+.tv-views li:nth-child(1) b::before { background: var(--text) !important; } .tv-views li:nth-child(2) b::before { background: var(--scarlet) !important; } .tv-views li:nth-child(3) b::before { background: #8A8787 !important; }
+.lc-s0 { color: var(--cmp1) !important; } .lc-s1 { color: var(--cmp2) !important; } .lc-s2 { color: var(--cmp3) !important; }
+.lc-keys button:nth-child(1) i { color: var(--cmp1) !important; } .lc-keys button:nth-child(2) i { color: var(--cmp2) !important; } .lc-keys button:nth-child(3) i { color: var(--cmp3) !important; }
+.vf-b[aria-pressed="true"], .lc-keys button[aria-pressed="true"] { background: var(--text) !important; color: var(--bg) !important; border-color: var(--text) !important; }
+
+/* ---------- 16px grid ---------- */
+:root { --gx: 32px; --s-1: 8px; --s0: 8px; --s1: 16px; --s2: 32px; --s3: 48px; --s4: 64px; --s5: 96px; --s6: 96px; --secgap: 96px; }
+@media (max-width: 767.98px) { :root { --secgap: 48px; --gx: 16px; } }
+.work .cases { column-gap: var(--gx) !important; row-gap: 64px !important; }
+.tv-areas, .tv-out, .rounds, .mcards, .gal, .beta3, .kv, .trio, .tv-probs, .tv-good, .tv-oci, .flist, .srcs, .cards { column-gap: var(--gx) !important; }
+#contribution .tv-areas, .beta3, #outcomes .tv-out, .cards { row-gap: var(--gx) !important; }
+.work .wk-body, .work .wk-feat .wk-body { padding: 16px 0 0 !important; }
+.work .wk-sum, .work .go2 { margin-top: 8px !important; }
+.hero > .stage, .hero > .tv-stage.tvh { margin-bottom: 48px !important; }
+.hero > .stage:not(.dev) { padding: 48px 48px 0 !important; }
+.hero > .stage.dev { padding: 32px 48px !important; }
+.tvh .tvh-stage { padding: 48px 8% 0 !important; }
+.sec h2 + :not(p) { margin-top: 32px !important; }
+.sub-h { margin-top: 48px !important; } .sub-h + * { margin-top: 16px !important; }
+#contribution .tv-areas > div, .tv-out > div, .beta3 > div, .flist > li, .rounds > li, .finding, .kv div, .lc, .pmx, .lanes, .tv-insight, .mcards > div, .card a { padding: 32px !important; }
+.tv-probs li, .tv-good li { padding: 16px !important; }
+.st-part { padding: 32px !important; }
+.study .cap { padding: 16px 32px 32px !important; }
+.moment, .moment.breakout, .moment:not(.breakout) { padding: 48px !important; }
+.tv-oci > div, .tv-oci > div + div, .tv-oci > div:last-child { padding: 16px !important; }
+.vt-tab { padding: 16px 16px !important; }
+.vf-b, .lc-keys button { padding: 8px 16px !important; }
+.btn { padding: 0 16px !important; min-height: 48px; }
+.k + h3, p.k + h3, .fl-k + h3, .rd-k + h3 { margin-top: 8px !important; }
+.b-l li { padding-top: 8px !important; padding-bottom: 8px !important; }
+@media (max-width: 767.98px) {
+  #contribution .tv-areas > div, .tv-out > div, .beta3 > div, .flist > li, .rounds > li, .finding, .kv div, .lc, .pmx, .lanes, .tv-insight, .mcards > div, .card a, .st-part { padding: 16px !important; }
+  .moment, .moment.breakout, .moment:not(.breakout) { padding: 32px 16px !important; }
+  .hero > .stage, .hero > .stage.dev, .hero > .stage:not(.dev) { padding: 16px 16px 0 !important; }
+  .hero > .stage.dev { padding-bottom: 16px !important; }
+  .tvh .tvh-stage { padding: 16px 4% 0 !important; }
+}
+.g1b { background: color-mix(in srgb, var(--text) 55%, var(--bg)) !important; color: var(--bg) !important; }
+.sb-key .g1b { background: color-mix(in srgb, var(--text) 55%, var(--bg)) !important; }
+.work .wk-body { row-gap: 0 !important; }
+.work .wk-body .go2 { margin-top: 16px !important; }
+.work .go2 { padding-top: 0 !important; }
+
+/* ---------- Semantic colours: deep blue and violet ----------
+   Blue   #05299E  good, ready, kept, delivered, done well
+   Violet #5E4AE3  in between: partly ready, high priority, to test, still to validate
+   Scarlet stays the accent and the one colour for risk and critical.
+   Grey only for "not checked". Comparison charts use blue, violet and grey,
+   never scarlet, so no option reads as a risk. */
+:root { --sem-good: #05299E; --sem-mid: #5E4AE3; --sem-good-soft: rgba(5,41,158,.10); --sem-mid-soft: rgba(94,74,227,.12); --sem-unk: #6E6B6B; }
+:root[data-mode="dark"] { --sem-good: #8FA4FF; --sem-mid: #A99BFF; --sem-good-soft: rgba(143,164,255,.14); --sem-mid-soft: rgba(169,155,255,.16); --sem-unk: #A8A6A6; }
+:root { --good: var(--sem-good); --pos: var(--sem-good); --pos-d: var(--sem-good); --warn: var(--sem-mid); --warn-d: var(--sem-mid); --warn-dd: var(--sem-mid); --warn-soft: var(--sem-mid-soft);
+  --cmp1: var(--sem-good); --cmp2: var(--sem-mid); --cmp3: var(--sem-unk); --c1: var(--sem-good); --c3: var(--sem-good); --cat: var(--sem-mid); }
+.g1 { background: var(--sem-good) !important; color: #FFFFFF !important; }
+.g1b { background: color-mix(in srgb, var(--sem-good) 45%, var(--bg)) !important; color: var(--text) !important; }
+.g2 { background: var(--sem-mid-soft) !important; color: var(--text) !important; }
+.g4 { background: var(--sem-mid) !important; color: #FFFFFF !important; box-shadow: none !important; }
+:root[data-mode="dark"] .g1, :root[data-mode="dark"] .g4 { color: var(--black) !important; }
+.sb-key .g1 { background: var(--sem-good) !important; } .sb-key .g1b { background: color-mix(in srgb, var(--sem-good) 45%, var(--bg)) !important; } .sb-key .g4 { background: var(--sem-mid) !important; }
+.b-r .b-h i { background: var(--sem-good) !important; } .b-p .b-h i { background: var(--sem-mid) !important; }
+.pr.h { background: var(--sem-mid-soft) !important; color: var(--sem-mid) !important; }
+.tv-out > div:nth-child(1) li::before { background: var(--sem-good) !important; }
+.tv-out > div:nth-child(3) li::before { background: var(--sem-mid) !important; box-shadow: none !important; }
+.own:not(.team) { background: var(--sem-good-soft) !important; color: var(--sem-good) !important; }
+.v1 { background: var(--sem-good) !important; color: #FFFFFF !important; }
+.v2 { background: var(--sem-mid) !important; color: #FFFFFF !important; }
+.v3 { background: var(--sem-unk) !important; color: #FFFFFF !important; }
+:root[data-mode="dark"] .v1, :root[data-mode="dark"] .v2, :root[data-mode="dark"] .v3 { color: var(--black) !important; }
+.tv-views li:nth-child(1) b::before { background: var(--sem-good) !important; } .tv-views li:nth-child(2) b::before { background: var(--sem-mid) !important; } .tv-views li:nth-child(3) b::before { background: var(--sem-unk) !important; }
+.lc-s0 { color: var(--sem-good) !important; } .lc-s1 { color: var(--sem-mid) !important; } .lc-s2 { color: var(--sem-unk) !important; }
+.lc-keys button:nth-child(1) i { color: var(--sem-good) !important; } .lc-keys button:nth-child(2) i { color: var(--sem-mid) !important; } .lc-keys button:nth-child(3) i { color: var(--sem-unk) !important; }
+.tg-rows .r .to { color: var(--sem-good) !important; }
+.eb i { background: linear-gradient(90deg, var(--sem-good) var(--v), var(--mat) var(--v)) !important; }
+.ln1, .ln2, .ln3, .ln4 { --lc: var(--text) !important; }
+:root[data-mode="dark"] .v1 { background: var(--sem-good) !important; } :root[data-mode="dark"] .v2 { background: var(--sem-mid) !important; } :root[data-mode="dark"] .v3 { background: var(--sem-unk) !important; }
