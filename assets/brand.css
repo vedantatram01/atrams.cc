@@ -238,3 +238,26 @@ html body .th-io .sr-cap { right: 18.5cqw !important; bottom: auto !important; t
 /* Line chart: a value shared by two lines is labelled once; the second label appears only when its line is selected */
 .lc .lc-dup { opacity: 0; } .lc.lc-focus .lc-s.on .lc-dup { opacity: 1; }
 .lc.lc-focus .lc-s:not(.on) .lc-v { opacity: 0; }
+
+/* ---------- Sleek: one motion language for the whole site ---------- */
+:root { --ease: cubic-bezier(.2, .7, .2, 1); --t-fast: .16s; --t: .24s; scroll-padding-top: 96px; }
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; -webkit-tap-highlight-color: transparent; }
+::selection { background: rgba(222, 26, 26, .16); color: inherit; }
+:root[data-mode="dark"] ::selection { background: rgba(255, 90, 85, .28); }
+/* Controls answer at the same speed, with the same curve */
+.btn, a.btn, .vf-b, .lc-keys button, .copy, .mode, .menu-btn, .vt-tab, .nav a, main a, footer a {
+  transition: color var(--t-fast) var(--ease), background-color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease), text-decoration-color var(--t-fast) var(--ease), transform var(--t-fast) var(--ease) !important;
+}
+.btn:active, .vf-b:active, .lc-keys button:active { transform: scale(.98); }
+/* Navigation slides away while reading down, returns on the way up */
+html body .nav { transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease), background-color var(--t) var(--ease); will-change: transform; }
+html body .nav.nav-up { transform: translateY(-100%); box-shadow: none; }
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+  /* Page to page: a quick crossfade, the navigation stays put */
+  @view-transition { navigation: auto; }
+  .nav { view-transition-name: site-nav; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .2s; animation-timing-function: var(--ease); }
+  ::view-transition-group(site-nav) { animation: none; }
+}
+@media (prefers-reduced-motion: reduce) { html body .nav, html body .nav.nav-up { transition: none; } }

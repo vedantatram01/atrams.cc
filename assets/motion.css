@@ -1,7 +1,7 @@
 /* atrams.cc motion styles. Paired with motion.js. All movement is off for reduced motion. */
 
 /* 1. Headline words: blur and rise, one after another */
-.tx-in .tx-w { display: inline-block; opacity: 0; filter: blur(8px); transform: translateY(12px); animation: txIn .7s cubic-bezier(.2,.7,.2,1) forwards; animation-delay: calc(var(--i) * 70ms + 120ms); }
+.tx-in .tx-w { display: inline-block; opacity: 0; filter: blur(8px); transform: translateY(12px); animation: txIn .5s cubic-bezier(.2,.7,.2,1) forwards; animation-delay: calc(var(--i) * 40ms + 80ms); }
 @keyframes txIn { to { opacity: 1; filter: blur(0); transform: none; } }
 
 /* 2. Text shimmer on the availability line */
@@ -9,23 +9,6 @@
 .otw .dot { -webkit-text-fill-color: initial; }
 @keyframes shimmer { from { background-position: 100% 0; } to { background-position: -150% 0; } }
 
-/* 3. Spotlight on cards: a soft brand glow follows the cursor */
-.sp { position: relative; isolation: isolate; }
-.sp::after { content: ""; position: absolute; inset: 0; z-index: 2; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .3s;
-  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--brand) 12%, transparent), transparent 60%); }
-.sp:hover::after { opacity: 1; }
-/* tilt on the cover image */
-.sp .wk-thumb > * { transform: var(--tilt, none); transition: transform .35s cubic-bezier(.2,.7,.2,1); transform-origin: center; will-change: transform; }
-.sp .wk-thumb { perspective: 900px; }
-
-/* 4. Border trail on the featured card: a short line of light travels the edge */
-@property --bt { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
-.wk-feat { position: relative; }
-.wk-feat::before { content: ""; position: absolute; inset: 0; z-index: 3; border-radius: inherit; padding: 1.5px; pointer-events: none;
-  background: conic-gradient(from var(--bt), transparent 0deg, transparent 300deg, color-mix(in srgb, var(--brand) 70%, transparent) 340deg, var(--brand) 356deg, transparent 360deg);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
-  animation: trail 7s linear infinite; }
-@keyframes trail { to { --bt: 360deg; } }
 
 /* 5. Animated tabs: one indicator slides between tabs */
 .vt-list.has-ind { position: relative; }
@@ -43,8 +26,7 @@
 @media (prefers-reduced-motion: reduce) {
   .tx-in .tx-w { opacity: 1; filter: none; transform: none; animation: none; }
   .otw { animation: none; background: none; color: var(--muted) !important; -webkit-background-clip: border-box; background-clip: border-box; }
-  .wk-feat::before { animation: none; display: none; }
-  .vt-ind, .btn, .sp .wk-thumb > * { transition: none; }
+  .vt-ind, .btn { transition: none; }
   .btn:hover { transform: none; }
 }
 .vh { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

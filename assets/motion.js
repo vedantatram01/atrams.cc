@@ -1,9 +1,8 @@
 /* atrams.cc motion: small, hand-written effects in the spirit of Motion Primitives
    and PaceUI, with no libraries. Every effect is off for reduced motion, and the
-   cursor effects run only with a fine pointer. Content stays readable without JS. */
+   navigation hides only while reading down. Content stays readable without JS. */
 (function () {
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   var root = document.documentElement;
   root.classList.add("mo");
   if (reduce) root.classList.add("mo-reduce");
@@ -72,23 +71,22 @@
     window.addEventListener("beforeprint", function () { nums.forEach(function (el) { if (el._final && el.firstChild) el.firstChild.textContent = el._final; }); });
   }
 
-  /* 3. Spotlight + tilt on cards (fine pointers only) */
-  if (fine && !reduce) {
-    document.querySelectorAll(".wk, .card a").forEach(function (c) {
-      c.classList.add("sp");
-      var thumb = c.querySelector(".wk-thumb");
-      c.addEventListener("pointermove", function (ev) {
-        var r = c.getBoundingClientRect(), x = ev.clientX - r.left, y = ev.clientY - r.top;
-        c.style.setProperty("--mx", x + "px"); c.style.setProperty("--my", y + "px");
-        if (thumb) {
-          var tr = thumb.getBoundingClientRect();
-          var px = (ev.clientX - tr.left) / tr.width - 0.5, py = (ev.clientY - tr.top) / tr.height - 0.5;
-          if (px >= -0.5 && px <= 0.5 && py >= -0.5 && py <= 0.5) thumb.style.setProperty("--tilt", "perspective(900px) rotateX(" + (-py * 4).toFixed(2) + "deg) rotateY(" + (px * 5).toFixed(2) + "deg)");
-          else thumb.style.removeProperty("--tilt");
-        }
+  /* 3. Navigation steps aside while reading down and returns on the way up */
+  var nav = document.querySelector(".nav");
+  if (nav) {
+    var lastY = window.scrollY, ticking = false;
+    window.addEventListener("scroll", function () {
+      if (ticking) return; ticking = true;
+      requestAnimationFrame(function () {
+        var y = window.scrollY, d = y - lastY;
+        var hold = document.body.classList.contains("menu-open") || nav.contains(document.activeElement);
+        if (y < 120 || d < -6 || hold) nav.classList.remove("nav-up");
+        else if (d > 6) nav.classList.add("nav-up");
+        if (Math.abs(d) > 6 || y < 120) lastY = y;
+        ticking = false;
       });
-      c.addEventListener("pointerleave", function () { if (thumb) thumb.style.removeProperty("--tilt"); });
-    });
+    }, { passive: true });
+    nav.addEventListener("focusin", function () { nav.classList.remove("nav-up"); });
   }
 
   /* 4. Animated tabs: one indicator slides to the selected tab */
