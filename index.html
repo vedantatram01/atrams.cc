@@ -703,6 +703,25 @@ img { max-width: 100%; display: block; }
 .th-tv .tvs { width: 90%; }
 :root[data-mode="dark"] .t-tv { --t1: #1E2422; --t2: #1E2422; }
 .th-tv { display: grid; place-items: center; }
+/* Treevah cover: three real screens layered in depth */
+.t-tv .wk-thumb.th-tv { background: radial-gradient(120% 90% at 85% 0%, #C8F2DD 0%, transparent 55%), radial-gradient(90% 80% at 0% 100%, #D7F0F5 0%, transparent 60%), #EAF7F0 !important; overflow: hidden; }
+.th-tv::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(color-mix(in srgb, #007867 22%, transparent) 1px, transparent 1.2px); background-size: 2.4cqw 2.4cqw; -webkit-mask: radial-gradient(70% 70% at 50% 50%, #000 30%, transparent 85%); mask: radial-gradient(70% 70% at 50% 50%, #000 30%, transparent 85%); opacity: .55; }
+:root[data-mode="dark"] .t-tv .wk-thumb.th-tv { background: radial-gradient(120% 90% at 85% 0%, #134634 0%, transparent 55%), radial-gradient(90% 80% at 0% 100%, #12343C 0%, transparent 60%), #13221D !important; }
+.tvc { position: absolute; inset: 0; }
+.tvc .tvs { position: absolute; width: auto; border-radius: 1.2cqw; box-shadow: 0 0 0 1px rgba(28,37,46,.06), 0 2.4cqw 5cqw -1.6cqw rgba(0,75,80,.35); transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.tvc-back { left: 30%; top: 6%; width: 62% !important; transform: rotate(3deg); opacity: .9; }
+.tvc-back .tvs-vp { aspect-ratio: 1440 / 760; }
+.tvc-main { left: 6%; top: 15%; width: 70% !important; }
+.tvc-vp-m { aspect-ratio: 1470 / 795 !important; }
+.tvc .tvs-vp img { object-fit: cover; object-position: 0 0; }
+.tvc-card { position: absolute; right: 5%; bottom: 7%; width: 30%; border-radius: 1.4cqw; overflow: hidden; background: #fff; box-shadow: 0 0 0 1px rgba(28,37,46,.06), 0 3cqw 6cqw -2cqw rgba(0,75,80,.45); transform: rotate(-2deg); transition: transform .6s cubic-bezier(.2,.7,.2,1); animation: tvcFloat 7s ease-in-out infinite; }
+.tvc-card img { display: block; width: 100%; height: auto; }
+@keyframes tvcFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -1.2cqw; } }
+.wk:hover .tvc-back { transform: rotate(4.5deg) translate(3cqw, -1.5cqw); }
+.wk:hover .tvc-main { transform: translate(-1.2cqw, .6cqw); }
+.wk:hover .tvc-card { transform: rotate(-4deg) translate(1.5cqw, -1.5cqw) scale(1.04); }
+@media (prefers-reduced-motion: reduce) { .tvc-card { animation: none; } .tvc .tvs, .tvc-card { transition: none; } }
+.sp .wk-thumb > .tvc { transform: var(--tilt, none); }
 .tvs { width: 86%; border: 1px solid var(--line); border-radius: 1cqw; background: #fff; overflow: hidden; box-shadow: 0 3cqw 6cqw -4cqw rgba(0,0,0,.35); }
 .tvs-bar { display: flex; align-items: center; gap: .7cqw; padding: 1.1cqw 1.6cqw; background: var(--mat); border-bottom: 1px solid var(--line); }
 .tvs-bar i { width: 1cqw; height: 1cqw; border-radius: 50%; background: var(--line); }
@@ -759,11 +778,16 @@ img { max-width: 100%; display: block; }
     <div class="cases">
     <article class="wk rv t-tv wk-feat" aria-labelledby="case-05">
       <a class="wk-thumb th-tv" href="treevah.html" tabindex="-1" aria-hidden="true">
-        <div class="tvs">
-          <div class="tvs-bar"><i></i><i></i><i></i><span>treevah.com</span></div>
-          <div class="tvs-vp">
-            <img class="tvs-c" src="assets/tv-cover.webp" width="1120" height="636" alt="" loading="lazy">
+        <div class="tvc">
+          <div class="tvs tvc-back">
+            <div class="tvs-bar"><i></i><i></i><i></i></div>
+            <div class="tvs-vp tvc-vp-b"><img src="assets/tv-js-prompt.webp" width="1440" height="1025" alt="" loading="lazy"></div>
           </div>
+          <div class="tvs tvc-main">
+            <div class="tvs-bar"><i></i><i></i><i></i><span>treevah.com</span></div>
+            <div class="tvs-vp tvc-vp-m"><img src="assets/tv-app.webp" width="1470" height="795" alt="" loading="lazy"></div>
+          </div>
+          <div class="tvc-card"><img src="assets/tv-th-depth.webp" width="618" height="530" alt="" loading="lazy"></div>
         </div>
       </a>
       <div class="wk-body">
