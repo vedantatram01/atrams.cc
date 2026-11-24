@@ -198,3 +198,8 @@ html body .tv-insight { padding: 0 !important; }
 .steps .ok .dot, .legend i.ok { background: var(--sem-good) !important; }
 .steps .ok .st { color: var(--sem-good) !important; }
 .meter i::after { background: var(--text) !important; }
+
+/* Logo: Ved.Atram, Black with a Scarlet full stop */
+.logo .lw { font-family: var(--display) !important; font-weight: 800 !important; font-size: 20px !important; letter-spacing: -.02em; color: var(--text) !important; }
+.logo .lw-dot { font-style: normal; color: var(--scarlet); }
+:root[data-mode="dark"] .logo .lw-dot { color: #FF5A55; }

@@ -380,12 +380,12 @@ td:first-child { width: 30%; }
 @media (min-width: 768px) { .menu { padding: 3px; } .menu .pill { border-radius: 3px !important; } }
 
 </style>
-<link rel="stylesheet" href="assets/system.css?v=202611240650"><link rel="stylesheet" href="assets/minimal.css?v=202611240650"><link rel="stylesheet" href="assets/layout.css?v=202611240650"><link rel="stylesheet" href="assets/color.css?v=202611240650"><link rel="stylesheet" href="assets/fundamentals.css?v=202611240659"><link rel="stylesheet" href="assets/motion.css?v=202611240650"><link rel="stylesheet" href="assets/devices.css?v=202611240650"><link rel="stylesheet" href="assets/brand.css?v=202611240659">
+<link rel="stylesheet" href="assets/system.css?v=202611240650"><link rel="stylesheet" href="assets/minimal.css?v=202611240650"><link rel="stylesheet" href="assets/layout.css?v=202611240650"><link rel="stylesheet" href="assets/color.css?v=202611240650"><link rel="stylesheet" href="assets/fundamentals.css?v=202611240659"><link rel="stylesheet" href="assets/motion.css?v=202611240650"><link rel="stylesheet" href="assets/devices.css?v=202611240650"><link rel="stylesheet" href="assets/brand.css?v=202611240702">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the case study</a>
 <nav class="nav" aria-label="Site">
-  <a class="logo" href="index.html"><span class="lw">Vedant Atram</span></a>
+  <a class="logo" href="index.html"><span class="lw" aria-hidden="true">Ved<i class="lw-dot">.</i>Atram</span><span class="vh">Vedant Atram, home</span></a>
   <div class="nav-r">
     <div class="menu" id="menu">
       <a class="pill" href="index.html#work" aria-current="true">Work</a>
@@ -406,7 +406,7 @@ td:first-child { width: 30%; }
   </div>
   <div class="col title">
     <h1>Invisible Obstacles</h1>
-    <p>Why blind screen-reader users get stuck in online job applications, and how I redesigned one to work with a screen reader from start to finish.</p>
+    <p>One date field stopped every blind screen-reader user we tested from finishing a job application. This is why, and how I redesigned the form to work with a screen reader from start to finish.</p>
     <p class="rt">9 min read</p>
     <dl class="meta">
       <div><dt>My role</dt><dd>UX Researcher &amp; Designer. I led the redesign and built the prototype.</dd></div>
@@ -427,7 +427,7 @@ td:first-child { width: 30%; }
 <main id="main" tabindex="-1">
 
 <section class="sec col" id="overview" aria-labelledby="h-over">
-  <h2 id="h-over">Overview</h2>
+  <h2 id="h-over">The short version</h2>
   <p>Online forms are one of the most common places the web breaks for people who use screen readers. On a job application the cost is high: a field you can’t complete can end the application before anyone reads it.</p>
   <div class="nums">
     <div><b>5×</b><span>longer for blind users on the same web task when a site is poorly accessible: 424 seconds against 82.</span><a href="https://doi.org/10.1093/iwc/iwad004">Griffith et al., 2022</a></div>
@@ -530,7 +530,7 @@ td:first-child { width: 30%; }
 </section>
 
 <section class="sec" id="motion" aria-labelledby="h-motion">
-  <div class="col"><h2 id="h-motion">The Redesign in Action</h2><p>A closer look at the redesigned application, highlighting how key interactions, form states, and navigation work together throughout the experience.</p></div>
+  <div class="col"><h2 id="h-motion">The redesign in action</h2><p>A closer look at the redesigned application, highlighting how key interactions, form states, and navigation work together throughout the experience.</p></div>
   <div class="wide clips-wrap">
     <div class="clip-bar"><span>Recorded from the working prototype. Clips play one at a time.</span><button type="button" class="mt" id="mt" aria-pressed="false">Pause clips</button></div>
     <div class="clips">
