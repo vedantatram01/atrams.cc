@@ -203,3 +203,10 @@ html body .tv-insight { padding: 0 !important; }
 .logo .lw { font-family: var(--display) !important; font-weight: 800 !important; font-size: 20px !important; letter-spacing: -.02em; color: var(--text) !important; }
 .logo .lw-dot { font-style: normal; color: var(--scarlet); }
 :root[data-mode="dark"] .logo .lw-dot { color: #FF5A55; }
+/* Logo v2: tighter wordmark, the full stop is a crisp Scarlet square on the baseline */
+.logo { display: inline-flex !important; align-items: center; text-decoration: none !important; }
+.logo .lw { display: inline-flex; align-items: baseline; font-family: var(--display) !important; font-weight: 800 !important; font-size: 22px !important; line-height: 1 !important; letter-spacing: -.045em !important; color: var(--text) !important; -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; }
+.logo .lw-dot { display: inline-block; width: .18em; height: .18em; margin: 0 .08em 0 .07em; background: var(--scarlet); color: transparent !important; font-size: inherit; overflow: hidden; vertical-align: baseline; transform: translateY(-.02em); transition: transform .25s cubic-bezier(.2,.7,.2,1); }
+:root[data-mode="dark"] .logo .lw-dot { background: #FF5A55; }
+.logo:hover .lw-dot { transform: translateY(-.02em) rotate(45deg); }
+@media (prefers-reduced-motion: reduce) { .logo:hover .lw-dot { transform: translateY(-.02em); } }
