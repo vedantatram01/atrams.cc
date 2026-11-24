@@ -261,3 +261,22 @@ html body .nav.nav-up { transform: translateY(-100%); box-shadow: none; }
   ::view-transition-group(site-nav) { animation: none; }
 }
 @media (prefers-reduced-motion: reduce) { html body .nav, html body .nav.nav-up { transition: none; } }
+
+/* ---------- Hero: who, focus, record, domains ---------- */
+html body .intro h1 { margin-top: 16px; }
+html body .intro .lede { margin-top: 16px; max-width: 640px; }
+.cred { display: flex; flex-wrap: wrap; gap: 8px 0; margin: 32px 0 0; padding: 0; list-style: none; font-size: 16px; line-height: 24px; color: var(--soft); }
+.cred li { padding: 0 16px; border-left: 1px solid var(--line); }
+.cred li:first-child { padding-left: 0; border-left: 0; }
+.cred b { font-weight: 600; color: var(--text); }
+.cr-co { display: inline-flex; align-items: center; vertical-align: -1px; margin-left: 2px; color: var(--text); }
+.cr-logo { display: block; height: 13px; width: auto; }
+.dom { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; margin: 16px 0 0; font-size: 14px; line-height: 20px; color: var(--muted); }
+.dom-k { font-weight: 600; color: var(--soft); }
+@media (max-width: 991.98px) {
+  .cred { flex-direction: column; gap: 8px; }
+  .cred li { padding: 0; border-left: 0; }
+}
+html body .intro .lede { max-width: 720px; font-size: 18px; line-height: 28px; }
+.dom > span + span { padding-left: 16px; border-left: 1px solid var(--line); }
+@media (max-width: 575.98px) { html body .intro .lede { font-size: 17px; line-height: 26px; } .dom > span + span { padding-left: 0; border-left: 0; } }
