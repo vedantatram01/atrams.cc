@@ -74,6 +74,7 @@
       var pts = d.s.map(function (s, si) { return { si: si, v: s.v[i] }; }).sort(function (a, b) { return b.v - a.v; });
       var stack = 0;
       for (var k = 1; k < pts.length; k++) {
+        if (pts[k - 1].v === pts[k].v) { below[pts[k].si][i] = "skip"; continue; }
         if (pts[k - 1].v - pts[k].v >= 10) { stack = 0; continue; }
         /* At the first point lines fan out below, so stack the label above instead */
         if (i === 0) { stack++; below[pts[k].si][i] = -stack; } else below[pts[k].si][i] = true;
@@ -88,8 +89,12 @@
       el("polyline", { points: s.v.map(function (v, i) { return X(i) + "," + Y(v); }).join(" "), class: "lc-l" }, g);
       s.v.forEach(function (v, i) {
         el("circle", { cx: X(i), cy: Y(v), r: 5, class: "lc-p" }, g);
-        var dn = below[si][i], lab = el("text", { x: X(i) + (i === last ? -10 : i === 0 ? 10 : 0), y: Y(v) + (dn === true ? 22 : dn < 0 ? -12 + dn * 15 : -12), class: "lc-v", "text-anchor": i === last ? "end" : i === 0 ? "start" : "middle" }, g);
-        lab.textContent = v + "%";
+        var dn = below[si][i];
+        /* A valley point takes its label underneath so the line never strikes through it */
+        if (dn === undefined && i > 0 && i < last && v < s.v[i - 1] && v < s.v[i + 1]) dn = true;
+        var dup = dn === "skip"; if (dup) dn = 0;
+        var lab = el("text", { x: X(i) + (i === last ? -10 : i === 0 ? 10 : 0), y: Y(v) + (dn === true ? 22 : dn < 0 ? -12 + dn * 15 : -12), class: "lc-v", "text-anchor": i === last ? "end" : i === 0 ? "start" : "middle" }, g);
+        lab.textContent = v + "%"; if (dup) lab.setAttribute("class", "lc-v lc-dup");
       });
       if (!sm) el("text", { x: X(last) + 14, y: endY[si], class: "lc-n" }, g).textContent = s.n;
       return g;

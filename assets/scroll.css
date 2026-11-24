@@ -1,43 +1,14 @@
-/* atrams.cc motion and scroll. Loaded last.
-   Home hero: type only. One headline, one line, two buttons.
-   Site-wide: scroll-driven reveals, parallax and scale, with CSS scroll timelines
-   where supported and a static page everywhere else. Reduced motion turns it all off. */
+/* atrams.cc scroll motion. Loaded last.
+   One gentle effect: cards and figures rise into place as they enter the screen.
+   CSS scroll timelines where supported, a static page everywhere else,
+   and nothing at all with reduced motion. Never sets `animation` on an element
+   that already has its own animation, so cover motion is never overwritten. */
 
-/* ---------- Home hero: one simple column, the headline carries it ---------- */
-.intro { display: block !important; padding-top: 96px !important; padding-bottom: 96px !important; }
-.intro .intro-t h1 { max-width: 15ch !important; font-size: clamp(44px, 6.4vw, 88px) !important; line-height: 1.02 !important; letter-spacing: -.035em !important; }
-.intro .intro-t .lede { max-width: 600px !important; margin-top: 32px !important; font-size: 18px !important; line-height: 28px !important; }
-@media (max-width: 767.98px) { .intro { padding-top: 48px !important; padding-bottom: 64px !important; } }
-
-/* ---------- Scroll-driven effects (progressive enhancement) ---------- */
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
-
-    /* project covers: the image settles from a gentle zoom as the card enters */
-    .work .wk .wk-thumb > * { animation: coverIn linear both; animation-timeline: view(); animation-range: entry 0% cover 40%; }
-    @keyframes coverIn { from { scale: 1.08; } to { scale: 1; } }
-    .work .wk { animation: cardUp linear both; animation-timeline: view(); animation-range: entry 0% entry 60%; }
-    @keyframes cardUp { from { opacity: 0; translate: 0 64px; } to { opacity: 1; translate: 0 0; } }
-
-    /* case-study heroes: the device grows into place, then recedes while you read on */
-    .hero > .stage .rdev, .hero > .stage.dev .devshot, .tvh .tvh-mac { animation: stageScroll linear both; animation-timeline: view(); animation-range: exit -20% exit 100%; }
-    @keyframes stageScroll { to { scale: .92; translate: 0 48px; opacity: .5; } }
-
-    /* section headings slide in from a mask */
-    .sec > h2, .col > h2, .work .head h2, .contact h2 { animation: headIn linear both; animation-timeline: view(); animation-range: entry 10% entry 70%; }
-    @keyframes headIn { from { clip-path: inset(0 0 100% 0); translate: 0 24px; } to { clip-path: inset(0 0 0 0); translate: 0 0; } }
-
-    /* figures and charts rise and sharpen */
-    .shot, .tv-chart, .lc, .pmx, .lanes, .study, .moment, figure.breakout, .gal > li, .flist > li, .beta3 > div, .tv-areas > div {
-      animation: blockIn linear both; animation-timeline: view(); animation-range: entry 0% entry 50%;
+    .work .wk, .shot, .tv-chart, .lc, .pmx, .lanes, .study, figure.breakout, .gal > li, .flist > li, .beta3 > div, .tv-areas > div {
+      animation: riseIn linear both; animation-timeline: view(); animation-range: entry 0% entry 45%;
     }
-    @keyframes blockIn { from { opacity: 0; translate: 0 32px; filter: blur(4px); } to { opacity: 1; translate: 0 0; filter: none; } }
-
-    /* big moments scale up as they reach the middle of the screen */
-    .moment .m-num { animation: numPop linear both; animation-timeline: view(); animation-range: entry 20% cover 45%; }
-    @keyframes numPop { from { scale: .7; } to { scale: 1; } }
-
+    @keyframes riseIn { from { opacity: 0; translate: 0 24px; } to { opacity: 1; translate: 0 0; } }
   }
 }
-
-

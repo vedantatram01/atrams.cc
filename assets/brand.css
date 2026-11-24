@@ -222,3 +222,19 @@ html body .rdev, :root[data-mode="dark"] .rdev.whp, :root[data-mode="dark"] .rde
 /* ---------- Logo: the name, set plainly ---------- */
 .logo { display: inline-flex !important; align-items: center; text-decoration: none !important; }
 html body .logo .lw { font-family: var(--display) !important; font-weight: 700 !important; font-size: 18px !important; line-height: 24px !important; letter-spacing: -.01em !important; color: var(--text) !important; }
+
+/* ---------- Cover fixes ---------- */
+/* CeraVe phones: a status-bar strip so scrolling pages never run under the island */
+.th-cv .ps::before { content: ""; position: absolute; z-index: 1; top: 0; left: 0; right: 0; height: 5.2%; background: #FFFFFF; }
+/* Invisible Obstacles: the screen-reader caption stays inside the laptop screen */
+html body .th-io .sr-cap { right: 18.5cqw !important; bottom: auto !important; top: 32.5cqw !important; width: 37cqw !important; font-size: 2cqw !important; padding: 1.4cqw 2cqw !important; }
+@media (max-width: 575.98px) { html body .th-io .sr-cap { right: 17cqw !important; top: 36cqw !important; width: 40cqw !important; } }
+/* Product screens inside covers always show the product's own light UI, in both site modes */
+:root[data-mode="dark"] .th-io .rdev-s { --text: #010400; --soft: #3A3838; --muted: #6E6B6B; --line: rgba(1,4,0,.12); color: #010400; }
+:root[data-mode="dark"] .th-io .sr-card, :root[data-mode="dark"] .th-io .bw { background: #FFFFFF; box-shadow: none; }
+:root[data-mode="dark"] .th-io .bw-bar { background: #F5F1F2; border-bottom-color: rgba(1,4,0,.08); }
+:root[data-mode="dark"] .th-io .sr-f b { border-color: rgba(1,4,0,.2); }
+:root[data-mode="dark"] .th-io .sr-cap { background: rgba(1,4,0,.88); color: #FFFBFC; }
+/* Line chart: a value shared by two lines is labelled once; the second label appears only when its line is selected */
+.lc .lc-dup { opacity: 0; } .lc.lc-focus .lc-s.on .lc-dup { opacity: 1; }
+.lc.lc-focus .lc-s:not(.on) .lc-v { opacity: 0; }
