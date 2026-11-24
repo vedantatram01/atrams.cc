@@ -1,42 +1,17 @@
 /* atrams.cc motion and scroll. Loaded last.
-   Home hero: a live reel of real project screens in real devices.
+   Home hero: type only. One headline, one line, two buttons.
    Site-wide: scroll-driven reveals, parallax and scale, with CSS scroll timelines
    where supported and a static page everywhere else. Reduced motion turns it all off. */
 
-/* ---------- Home hero: text left, reel right ---------- */
-@media (min-width: 992px) {
-  .intro { display: grid !important; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 64px; align-items: center; padding-top: 64px !important; padding-bottom: 96px !important; }
-  .intro .intro-t h1 { font-size: clamp(40px, 3.6vw, 56px) !important; line-height: 1.08 !important; }
-}
-.intro-t { min-width: 0; }
-.reel { position: relative; min-width: 0; margin-top: 48px; }
-@media (min-width: 992px) { .reel { margin-top: 0; } }
-.reel-stage { position: relative; container-type: inline-size; aspect-ratio: 16 / 11.5; --px: 0; --py: 0; }
-.reel-mac { position: absolute !important; left: 0; top: 4%; width: 92%; transition: translate .6s cubic-bezier(.2,.7,.2,1); translate: calc(var(--px) * -1.2cqw) calc(var(--py) * -1cqw); }
-.reel-iph { position: absolute !important; right: 0; bottom: 0; width: 23%; z-index: 3; transition: translate .6s cubic-bezier(.2,.7,.2,1), opacity .5s, transform .7s cubic-bezier(.2,.8,.2,1); translate: calc(var(--px) * 2cqw) calc(var(--py) * 1.6cqw); }
-.reel .rdev { filter: drop-shadow(0 3cqw 4cqw rgba(1,4,0,.22)); }
-.reel .rdev-s > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 0 0; opacity: 0; transform: scale(1.04); transition: opacity .7s ease, transform 1.4s cubic-bezier(.2,.7,.2,1); }
-.reel[data-i="0"] .r0, .reel[data-i="1"] .r1, .reel[data-i="2"] .r2 { opacity: 1; transform: none; }
-.reel[data-i="0"] .reel-iph { opacity: 0; transform: translateY(18%) rotate(4deg); }
-.reel-nav { list-style: none; margin: 24px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-.reel-nav a { position: relative; display: block; padding-top: 16px; text-decoration: none !important; color: var(--muted); }
-.reel-nav a b { display: block; font: 600 15px/20px var(--display); color: var(--muted); transition: color .3s; }
-.reel-nav a span { display: block; font-size: 13px; line-height: 18px; color: var(--muted); }
-.reel-nav a i { position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--line); overflow: hidden; }
-.reel-nav a i::after { content: ""; position: absolute; inset: 0; background: var(--brand); transform: scaleX(0); transform-origin: 0 50%; }
-.reel[data-i="0"] [data-k="0"] b, .reel[data-i="1"] [data-k="1"] b, .reel[data-i="2"] [data-k="2"] b, .reel-nav a:hover b, .reel-nav a:focus-visible b { color: var(--text); }
-.reel[data-i="0"] [data-k="0"] i::after, .reel[data-i="1"] [data-k="1"] i::after, .reel[data-i="2"] [data-k="2"] i::after { animation: reelBar 4.2s linear forwards; animation-play-state: var(--run, running); }
-.reel.still .reel-nav i::after { animation: none !important; transform: scaleX(1); opacity: 0; }
-.reel.still [data-i] i::after { opacity: 1; }
-@keyframes reelBar { to { transform: scaleX(1); } }
-@media (max-width: 575.98px) { .reel-nav { grid-template-columns: 1fr; gap: 8px; } .reel-nav a span { display: none; } }
+/* ---------- Home hero: one simple column, the headline carries it ---------- */
+.intro { display: block !important; padding-top: 96px !important; padding-bottom: 96px !important; }
+.intro .intro-t h1 { max-width: 15ch !important; font-size: clamp(44px, 6.4vw, 88px) !important; line-height: 1.02 !important; letter-spacing: -.035em !important; }
+.intro .intro-t .lede { max-width: 600px !important; margin-top: 32px !important; font-size: 18px !important; line-height: 28px !important; }
+@media (max-width: 767.98px) { .intro { padding-top: 48px !important; padding-bottom: 64px !important; } }
 
 /* ---------- Scroll-driven effects (progressive enhancement) ---------- */
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
-    /* hero reel drifts up and slightly back as you scroll away */
-    .reel-stage { animation: heroDrift linear both; animation-timeline: scroll(root); animation-range: 0 600px; }
-    @keyframes heroDrift { to { transform: translateY(-48px) scale(.96); opacity: .6; } }
 
     /* project covers: the image settles from a gentle zoom as the card enters */
     .work .wk .wk-thumb > * { animation: coverIn linear both; animation-timeline: view(); animation-range: entry 0% cover 40%; }
@@ -67,14 +42,5 @@
     @keyframes rpGrow { to { scale: 1 1; } }
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .reel-mac, .reel-iph { translate: none !important; transition: none !important; }
-  .reel .rdev-s > img { transition: none; transform: none; }
-}
-.reel.hold .reel-nav i::after { animation: none !important; transform: scaleX(1); }
 
-/* ---------- Home hero 3D graphic ---------- */
-.iso { position: relative; width: 100%; aspect-ratio: 1 / .86; margin-top: 32px; }
-.iso-c { display: block; width: 100%; height: 100%; }
-@media (min-width: 992px) { .iso { margin-top: 0; } }
-@media (prefers-reduced-motion: no-preference) { @supports (animation-timeline: view()) { .iso { animation: heroDrift linear both; animation-timeline: scroll(root); animation-range: 0 600px; } } }
+

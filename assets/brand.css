@@ -62,9 +62,9 @@ a:not(.btn):not(.pill):not(.logo):not(.wk-thumb):hover { color: var(--brand-d); 
 .pull { border-left-color: var(--brand) !important; }
 .own, .own:not(.team) { background: var(--brand-soft) !important; color: var(--brand-d) !important; }
 .own.team { background: var(--unk-soft) !important; color: var(--soft) !important; }
-.trk li::before { background: var(--mat) !important; box-shadow: inset 0 0 0 2px var(--text) !important; }
-.trk li:first-child::before { background: var(--brand) !important; box-shadow: none !important; }
-.trk li::after { background: var(--line) !important; }
+.st-trk li::before { background: var(--mat) !important; box-shadow: inset 0 0 0 2px var(--text) !important; }
+.st-trk li:first-child::before { background: var(--brand) !important; box-shadow: none !important; }
+.st-trk li::after { background: var(--line) !important; }
 .ln1, .ln2, .ln3, .ln4 { --lc: var(--text) !important; }
 .tv-oci > div:last-child { background: var(--brand-soft) !important; } .tv-oci > div:last-child dt { color: var(--brand-d) !important; }
 
@@ -210,3 +210,20 @@ html body .tv-insight { padding: 0 !important; }
 :root[data-mode="dark"] .logo .lw-dot { background: #FF5A55; }
 .logo:hover .lw-dot { transform: translateY(-.02em) rotate(45deg); }
 @media (prefers-reduced-motion: reduce) { .logo:hover .lw-dot { transform: translateY(-.02em); } }
+
+/* ---------- Controls: one corner radius, 5px ---------- */
+.btn, a.btn, .btn-primary, .btn-quiet, .vf-b, .lc-keys button, .copy, .skip, .zoom-tag, .zv-x, .mode, .menu-btn,
+.pmx-b, .vt-tab, .fl-d > summary, button, input, select, textarea, .pill:not(.nav .pill) { border-radius: 5px !important; }
+
+/* ---------- Colour discipline: covers are one ink, in both modes ---------- */
+:root .work .wk-thumb, :root[data-mode="dark"] .work .wk-thumb, :root[data-mode="dark"] .t-tv .wk-thumb.th-tv,
+:root .hero > .stage, :root[data-mode="dark"] .hero > .stage, :root .tvh .tvh-stage { background: var(--cover) !important; }
+:root[data-mode="dark"] .npt, :root[data-mode="dark"] .th-np { --bx: #141614; --bt: #FFFBFC; --ln: rgba(255,251,252,.18); --hl: #FFFBFC; --hc: #010400; }
+:root[data-mode="dark"] .scr, :root[data-mode="dark"] .p-scr, :root[data-mode="dark"] .fr-in { background: #0F100F; }
+html body .mode, html body .menu-btn, html body .mt, html body .cplay { border-radius: 5px !important; }
+/* Real bezels carry their own edge: no drawn frames on them in any mode */
+html body .rdev, :root[data-mode="dark"] .rdev.whp, :root[data-mode="dark"] .rdev.pp, :root[data-mode="dark"] .rdev.devp, :root[data-mode="dark"] .rdev.whc { box-shadow: none !important; }
+/* Phones: 16px page margin, one grid unit, for every container */
+@media (max-width: 575.98px) {
+  html body .wrap, html body .col, html body .nav, html body footer .wrap { padding-left: 16px !important; padding-right: 16px !important; }
+}

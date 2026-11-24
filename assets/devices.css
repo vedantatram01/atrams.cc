@@ -82,7 +82,7 @@
 .hero > .stage.dev .devshot img { border-radius: 0 !important; box-shadow: none !important; }
 .hero > .stage:not(.dev) { padding-left: calc(48px + 96px) !important; }
 .hero > .stage.dev:has(img[src*="wh-morning"]) { background: linear-gradient(180deg, #FAF8F6, #EAE6DE); }
-.hero > .stage.dev:has(img[src*="np-hero"]) { background: #EDEAE2; }
+.hero > .stage.dev:has(img[src*="np-hero"]) { background: #F5F1F2; }
 .hero > .stage:has(img[src^="assets/cv-hero"]) { background: #BFDDF2; }
 :root[data-mode="dark"] .hero > .stage:has(img[src^="assets/cv-hero"]) { background: #16334A; }
 .hero > .stage:has(img[src^="assets/hero-desk"]) { background: #1D2229; }

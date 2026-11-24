@@ -20,14 +20,14 @@
 li > p, .ev, .tv-insight .ev, .tv-areas > div > p, .tv-out li, summary, summary span, .rd-c, .fl-m, .fl-d > p {
   font-size: 16px !important;
 }
-.vt-tab, .vt-tab span, .sb-l, .eb-h, .tv-views .m, .tn, p.k, .fl-k, .rd-k, .st-k, .b-h span, .ln-t span, .trk span, .srcs span, .rd-f {
+.vt-tab, .vt-tab span, .sb-l, .eb-h, .tv-views .m, .tn, p.k, .fl-k, .rd-k, .st-k, .b-h span, .ln-t span, .st-trk span, .srcs span, .rd-f {
   font-size: 14px !important;
 }
 .fl-d > summary, .fl-d > summary span { font-size: 14px !important; }
 
 /* ---------- Type scale: headings ---------- */
 .logo .lw, .co-txt, .co-b .co-txt, .b-h { font-size: 16px !important; }
-.tt-h b, .srcs .q b, .srcs li.q b, .tv-sub, .ln-t b, .trk b, .flist h3, .rounds h3 { font-size: 20px !important; line-height: 28px !important; }
+.tt-h b, .srcs .q b, .srcs li.q b, .tv-sub, .ln-t b, .st-trk b, .flist h3, .rounds h3 { font-size: 20px !important; line-height: 28px !important; }
 .wk h3, .wk h3 a { font-size: 24px !important; line-height: 32px !important; }
 .nx-t, .contact h2, .moment .m-lead, .tv-src b, .srcs b { font-size: 36px !important; line-height: 44px !important; }
 @media (max-width: 767.98px) {
@@ -50,7 +50,7 @@ details > summary { padding-top: 16px !important; padding-bottom: 16px !importan
 
 /* ---------- Radius: four steps ---------- */
 .own, .pr, .b-h span { border-radius: 6px !important; }
-.btn, .vf-b, .lc-keys button, .copy, .skip, .zoom-tag, .mode, .menu-btn { border-radius: 8px !important; }
+.btn, .vf-b, .lc-keys button, .copy, .skip, .zoom-tag, .mode, .menu-btn { border-radius: 5px !important; }
 .shot img, .frame, .tv-shot, .tv-fig img, .np-map img, .tv-oci > div { border-radius: 12px !important; }
 .wk, .moment, .moment.breakout, .moment:not(.breakout), .study, .lanes, .tv-chart, .lc, .pmx, .kv div, .finding, .flist > li,
 .rounds > li, .mcards > div, .tv-areas > div, .tv-out > div, .beta3 > div, .tv-probs li, .tv-good li, .goal, .trip,

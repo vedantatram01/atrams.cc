@@ -69,9 +69,9 @@ html, body { overflow-x: clip; }
 .lanes { padding: 24px !important; }
 .st-part + .st-part, .study .cap { background: none !important; }
 .st-part + .st-part { border-top: 1px dashed var(--line) !important; }
-.trk li::before { box-shadow: none !important; background: rgba(0,167,111,.16) !important; border-radius: 50% !important; width: 14px; height: 14px; top: 5px; }
-.trk li:first-child::before { background: #00A76F !important; }
-.trk li::after { background: rgba(0,167,111,.24) !important; border-radius: 2px; }
+.st-trk li::before { box-shadow: none !important; background: rgba(0,167,111,.16) !important; border-radius: 50% !important; width: 14px; height: 14px; top: 5px; }
+.st-trk li:first-child::before { background: #00A76F !important; }
+.st-trk li::after { background: rgba(0,167,111,.24) !important; border-radius: 2px; }
 .srcs b { font-weight: 700; }
 .srcs li:nth-child(1) b, .srcs li:nth-child(2) b, .srcs li:nth-child(3) b { color: var(--accent); }
 .ln-bar i { box-shadow: none !important; border-radius: 6px !important; height: 14px !important; }

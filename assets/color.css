@@ -50,7 +50,7 @@
 .moment .m-num { background: none !important; -webkit-background-clip: border-box !important; background-clip: border-box !important; color: var(--brand-d) !important; }
 .pull { border-left-color: var(--brand) !important; }
 .srcs li:nth-child(-n+3) b { color: var(--brand-d) !important; }
-.trk li::before { background: var(--brand-soft) !important; } .trk li:first-child::before { background: var(--brand) !important; } .trk li::after { background: var(--brand-soft) !important; }
+.st-trk li::before { background: var(--brand-soft) !important; } .st-trk li:first-child::before { background: var(--brand) !important; } .st-trk li::after { background: var(--brand-soft) !important; }
 .vt-tab[aria-selected="true"] { border-bottom-color: var(--brand) !important; }
 .tv-oci > div:last-child { background: var(--brand-soft) !important; } .tv-oci > div:last-child dt { color: var(--brand-d) !important; }
 .pmx-c[data-z="Do next"] { background: var(--brand-soft) !important; }
