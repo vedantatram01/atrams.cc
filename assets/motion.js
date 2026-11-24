@@ -112,18 +112,4 @@
   scanTabs();
   window.addEventListener("load", scanTabs);
 
-  /* 5. Reading progress on case studies */
-  if (document.querySelector(".title") && document.querySelector(".toc")) {
-    var bar = document.createElement("div");
-    bar.className = "rp"; bar.setAttribute("aria-hidden", "true");
-    document.body.appendChild(bar);
-    var tick = false;
-    function upd() {
-      var h = root.scrollHeight - innerHeight;
-      bar.style.transform = "scaleX(" + (h > 0 ? Math.min(1, scrollY / h) : 0) + ")";
-      tick = false;
-    }
-    window.addEventListener("scroll", function () { if (!tick) { tick = true; requestAnimationFrame(upd); } }, { passive: true });
-    upd();
-  }
 })();

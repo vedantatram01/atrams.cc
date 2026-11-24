@@ -32,8 +32,6 @@
 .vt-list.has-ind .vt-tab { border-bottom-color: transparent !important; }
 .vt-ind { position: absolute; left: 0; bottom: -1px; height: 2px; border-radius: 2px; background: var(--brand); transition: transform .35s cubic-bezier(.2,.7,.2,1), width .35s cubic-bezier(.2,.7,.2,1); pointer-events: none; }
 
-/* 6. Reading progress */
-.rp { position: fixed; top: 0; left: 0; right: 0; z-index: 60; height: 3px; background: var(--brand); transform-origin: 0 50%; transform: scaleX(0); pointer-events: none; }
 
 /* 7. Buttons: a gentle lift and a sliding arrow */
 .btn { transition: transform .2s, box-shadow .2s, background-color .2s; }
@@ -48,6 +46,5 @@
   .wk-feat::before { animation: none; display: none; }
   .vt-ind, .btn, .sp .wk-thumb > * { transition: none; }
   .btn:hover { transform: none; }
-  .rp { display: none; }
 }
 .vh { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
