@@ -44,7 +44,7 @@ html, body { background: var(--bg) !important; color: var(--text); }
 :focus-visible { outline-color: var(--brand) !important; }
 
 /* ---------- 30: Black ---------- */
-.btn, .btn-p, a.btn:not(.btn-s) { background: var(--text) !important; color: var(--bg) !important; border-color: var(--text) !important; }
+
 .work .wk .wk-thumb, .t-tv .wk-thumb, .t-wh .wk-thumb, .t-np .wk-thumb, .t-io .wk-thumb, .t-cv .wk-thumb,
 .t-tv .wk-thumb.th-tv { background: var(--cover) !important; }
 .hero > .stage:not(.dev), .tvh .tvh-stage { background: var(--cover) !important; }
@@ -157,3 +157,18 @@ a:not(.btn):not(.pill):not(.logo):not(.wk-thumb):hover { color: var(--brand-d); 
 .eb i { background: linear-gradient(90deg, var(--sem-good) var(--v), var(--mat) var(--v)) !important; }
 .ln1, .ln2, .ln3, .ln4 { --lc: var(--text) !important; }
 :root[data-mode="dark"] .v1 { background: var(--sem-good) !important; } :root[data-mode="dark"] .v2 { background: var(--sem-mid) !important; } :root[data-mode="dark"] .v3 { background: var(--sem-unk) !important; }
+
+/* ---------- Buttons: one primary, one secondary ----------
+   Primary   Scarlet fill, white text: the single call to action (the 10%).
+   Secondary Black outline on Snow, fills Black on hover.
+   Both 48px tall, 24px side padding, 8px radius, 16px apart. */
+.btn, a.btn, .btn-primary, .btn-quiet { display: inline-flex !important; align-items: center; justify-content: center; gap: 8px; min-height: 48px !important; height: 48px; padding: 0 24px !important; border-radius: 8px !important; font-size: 15px !important; font-weight: 600 !important; line-height: 1 !important; text-decoration: none !important; transition: background-color .2s, color .2s, border-color .2s, transform .2s, box-shadow .2s; }
+.btn-primary, a.btn-primary { background: var(--scarlet) !important; color: #FFFFFF !important; border: 1px solid var(--scarlet) !important; }
+.btn-primary:hover, .btn-primary:focus-visible { background: var(--scarlet-d) !important; border-color: var(--scarlet-d) !important; box-shadow: 0 8px 16px -8px rgba(222,26,26,.55) !important; transform: translateY(-1px); }
+.btn-quiet, a.btn-quiet { background: transparent !important; color: var(--text) !important; border: 1px solid var(--text) !important; }
+.btn-quiet:hover, .btn-quiet:focus-visible { background: var(--text) !important; color: var(--bg) !important; box-shadow: none !important; transform: translateY(-1px); }
+:root[data-mode="dark"] .btn-primary, :root[data-mode="dark"] a.btn-primary { background: #FF5A55 !important; border-color: #FF5A55 !important; color: var(--black) !important; }
+:root[data-mode="dark"] .btn-primary:hover { background: #FF8A86 !important; border-color: #FF8A86 !important; }
+.btn:focus-visible { outline: 2px solid var(--text) !important; outline-offset: 3px; }
+.cta, .hero-cta, .acts, .btns { gap: 16px !important; }
+@media (prefers-reduced-motion: reduce) { .btn:hover { transform: none !important; } }
