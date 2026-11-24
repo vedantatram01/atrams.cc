@@ -101,3 +101,47 @@
   .tvh .tvh-stage { padding: 24px 4% 0; border-radius: 16px; }
 }
 .hero > .stage.dev .devshot img { mix-blend-mode: darken; }
+
+/* ---------- Real device frames (Apple product bezels, used as is) ----------
+   The screen sits under the frame PNG at the exact opening measured from its transparency. */
+.rdev { position: relative; }
+.rdev > .rdev-f { position: relative !important; z-index: 2; display: block; width: 100% !important; height: auto !important; inset: auto !important; opacity: 1 !important; animation: none !important; transform: none !important; pointer-events: none; border-radius: 0 !important; box-shadow: none !important; object-fit: fill !important; max-width: none; }
+.rdev > .rdev-s { position: absolute !important; z-index: 1; overflow: hidden; background: #000; padding: 0 !important; margin: 0 !important; aspect-ratio: auto !important; box-shadow: none !important; }
+.rdev > .rdev-s::before, .rdev > .rdev-s::after { content: none !important; }
+.rdev-mac > .rdev-s { left: 9.061%; top: 2.219%; width: 81.878%; height: 86.601%; border-radius: 1.2% 1.2% 0 0 / 1.9% 1.9% 0 0 !important; background: #fff; }
+.rdev-iph > .rdev-s { left: 4.321%; top: 1.803%; width: 91.357%; height: 96.431%; border-radius: 14% / 6.6% !important; background: #fff; }
+.rdev-watch > .rdev-s { left: 9.804%; top: 21.253%; width: 75.223%; height: 57.494%; border-radius: 24% / 20% !important; background: #000; }
+.rdev > .rdev-s > img { display: block; width: 100%; }
+.rdev-mac > .rdev-s > img { position: absolute; inset: 0; height: 100%; object-fit: cover; object-position: 50% 0; }
+.rdev.pp, .rdev.whp, .rdev.npp, .rdev.whw { padding: 0 !important; background: none !important; border-radius: 0 !important; box-shadow: none !important; border: 0 !important; }
+.rdev.pp::before, .rdev.pp::after, .rdev.whp::before, .rdev.whp::after, .rdev.npp::before, .rdev.npp::after, .rdev.whw::before, .rdev.whw::after { content: none !important; }
+.rdev.whw > i { display: none !important; }
+.rdev { filter: drop-shadow(0 2.4cqw 3.2cqw rgba(0,0,0,.28)); }
+.rdev.pp, .rdev.npp { position: absolute !important; }
+.th-io { display: grid !important; place-items: end center !important; }
+.io-mac { position: relative; width: 84%; margin-bottom: -1%; }
+.io-mac .bw-body { position: absolute; inset: 0; background: #fff; display: grid; place-items: start center; }
+.io-mac .bw-body .sr-card { max-width: 70% !important; padding-top: 6% !important; }
+.th-io .sr-cap { bottom: 6cqw !important; }
+.th-tv { place-items: end center !important; }
+.work .wk-body { align-items: baseline; }
+
+/* screens fill the opening edge to edge, never cropped at the sides */
+.rdev-mac > .rdev-s > img, .tv-seq > img { object-fit: cover !important; object-position: 0 0 !important; }
+.hx-mac .rdev-s { background: #fff; }
+.hx-mac .rdev-s .vp { position: relative; width: 100%; padding: 0; margin: 0; aspect-ratio: auto; }
+.hx-mac .rdev-s .vp img { display: block; width: 100%; height: auto; border-radius: 0 !important; }
+.hx-iph .rdev-s { display: flex; flex-direction: column; }
+.hx-iph .rdev-s .sbar { flex: none; }
+.hx-iph .rdev-s .pv { flex: 1; overflow: hidden; }
+.hx-iph .rdev-s .pv img { display: block; width: 100%; height: auto; border-radius: 0 !important; }
+.hero .laptop.rdev, .hero .phone.rdev { padding: 0 !important; background: none !important; box-shadow: none !important; border: 0 !important; border-radius: 0 !important; }
+.hero .laptop.rdev::before, .hero .laptop.rdev::after, .hero .phone.rdev::before, .hero .phone.rdev::after { content: none !important; }
+.hero > .stage:not(.dev) { padding-bottom: 0 !important; }
+.hero .phone.rdev { width: 21% !important; bottom: 0 !important; }
+.tvh-scr .tv-shot, .tvh-scr .zoom { position: absolute; inset: 0; }
+.tvh-scr .tv-shot img, .tvh-scr .zoom img { object-fit: cover !important; object-position: 0 0 !important; }
+.hero > .stage:not(.dev) { position: relative; padding: 48px 48px 0 !important; }
+.hero .laptop.rdev { width: 82% !important; max-width: none !important; margin: 0 0 0 auto !important; }
+.hero .phone.rdev { position: absolute !important; z-index: 3; left: 5% !important; bottom: 0 !important; width: 17% !important; transform: translateY(8%); display: block !important; }
+@media (max-width: 767.98px) { .hero > .stage:not(.dev) { padding: 24px 16px 0 !important; } .hero .laptop.rdev { width: 100% !important; } .hero .phone.rdev { display: none !important; } }
