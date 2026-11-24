@@ -113,7 +113,7 @@ html body .copy { padding: 8px 16px !important; gap: 8px !important; }
 html body main [role="tablist"] > button:not(.vt-tab) { padding: 16px 16px !important; }
 html body .cplay { padding: 8px !important; }
 html body .went i, html body .went s { padding-left: 16px !important; }
-html body .iac li, html body main ol.tl li { padding-top: 16px !important; padding-bottom: 16px !important; }
+html body .iac > li, html body main ol.tl > li { padding-top: 16px !important; padding-bottom: 16px !important; }
 html body .rd-f + *, html body .tv-views li span { margin-top: 8px !important; }
 html body #contribution .tv-areas > div > p, html body .tv-insight > p.ev, html body .tv-halves.tv-vs > div > p { line-height: 24px !important; }
 html body .ln-t span { margin-top: 8px !important; }

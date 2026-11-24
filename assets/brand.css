@@ -172,3 +172,29 @@ a:not(.btn):not(.pill):not(.logo):not(.wk-thumb):hover { color: var(--brand-d); 
 .btn:focus-visible { outline: 2px solid var(--text) !important; outline-offset: 3px; }
 .cta, .hero-cta, .acts, .btns { gap: 16px !important; }
 @media (prefers-reduced-motion: reduce) { .btn:hover { transform: none !important; } }
+
+/* ---------- Audit fixes ----------
+   1 Semantics: scarlet means risk only inside content. "Working well" is good (blue);
+     an implication is the takeaway, so it gets Black emphasis, not a status colour.
+   2 Hierarchy: every section heading of the same level is the same size.
+   3 Alignment: the case-study hero and its caption share the title block's left edge.
+   4 Proximity: bullet lists inside About entries sit 8px apart, not 40px.
+   5 Common region: the three insight tiles are equal height and share one row. */
+.tv-ba > .aft { border-color: var(--sem-good) !important; } .tv-ba .aft small { color: var(--sem-good) !important; }
+.tv-oci > div:last-child { background: var(--text) !important; color: var(--bg) !important; }
+.tv-oci > div:last-child dt { color: color-mix(in srgb, var(--bg) 70%, var(--text)) !important; }
+.tv-oci > div:last-child dd { color: var(--bg) !important; }
+.tv-oci { align-items: stretch !important; }
+.tv-oci > div { display: flex; flex-direction: column; }
+.work .head h2, .contact h2, main section > h2, main .wrap > h2, .about-sec h2 { font-size: 36px !important; line-height: 44px !important; }
+@media (max-width: 767.98px) { .work .head h2, .contact h2, main section > h2, main .wrap > h2 { font-size: 28px !important; line-height: 36px !important; } }
+.hero > .tv-stage.tvh { width: calc(var(--bw) + var(--gx)) !important; padding-left: calc(var(--gx) / 2) !important; padding-right: calc(var(--gx) / 2) !important; box-sizing: border-box; }
+.hero > .stage { width: var(--bw) !important; }
+.hero > .tv-stage.tvh .cap, .hero > .stage + .cap { padding-left: 0 !important; }
+html body .tv-insight { padding: 0 !important; }
+/* About: section labels in the side column step down to 24 */
+.about-page main h2, body:has(.what) main h2 { font-size: 24px !important; line-height: 32px !important; }
+/* CeraVe: "went well" is good, so blue; neutral ratings are ink, not risk */
+.steps .ok .dot, .legend i.ok { background: var(--sem-good) !important; }
+.steps .ok .st { color: var(--sem-good) !important; }
+.meter i::after { background: var(--text) !important; }

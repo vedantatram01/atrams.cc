@@ -68,6 +68,8 @@
       el.textContent = ""; el.appendChild(v); el.appendChild(sr);
       io.observe(el);
     });
+    /* never leave a figure at zero: settle any not yet counted when printing or after 8s off-screen */
+    window.addEventListener("beforeprint", function () { nums.forEach(function (el) { if (el._final && el.firstChild) el.firstChild.textContent = el._final; }); });
   }
 
   /* 3. Spotlight + tilt on cards (fine pointers only) */
