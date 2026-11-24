@@ -782,7 +782,7 @@ img { max-width: 100%; display: block; }
 .wk:not(.live) .th-tv * { animation-play-state: paused; }
 
 </style>
-<link rel="stylesheet" href="assets/system.css?v=202611240540"><link rel="stylesheet" href="assets/minimal.css?v=202611240540"><link rel="stylesheet" href="assets/layout.css?v=202611240540"><link rel="stylesheet" href="assets/color.css?v=202611240540"><link rel="stylesheet" href="assets/fundamentals.css?v=202611240540"><link rel="stylesheet" href="assets/motion.css?v=202611240540">
+<link rel="stylesheet" href="assets/system.css?v=202611240625"><link rel="stylesheet" href="assets/minimal.css?v=202611240625"><link rel="stylesheet" href="assets/layout.css?v=202611240625"><link rel="stylesheet" href="assets/color.css?v=202611240625"><link rel="stylesheet" href="assets/fundamentals.css?v=202611240625"><link rel="stylesheet" href="assets/motion.css?v=202611240625"><link rel="stylesheet" href="assets/devices.css?v=202611240625">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -826,18 +826,9 @@ img { max-width: 100%; display: block; }
     <div class="cases">
     <article class="wk rv t-tv wk-feat" aria-labelledby="case-05">
       <a class="wk-thumb th-tv" href="treevah.html" tabindex="-1" aria-hidden="true">
-        <div class="tvc">
-          <div class="tvs tvc-back">
-            <div class="tvs-bar"><i></i><i></i><i></i></div>
-            <div class="tvs-vp tvc-vp-b"><img src="assets/tv-js-prompt.webp" width="1440" height="1025" alt="" loading="lazy"></div>
-          </div>
-          <div class="tvs tvc-main">
-            <div class="tvs-bar"><i></i><i></i><i></i><span>treevah.com</span></div>
-            <div class="tvs-vp tvc-vp-m"><img src="assets/tv-app.webp" width="1470" height="795" alt="" loading="lazy"><span class="tvc-hl"></span><span class="tvc-rip r1"></span><span class="tvc-rip r2"></span></div>
-          </div>
-          <div class="tvc-card"><img src="assets/tv-th-depth.webp" width="618" height="530" alt="" loading="lazy"></div>
-          <span class="tvc-rip r3"></span>
-          <svg class="tvc-cur" viewBox="0 0 24 24"><path d="M5 3l14 8-6.2 1.6L10 19z" fill="#1C252E" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <div class="mbp tv-mac">
+          <div class="mbp-lid"><div class="mbp-scr tv-seq"><img src="assets/tv-dkb.webp" width="2000" height="1011" alt="" loading="lazy"><img src="assets/tv-app.webp" width="1470" height="795" alt="" loading="lazy"><img src="assets/tv-depth.webp" width="2000" height="1422" alt="" loading="lazy"></div></div>
+          <div class="mbp-base"></div>
         </div>
       </a>
       <div class="wk-body">
@@ -1013,7 +1004,7 @@ img { max-width: 100%; display: block; }
   var cards = [].slice.call(document.querySelectorAll(".wk"));
   var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduce || !document.body.getAnimations) { cards.forEach(function (c) { c.classList.add("live"); }); return; }
-  var CFG = { "th-tv": [16000, 1.2], "th-io": [10000, 1.5], "th-wh": [12000, 1.7], "th-np": [12000, 1.7], "th-cv": [18000, 2.2] };
+  var CFG = { "th-tv": [15000, 1], "th-io": [10000, 1.5], "th-wh": [12000, 1.7], "th-np": [12000, 1.7], "th-cv": [18000, 2.2] };
   var st = cards.map(function (c) {
     var th = c.querySelector(".wk-thumb"), k = Object.keys(CFG).filter(function (x) { return th.classList.contains(x); })[0] || "th-io";
     var bar = document.createElement("span"); bar.className = "wk-prog"; bar.setAttribute("aria-hidden", "true"); bar.innerHTML = "<i></i>"; th.appendChild(bar);
@@ -1048,6 +1039,6 @@ img { max-width: 100%; display: block; }
   wake();
 })();
 </script>
-<script src="assets/motion.js?v=202611240540" defer></script>
+<script src="assets/motion.js?v=202611240625" defer></script>
 </body>
 </html>
