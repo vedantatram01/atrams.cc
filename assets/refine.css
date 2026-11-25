@@ -20,7 +20,7 @@ html:root body { background: var(--bg) !important; color: var(--text); font-fami
 html:root body :where(h1, h2, h3, h4, h5, h6, p, li, dt, dd, a, button, span, b, strong, em, figcaption, td, th, caption, label, small, blockquote, cite, div, summary, ol, ul) { font-family: var(--f) !important; }
 html:root body :is(h1, h2, h3, h4) { font-weight: 500 !important; text-wrap: balance; }
 html:root body :is(b, strong) { font-weight: 600; }
-html:root body .hero h1 { font: 500 clamp(40px, 5.6vw, 76px)/1.02 var(--f) !important; letter-spacing: -.045em !important; max-width: 16ch; }
+html:root body .hero h1 { font-family: var(--f) !important; max-width: 16ch; }
 html:root body main h2 { font-size: clamp(28px, 3vw, 40px) !important; line-height: 1.1 !important; letter-spacing: -.035em !important; font-weight: 500 !important; }
 html:root body main h3 { letter-spacing: -.02em !important; }
 html:root body main p, html:root body main li { text-wrap: pretty; }
@@ -28,8 +28,8 @@ html:root body .hero .title > p:not(.rt):not(.tv-sub) { color: var(--muted) !imp
 html:root body .hero .tv-sub { font: 500 22px/1.3 var(--f) !important; letter-spacing: -.02em !important; color: var(--muted) !important; }
 
 /* Nav: flat bar, hairline once you scroll */
-html:root body .nav { top: 0 !important; margin: 0 auto !important; width: 100% !important; max-width: none !important; height: 64px !important; padding: 0 max(20px, calc((100vw - 1200px) / 2)) !important; border-radius: 0 !important; background: var(--d-glass) !important; -webkit-backdrop-filter: saturate(1.6) blur(14px) !important; backdrop-filter: saturate(1.6) blur(14px) !important; box-shadow: none !important; border-bottom: 1px solid transparent !important; transition: border-color .3s var(--r-ease) !important; }
-html:root body .nav.scrolled { box-shadow: none !important; border-bottom-color: var(--line) !important; }
+html:root body .nav { top: 0 !important; margin: 0 auto !important; width: 100% !important; max-width: none !important; height: 64px !important; padding: 0 max(20px, calc((100vw - 1200px) / 2)) !important; border-radius: 0 !important; background: var(--d-glass) !important; -webkit-backdrop-filter: saturate(1.6) blur(14px) !important; backdrop-filter: saturate(1.6) blur(14px) !important; box-shadow: none !important; border-bottom: 0 !important; box-shadow: 0 1px 0 transparent !important; transition: box-shadow .3s var(--r-ease) !important; }
+html:root body .nav.scrolled { box-shadow: 0 1px 0 var(--line) !important; }
 html:root body .nav .logo .lw { font: 500 15px/1 var(--f) !important; letter-spacing: -.01em !important; }
 html:root body .nav .logo .lw b { font-weight: 500 !important; }
 html:root body .nav .logo .lw span { color: var(--text) !important; }
@@ -115,3 +115,66 @@ html:root body main .card .ct { letter-spacing: -.02em !important; }
 /* Align the bar with the page column */
 html:root body .nav { padding: 0 max(20px, calc((100vw - 1248px) / 2)) !important; }
 @media (max-width: 767.98px) { html:root body .nav { padding: 0 20px !important; } }
+
+/* ───────────── Layout system ─────────────
+   One container (1200px, 40px gutters, 20px on phones), one title size,
+   one section-heading size, one section rhythm. Every page snaps to it. */
+html:root { --cw: 1200px; --gx: 40px; --rhythm: 112px; --col: 640px; --secgap: var(--rhythm); }
+@media (max-width: 767.98px) { html:root { --gx: 20px; --rhythm: 80px; } }
+
+/* Containers */
+html:root body :is(.wrap, .hero, .nextcs, .site-foot) { box-sizing: border-box !important; width: min(var(--cw), calc(100% - 2 * var(--gx))) !important; max-width: none !important; margin-left: auto !important; margin-right: auto !important; padding-left: 0 !important; padding-right: 0 !important; }
+html:root body main .wide { box-sizing: border-box !important; width: min(var(--cw), calc(100vw - 2 * var(--gx))) !important; max-width: none !important; margin-left: 50% !important; transform: translateX(-50%); }
+html:root body main :is(.sec, .sec.col) { padding-left: 0 !important; padding-right: 0 !important; }
+html:root body main .col { box-sizing: border-box; width: min(var(--col), calc(100vw - 2 * var(--gx))) !important; max-width: none !important; margin-left: auto !important; margin-right: auto !important; padding-left: 0 !important; padding-right: 0 !important; }
+html:root body .nav { padding-left: max(var(--gx), calc((100% - var(--cw)) / 2)) !important; padding-right: max(var(--gx), calc((100% - var(--cw)) / 2)) !important; height: 64px !important; }
+html:root body .nav .logo { padding: 0 !important; margin: 0 !important; min-width: 0 !important; }
+html:root body .nav .logo .lw { font: 500 15px/1 var(--f) !important; }
+html:root body .nav-r > .menu-btn { margin-right: -10px !important; }
+
+/* Titles: one display size, one heading size, one lede */
+html:root body h1 { font-size: clamp(36px, 5vw, 68px) !important; line-height: 1.04 !important; letter-spacing: -.045em !important; font-weight: 500 !important; }
+html:root body main h2, html:root body .contact h2 { font-size: clamp(26px, 2.4vw, 34px) !important; line-height: 1.15 !important; letter-spacing: -.035em !important; font-weight: 500 !important; }
+html:root body :is(.hero .title > p:not(.rt):not(.tv-sub), .intro .lede, .intro > p) { margin-top: 28px !important; max-width: 36em !important; font-size: 18px !important; line-height: 1.6 !important; letter-spacing: -.005em; color: var(--soft) !important; }
+html:root body .hero .tv-sub { margin-top: 16px !important; }
+
+/* Page top: titles start 112px under the bar on every page */
+html:root body .hero { padding-top: var(--rhythm) !important; }
+html:root body .intro { padding-top: var(--rhythm) !important; padding-bottom: 0 !important; }
+html:root body .intro h1 { margin-top: 0 !important; max-width: 16ch !important; }
+html:root body .me { align-items: start !important; }
+
+/* Section rhythm */
+html:root body main .sec { padding-top: var(--rhythm) !important; margin-top: 0 !important; border-top: 0 !important; }
+html:root body main .sec h2 + * { margin-top: 20px !important; }
+html:root body main .about { margin-top: var(--rhythm) !important; padding-top: 32px !important; border-top: 1px solid var(--line); gap: 32px 40px !important; }
+html:root body main .intro + .about { margin-top: var(--rhythm) !important; }
+html:root body main .contact { margin-top: var(--rhythm) !important; padding-top: 32px !important; padding-bottom: 0 !important; border-top: 1px solid var(--line); }
+html:root body main .contact .links { margin-top: 28px !important; }
+
+/* Contents rail: sits on the container's left edge, only where it fits beside the text */
+@media (min-width: 1280px) { html:root body .toc { left: max(var(--gx), calc((100% - var(--cw)) / 2)) !important; } }
+
+/* Next case and footer: same width, same spacing as the home page */
+html:root body .nextcs { margin-top: var(--rhythm) !important; }
+html:root body .site-foot { margin-top: var(--rhythm) !important; padding-top: 0 !important; padding-bottom: 40px !important; }
+html:root body .site-foot .sf-in { border-top: 1px solid var(--line) !important; }
+html:root body .site-foot .sf-row { padding-top: 24px !important; flex-direction: row !important; align-items: center !important; }
+html:root body .site-foot .sf-c { color: var(--muted) !important; font-size: 14px !important; }
+html:root body .site-foot .sf-links a { min-height: 0 !important; color: var(--muted) !important; font-size: 14px !important; }
+html:root body .site-foot .sf-links a:hover { color: var(--text) !important; }
+html:root body .site-foot .sf-links { gap: 8px 24px !important; }
+
+/* Two widths only: the 640px reading column and the 1200px container */
+html:root { --w-10: min(1200px, calc(100vw - 2 * var(--gx))) !important; --w-full: min(1200px, calc(100vw - 2 * var(--gx))) !important; --bw: min(1200px, calc(100vw - 2 * var(--gx))) !important; --w-text: min(var(--col), calc(100vw - 2 * var(--gx))) !important; }
+html:root body main .wide > .ba, html:root body main .wide.ba { padding-left: 0 !important; padding-right: 0 !important; }
+html:root body main :is(.nums, .people) > div { padding: 20px !important; }
+
+/* Remaining lifted cards: same hairline as every other panel */
+html:root body main :is(.tv-areas, .tv-out, .mcards) > div, html:root body main :is(.tv-probs, .rounds, .flist) > li { box-shadow: none !important; border: 1px solid var(--line) !important; border-radius: 12px !important; }
+
+/* Writing page: breathing room between the intro and the list */
+html:root body .intro .links { margin-top: 28px !important; }
+html:root body .intro + .wrap, html:root body .intro + * .cards, html:root body main .cards { margin-top: 64px !important; }
+html:root body main .cards { gap: 20px !important; }
+html:root body main :is(.work, .about, .contact, .credit, .writing, .says) { background-image: none !important; }
