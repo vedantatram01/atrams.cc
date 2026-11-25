@@ -147,3 +147,9 @@ section + section { margin-top: 112px; }
   .vid { display: none; }
   *, *::before, *::after { transition-duration: 0s !important; }
 }
+
+/* Logo: the VA monogram beside the name, drawn in the text colour */
+.name { display: inline-flex; align-items: center; gap: 10px; }
+.mk { width: 18px; height: 18px; flex: none; fill: currentColor; transition: transform .4s var(--ease); }
+.name:hover .mk { transform: rotate(-8deg); }
+@media (max-width: 720px) { #mode { margin-right: 0; } }

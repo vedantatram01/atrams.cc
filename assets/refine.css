@@ -178,3 +178,15 @@ html:root body .intro .links { margin-top: 28px !important; }
 html:root body .intro + .wrap, html:root body .intro + * .cards, html:root body main .cards { margin-top: 64px !important; }
 html:root body main .cards { gap: 20px !important; }
 html:root body main :is(.work, .about, .contact, .credit, .writing, .says) { background-image: none !important; }
+
+/* Logo: the VA monogram beside the name, drawn in the text colour */
+html:root body .nav .logo { display: inline-flex !important; align-items: center !important; gap: 10px !important; color: var(--text) !important; text-decoration: none !important; }
+html:root body .nav .logo .mk { width: 18px; height: 18px; flex: none; fill: currentColor; transition: transform .4s var(--r-ease); }
+html:root body .nav .logo:hover .mk { transform: rotate(-8deg); }
+@media (prefers-reduced-motion: reduce) { html:root body .nav .logo .mk { transition: none; } }
+@media (max-width: 767.98px) {
+  html:root body .nav-r { gap: 4px !important; }
+  html:root body .nav .nav-r > :is(.mode, .menu-btn) { min-width: 0 !important; min-height: 0 !important; }
+  html:root body .nav .nav-r > .mode { width: 36px !important; height: 36px !important; margin: 0 !important; }
+  html:root body .nav-r > .menu-btn { width: 36px !important; height: 36px !important; margin: 0 -8px 0 0 !important; border-radius: 8px !important; }
+}
