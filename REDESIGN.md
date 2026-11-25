@@ -7,7 +7,9 @@ Live site stays on `main` (GitHub Pages). All redesign work happens on `redesign
   - A · Desire Lines (recommended): planned route vs the route people took; Chicago street grid; scarlet desire line.
   - B · Load-Bearing: Chicago steel-frame elevation, red-oxide primer, "Show the structure" accessibility X-ray. Uses Big Shoulders (conflicts with the Montserrat rule).
   - C · Exposure Sheet: animation X-sheet, storyboard scrubber, key frame = where people stopped.
-- Waiting on: Vedant's choice of direction.
+- Vedant rejected A, B and C (too conceptual). Asked for fundamentals: visual design, motion and UX for the hiring audience.
+- D · Fundamentals first: home + Invisible Obstacles case opening on the canvas (row 2). HD hero shots from the live case pages on a #EDEAE2 light table; text left / image right for every project; 60-second version at the top of each case.
+- Waiting on: feedback on D.
 
 ## Standing rules
 - Palette Snow #FFFBFC / Black #010400 / Scarlet #DE1A1A; blue #05299E and violet #5E4AE3 only for meaning.
