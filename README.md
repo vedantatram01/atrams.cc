@@ -47,3 +47,5 @@ Remove any other A, AAAA or CNAME records for `@` and `www` (for example, ones f
 ## Design system
 
 `assets/system.css` holds the shared tokens (colour, type, spacing, corners) and the shared components (header, logo, buttons). Every page links it last, so change those values there, not in a page's own styles.
+
+`assets/refine.css` loads after every other stylesheet on the inner pages and sets the current look: Geist type, neutral palette, hairlines and no labels above headings. The home page uses `assets/home.css` on its own.

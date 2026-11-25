@@ -1,0 +1,117 @@
+/* Refine layer. Loaded last on every inner page.
+   One type family (Geist), neutral ink on paper, hairlines instead of shadows,
+   medium weights instead of heavy ones, no labels stacked above headings. */
+html:root {
+  --f: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sans: var(--f); --display: var(--f);
+  --bg: #FBFBFA; --surface: #FBFBFA; --mat: #F1F0EC; --text: #0B0B0A; --soft: #3F3F3C; --muted: #71716C; --line: #E6E5E1;
+  --g200: #F1F0EC; --g300: #E6E5E1;
+  --d-glass: color-mix(in srgb, #FBFBFA 86%, transparent); --d-hair: #E6E5E1; --d-hi: transparent; --d-chip: transparent; --d-s2: #F4F3F0;
+  --r-ease: cubic-bezier(.2,.7,.1,1);
+}
+html:root[data-mode="dark"] {
+  --bg: #0B0B0A; --surface: #0B0B0A; --mat: #151514; --text: #EDEDEA; --soft: #C2C2BD; --muted: #8A8A85; --line: #232321;
+  --g200: #151514; --g300: #232321;
+  --d-glass: color-mix(in srgb, #0B0B0A 86%, transparent); --d-hair: #232321; --d-s2: #121211;
+}
+
+/* Type */
+html:root body { background: var(--bg) !important; color: var(--text); font-family: var(--f) !important; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-feature-settings: "ss01", "cv11"; }
+html:root body :where(h1, h2, h3, h4, h5, h6, p, li, dt, dd, a, button, span, b, strong, em, figcaption, td, th, caption, label, small, blockquote, cite, div, summary, ol, ul) { font-family: var(--f) !important; }
+html:root body :is(h1, h2, h3, h4) { font-weight: 500 !important; text-wrap: balance; }
+html:root body :is(b, strong) { font-weight: 600; }
+html:root body .hero h1 { font: 500 clamp(40px, 5.6vw, 76px)/1.02 var(--f) !important; letter-spacing: -.045em !important; max-width: 16ch; }
+html:root body main h2 { font-size: clamp(28px, 3vw, 40px) !important; line-height: 1.1 !important; letter-spacing: -.035em !important; font-weight: 500 !important; }
+html:root body main h3 { letter-spacing: -.02em !important; }
+html:root body main p, html:root body main li { text-wrap: pretty; }
+html:root body .hero .title > p:not(.rt):not(.tv-sub) { color: var(--muted) !important; font-size: 20px !important; line-height: 1.55 !important; letter-spacing: -.01em; }
+html:root body .hero .tv-sub { font: 500 22px/1.3 var(--f) !important; letter-spacing: -.02em !important; color: var(--muted) !important; }
+
+/* Nav: flat bar, hairline once you scroll */
+html:root body .nav { top: 0 !important; margin: 0 auto !important; width: 100% !important; max-width: none !important; height: 64px !important; padding: 0 max(20px, calc((100vw - 1200px) / 2)) !important; border-radius: 0 !important; background: var(--d-glass) !important; -webkit-backdrop-filter: saturate(1.6) blur(14px) !important; backdrop-filter: saturate(1.6) blur(14px) !important; box-shadow: none !important; border-bottom: 1px solid transparent !important; transition: border-color .3s var(--r-ease) !important; }
+html:root body .nav.scrolled { box-shadow: none !important; border-bottom-color: var(--line) !important; }
+html:root body .nav .logo .lw { font: 500 15px/1 var(--f) !important; letter-spacing: -.01em !important; }
+html:root body .nav .logo .lw b { font-weight: 500 !important; }
+html:root body .nav .logo .lw span { color: var(--text) !important; }
+html:root body .nav .pill { font-size: 14px !important; font-weight: 400 !important; color: var(--soft) !important; margin: 0 14px !important; background-image: none !important; }
+html:root body .nav .pill:hover, html:root body .nav .pill[aria-current] { color: var(--text) !important; }
+html:root body .nav .d-contact { min-height: 0 !important; height: auto; margin-left: 14px !important; padding: 0 !important; border-radius: 0 !important; background: none !important; color: var(--soft) !important; font-size: 14px !important; font-weight: 400 !important; }
+html:root body .nav .d-contact:hover { color: var(--text) !important; }
+html:root body .nav-r > .mode { width: 36px !important; height: 36px !important; margin-left: 10px !important; margin-right: -8px !important; border-radius: 8px !important; background: transparent !important; box-shadow: none !important; color: var(--soft) !important; }
+html:root body .nav-r > .mode:hover { background: var(--mat) !important; color: var(--text) !important; }
+html:root body .nav-r > .mode svg { width: 18px !important; height: 18px !important; }
+html:root body .nav-r > .menu-btn { width: 40px !important; height: 40px !important; background: transparent !important; box-shadow: none !important; }
+@media (max-width: 767.98px) {
+  html:root body .nav { padding: 0 20px !important; height: 60px !important; }
+  html:root body .nav .menu { background: var(--bg) !important; }
+  html:root body .nav .menu .pill { font-size: 22px !important; color: var(--text) !important; letter-spacing: -.02em; font-weight: 500 !important; margin: 0 !important; }
+}
+
+/* Case-study header */
+html:root body .hero { max-width: 1264px !important; padding-top: 112px !important; }
+html:root body .hero .rt { color: var(--muted) !important; }
+html:root body .hero dl.meta { margin-top: 56px !important; padding-top: 20px !important; }
+html:root body .hero dl.meta dt { font: 400 14px/1.4 var(--f) !important; color: var(--muted) !important; }
+html:root body .hero dl.meta dd { margin-top: 4px !important; font-size: 15px !important; line-height: 1.5 !important; }
+html:root body .hero dl.glance { margin-top: 32px !important; border-radius: 0 !important; background: none !important; box-shadow: none !important; border-top: 1px solid var(--line) !important; border-bottom: 1px solid var(--line); }
+html:root body .hero dl.glance > div { padding: 20px 24px 22px 0 !important; border-left: 0 !important; }
+html:root body .hero dl.glance > div + div { padding-left: 24px !important; border-left: 1px solid var(--line) !important; }
+html:root body .hero dl.glance dt, html:root body .hero dl.glance > div:nth-child(n) dt { font: 500 15px/1.4 var(--f) !important; color: var(--text) !important; }
+html:root body .hero dl.glance dd { margin-top: 6px !important; color: var(--muted) !important; }
+html:root body .hero .d-media { border-radius: 14px !important; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text) 5%, transparent) !important; }
+@media (max-width: 1023.98px) {
+  html:root body .hero dl.glance > div + div { padding-left: 0 !important; border-left: 0 !important; border-top: 1px solid var(--line) !important; }
+}
+@media (max-width: 767.98px) { html:root body .hero { padding-top: 56px !important; } }
+
+/* Section contents rail: quieter */
+html:root body .toc a { font-size: 13px !important; color: var(--muted) !important; }
+html:root body .toc a:hover, html:root body .toc a[aria-current] { color: var(--text) !important; background: none !important; }
+html:root body .toc a[aria-current]::before { background: var(--text) !important; }
+
+/* Kicker labels: move them below the heading as a quiet note, never above it */
+html:root body :is(.finding, div, li, article, section, figure):has(> :is(.k, .fl-k, .rd-k, .cm)) { display: flex !important; flex-direction: column; }
+html:root body :is(.k, .fl-k, .rd-k, .cm) { order: 10; margin: 12px 0 0 !important; font: 400 14px/1.5 var(--f) !important; color: var(--muted) !important; letter-spacing: 0 !important; text-transform: none !important; }
+html:root body .nextcs .nx .nx-k { display: none !important; }
+
+/* Cards and panels: hairline, no lift */
+html:root body main :is(.finding, .card, .people > div, .nums > div) { box-shadow: none !important; background: transparent !important; border: 1px solid var(--line) !important; border-radius: 12px !important; }
+html:root body main .people > div b, html:root body main .nums > div b { font-weight: 500 !important; letter-spacing: -.03em; }
+
+/* Next case: same paper, large type */
+html:root body .nextcs .nx { background: var(--mat) !important; color: var(--text) !important; box-shadow: none !important; border-radius: 16px !important; transition: background-color .3s var(--r-ease); }
+html:root body .nextcs .nx:hover { background: color-mix(in srgb, var(--mat) 70%, var(--line)) !important; }
+html:root body .nextcs .nx .nx-t { font-weight: 500 !important; letter-spacing: -.035em !important; }
+html:root body .nextcs .nx .nx-d { color: var(--muted) !important; }
+html:root body .nextcs .nx .nx-a { color: var(--text) !important; }
+
+/* Links and focus */
+html:root body main a:not([class]) { text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); }
+html:root body main a:not([class]):hover { text-decoration-color: currentColor; }
+html:root body :focus-visible { outline: 2px solid #DE1A1A !important; outline-offset: 3px; }
+::selection { background: rgba(222, 26, 26, .18); }
+
+/* Panels: a hairline frame instead of a floating drop shadow */
+html:root body main :is(.lanes, .tv-chart, .study, .lc, .pmx, .tv-shot, .b-r, .b-p, .b-n, table) { box-shadow: 0 0 0 1px var(--line) !important; }
+
+/* Nav order: links, contact, then the theme switch */
+html:root body .nav-r > .menu { order: 1; }
+html:root body .nav-r > .d-contact { order: 2; }
+html:root body .nav-r > .mode { order: 3; }
+html:root body .nav-r > .menu-btn { order: 4; }
+
+/* Buttons: one ink pill, one outline pill. No red slabs. */
+html:root body .btn { height: 44px !important; min-height: 44px !important; padding: 0 18px !important; border-radius: 999px !important; font: 500 14px/1 var(--f) !important; box-shadow: inset 0 0 0 1px var(--line) !important; border: 0 !important; background: transparent !important; color: var(--text) !important; transition: background-color .2s, box-shadow .2s !important; }
+html:root body .btn:hover { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text) 40%, transparent) !important; }
+html:root body .btn.btn-primary, html:root body a.btn-primary { background: var(--text) !important; color: var(--bg) !important; box-shadow: none !important; }
+html:root body .btn.btn-primary:hover { background: color-mix(in srgb, var(--text) 82%, var(--bg)) !important; }
+
+/* Writing cards */
+html:root body main .card a { box-shadow: none !important; }
+html:root body main .card:hover { border-color: color-mix(in srgb, var(--text) 25%, transparent) !important; }
+html:root body main .card .go { color: var(--text) !important; }
+html:root body main .card .ct { letter-spacing: -.02em !important; }
+
+/* Align the bar with the page column */
+html:root body .nav { padding: 0 max(20px, calc((100vw - 1248px) / 2)) !important; }
+@media (max-width: 767.98px) { html:root body .nav { padding: 0 20px !important; } }

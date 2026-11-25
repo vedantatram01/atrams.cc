@@ -20,311 +20,151 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/d/th-tv.webp">
+<link rel="stylesheet" href="assets/home.css?v=202611252">
 <script>(function(){var m;try{m=localStorage.getItem("io-mode")}catch(e){}if(!m&&window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)m="dark";document.documentElement.setAttribute("data-mode",m||"light")})();</script>
-<style>
-body{margin:0;background:#FFFBFC}:root[data-mode="dark"] body{background:#010400}.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.skip{position:absolute;left:16px;top:-60px;z-index:100;padding:12px 16px;border-radius:5px;background:#010400;color:#FFFBFC}.skip:focus{top:16px}
-a{color:#010400}a:hover{color:#B8141A}
-.fd *{box-sizing:border-box}
-.num{display:inline-block;margin-right:12px;padding-right:12px;border-right:1px solid currentColor;font-variant-numeric:tabular-nums;font-weight:600;opacity:.6;line-height:1}
-.fd{--bg:#FFFBFC;--fg:#010400;--soft:#3A3838;--muted:#6E6B6B;--line:#D9D5D6;--s2:#F5F1F2;--at:#B8141A;--good:#05299E;--band:#010400;--glass:rgba(255,251,252,.72);--hair:rgba(1,4,0,.08);--hi:rgba(255,255,255,.8);--chip:rgba(1,4,0,.05);transition:background-color .4s cubic-bezier(.16,1,.3,1),color .4s cubic-bezier(.16,1,.3,1)}
-:root[data-mode="dark"] .fd{--bg:#010400;--fg:#FFFBFC;--soft:#D6D2D3;--muted:#A8A6A6;--line:#2A2C2A;--s2:#141614;--at:#FF5A55;--good:#8FA4FF;--band:#0E100E;--glass:rgba(16,18,16,.62);--hair:rgba(255,255,255,.1);--hi:rgba(255,255,255,.08);--chip:rgba(255,255,255,.08)}
-:root[data-mode="dark"] .fd .glint{background-image:linear-gradient(100deg,#FF5A55 0 40%,#FFC2BD 50%,#FF5A55 60% 100%)}
-:root[data-mode="dark"] .fd .shot{box-shadow:0 0 0 1px rgba(255,255,255,.08),0 24px 48px -24px rgba(0,0,0,.8)}
-.fd a{color:inherit}.fd a:hover{color:var(--at)}
-.press{transition:transform .15s cubic-bezier(.16,1,.3,1)}.press:active{transform:scale(.97)}
-.chev{display:inline-block;transition:transform .3s cubic-bezier(.16,1,.3,1)}[aria-expanded="true"] .chev{transform:rotate(180deg)}
-.qlw{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .45s cubic-bezier(.16,1,.3,1),visibility 0s .45s}.qlw.on{grid-template-rows:1fr;visibility:visible;transition:grid-template-rows .45s cubic-bezier(.16,1,.3,1),visibility 0s}.qli{overflow:hidden;min-height:0}.ql{margin-top:16px;border-radius:12px;background:var(--s2);box-shadow:0 0 0 1px var(--hair),inset 0 1px 0 var(--hi)}.ql>div+div{border-top:1px solid var(--hair)}.qlw.on .ql>div{animation:rise .5s cubic-bezier(.16,1,.3,1) both}.ql>div:nth-child(2){animation-delay:50ms}.ql>div:nth-child(3){animation-delay:100ms}.ql>div:nth-child(4){animation-delay:150ms}
-@property --n{syntax:"<integer>";inherits:false;initial-value:0}
-.count{animation:count 1.4s cubic-bezier(.16,1,.3,1) .5s both;counter-reset:n var(--n)}.count::before{content:counter(n)}
-@keyframes count{from{--n:0}to{--n:5}}
-.tabbar{position:relative}.tabbar::after{content:"";position:absolute;left:0;top:12px;bottom:12px;width:3px;border-radius:2px;background:#FF5A55;transform:scaleY(0);transition:transform .35s cubic-bezier(.16,1,.3,1)}.tabbar[aria-pressed="true"]::after{transform:scaleY(1)}
-.sun,.moon{transition:transform .5s cubic-bezier(.16,1,.3,1),opacity .3s}:root[data-mode="dark"] .sun{transform:rotate(90deg) scale(.5);opacity:0}:root:not([data-mode="dark"]) .moon{transform:rotate(-90deg) scale(.5);opacity:0}
-
-.fd :focus-visible{outline:2px solid #DE1A1A;outline-offset:3px;border-radius:5px}
-.ln{display:block;overflow:hidden;padding-bottom:.06em}.ln>span{display:block;animation:lnUp .9s cubic-bezier(.16,1,.3,1) both}
-@keyframes lnUp{from{transform:translateY(105%)}to{transform:none}}
-.rise{animation:rise .7s cubic-bezier(.16,1,.3,1) both}@keyframes rise{from{opacity:0;transform:translateY(16px)}}
-.dot{position:relative}.dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:#DE1A1A;animation:ping 2.4s cubic-bezier(.16,1,.3,1) infinite}
-@keyframes ping{0%{transform:scale(1);opacity:.5}70%,100%{transform:scale(3);opacity:0}}
-.glint{background:linear-gradient(100deg,#B8141A 0 40%,#FF7A70 50%,#B8141A 60% 100%) 0 0/250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:glint 2.4s cubic-bezier(.16,1,.3,1) .9s both}
-@keyframes glint{from{background-position:100% 0}to{background-position:0 0}}
-.ul{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .3s cubic-bezier(.16,1,.3,1)}.ul:hover{background-size:100% 1px}
-.shine{position:relative;overflow:hidden;isolation:isolate}.shine::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%) -150% 0/60% 100% no-repeat;transition:background-position .8s cubic-bezier(.16,1,.3,1)}.shine:hover::before{background-position:250% 0}
-.metal{position:relative;overflow:hidden;background:linear-gradient(145deg,#1C1E1C 0%,#0B0C0B 45%,#151715 100%)}
-.metal::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0 1px,transparent 1px 3px)}
-.metal::after,.glass::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:radial-gradient(420px circle at var(--mx,25%) var(--my,15%),rgba(255,255,255,.16),transparent 45%);transition:opacity .3s}
-.glass{position:relative;overflow:hidden;box-shadow:0 0 0 1px rgba(1,4,0,.08),inset 0 1px 0 rgba(255,255,255,.7),0 24px 48px -24px rgba(1,4,0,.25)}
-.glass::after{background:radial-gradient(520px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.4),transparent 40%);opacity:0;mix-blend-mode:soft-light}.row:hover .glass::after{opacity:1}
-.shot img,.shot video{transition:transform .6s cubic-bezier(.16,1,.3,1)}.row:hover .shot img,.row:hover .shot video{transform:scale(1.025)}
-.go span{display:inline-block;transition:transform .3s cubic-bezier(.16,1,.3,1)}.row:hover .go span{transform:translateX(6px)}
-@supports (animation-timeline: view()){.rv{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 35%}.shot img,.shot video{animation:imgIn linear both;animation-timeline:view();animation-range:entry 0% cover 35%}}
-@keyframes imgIn{from{clip-path:inset(14% 0 0 0);scale:1.08}to{clip-path:inset(0);scale:1}}
-@media (prefers-reduced-motion: reduce){.vid{display:none}.ln>span,.rise,.rv,.shot img,.glint,.ql>div,.count{animation:none !important}.count::before{content:"5"}.fd,.press,.chev,.qlw,.tabbar::after,.sun,.moon{transition:none !important}.dot::after{display:none}.shot img,.go span,.ul,.shine::before{transition:none}}
-@media (max-width: 1100px){.hero{grid-template-columns:minmax(0,1fr) !important}.hero>*{grid-column:auto !important}.hero .metal{max-width:520px}}
-@media (max-width: 900px){.g12{grid-template-columns:minmax(0,1fr) !important}.g12>*{grid-column:auto !important}.band{padding:64px 20px !important}.row{padding:56px 0 !important;gap:24px !important}.tabs{flex-direction:column !important}.tabs>*{padding:16px 20px !important}.cap2{grid-template-columns:minmax(0,1fr) !important}.proof li{grid-template-columns:minmax(0,1fr) !important;gap:4px !important}}
-@media (max-width: 640px){.nl{display:none !important}.fd [style*="max-width:1312px"]{padding-left:20px !important;padding-right:20px !important}.wrapx{padding-left:20px !important;padding-right:20px !important}.ct{padding:48px 24px !important}.mail{font-size:clamp(17px,5.2vw,22px) !important;line-height:28px !important}.navwrap{padding:0 12px !important;top:8px !important}.topnav{flex-wrap:nowrap !important;padding:6px 6px 6px 16px !important;margin-top:8px !important}.navr{flex-wrap:nowrap !important;gap:0 8px !important}.fd #writing,.fd #contact{padding-top:80px !important}.fd #skills{margin-top:80px !important}}
-.mbtn{display:none}
-@media (max-width: 1023.98px){.nl-x{display:none !important}.topnav,.navr{flex-wrap:nowrap !important}}
-@media (max-width: 767.98px){.nl{display:none !important}.navwrap{padding:0 12px !important;top:8px !important}.topnav{padding:6px 6px 6px 16px !important;margin-top:8px !important}.navr .shine{display:none !important}.topnav,.navr{flex-wrap:nowrap !important}.navr{gap:0 8px !important}.mbtn{display:grid;place-items:center;width:44px;height:44px;border:0;border-radius:5px;background:transparent;color:var(--fg);cursor:pointer}.mbtn .bars{position:relative;width:18px;height:10px}.mbtn .bars i{position:absolute;left:0;right:0;height:1.5px;border-radius:2px;background:currentColor;transition:transform .25s,top .25s}.mbtn .bars i:first-child{top:0}.mbtn .bars i:last-child{top:8.5px}.mbtn[aria-expanded="true"] .bars i{top:4.25px}.mbtn[aria-expanded="true"] .bars i:first-child{transform:rotate(45deg)}.mbtn[aria-expanded="true"] .bars i:last-child{transform:rotate(-45deg)}
-.mpanel{position:fixed;z-index:-1;top:0;left:0;right:0;height:100dvh;padding:88px 20px 32px;display:flex;flex-direction:column;background:var(--bg);overflow-y:auto}.mpanel[hidden]{display:none}.mpanel a{display:flex;align-items:center;min-height:64px;border-bottom:1px solid var(--line);font:500 24px/32px Montserrat,sans-serif;color:var(--fg);text-decoration:none}
-body.m-open{overflow:hidden}}
-@media (prefers-reduced-motion: reduce){.mbtn .bars i{transition:none}}
-</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="fd" style="font-family:'Public Sans',system-ui,sans-serif;color:var(--fg);background:var(--bg)">
 
-  <div class="navwrap" style="position:sticky;top:12px;z-index:10;padding:0 24px">
-    <nav class="topnav" aria-label="Main" style="max-width:1264px;margin:12px auto 0;padding:8px 8px 8px 24px;display:flex;flex-wrap:wrap;gap:8px 32px;align-items:center;justify-content:space-between;border-radius:12px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);box-shadow:0 0 0 1px var(--hair),inset 0 1px 0 var(--hi),0 12px 32px -16px rgba(1,4,0,.2)">
-      <a href="#top" aria-label="Vedant Atram, home" style="text-decoration:none;font:18px/24px Montserrat,sans-serif;letter-spacing:-.02em;white-space:nowrap"><span style="font-weight:800">Vedant</span><span style="font-weight:500;color:var(--soft)"> Atram</span></a>
-      <div class="navr" style="display:flex;flex-wrap:wrap;align-items:center;gap:0 28px;font-size:15px;font-weight:500">
-        <a class="ul nl" href="#work" style="padding:4px 0">Work</a>
-        <a class="ul nl nl-x" href="#skills" style="padding:4px 0">Expertise</a>
-        <a class="ul nl" href="about.html" style="padding:4px 0">About</a>
-        <a class="ul nl" href="#writing" style="padding:4px 0">Writing</a>
-        <a class="ul nl" href="Vedant-Atram-Resume.pdf" style="padding:4px 0">Resume</a>
-        <button type="button" class="press" id="mode" aria-label="Switch to dark mode" style="position:relative;width:44px;height:44px;border:0;border-radius:5px;background:var(--chip);color:var(--fg);cursor:pointer;box-shadow:inset 0 0 0 1px var(--hair)"><svg class="sun" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" style="position:absolute;left:12px;top:12px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" style="position:absolute;left:12px;top:12px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg></button>
-        <a class="shine press" href="#contact" style="display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:5px;background:var(--fg);color:var(--bg);text-decoration:none;font-weight:600">Contact</a>
-        <button type="button" class="mbtn press" id="mbtn" aria-expanded="false" aria-controls="mpanel"><span class="vh">Menu</span><span class="bars" aria-hidden="true"><i></i><i></i></span></button>
-      </div>
-    </nav>
-    <div class="mpanel" id="mpanel" hidden>
-      <a href="#work">Work</a><a href="#skills">Expertise</a><a href="about.html">About</a><a href="#writing">Writing</a><a href="Vedant-Atram-Resume.pdf">Resume</a><a href="#contact">Contact</a>
+<header class="top" id="topbar">
+  <nav class="wrap" aria-label="Main">
+    <a class="name" href="#top" aria-label="Vedant Atram, home">Vedant Atram</a>
+    <div class="links">
+      <a class="nl" href="#work">Work</a>
+      <a class="nl" href="about.html">About</a>
+      <a class="nl" href="thinking.html">Writing</a>
+      <a class="nl" href="Vedant-Atram-Resume.pdf">Resume</a>
+      <a class="nl" href="#contact">Contact</a>
+      <button type="button" class="icon-btn" id="mode" aria-label="Switch to dark mode"><svg class="sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2.5 12h2M19.5 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg></button>
+      <button type="button" class="icon-btn mbtn" id="mbtn" aria-expanded="false" aria-controls="mpanel"><span class="vh">Menu</span><span class="bars" aria-hidden="true"><i></i><i></i></span></button>
     </div>
+  </nav>
+  <div class="mpanel" id="mpanel" hidden>
+    <a href="#work">Work</a><a href="about.html">About</a><a href="thinking.html">Writing</a><a href="Vedant-Atram-Resume.pdf">Resume</a><a href="#contact">Contact</a>
   </div>
+</header>
 
-  <header id="top" class="g12 hero" style="max-width:1312px;margin:0 auto;padding:104px 32px 128px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;align-items:center">
-    <div style="grid-column:1 / span 8">
-      <p class="rise" style="margin:0;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;color:var(--soft)"><span class="dot" aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:#DE1A1A"></span>Open to work · Based in Chicago</p>
-      <h1 class="h1" style="margin:24px 0 0;font:800 clamp(40px,3.9vw,60px)/1.06 Montserrat,sans-serif;letter-spacing:-.04em">
-        <span class="ln"><span>I’m Vedant.</span></span>
-        <span class="ln"><span style="animation-delay:90ms">A digital product designer</span></span>
-        <span class="ln"><span style="animation-delay:180ms">and <span class="glint">UX researcher.</span></span></span>
-      </h1>
-      <p class="rise" style="margin:32px 0 0;max-width:34em;font-size:20px;line-height:32px;color:var(--soft);animation-delay:320ms">My focus is building data-driven, system-level and AI-native solutions that work for the people who use them and the teams who run them.</p>
-      <p class="rise" style="margin:20px 0 0;font-size:14px;line-height:20px;color:var(--muted);animation-delay:400ms"><b style="color:var(--soft);font-weight:600">Domains</b>   SaaS · Healthcare · EdTech · Fintech   ·   B2B · B2C · Enterprise</p>
-      <div class="rise" style="margin-top:40px;display:flex;flex-wrap:wrap;gap:16px;animation-delay:460ms">
-        <a class="shine press" href="#work" style="display:inline-flex;align-items:center;min-height:48px;padding:0 24px;border-radius:5px;background:#DE1A1A;color:#FFFFFF;text-decoration:none;font-weight:600;box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 8px 20px -8px rgba(222,26,26,.55)">See my work</a>
-        <a href="Vedant-Atram-Resume.pdf" style="display:inline-flex;align-items:center;min-height:48px;padding:0 24px;border-radius:5px;border:1px solid var(--fg);text-decoration:none;font-weight:600">Download resume (PDF)</a>
+<main id="main">
+  <div class="wrap">
+
+    <section class="hero" id="top" aria-labelledby="hero-h">
+      <h1 id="hero-h" class="in">I’m Vedant, a product designer and UX researcher <span class="dim">building data-driven, system-level and AI-native products.</span></h1>
+      <p class="lede in d1">I design for the people who use a product and the teams who run it. Currently at Intuit, working across TurboTax and QuickBooks.</p>
+      <div class="ctas in d2">
+        <a class="btn btn-p" href="#work">View work</a>
+        <a class="btn btn-s" href="Vedant-Atram-Resume.pdf">Resume <span class="arr" aria-hidden="true">↗</span></a>
       </div>
-    </div>
+      <ul class="facts in d3" aria-label="At a glance">
+        <li><b>Product Designer, Intuit</b>2026 to now</li>
+        <li><b>UI/UX Designer, Hexaware</b>2020 to 2024</li>
+        <li><b>M.S. Human-Computer Interaction</b>DePaul University, 2026</li>
+        <li><b>Chicago, open to work</b>SaaS, healthcare, edtech, fintech</li>
+      </ul>
+    </section>
 
-    <div class="metal rise" role="group" aria-label="Career summary" data-track style="grid-column:9 / span 4;border-radius:16px;padding:32px;color:#FFFBFC;box-shadow:0 0 0 1px rgba(255,255,255,.08) inset,inset 0 1px 0 rgba(255,255,255,.18),0 40px 80px -32px rgba(1,4,0,.55);animation-delay:300ms">
-      <div style="position:relative;z-index:1">
-        <div style="display:flex;justify-content:space-between;align-items:center"><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:#B7B3B4">Career</p><p style="margin:0;display:flex;align-items:center;gap:8px;font-size:13px;color:#D6D2D3"><span aria-hidden="true" style="width:6px;height:6px;border-radius:50%;background:#FF5A55"></span>Available</p></div>
-        <p style="margin:24px 0 0;font:800 64px/64px Montserrat,sans-serif;letter-spacing:-.04em"><span aria-hidden="true"><span class="count"></span>+</span><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">5+</span> <span style="font-size:20px;letter-spacing:-.01em">years</span></p>
-        <p style="margin:8px 0 0;font-size:15px;line-height:22px;color:#D6D2D3">in product design and UX research, across Mumbai and Chicago</p>
-        <dl style="margin:28px 0 0">
-          <div style="display:grid;grid-template-columns:72px minmax(0,1fr);gap:12px;padding:14px 0;border-top:1px solid rgba(255,255,255,.12)"><dt style="font-size:13px;line-height:20px;color:#B7B3B4">Now</dt><dd style="margin:0"><span style="display:block;font:700 15px/20px Montserrat,sans-serif">Intuit</span><span style="display:block;margin-top:2px;font-size:13px;line-height:19px;color:#D6D2D3">Product Designer · TurboTax, QuickBooks · 2026–</span></dd></div><div style="display:grid;grid-template-columns:72px minmax(0,1fr);gap:12px;padding:14px 0;border-top:1px solid rgba(255,255,255,.12)"><dt style="font-size:13px;line-height:20px;color:#B7B3B4">Before</dt><dd style="margin:0"><span style="display:block;font:700 15px/20px Montserrat,sans-serif">Hexaware Technologies</span><span style="display:block;margin-top:2px;font-size:13px;line-height:19px;color:#D6D2D3">UI/UX Designer · 2020–2024</span></dd></div><div style="display:grid;grid-template-columns:72px minmax(0,1fr);gap:12px;padding:14px 0;border-top:1px solid rgba(255,255,255,.12)"><dt style="font-size:13px;line-height:20px;color:#B7B3B4">Study</dt><dd style="margin:0"><span style="display:block;font:700 15px/20px Montserrat,sans-serif">DePaul University</span><span style="display:block;margin-top:2px;font-size:13px;line-height:19px;color:#D6D2D3">M.S. Human&#8209;Computer Interaction · 2024–2026</span></dd></div>
-        </dl>
-      </div>
-    </div>
-  </header>
+    <section id="work" aria-labelledby="work-h">
+      <div class="sh"><h2 id="work-h">Selected work</h2><p>2025 to 2026</p></div>
+      <div class="grid">
 
-  <main id="main">
-  <section id="work" aria-labelledby="work-h" style="max-width:1312px;margin:0 auto;padding:0 32px">
-    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:16px;border-top:2px solid var(--fg);padding-top:24px">
-      <h2 id="work-h" style="margin:0;font:500 15px/20px 'Public Sans',sans-serif;color:var(--muted)">Selected work</h2>
-    </div>
-    
-      <article class="row g12" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;align-items:center;padding:80px 0;border-bottom:1px solid var(--line)">
-        <div class="rv" style="grid-column:1 / span 4">
-          <p style="margin:0;font:500 15px/20px 'Public Sans',sans-serif;color:var(--muted)">AI file manager · 2026</p>
-          <h3 style="margin:12px 0 0;font:700 18px/24px Montserrat,sans-serif">Treevah</h3>
-          <p style="margin:16px 0 0;font:700 28px/34px Montserrat,sans-serif;letter-spacing:-.02em">51% of web components didn’t match the design handoff.</p>
-          <p style="margin:16px 0 0;font-size:16px;line-height:26px;color:var(--soft)">Treevah is an AI file manager in alpha that changed every week. I designed with the team, audited 766 components on my own, and planned the usability study and Clarity analysis that shaped what to fix before Beta.</p>
-          <p style="margin:16px 0 0;font-size:13px;line-height:20px;color:var(--muted)">Role: UI/UX Designer · Team of 5 · Component audit, usability study, behaviour analytics</p>
-          <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center">
-            <a class="go" href="treevah.html" style="display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:600;text-underline-offset:5px">Read the case study<span class="vh"> on Treevah</span> <span aria-hidden="true" style="color:#DE1A1A">→</span></a>
-            <button type="button" class="press ql-btn" aria-expanded="false" aria-controls="ql-tv" style="min-height:44px;padding:0 16px;border:0;border-radius:5px;background:var(--chip);color:var(--fg);font:600 14px 'Public Sans',sans-serif;cursor:pointer;box-shadow:inset 0 0 0 1px var(--hair)"><span class="lbl">Quick look</span><span class="vh"> at Treevah</span> <svg class="chev" aria-hidden="true" viewBox="0 0 16 16" width="14" height="14" style="margin-left:6px;vertical-align:-2px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg></button>
-          </div>
-          <div class="qlw" id="ql-tv" role="region" aria-label="Treevah in 60 seconds"><div class="qli"><div class="ql"><div style="padding:16px 20px"><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:var(--soft)">The problem</p><p style="margin:6px 0 0;font-size:15px;line-height:23px">In its eighth alpha: did the build still match the design, and could new users manage without help?</p></div><div style="padding:16px 20px"><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:var(--at)">What we found</p><p style="margin:6px 0 0;font-size:15px;line-height:23px">51% of 585 web components didn’t match the handoff file engineers were building from.</p></div><div style="padding:16px 20px"><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:var(--soft)">My part</p><p style="margin:6px 0 0;font-size:15px;line-height:23px">Audited 766 components on my own; wrote the Alpha 8 study plan and ran sessions; set up and analysed Microsoft Clarity.</p></div><div style="padding:16px 20px"><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:var(--good)">Where it landed</p><p style="margin:6px 0 0;font-size:15px;line-height:23px">18 recommendations for Alpha 9, and a Beta readiness rating across 13 areas.</p></div></div></div></div>
-        </div>
-        <a class="shot glass" data-track href="treevah.html" tabindex="-1" aria-hidden="true" style="grid-column:5 / span 8;aspect-ratio:16 / 10;border-radius:12px;background:#EDEAE2;display:block">
-          <img src="assets/d/th-tv.webp" alt="" width="1280" height="800" loading="eager" style="position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover">
-          <video class="vid" src="assets/d/th-tv.mp4" muted loop playsinline preload="auto" style="position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover"></video>
+        <a class="card wide rv" href="treevah.html">
+          <div class="media"><img src="assets/d/th-tv.webp" alt="Treevah on a laptop: the Features folder open beside a preview panel." width="1280" height="800" loading="eager"><video class="vid" src="assets/d/th-tv.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div>
+          <div class="cap"><h3>Treevah</h3><span class="yr">2026</span><p class="hl">51% of web components didn’t match the design handoff. I audited 766 of them and planned the study that shaped what to fix before Beta.</p><p class="role">AI file manager · UI/UX Designer · Team of 5</p></div>
         </a>
-        <p class="vh">Treevah on a laptop: the Features folder open beside a preview panel.</p>
-      </article>
-      <article class="row g12" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;align-items:center;padding:80px 0;border-bottom:1px solid var(--line)">
-        <div class="rv" style="grid-column:1 / span 4">
-          <p style="margin:0;font:500 15px/20px 'Public Sans',sans-serif;color:var(--muted)">Accessible forms · 2025</p>
-          <h3 style="margin:12px 0 0;font:700 18px/24px Montserrat,sans-serif">Invisible Obstacles</h3>
-          <p style="margin:16px 0 0;font:700 28px/34px Montserrat,sans-serif;letter-spacing:-.02em">One date field stopped all four screen-reader users.</p>
-          <p style="margin:16px 0 0;font-size:16px;line-height:26px;color:var(--soft)">We watched four blind adults complete a real job application. I redesigned the form around what they hear, and it now passes an automated WCAG 2.1 AA check with zero violations.</p>
-          <p style="margin:16px 0 0;font-size:13px;line-height:20px;color:var(--muted)">Role: UX Researcher &amp; Designer · Team of 4 · Moderated sessions, task analysis</p>
-          <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center">
-            <a class="go" href="invisible-obstacles.html" style="display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:600;text-underline-offset:5px">Read the case study<span class="vh"> on Invisible Obstacles</span> <span aria-hidden="true" style="color:#DE1A1A">→</span></a>
-            <button type="button" class="press ql-btn" aria-expanded="false" aria-controls="ql-io" style="min-height:44px;padding:0 16px;border:0;border-radius:5px;background:var(--chip);color:var(--fg);font:600 14px 'Public Sans',sans-serif;cursor:pointer;box-shadow:inset 0 0 0 1px var(--hair)"><span class="lbl">Quick look</span><span class="vh"> at Invisible Obstacles</span> <svg class="chev" aria-hidden="true" viewBox="0 0 16 16" width="14" height="14" style="margin-left:6px;vertical-align:-2px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg></button>
-          </div>
-          <div class="qlw" id="ql-io" role="region" aria-label="Invisible Obstacles in 60 seconds"><div class="qli"><div class="ql"><div style="padding:16px 20px"><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:var(--soft)">The problem</p><p style="margin:6px 0 0;font-size:15px;line-height:23px">A field a screen reader can’t complete can end a job application before anyone reads it.</p></div><div style="padding:16px 20px"><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:var(--at)">What we found</p><p style="margin:6px 0 0;font-size:15px;line-height:23px">The date field stopped all four participants; focus jumped and some controls had no labels.</p></div><div style="padding:16px 20px"><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:var(--soft)">My part</p><p style="margin:6px 0 0;font-size:15px;line-height:23px">Redesigned the form: today’s date filled in, three labelled date fields, a heading for every step, progress read aloud.</p></div><div style="padding:16px 20px"><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:var(--good)">Where it landed</p><p style="margin:6px 0 0;font-size:15px;line-height:23px">Zero violations in an automated WCAG 2.1 A and AA scan. Not yet tested with blind users.</p></div></div></div></div>
-        </div>
-        <a class="shot glass" data-track href="invisible-obstacles.html" tabindex="-1" aria-hidden="true" style="grid-column:5 / span 8;aspect-ratio:16 / 10;border-radius:12px;background:#EDEAE2;display:block">
-          <img src="assets/d/th-io.webp" alt="" width="1280" height="800" loading="lazy" style="position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover">
-          <video class="vid" src="assets/d/th-io.mp4" muted loop playsinline preload="none" style="position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover"></video>
-        </a>
-        <p class="vh">The redesigned application on a laptop, with a screen-reader caption announcing the start date field.</p>
-      </article>
-      <article class="row g12" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;align-items:center;padding:80px 0;border-bottom:1px solid var(--line)">
-        <div class="rv" style="grid-column:1 / span 4">
-          <p style="margin:0;font:500 15px/20px 'Public Sans',sans-serif;color:var(--muted)">Information architecture · 2025–26</p>
-          <h3 style="margin:12px 0 0;font:700 18px/24px Montserrat,sans-serif">NPS.gov</h3>
-          <p style="margin:16px 0 0;font:700 28px/34px Montserrat,sans-serif;letter-spacing:-.02em">People agreed on the labels, then still couldn’t find things.</p>
-          <p style="margin:16px 0 0;font-size:16px;line-height:26px;color:var(--soft)">We rebuilt the National Park Service site’s structure through a content audit, 3 card sorts and 3 tree tests. The gap between agreeing and finding shaped my wireframes.</p>
-          <p style="margin:16px 0 0;font-size:13px;line-height:20px;color:var(--muted)">Role: UX Designer · Team of 3 · Content audit, card sorting, tree testing</p>
-          <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center">
-            <a class="go" href="national-parks.html" style="display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:600;text-underline-offset:5px">Read the case study<span class="vh"> on NPS.gov</span> <span aria-hidden="true" style="color:#DE1A1A">→</span></a>
-            <button type="button" class="press ql-btn" aria-expanded="false" aria-controls="ql-np" style="min-height:44px;padding:0 16px;border:0;border-radius:5px;background:var(--chip);color:var(--fg);font:600 14px 'Public Sans',sans-serif;cursor:pointer;box-shadow:inset 0 0 0 1px var(--hair)"><span class="lbl">Quick look</span><span class="vh"> at NPS.gov</span> <svg class="chev" aria-hidden="true" viewBox="0 0 16 16" width="14" height="14" style="margin-left:6px;vertical-align:-2px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg></button>
-          </div>
-          <div class="qlw" id="ql-np" role="region" aria-label="NPS.gov in 60 seconds"><div class="qli"><div class="ql"><div style="padding:16px 20px"><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:var(--soft)">The problem</p><p style="margin:6px 0 0;font-size:15px;line-height:23px">The site grew to match the organisation, not its visitors. Navigation changed from park to park.</p></div><div style="padding:16px 20px"><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:var(--at)">What we found</p><p style="margin:6px 0 0;font-size:15px;line-height:23px">Card sorts reached 80–100% agreement, yet only 22.2% found field trips in tree test round 1.</p></div><div style="padding:16px 20px"><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:var(--soft)">My part</p><p style="margin:6px 0 0;font-size:15px;line-height:23px">With the team, ran the inventory, card sorts and tree tests. I designed the wireframes and, in 2026, the prototype.</p></div><div style="padding:16px 20px"><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:var(--good)">Where it landed</p><p style="margin:6px 0 0;font-size:15px;line-height:23px">Wireframes for three journeys and a coded prototype, built on the tested structure.</p></div></div></div></div>
-        </div>
-        <a class="shot glass" data-track href="national-parks.html" tabindex="-1" aria-hidden="true" style="grid-column:5 / span 8;aspect-ratio:16 / 10;border-radius:12px;background:#EDEAE2;display:block">
-          <img src="assets/d/th-np.webp" alt="" width="1280" height="800" loading="lazy" style="position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover">
-          <video class="vid" src="assets/d/th-np.mp4" muted loop playsinline preload="none" style="position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover"></video>
-        </a>
-        <p class="vh">The redesigned volunteer page on a phone, beside the new sitemap with Supporting NPS open.</p>
-      </article>
-      <article class="row g12" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;align-items:center;padding:80px 0;border-bottom:1px solid var(--line)">
-        <div class="rv" style="grid-column:1 / span 4">
-          <p style="margin:0;font:500 15px/20px 'Public Sans',sans-serif;color:var(--muted)">Health · wearables · 2025–26</p>
-          <h3 style="margin:12px 0 0;font:700 18px/24px Montserrat,sans-serif">Wearable Health</h3>
-          <p style="margin:16px 0 0;font:700 28px/34px Montserrat,sans-serif;letter-spacing:-.02em">People pay for health features, then quietly stop using them.</p>
-          <p style="margin:16px 0 0;font-size:16px;line-height:26px;color:var(--soft)">We observed and interviewed 14 smartwatch owners to learn why. I turned five findings into Tend, a watch and phone app concept.</p>
-          <p style="margin:16px 0 0;font-size:13px;line-height:20px;color:var(--muted)">Role: UX Researcher &amp; Designer · Team of 3 · Observation, interviews, affinity mapping</p>
-          <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center">
-            <a class="go" href="wearable-health.html" style="display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:600;text-underline-offset:5px">Read the case study<span class="vh"> on Wearable Health</span> <span aria-hidden="true" style="color:#DE1A1A">→</span></a>
-            <button type="button" class="press ql-btn" aria-expanded="false" aria-controls="ql-wh" style="min-height:44px;padding:0 16px;border:0;border-radius:5px;background:var(--chip);color:var(--fg);font:600 14px 'Public Sans',sans-serif;cursor:pointer;box-shadow:inset 0 0 0 1px var(--hair)"><span class="lbl">Quick look</span><span class="vh"> at Wearable Health</span> <svg class="chev" aria-hidden="true" viewBox="0 0 16 16" width="14" height="14" style="margin-left:6px;vertical-align:-2px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg></button>
-          </div>
-          <div class="qlw" id="ql-wh" role="region" aria-label="Wearable Health in 60 seconds"><div class="qli"><div class="ql"><div style="padding:16px 20px"><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:var(--soft)">The problem</p><p style="margin:6px 0 0;font-size:15px;line-height:23px">Smartwatches promise healthier habits, but engagement is uneven after the first weeks.</p></div><div style="padding:16px 20px"><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:var(--at)">What we found</p><p style="margin:6px 0 0;font-size:15px;line-height:23px">Some people use every feature; others keep to steps and sleep, or put the watch in a drawer.</p></div><div style="padding:16px 20px"><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:var(--soft)">My part</p><p style="margin:6px 0 0;font-size:15px;line-height:23px">Rated every requested improvement by user value and build effort, and designed Tend from the high-value, low-effort set.</p></div><div style="padding:16px 20px"><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:var(--good)">Where it landed</p><p style="margin:6px 0 0;font-size:15px;line-height:23px">A watch and phone prototype. Testing is planned over days, since the problems play out over days.</p></div></div></div></div>
-        </div>
-        <a class="shot glass" data-track href="wearable-health.html" tabindex="-1" aria-hidden="true" style="grid-column:5 / span 8;aspect-ratio:16 / 10;border-radius:12px;background:#EDEAE2;display:block">
-          <img src="assets/d/th-wh.webp" alt="" width="1280" height="800" loading="lazy" style="position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover">
-          <video class="vid" src="assets/d/th-wh.mp4" muted loop playsinline preload="none" style="position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover"></video>
-        </a>
-        <p class="vh">Tend on a watch and a phone: a live heart-rate screen and the week’s activity.</p>
-      </article>
-      <article class="row g12" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;align-items:center;padding:80px 0;border-bottom:1px solid var(--line)">
-        <div class="rv" style="grid-column:1 / span 4">
-          <p style="margin:0;font:500 15px/20px 'Public Sans',sans-serif;color:var(--muted)">E-commerce usability · 2025–26</p>
-          <h3 style="margin:12px 0 0;font:700 18px/24px Montserrat,sans-serif">CeraVe</h3>
-          <p style="margin:16px 0 0;font:700 28px/34px Montserrat,sans-serif;letter-spacing:-.02em">Shoppers found the products, then lost confidence choosing.</p>
-          <p style="margin:16px 0 0;font-size:16px;line-height:26px;color:var(--soft)">CeraVe’s site can’t sell, so its job is to help people choose. Five usability sessions showed where confidence dropped, and all 12 of our recommendations are built into a coded prototype.</p>
-          <p style="margin:16px 0 0;font-size:13px;line-height:20px;color:var(--muted)">Role: UX Researcher · Team of 4 · Usability testing, SUS, ASQ</p>
-          <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center">
-            <a class="go" href="cerave.html" style="display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:600;text-underline-offset:5px">Read the case study<span class="vh"> on CeraVe</span> <span aria-hidden="true" style="color:#DE1A1A">→</span></a>
-            <button type="button" class="press ql-btn" aria-expanded="false" aria-controls="ql-cv" style="min-height:44px;padding:0 16px;border:0;border-radius:5px;background:var(--chip);color:var(--fg);font:600 14px 'Public Sans',sans-serif;cursor:pointer;box-shadow:inset 0 0 0 1px var(--hair)"><span class="lbl">Quick look</span><span class="vh"> at CeraVe</span> <svg class="chev" aria-hidden="true" viewBox="0 0 16 16" width="14" height="14" style="margin-left:6px;vertical-align:-2px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg></button>
-          </div>
-          <div class="qlw" id="ql-cv" role="region" aria-label="CeraVe in 60 seconds"><div class="qli"><div class="ql"><div style="padding:16px 20px"><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:var(--soft)">The problem</p><p style="margin:6px 0 0;font-size:15px;line-height:23px">Every “Buy” leaves for a retailer, so the site only works if shoppers leave knowing what to buy.</p></div><div style="padding:16px 20px"><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:var(--at)">What we found</p><p style="margin:6px 0 0;font-size:15px;line-height:23px">0 of 5 finished the product comparison on their own. The System Usability Scale averaged 54.1.</p></div><div style="padding:16px 20px"><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:var(--soft)">My part</p><p style="margin:6px 0 0;font-size:15px;line-height:23px">Built all 12 team recommendations into a coded prototype in CeraVe’s existing visual style.</p></div><div style="padding:16px 20px"><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:var(--good)">Where it landed</p><p style="margin:6px 0 0;font-size:15px;line-height:23px">A scripted run completes all three tasks. Not yet tested with shoppers.</p></div></div></div></div>
-        </div>
-        <a class="shot glass" data-track href="cerave.html" tabindex="-1" aria-hidden="true" style="grid-column:5 / span 8;aspect-ratio:16 / 10;border-radius:12px;background:#EDEAE2;display:block">
-          <img src="assets/d/th-cv.webp" alt="" width="1280" height="800" loading="lazy" style="position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover">
-          <video class="vid" src="assets/d/th-cv.mp4" muted loop playsinline preload="none" style="position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover"></video>
-        </a>
-        <p class="vh">Three phones showing the CeraVe redesign: the home page, a product page and its details.</p>
-      </article>
-  </section>
 
-  <section id="skills" aria-labelledby="do-h" style="margin-top:128px;background:var(--band);color:#FFFBFC">
-    <div class="band" style="max-width:1312px;margin:0 auto;padding:112px 32px">
-      <div class="g12" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;align-items:baseline">
-        <p style="grid-column:1 / span 4;margin:0;font:500 15px/20px 'Public Sans',sans-serif;color:#B7B3B4">Expertise</p>
-        <h2 id="do-h" style="grid-column:5 / span 8;margin:0;font:800 clamp(32px,4vw,44px)/1.1 Montserrat,sans-serif;letter-spacing:-.03em">How I can help your team</h2>
-      </div>
-      <div class="g12" style="margin-top:56px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;align-items:start">
-        <div class="tabs" role="group" aria-label="Choose an area of expertise" style="grid-column:1 / span 4;display:flex;flex-direction:column;gap:8px">
-          <button type="button" class="tabbar press" data-tab="0" aria-pressed="true" style="display:block;width:100%;min-height:44px;padding:20px 24px;border:0;border-radius:12px;text-align:left;cursor:pointer;color:#FFFBFC;background:transparent;box-shadow:inset 0 -1px 0 rgba(255,255,255,.08);opacity:.72"><span style="display:block;font:700 20px/26px Montserrat,sans-serif">Design products end to end</span></button><button type="button" class="tabbar press" data-tab="1" aria-pressed="false" style="display:block;width:100%;min-height:44px;padding:20px 24px;border:0;border-radius:12px;text-align:left;cursor:pointer;color:#FFFBFC;background:transparent;box-shadow:inset 0 -1px 0 rgba(255,255,255,.08);opacity:.72"><span style="display:block;font:700 20px/26px Montserrat,sans-serif">Turn research into decisions</span></button><button type="button" class="tabbar press" data-tab="2" aria-pressed="false" style="display:block;width:100%;min-height:44px;padding:20px 24px;border:0;border-radius:12px;text-align:left;cursor:pointer;color:#FFFBFC;background:transparent;box-shadow:inset 0 -1px 0 rgba(255,255,255,.08);opacity:.72"><span style="display:block;font:700 20px/26px Montserrat,sans-serif">Make products hold together</span></button>
-        </div>
-        <div class="metal" data-track style="grid-column:5 / span 8;border-radius:16px;padding:40px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1),inset 0 1px 0 rgba(255,255,255,.16)">
-          <div class="cap" data-cap="0" style="position:relative;z-index:1">
-            <p style="margin:0;font-size:20px;line-height:30px;color:#FFFBFC">I take a problem from flows and wireframes to interface design and coded prototypes, with engineers in the loop.</p>
-            <div class="cap2" style="margin-top:32px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px">
-              <div><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:#B7B3B4">Toolkit</p><ul style="margin:12px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px"><li style="padding:6px 12px;border-radius:6px;font-size:14px;line-height:20px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)">End-to-end product design</li><li style="padding:6px 12px;border-radius:6px;font-size:14px;line-height:20px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)">Interaction design</li><li style="padding:6px 12px;border-radius:6px;font-size:14px;line-height:20px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)">Figma</li><li style="padding:6px 12px;border-radius:6px;font-size:14px;line-height:20px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)">HTML, CSS, JavaScript</li></ul></div>
-              <div><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:#B7B3B4">At work</p><p style="margin:12px 0 0;font-size:15px;line-height:23px;color:#D6D2D3">At Intuit I design financial workflows across TurboTax and QuickBooks with product managers, engineers and researchers. At Hexaware I designed client web and mobile apps in health, education and marketplaces.</p></div>
-            </div>
-            <p style="margin:32px 0 0;font:600 13px/18px 'Public Sans',sans-serif;color:#B7B3B4">Proof in the case studies</p>
-            <ul class="proof" style="margin:8px 0 0;padding:0;list-style:none"><li style="display:grid;grid-template-columns:160px minmax(0,1fr);gap:16px;padding:12px 0;border-top:1px solid rgba(255,255,255,.1);font-size:15px;line-height:23px"><b style="font-family:Montserrat,sans-serif">CeraVe</b><span style="color:#D6D2D3">All 12 recommendations built into a coded prototype.</span></li><li style="display:grid;grid-template-columns:160px minmax(0,1fr);gap:16px;padding:12px 0;border-top:1px solid rgba(255,255,255,.1);font-size:15px;line-height:23px"><b style="font-family:Montserrat,sans-serif">Wearable Health</b><span style="color:#D6D2D3">Five findings turned into Tend, for watch and phone.</span></li><li style="display:grid;grid-template-columns:160px minmax(0,1fr);gap:16px;padding:12px 0;border-top:1px solid rgba(255,255,255,.1);font-size:15px;line-height:23px"><b style="font-family:Montserrat,sans-serif">Treevah</b><span style="color:#D6D2D3">Interface design with the team, while the alpha changed every week.</span></li></ul>
-          </div><div class="cap" data-cap="1" hidden style="position:relative;z-index:1">
-            <p style="margin:0;font-size:20px;line-height:30px;color:#FFFBFC">I plan and run studies, then turn what people do into priorities a team can act on.</p>
-            <div class="cap2" style="margin-top:32px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px">
-              <div><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:#B7B3B4">Toolkit</p><ul style="margin:12px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px"><li style="padding:6px 12px;border-radius:6px;font-size:14px;line-height:20px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)">Moderated usability tests</li><li style="padding:6px 12px;border-radius:6px;font-size:14px;line-height:20px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)">Interviews and task analysis</li><li style="padding:6px 12px;border-radius:6px;font-size:14px;line-height:20px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)">Heuristic evaluation</li><li style="padding:6px 12px;border-radius:6px;font-size:14px;line-height:20px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)">Analytics and A/B tests</li></ul></div>
-              <div><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:#B7B3B4">At work</p><p style="margin:12px 0 0;font-size:15px;line-height:23px;color:#D6D2D3">At Intuit I run mixed-methods research on onboarding: usability tests, analytics and competitive analysis. At Hexaware I redesigned onboarding for a flagship platform using session recordings, prototyping and A/B tests.</p></div>
-            </div>
-            <p style="margin:32px 0 0;font:600 13px/18px 'Public Sans',sans-serif;color:#B7B3B4">Proof in the case studies</p>
-            <ul class="proof" style="margin:8px 0 0;padding:0;list-style:none"><li style="display:grid;grid-template-columns:160px minmax(0,1fr);gap:16px;padding:12px 0;border-top:1px solid rgba(255,255,255,.1);font-size:15px;line-height:23px"><b style="font-family:Montserrat,sans-serif">Invisible Obstacles</b><span style="color:#D6D2D3">Sessions with four blind screen-reader users, coded line by line.</span></li><li style="display:grid;grid-template-columns:160px minmax(0,1fr);gap:16px;padding:12px 0;border-top:1px solid rgba(255,255,255,.1);font-size:15px;line-height:23px"><b style="font-family:Montserrat,sans-serif">Treevah</b><span style="color:#D6D2D3">Alpha 8 study plan, sessions and Clarity analysis.</span></li><li style="display:grid;grid-template-columns:160px minmax(0,1fr);gap:16px;padding:12px 0;border-top:1px solid rgba(255,255,255,.1);font-size:15px;line-height:23px"><b style="font-family:Montserrat,sans-serif">CeraVe</b><span style="color:#D6D2D3">Five usability sessions with SUS and ASQ.</span></li></ul>
-          </div><div class="cap" data-cap="2" hidden style="position:relative;z-index:1">
-            <p style="margin:0;font-size:20px;line-height:30px;color:#FFFBFC">I work on the structure underneath: information architecture, design systems and accessibility, so a product stays usable as it grows.</p>
-            <div class="cap2" style="margin-top:32px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px">
-              <div><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:#B7B3B4">Toolkit</p><ul style="margin:12px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px"><li style="padding:6px 12px;border-radius:6px;font-size:14px;line-height:20px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)">Card sorting</li><li style="padding:6px 12px;border-radius:6px;font-size:14px;line-height:20px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)">Tree testing</li><li style="padding:6px 12px;border-radius:6px;font-size:14px;line-height:20px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)">Design systems</li><li style="padding:6px 12px;border-radius:6px;font-size:14px;line-height:20px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)">WCAG 2.1 AA</li><li style="padding:6px 12px;border-radius:6px;font-size:14px;line-height:20px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)">Screen-reader testing</li><li style="padding:6px 12px;border-radius:6px;font-size:14px;line-height:20px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)">axe audits</li></ul></div>
-              <div><p style="margin:0;font:600 13px/18px 'Public Sans',sans-serif;color:#B7B3B4">At work</p><p style="margin:12px 0 0;font-size:15px;line-height:23px;color:#D6D2D3">At Intuit I contribute components and accessibility patterns to the Intuit Design System. At Hexaware I built and maintained a Figma design system shared across teams, and mentored junior designers.</p></div>
-            </div>
-            <p style="margin:32px 0 0;font:600 13px/18px 'Public Sans',sans-serif;color:#B7B3B4">Proof in the case studies</p>
-            <ul class="proof" style="margin:8px 0 0;padding:0;list-style:none"><li style="display:grid;grid-template-columns:160px minmax(0,1fr);gap:16px;padding:12px 0;border-top:1px solid rgba(255,255,255,.1);font-size:15px;line-height:23px"><b style="font-family:Montserrat,sans-serif">NPS.gov</b><span style="color:#D6D2D3">3 card sorts and 3 tree tests behind a new structure.</span></li><li style="display:grid;grid-template-columns:160px minmax(0,1fr);gap:16px;padding:12px 0;border-top:1px solid rgba(255,255,255,.1);font-size:15px;line-height:23px"><b style="font-family:Montserrat,sans-serif">Treevah</b><span style="color:#D6D2D3">766 components audited against the system and handoff.</span></li><li style="display:grid;grid-template-columns:160px minmax(0,1fr);gap:16px;padding:12px 0;border-top:1px solid rgba(255,255,255,.1);font-size:15px;line-height:23px"><b style="font-family:Montserrat,sans-serif">Invisible Obstacles</b><span style="color:#D6D2D3">A form redesigned to pass WCAG 2.1 AA checks.</span></li></ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        <a class="card rv" href="invisible-obstacles.html">
+          <div class="media"><img src="assets/d/th-io.webp" alt="The redesigned job application on a laptop, with a screen-reader caption announcing the start date field." width="1280" height="800" loading="lazy"><video class="vid" src="assets/d/th-io.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div>
+          <div class="cap"><h3>Invisible Obstacles</h3><span class="yr">2025</span><p class="hl">One date field stopped all four screen-reader users. The redesign passes an automated WCAG 2.1 AA check.</p><p class="role">Accessible forms · UX Researcher &amp; Designer</p></div>
+        </a>
 
-  <section id="writing" aria-labelledby="wr-h" style="max-width:1312px;margin:0 auto;padding:128px 32px 0">
-    <div class="g12" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;align-items:baseline">
-      <p style="grid-column:1 / span 4;margin:0;font:500 15px/20px 'Public Sans',sans-serif;color:var(--muted)">Writing</p>
-      <div style="grid-column:5 / span 8;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px">
-        <div><h2 id="wr-h" style="margin:0;font:800 clamp(32px,4vw,44px)/1.1 Montserrat,sans-serif;letter-spacing:-.03em">What I’m thinking about</h2><p style="margin:12px 0 0;font-size:18px;line-height:28px;color:var(--soft)">On design systems, research and how AI is changing the work.</p></div>
-        <a class="ul" href="https://medium.com/@Atrams" style="font-weight:600;padding:12px 0">Read all articles on Medium</a>
-      </div>
-    </div>
-    <ul class="g12" style="list-style:none;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:0 32px">
-      <li class="rv" style="grid-column:5 / span 8;border-top:1px solid var(--line)"><a class="row" href="https://medium.com/design-systems-collective/your-design-system-has-a-week-to-live-a0bc8a18af67" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 24px;padding:24px 0;text-decoration:none"><span style="flex:1 1 320px;font:700 22px/30px Montserrat,sans-serif;letter-spacing:-.01em">Your Design System Has a Week to Live</span><span class="go" style="white-space:nowrap;font-size:14px;line-height:30px;color:var(--soft)">Design Systems Collective <span aria-hidden="true" style="color:#DE1A1A">↗</span></span></a></li><li class="rv" style="grid-column:5 / span 8;border-top:1px solid var(--line)"><a class="row" href="https://medium.com/@Atrams/design-in-tech-report-2026-gave-the-shift-a-name-ax-03ae7abb8fd3" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 24px;padding:24px 0;text-decoration:none"><span style="flex:1 1 320px;font:700 22px/30px Montserrat,sans-serif;letter-spacing:-.01em">Design in Tech Report 2026 gave the shift a name: AX</span><span class="go" style="white-space:nowrap;font-size:14px;line-height:30px;color:var(--soft)">Medium <span aria-hidden="true" style="color:#DE1A1A">↗</span></span></a></li><li class="rv" style="grid-column:5 / span 8;border-top:1px solid var(--line)"><a class="row" href="https://medium.com/design-systems-collective/how-to-read-study-and-understand-any-design-system-eb21914de736" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 24px;padding:24px 0;text-decoration:none"><span style="flex:1 1 320px;font:700 22px/30px Montserrat,sans-serif;letter-spacing:-.01em">How to Read, Study, and Understand Any Design System</span><span class="go" style="white-space:nowrap;font-size:14px;line-height:30px;color:var(--soft)">Design Systems Collective <span aria-hidden="true" style="color:#DE1A1A">↗</span></span></a></li>
-    </ul>
-  </section>
+        <a class="card rv" href="national-parks.html">
+          <div class="media"><img src="assets/d/th-np.webp" alt="The redesigned NPS.gov volunteer page on a phone, beside the new sitemap." width="1280" height="800" loading="lazy"><video class="vid" src="assets/d/th-np.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div>
+          <div class="cap"><h3>NPS.gov</h3><span class="yr">2025–26</span><p class="hl">People agreed on the labels, then still couldn’t find things. Three card sorts and three tree tests rebuilt the structure.</p><p class="role">Information architecture · UX Designer</p></div>
+        </a>
 
-  </main>
-  <footer id="contact" aria-labelledby="ct-h" style="max-width:1312px;margin:0 auto;padding:128px 32px 64px">
-    <div class="band metal rv ct" data-track style="color:#FFFBFC;border-radius:16px;padding:80px 64px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),inset 0 1px 0 rgba(255,255,255,.16)">
-      <div style="position:relative;z-index:1">
-        <p style="margin:0;font:500 15px/20px 'Public Sans',sans-serif;color:#B7B3B4">Contact</p>
-        <h2 id="ct-h" style="margin:16px 0 0;max-width:22ch;font:800 clamp(36px,5vw,56px)/1.07 Montserrat,sans-serif;letter-spacing:-.03em">Hiring a product designer or UX researcher? <span style="display:block;color:#FF5A55">Let’s talk.</span></h2>
-        <p style="margin:24px 0 0;max-width:34em;font-size:18px;line-height:28px;color:#D6D2D3">Email is the fastest way to reach me. My resume and profiles are below.</p>
-        <div style="margin-top:40px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px"><a class="ul mail" href="mailto:vedantatram157@gmail.com" style="font:700 32px/40px Montserrat,sans-serif;color:#FFFBFC;letter-spacing:-.02em">vedantatram157<wbr>@gmail.com</a>
-        <button type="button" class="press" id="copy" style="min-height:44px;padding:0 16px;border:0;border-radius:5px;background:rgba(255,255,255,.08);color:#FFFBFC;font:600 14px 'Public Sans',sans-serif;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(255,255,255,.16)">Copy email</button><span id="copy-status" role="status" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></span></div>
-        <div style="margin-top:48px;display:flex;flex-wrap:wrap;gap:8px 32px;border-top:1px solid rgba(255,255,255,.12);padding-top:16px">
-          <a class="ul" href="https://www.linkedin.com/in/vedantatram/" style="color:#FFFBFC;padding:12px 0">LinkedIn</a>
-          <a class="ul" href="https://medium.com/@Atrams" style="color:#FFFBFC;padding:12px 0">Medium</a>
-          <a class="ul" href="https://www.behance.net/vedantatram" style="color:#FFFBFC;padding:12px 0">Behance</a>
-          <a class="ul" href="Vedant-Atram-Resume.pdf" style="color:#FFFBFC;padding:12px 0">Resume (PDF)</a>
+        <a class="card rv" href="wearable-health.html">
+          <div class="media"><img src="assets/d/th-wh.webp" alt="Tend on a watch and a phone: a live heart-rate screen and the week’s activity." width="1280" height="800" loading="lazy"><video class="vid" src="assets/d/th-wh.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div>
+          <div class="cap"><h3>Wearable Health</h3><span class="yr">2025–26</span><p class="hl">People pay for health features, then quietly stop using them. Fourteen interviews became Tend, for watch and phone.</p><p class="role">Health wearables · UX Researcher &amp; Designer</p></div>
+        </a>
+
+        <a class="card rv" href="cerave.html">
+          <div class="media"><img src="assets/d/th-cv.webp" alt="Three phones showing the CeraVe redesign: the home page, a product page and its details." width="1280" height="800" loading="lazy"><video class="vid" src="assets/d/th-cv.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div>
+          <div class="cap"><h3>CeraVe</h3><span class="yr">2025–26</span><p class="hl">Shoppers found the products, then lost confidence choosing. All 12 recommendations are built into a coded prototype.</p><p class="role">E-commerce usability · UX Researcher</p></div>
+        </a>
+
+      </div>
+    </section>
+
+    <section id="skills" aria-labelledby="do-h">
+      <div class="sh"><h2 id="do-h">How I can help your team</h2><p>Research, design and the structure underneath</p></div>
+      <div class="cols">
+        <div class="rv">
+          <h3>Design products end to end</h3>
+          <p>I take a problem from flows and wireframes to interface design and coded prototypes, with engineers in the loop.</p>
+          <ul><li>End-to-end product design</li><li>Interaction design</li><li>Figma</li><li>HTML, CSS, JavaScript</li></ul>
+        </div>
+        <div class="rv">
+          <h3>Turn research into decisions</h3>
+          <p>I plan and run studies, then turn what people do into priorities a team can act on.</p>
+          <ul><li>Moderated usability tests</li><li>Interviews and task analysis</li><li>Heuristic evaluation</li><li>Analytics and A/B tests</li></ul>
+        </div>
+        <div class="rv">
+          <h3>Make products hold together</h3>
+          <p>Information architecture, design systems and accessibility, so a product stays usable as it grows.</p>
+          <ul><li>Card sorting and tree testing</li><li>Design systems</li><li>WCAG 2.1 AA, screen-reader testing</li><li>axe audits</li></ul>
         </div>
       </div>
-    </div>
-    <div style="margin-top:32px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 24px;font-size:14px;line-height:20px;color:var(--muted)">
-      <p style="margin:0;padding:12px 0">© 2026 Vedant Atram · Chicago</p>
-      <a class="ul" href="#top" style="padding:12px 0">Back to top ↑</a>
-    </div>
+    </section>
+
+    <section id="writing" aria-labelledby="wr-h">
+      <div class="sh"><h2 id="wr-h">Writing</h2><a class="ln" href="https://medium.com/@Atrams">All articles on Medium</a></div>
+      <ul class="posts">
+        <li class="rv"><a href="https://medium.com/design-systems-collective/your-design-system-has-a-week-to-live-a0bc8a18af67"><span class="t">Your Design System Has a Week to Live</span><span class="p">Design Systems Collective <span class="arr" aria-hidden="true">↗</span></span></a></li>
+        <li class="rv"><a href="https://medium.com/@Atrams/design-in-tech-report-2026-gave-the-shift-a-name-ax-03ae7abb8fd3"><span class="t">Design in Tech Report 2026 gave the shift a name: AX</span><span class="p">Medium <span class="arr" aria-hidden="true">↗</span></span></a></li>
+        <li class="rv"><a href="https://medium.com/design-systems-collective/how-to-read-study-and-understand-any-design-system-eb21914de736"><span class="t">How to Read, Study, and Understand Any Design System</span><span class="p">Design Systems Collective <span class="arr" aria-hidden="true">↗</span></span></a></li>
+      </ul>
+    </section>
+
+    <section class="contact" id="contact" aria-labelledby="ct-h">
+      <h2 class="big" id="ct-h">Hiring a product designer or UX researcher? <span class="dim">Let’s talk.</span></h2>
+      <div class="mailrow rv">
+        <a class="mail ln" href="mailto:vedantatram157@gmail.com">vedantatram157@gmail.com</a>
+        <button type="button" class="copy" id="copy">Copy</button><span id="copy-status" role="status" class="vh"></span>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<div class="wrap">
+  <footer class="foot">
+    <p>© 2026 Vedant Atram · Chicago</p>
+    <nav aria-label="Elsewhere">
+      <a href="https://www.linkedin.com/in/vedantatram/">LinkedIn</a>
+      <a href="https://medium.com/@Atrams">Medium</a>
+      <a href="https://www.behance.net/vedantatram">Behance</a>
+      <a href="Vedant-Atram-Resume.pdf">Resume</a>
+    </nav>
   </footer>
 </div>
+
 <script>
 (function(){
   var root=document.documentElement, btn=document.getElementById('mode');
-  function sync(){var d=root.getAttribute('data-mode')==='dark';btn&&btn.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
+  function sync(){var d=root.getAttribute('data-mode')==='dark';btn.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
   sync();
-  btn&&btn.addEventListener('click',function(){var d=root.getAttribute('data-mode')==='dark'?'light':'dark';root.setAttribute('data-mode',d);try{localStorage.setItem('io-mode',d)}catch(e){}sync();});
-  document.querySelectorAll('[data-track]').forEach(function(el){el.addEventListener('pointermove',function(e){var r=el.getBoundingClientRect();el.style.setProperty('--mx',(e.clientX-r.left)+'px');el.style.setProperty('--my',(e.clientY-r.top)+'px');});});
-  document.querySelectorAll('.ql-btn').forEach(function(b){b.addEventListener('click',function(){var p=document.getElementById(b.getAttribute('aria-controls')),open=b.getAttribute('aria-expanded')!=='true';
-    document.querySelectorAll('.ql-btn[aria-expanded="true"]').forEach(function(o){if(o!==b){o.setAttribute('aria-expanded','false');o.style.background='var(--chip)';o.style.color='var(--fg)';document.getElementById(o.getAttribute('aria-controls')).classList.remove('on');}});
-    b.setAttribute('aria-expanded',open);p.classList.toggle('on',open);b.style.background=open?'var(--fg)':'var(--chip)';b.style.color=open?'var(--bg)':'var(--fg)';});});
+  btn.addEventListener('click',function(){var d=root.getAttribute('data-mode')==='dark'?'light':'dark';root.setAttribute('data-mode',d);try{localStorage.setItem('io-mode',d)}catch(e){}sync();});
+  var bar=document.getElementById('topbar');
+  function sc(){bar.classList.toggle('scrolled',window.scrollY>8);} sc(); window.addEventListener('scroll',sc,{passive:true});
   var mb=document.getElementById('mbtn'),mp=document.getElementById('mpanel');
-  if(mb&&mp){function mset(o,f){mb.setAttribute('aria-expanded',o);mp.hidden=!o;document.body.classList.toggle('m-open',o);if(o){var a=mp.querySelector('a');a&&a.focus();}else if(f)mb.focus();}
-    mb.addEventListener('click',function(){mset(mb.getAttribute('aria-expanded')!=='true')});
-    mp.addEventListener('click',function(e){if(e.target.closest('a'))mset(false)});
-    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!mp.hidden)mset(false,true)});
-    matchMedia('(min-width: 641px)').addEventListener('change',function(e){if(e.matches)mset(false)});}
-  var tabs=document.querySelectorAll('.tabbar');
-  function pick(i){tabs.forEach(function(t,j){var on=j===i;t.setAttribute('aria-pressed',on);t.style.opacity=on?1:.72;t.style.background=on?'rgba(255,255,255,.08)':'transparent';t.style.boxShadow=on?'inset 0 0 0 1px rgba(255,255,255,.14),inset 0 1px 0 rgba(255,255,255,.16)':'inset 0 -1px 0 rgba(255,255,255,.08)';});document.querySelectorAll('.cap').forEach(function(c,j){c.hidden=j!==i;});}
-  tabs.forEach(function(t,i){t.addEventListener('click',function(){pick(i)});}); pick(0);
+  function mset(o,f){mb.setAttribute('aria-expanded',o);mp.hidden=!o;document.body.classList.toggle('m-open',o);if(o){var a=mp.querySelector('a');a&&a.focus();}else if(f)mb.focus();}
+  mb.addEventListener('click',function(){mset(mb.getAttribute('aria-expanded')!=='true')});
+  mp.addEventListener('click',function(e){if(e.target.closest('a'))mset(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!mp.hidden)mset(false,true)});
+  matchMedia('(min-width: 721px)').addEventListener('change',function(e){if(e.matches)mset(false)});
   var cb=document.getElementById('copy'),cs=document.getElementById('copy-status'),ct;
-  cb&&cb.addEventListener('click',function(){try{navigator.clipboard.writeText('vedantatram157@gmail.com')}catch(e){}cb.textContent='Copied ✓';cs.textContent='Email address copied';clearTimeout(ct);ct=setTimeout(function(){cb.textContent='Copy email';cs.textContent='';},2000);});
+  cb.addEventListener('click',function(){try{navigator.clipboard.writeText('vedantatram157@gmail.com')}catch(e){}cb.textContent='Copied';cs.textContent='Email address copied';clearTimeout(ct);ct=setTimeout(function(){cb.textContent='Copy';cs.textContent='';},2000);});
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!reduce&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(x){var v=x.target;if(x.isIntersecting){v.preload='auto';var r=v.play();r&&r.catch&&r.catch(function(){});}else v.pause();});},{rootMargin:'200px'});document.querySelectorAll('video.vid').forEach(function(v){v.muted=true;io.observe(v);});}
 })();
