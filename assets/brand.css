@@ -280,3 +280,5 @@ html body .intro .lede { margin-top: 16px; max-width: 640px; }
 html body .intro .lede { max-width: 720px; font-size: 18px; line-height: 28px; }
 .dom > span + span { padding-left: 16px; border-left: 1px solid var(--line); }
 @media (max-width: 575.98px) { html body .intro .lede { font-size: 17px; line-height: 26px; } .dom > span + span { padding-left: 0; border-left: 0; } }
+/* Case heroes built from flat device shots blend into a light table, in both modes */
+html body .hero > .stage.dev, :root[data-mode="dark"] .hero > .stage.dev { background: #EDEAE2 !important; } /* matches the shots’ own ground */
