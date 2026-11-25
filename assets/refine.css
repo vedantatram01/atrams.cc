@@ -58,7 +58,7 @@ html:root body .hero dl.glance > div { padding: 20px 24px 22px 0 !important; bor
 html:root body .hero dl.glance > div + div { padding-left: 24px !important; border-left: 1px solid var(--line) !important; }
 html:root body .hero dl.glance dt, html:root body .hero dl.glance > div:nth-child(n) dt { font: 500 15px/1.4 var(--f) !important; color: var(--text) !important; }
 html:root body .hero dl.glance dd { margin-top: 6px !important; color: var(--muted) !important; }
-html:root body .hero .d-media { border-radius: 14px !important; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text) 5%, transparent) !important; }
+html:root body .hero .d-media { border-radius: 5px !important; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text) 5%, transparent) !important; }
 @media (max-width: 1023.98px) {
   html:root body .hero dl.glance > div + div { padding-left: 0 !important; border-left: 0 !important; border-top: 1px solid var(--line) !important; }
 }
@@ -75,11 +75,11 @@ html:root body :is(.k, .fl-k, .rd-k, .cm) { order: 10; margin: 12px 0 0 !importa
 html:root body .nextcs .nx .nx-k { display: none !important; }
 
 /* Cards and panels: hairline, no lift */
-html:root body main :is(.finding, .card, .people > div, .nums > div) { box-shadow: none !important; background: transparent !important; border: 1px solid var(--line) !important; border-radius: 12px !important; }
+html:root body main :is(.finding, .card, .people > div, .nums > div) { box-shadow: none !important; background: transparent !important; border: 1px solid var(--line) !important; border-radius: 5px !important; }
 html:root body main .people > div b, html:root body main .nums > div b { font-weight: 500 !important; letter-spacing: -.03em; }
 
 /* Next case: same paper, large type */
-html:root body .nextcs .nx { background: var(--mat) !important; color: var(--text) !important; box-shadow: none !important; border-radius: 16px !important; transition: background-color .3s var(--r-ease); }
+html:root body .nextcs .nx { background: var(--mat) !important; color: var(--text) !important; box-shadow: none !important; border-radius: 5px !important; transition: background-color .3s var(--r-ease); }
 html:root body .nextcs .nx:hover { background: color-mix(in srgb, var(--mat) 70%, var(--line)) !important; }
 html:root body .nextcs .nx .nx-t { font-weight: 500 !important; letter-spacing: -.035em !important; }
 html:root body .nextcs .nx .nx-d { color: var(--muted) !important; }
@@ -88,7 +88,7 @@ html:root body .nextcs .nx .nx-a { color: var(--text) !important; }
 /* Links and focus */
 html:root body main a:not([class]) { text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); }
 html:root body main a:not([class]):hover { text-decoration-color: currentColor; }
-html:root body :focus-visible { outline: 2px solid #DE1A1A !important; outline-offset: 3px; }
+html:root body :focus-visible { outline: 2px solid #DE1A1A !important; outline-offset: 3px; border-radius: 5px; }
 ::selection { background: rgba(222, 26, 26, .18); }
 
 /* Panels: a hairline frame instead of a floating drop shadow */
@@ -101,7 +101,7 @@ html:root body .nav-r > .mode { order: 3; }
 html:root body .nav-r > .menu-btn { order: 4; }
 
 /* Buttons: one ink pill, one outline pill. No red slabs. */
-html:root body .btn { height: 44px !important; min-height: 44px !important; padding: 0 18px !important; border-radius: 999px !important; font: 500 14px/1 var(--f) !important; box-shadow: inset 0 0 0 1px var(--line) !important; border: 0 !important; background: transparent !important; color: var(--text) !important; transition: background-color .2s, box-shadow .2s !important; }
+html:root body .btn { height: 44px !important; min-height: 44px !important; padding: 0 18px !important; border-radius: 5px !important; font: 500 14px/1 var(--f) !important; box-shadow: inset 0 0 0 1px var(--line) !important; border: 0 !important; background: transparent !important; color: var(--text) !important; transition: background-color .2s, box-shadow .2s !important; }
 html:root body .btn:hover { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text) 40%, transparent) !important; }
 html:root body .btn.btn-primary, html:root body a.btn-primary { background: var(--text) !important; color: var(--bg) !important; box-shadow: none !important; }
 html:root body .btn.btn-primary:hover { background: color-mix(in srgb, var(--text) 82%, var(--bg)) !important; }
@@ -171,7 +171,7 @@ html:root body main .wide > .ba, html:root body main .wide.ba { padding-left: 0 
 html:root body main :is(.nums, .people) > div { padding: 20px !important; }
 
 /* Remaining lifted cards: same hairline as every other panel */
-html:root body main :is(.tv-areas, .tv-out, .mcards) > div, html:root body main :is(.tv-probs, .rounds, .flist) > li { box-shadow: none !important; border: 1px solid var(--line) !important; border-radius: 12px !important; }
+html:root body main :is(.tv-areas, .tv-out, .mcards) > div, html:root body main :is(.tv-probs, .rounds, .flist) > li { box-shadow: none !important; border: 1px solid var(--line) !important; border-radius: 5px !important; }
 
 /* Writing page: breathing room between the intro and the list */
 html:root body .intro .links { margin-top: 28px !important; }
@@ -190,3 +190,19 @@ html:root body .nav .logo:hover .mk { transform: rotate(-8deg); }
   html:root body .nav .nav-r > .mode { width: 36px !important; height: 36px !important; margin: 0 !important; }
   html:root body .nav-r > .menu-btn { width: 36px !important; height: 36px !important; margin: 0 -8px 0 0 !important; border-radius: 8px !important; }
 }
+
+/* Corners: one radius, 5px, on every card, panel, image, button and chip.
+   True circles (dots, chart points) and the device mockups keep their own shape. */
+html:root { --r-s: 5px; --r-m: 5px; --r-l: 5px; --r: 5px; }
+html:root body :is(
+  .nav .menu, .nav .logo, .nav-r > .mode, .nav-r > .menu-btn, .pill, .d-contact, .skip, .btn, .copy, .chip, .tags li, .toc a,
+  .hero .d-media, .nextcs .nx, .site-foot a,
+  main .frame, main .frame img, main .frame video, main .fr-in, main .fr-in img, main .zoom img, main .tv-shot, main .tm-l, main .tm-d,
+  main .finding, main .card, main .card > a, main .opt, main .sketch, main .moment, main .study, main .lanes, main .lc, main .pmx,
+  main .tv-chart, main table, main .exp, main .got, main .goal, main .trip, main .vt-p, main .aft, main .b-n, main .b-p, main .b-r,
+  main .chap .col, main .bar, main .bar .fill, main .own, main .pr, main .b-h span, main .pmx-c, main .sb, main .pbar, main .sk-f, main .sk-cal,
+  main .portrait img, main .candid img,
+  main :is(.nums, .people, .mcards, .tv-oci, .tv-out, .tv-ba, .tv-halves, .tv-areas) > div,
+  main :is(.flist, .rounds, .tv-probs, .cards, .flow, .iat-l) > li, main .ln-bar i, main .went em, main .sk-cal b
+) { border-radius: 5px !important; }
+html:root body #contribution .tv-areas > div, html:root body #outcomes .tv-out > div { border: 1px solid var(--line) !important; border-radius: 5px !important; padding: 24px !important; background: transparent !important; box-shadow: none !important; }
