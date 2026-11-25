@@ -29,3 +29,11 @@ Live site stays on `main` (GitHub Pages). All redesign work happens on `redesign
 - Homepage 1.1 MB, 18 images all lazy (first cover included).
 - Case studies 13–19k px tall, 1.6–2.6k words; only Invisible Obstacles has a short version.
 - 9 stylesheets layered with !important overrides.
+
+## 2026-11-25 · Direction D progress (canvas row 2)
+- Home: glass sticky nav, weight-contrast wordmark (Vedant 800 / Atram 500), metal career card (5+ years), video thumbnails recorded from live covers on #EDEAE2, Quick look (problem / found / my part / landed), Expertise selector, Writing, Contact with copy-email, footer.
+- Labels: sentence case, no numbers (user asked).
+- Dark mode via tokens + toggle; phone layout checked at 390px in the canvas.
+- Case: Invisible Obstacles opening with 60-second version; same nav; video hero.
+- Visuals board: NPS tree-test lines, Treevah 100-square audit, IO participant lanes, CeraVe tasks + SUS 54.1 vs 68, WH persona spectrum by rank.
+- Logo options A–E on canvas; A applied, waiting on user's pick.
