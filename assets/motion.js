@@ -71,23 +71,7 @@
     window.addEventListener("beforeprint", function () { nums.forEach(function (el) { if (el._final && el.firstChild) el.firstChild.textContent = el._final; }); });
   }
 
-  /* 3. Navigation steps aside while reading down and returns on the way up */
-  var nav = document.querySelector(".nav");
-  if (nav) {
-    var lastY = window.scrollY, ticking = false;
-    window.addEventListener("scroll", function () {
-      if (ticking) return; ticking = true;
-      requestAnimationFrame(function () {
-        var y = window.scrollY, d = y - lastY;
-        var hold = document.body.classList.contains("menu-open") || nav.contains(document.activeElement);
-        if (y < 120 || d < -6 || hold) nav.classList.remove("nav-up");
-        else if (d > 6) nav.classList.add("nav-up");
-        if (Math.abs(d) > 6 || y < 120) lastY = y;
-        ticking = false;
-      });
-    }, { passive: true });
-    nav.addEventListener("focusin", function () { nav.classList.remove("nav-up"); });
-  }
+  /* 3. Navigation stays put on every page, so it never flickers while reading */
 
   /* 4. Animated tabs: one indicator slides to the selected tab */
   function wireTabs(list) {

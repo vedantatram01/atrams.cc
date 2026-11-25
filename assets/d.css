@@ -82,3 +82,69 @@ html body .site-foot { max-width: 1312px; margin: 48px auto 0 !important; paddin
 @media (prefers-reduced-motion: reduce) { html body .hero .d-media { animation: none; } html body .d-media video { display: none; } }
 html body .toc.d-off { opacity: 0 !important; pointer-events: none; transition: opacity .3s; }
 @media (min-width: 768px) { html body .nav .d-mob { display: none !important; } }
+
+/* ---------- Glitch pass (Nov 2026) ---------- */
+/* Nav stays in place on every page, like the homepage */
+html body .nav.nav-up { transform: none !important; }
+/* Nav controls: same order, size and icon on every page */
+html body .nav-r > .mode { display: grid !important; place-items: center; padding: 0 !important; flex: none; }
+html body .nav-r > .mode svg { width: 20px !important; height: 20px !important; }
+html body .nav-r > .menu-btn { width: 44px !important; height: 44px !important; margin: 0 !important; border-radius: 5px !important; }
+
+/* Footer: one rule, one row, aligned to the page edges */
+html body .site-foot .sf-in { padding: 0 !important; border-top: 1px solid var(--line); }
+html body .site-foot .sf-row { display: flex !important; flex-wrap: wrap; align-items: center !important; justify-content: space-between !important; gap: 8px 24px; padding: 20px 0 0 !important; margin: 0 !important; }
+html body .site-foot .sf-c { font-size: 14px; line-height: 20px; color: var(--muted); }
+html body .site-foot .sf-links { display: flex !important; flex-wrap: wrap; gap: 0 24px !important; margin: 0 !important; padding: 0 !important; list-style: none; }
+html body .site-foot .sf-links a { min-width: 0 !important; min-height: 44px; justify-content: flex-start !important; padding: 0 !important; font-size: 14px; color: var(--soft); }
+html body .site-foot .sf-links a:hover { color: var(--text); }
+
+/* Next case study: flush with the content edges */
+html body .nextcs .nx { margin: 0 !important; position: relative; }
+html body .nextcs .nx-all { margin-top: 12px; }
+
+/* Tabs inside case studies: one row; scroll sideways on small screens instead of wrapping */
+@media (max-width: 767.98px) {
+  html body .vt-list { flex-wrap: nowrap !important; overflow-x: auto; scrollbar-width: none; gap: 0 4px !important; scroll-snap-type: x proximity; }
+  html body .vt-list::-webkit-scrollbar { display: none; }
+  html body .vt-list .vt-tab { flex: none !important; white-space: nowrap; scroll-snap-align: start; padding-left: 12px !important; padding-right: 12px !important; }
+  /* Priority table as cards: full-width cells */
+  html body .tv-et td, html body .tv-et th, html body .tv-et td:first-child { width: auto !important; }
+  /* Section list follows the nav: below it when shown, at the very top when it hides */
+  html body .toc { top: 72px !important; background: var(--bg) !important; transition: top .35s var(--d-ease); }
+  html body .sec { scroll-margin-top: 136px !important; }
+}
+@media (max-width: 640px) {
+  html body main .sec { padding-left: 20px !important; padding-right: 20px !important; }
+  html body .site-foot { padding: 24px 20px 40px !important; }
+  html body .site-foot .sf-row { flex-direction: column-reverse; align-items: flex-start !important; }
+}
+/* Nav metrics match the homepage exactly: 60px bar, 15px links in text colour, 28px rhythm */
+html body .nav { height: 60px; min-height: 0 !important; }
+html body .nav > .logo { min-height: 0 !important; height: auto !important; }
+@media (min-width: 768px) {
+  html body .nav .pill { font-size: 15px !important; color: var(--text) !important; margin: 0 14px !important; }
+  html body .nav-r { gap: 0 !important; }
+  html body .nav-r > .mode { margin-left: 14px !important; }
+  html body .nav .d-contact { margin-left: 28px !important; }
+}
+@media (max-width: 640px) { html body .nav { height: 56px; } html body .menu { top: 72px !important; } }
+@media (min-width: 768px) { html body .nav .pill { min-width: 0 !important; min-height: 0 !important; padding: 4px 0 !important; } }
+html body .nav-r > .mode svg { stroke-width: 1.8 !important; }
+@media (max-width: 640px) { html body .sb .sbn { display: none; } } html body .sb .sbn { font-style: normal; }
+html body .spec .sd { margin: -13px 0 0 -13px !important; font-size: 11px !important; }
+@media (min-width: 768px) { html body .beta3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; } }
+html body .beta3 .b-h { white-space: nowrap; }
+/* About, Writing and 404 share the same page edges as the case studies */
+html body main .wrap { max-width: 1312px !important; margin-left: auto !important; margin-right: auto !important; padding-left: 32px !important; padding-right: 32px !important; box-sizing: border-box; }
+@media (max-width: 640px) { html body main .wrap { padding-left: 20px !important; padding-right: 20px !important; } }
+html body main .work, html body main .about, html body main .contact, html body main .credit { background-size: calc(100% - 64px) 1px !important; }
+@media (max-width: 640px) { html body main .work, html body main .about, html body main .contact, html body main .credit { background-size: calc(100% - 40px) 1px !important; } }
+@media (min-width: 768px) { html body .nav .menu { gap: 0 !important; } }
+html body .nav-r > .mode { color: var(--text) !important; }
+@media (max-width: 767.98px) { html body .nav .d-contact { display: none !important; } html body .nav { padding: 6px 6px 6px 16px !important; height: 56px; top: 8px !important; margin-top: 8px !important; width: calc(100% - 24px) !important; } html body .menu { top: 72px !important; } html body .nav-r { gap: 8px !important; } }
+@media (min-width: 768px) { html body .rounds:not(.rounds-2) > li { grid-template-columns: 240px minmax(0, 1fr) !important; align-content: start; } html body .rounds:not(.rounds-2) .rd-f { align-self: start; } }
+@media (max-width: 767.98px) {
+  html body .menu { padding: 24px 20px 32px !important; border-top: 0 !important; top: 64px !important; }
+  html body .menu .pill { height: 64px !important; min-height: 64px !important; padding: 0 !important; margin: 0 !important; border-radius: 0 !important; font-size: 24px !important; width: auto !important; justify-content: space-between !important; }
+}
