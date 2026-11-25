@@ -37,3 +37,8 @@ Live site stays on `main` (GitHub Pages). All redesign work happens on `redesign
 - Case: Invisible Obstacles opening with 60-second version; same nav; video hero.
 - Visuals board: NPS tree-test lines, Treevah 100-square audit, IO participant lanes, CeraVe tasks + SUS 54.1 vs 68, WH persona spectrum by rank.
 - Logo options A–E on canvas; A applied, waiting on user's pick.
+
+## 2026-11-25 · D live across the site
+- Homepage D published (main).
+- Inner pages: assets/d.css + assets/d.js layer — glass nav with Contact, two-weight wordmark, title-first hero, 60-second summary panel, video hero on case studies, dark next-case card, 5px buttons.
+- Mobile menu fixed (nav will-change created a containing block for the fixed menu).
