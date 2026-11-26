@@ -148,3 +148,5 @@ html body .nav-r > .mode { color: var(--text) !important; }
   html body .menu { padding: 24px 20px 32px !important; border-top: 0 !important; top: 64px !important; }
   html body .menu .pill { height: 64px !important; min-height: 64px !important; padding: 0 !important; margin: 0 !important; border-radius: 0 !important; font-size: 24px !important; width: auto !important; justify-content: space-between !important; }
 }
+/* Case studies: section links are positioned by d.js; no extra page offset */
+html:has(#toc) { scroll-padding-top: 0 !important; }
