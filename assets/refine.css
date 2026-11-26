@@ -206,3 +206,13 @@ html:root body :is(
   main :is(.flist, .rounds, .tv-probs, .cards, .flow, .iat-l) > li, main .ln-bar i, main .went em, main .sk-cal b
 ) { border-radius: 5px !important; }
 html:root body #contribution .tv-areas > div, html:root body #outcomes .tv-out > div { border: 1px solid var(--line) !important; border-radius: 5px !important; padding: 24px !important; background: transparent !important; box-shadow: none !important; }
+
+/* Pill nav with an active state, matching the home page */
+@media (min-width: 768px) {
+  html:root body .nav .menu { gap: 4px !important; }
+  html:root body .nav .menu .pill { margin: 0 !important; padding: 6px 12px !important; border-radius: 5px !important; transition: background-color .2s, color .2s; }
+  html:root body .nav .menu .pill:hover { background: var(--mat) !important; }
+  html:root body .nav .menu .pill[aria-current] { color: var(--text) !important; background: var(--mat) !important; box-shadow: inset 0 0 0 1px var(--line) !important; }
+  html:root body .nav .d-contact { margin-left: 4px !important; padding: 6px 12px !important; }
+}
+@media (prefers-reduced-motion: reduce) { html:root body .nav .menu .pill { transition: none; } }
