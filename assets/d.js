@@ -70,3 +70,29 @@
     window.addEventListener("load", function () { go(id0, false); });
   }
 })();
+/* Side rail steps aside while a wide figure or table passes beneath it, so they never overlap */
+(function () {
+  var toc = document.getElementById("toc"); if (!toc) return;
+  var wq = matchMedia("(min-width: 1400px)");
+  var wide = [];
+  function collect() {
+    var tr = toc.getBoundingClientRect();
+    var railRight = tr.width ? tr.right + 16 : 0;
+    wide = Array.prototype.filter.call(document.querySelectorAll("main .sec > *, main .sec figure, main .sec table, main .breakout"), function (el) {
+      var r = el.getBoundingClientRect(); return r.width > 0 && r.left < railRight;
+    });
+  }
+  var t = false;
+  function check() {
+    t = false;
+    if (!wq.matches) { toc.classList.remove("d-hide"); return; }
+    var tr = toc.getBoundingClientRect(); var hit = false;
+    for (var i = 0; i < wide.length && !hit; i++) { var r = wide[i].getBoundingClientRect(); if (r.bottom > tr.top - 8 && r.top < tr.bottom + 8) hit = true; }
+    toc.classList.toggle("d-hide", hit);
+  }
+  function on() { if (!t) { t = true; requestAnimationFrame(check); } }
+  function re() { toc.classList.remove("d-hide"); collect(); check(); }
+  window.addEventListener("scroll", on, { passive: true });
+  window.addEventListener("resize", function () { clearTimeout(re.t); re.t = setTimeout(re, 150); });
+  window.addEventListener("load", re); re();
+})();

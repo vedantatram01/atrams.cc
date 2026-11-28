@@ -150,3 +150,7 @@ html body .nav-r > .mode { color: var(--text) !important; }
 }
 /* Case studies: section links are positioned by d.js; no extra page offset */
 html:has(#toc) { scroll-padding-top: 0 !important; }
+/* A note right after a wide figure: keep it at text width (was squeezed to ~80px by the figure-caption padding) */
+html body .col .breakout + p.cap { padding-left: 0 !important; padding-right: 0 !important; box-sizing: border-box !important; max-width: 600px !important; margin-left: auto !important; margin-right: auto !important; }
+html body .toc.d-hide { opacity: 0 !important; visibility: hidden !important; pointer-events: none; transition: opacity .25s, visibility 0s .25s; }
+@media (max-width: 900px) { html body .tv-out { grid-template-columns: minmax(0, 1fr) !important; } }
